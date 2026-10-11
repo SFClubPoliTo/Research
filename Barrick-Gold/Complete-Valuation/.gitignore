@@ -1,0 +1,11 @@
+data/raw/ib_local/
+data/raw/lse_local/
+**/__pycache__/
+.pytest_cache/
+**/.pytest_cache/
+utilities/.test-work/
+test-temp-parent/
+*.json.tmp
+.venv/
+*.pyc
+.env

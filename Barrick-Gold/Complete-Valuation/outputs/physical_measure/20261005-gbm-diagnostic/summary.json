@@ -1,0 +1,43 @@
+{
+  "status": "DIAGNOSTIC_NOT_ADMITTED_TO_BARRICK_DCF",
+  "underlying": "GLD_USD_PER_SHARE",
+  "cutoff": "2026-09-02",
+  "historical_mle": {
+    "arithmetic_drift": 0.19750762555593518,
+    "log_drift": 0.17573603796941176,
+    "sigma": 0.20867001503102173,
+    "drift_standard_error": 0.09345449321465145,
+    "years": 4.985626283367557,
+    "observations": 1252,
+    "diffusion_source": "historical_P_MLE_not_joint_Q_fit"
+  },
+  "fixed_current_Q_diffusion": {
+    "arithmetic_drift": 0.20720521178278667,
+    "log_drift": 0.17573603796941176,
+    "sigma": 0.25087516343143623,
+    "drift_standard_error": 0.1123563979958608,
+    "years": 4.985626283367557,
+    "observations": 1252,
+    "diffusion_source": "same_underlying_Q_diffusion_held_fixed"
+  },
+  "fixed_Q_drift_95_interval": [
+    -0.013013328289100484,
+    0.42742375185467385
+  ],
+  "historical_only_oos": {
+    "n": 1000,
+    "rmse": 4.397968231743097,
+    "random_walk_rmse": 4.4043738942101625,
+    "mean_log_score": 2.883774628896007
+  },
+  "limitations": [
+    "Fixed-Q result is in-sample and uses current calibration; not used in historical OOS.",
+    "GLD is not gold USD/oz; basis model required.",
+    "Constant drift and diffusion assume temporal stability; standard error conditions on model.",
+    "Other three model families not yet physically estimated."
+  ],
+  "hashes": {
+    "data\\raw\\ib_local\\physical_history_20261005\\gld_rth.csv": "30b7a2b20734ac015064f1a10659e3ac8c4232aa68eafcf53ad5be54c2c1bbea",
+    "data/processed/physical_measure/q_reference_20260902/black_scholes.json": "253d9ad64bb0c67c5c78af2af71841879ec93b30da205071998861576808b0c1"
+  }
+}

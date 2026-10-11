@@ -1,0 +1,100 @@
+{
+  "status": "TARGETED_NUMERICAL_STRESS_CHECK_NOT_REFIT_OR_OOS_VALIDATION",
+  "model": "full_bates_hawkes",
+  "origin": "2026-07-24",
+  "selection": "Largest saved within-grid seed NLL spread in the completed panel",
+  "source_sha256": "10a51c4a2ee9776c7067ea04c72b8ac9b0ad7f3393a419c51be491ce0291f9fa",
+  "filter_sha256": "b746e7952cd44475e87df41e5d89aa3c86462b3e82727fae38bd5be03b2c7331",
+  "original_max_within_grid_seed_spread": 402.1043662417537,
+  "integrated_within_grid_seed_spreads": {
+    "16": 27.774730226081374,
+    "32": 139.39081855347376
+  },
+  "results": [
+    {
+      "seed": 1704,
+      "negative_log_likelihood": -3607.627129949912,
+      "terminal_variance_mean": 0.18115825523832627,
+      "terminal_q_intensity_functional_mean": 0.8332570560473003,
+      "kappa_p": 3.018869238034245,
+      "theta_p": 0.0983525963002512,
+      "intensity_ratio": 0.7208964975321999,
+      "mark_mean_p": -0.2419268615557225,
+      "substeps": 16,
+      "variance_floor_fraction": 3.6401686325571897e-06,
+      "minimum_ess": 1.0,
+      "normal_marks_integrated": true
+    },
+    {
+      "seed": 1705,
+      "negative_log_likelihood": -3626.3467894084383,
+      "terminal_variance_mean": 0.23660156490454312,
+      "terminal_q_intensity_functional_mean": 0.8332570560473003,
+      "kappa_p": 3.018869238034245,
+      "theta_p": 0.0983525963002512,
+      "intensity_ratio": 0.7208964975321999,
+      "mark_mean_p": -0.2419268615557225,
+      "substeps": 16,
+      "variance_floor_fraction": 3.989225898692811e-06,
+      "minimum_ess": 1.0,
+      "normal_marks_integrated": true
+    },
+    {
+      "seed": 1706,
+      "negative_log_likelihood": -3635.4018601759935,
+      "terminal_variance_mean": 0.1973436907942219,
+      "terminal_q_intensity_functional_mean": 0.8332570560473003,
+      "kappa_p": 3.018869238034245,
+      "theta_p": 0.0983525963002512,
+      "intensity_ratio": 0.7208964975321999,
+      "mark_mean_p": -0.2419268615557225,
+      "substeps": 16,
+      "variance_floor_fraction": 3.7398992800245096e-06,
+      "minimum_ess": 1.0,
+      "normal_marks_integrated": true
+    },
+    {
+      "seed": 1704,
+      "negative_log_likelihood": -3633.589093369631,
+      "terminal_variance_mean": 0.20045139981935167,
+      "terminal_q_intensity_functional_mean": 0.8332570560473003,
+      "kappa_p": 3.018869238034245,
+      "theta_p": 0.0983525963002512,
+      "intensity_ratio": 0.7208964975321999,
+      "mark_mean_p": -0.2419268615557225,
+      "substeps": 32,
+      "variance_floor_fraction": 7.230471941380719e-07,
+      "minimum_ess": 1.99528884676805,
+      "normal_marks_integrated": true
+    },
+    {
+      "seed": 1705,
+      "negative_log_likelihood": -3633.235635657046,
+      "terminal_variance_mean": 0.19317371008855394,
+      "terminal_q_intensity_functional_mean": 0.8332570560473003,
+      "kappa_p": 3.018869238034245,
+      "theta_p": 0.0983525963002512,
+      "intensity_ratio": 0.7208964975321999,
+      "mark_mean_p": -0.2419268615557225,
+      "substeps": 32,
+      "variance_floor_fraction": 9.723738128063725e-07,
+      "minimum_ess": 1.0000000000000004,
+      "normal_marks_integrated": true
+    },
+    {
+      "seed": 1706,
+      "negative_log_likelihood": -3494.198274816157,
+      "terminal_variance_mean": 0.17895200389374644,
+      "terminal_q_intensity_functional_mean": 0.8332570560473003,
+      "kappa_p": 3.018869238034245,
+      "theta_p": 0.0983525963002512,
+      "intensity_ratio": 0.7208964975321999,
+      "mark_mean_p": -0.2419268615557225,
+      "substeps": 32,
+      "variance_floor_fraction": 8.726431653390523e-07,
+      "minimum_ess": 1.1618036699380003,
+      "normal_marks_integrated": true
+    }
+  ],
+  "elapsed_seconds": 17.890519300010055
+}

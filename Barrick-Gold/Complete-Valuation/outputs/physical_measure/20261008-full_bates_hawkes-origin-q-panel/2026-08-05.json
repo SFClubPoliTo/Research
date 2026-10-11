@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "v0": 0.06696820060291833,
+    "kappa": 9.159502708219566,
+    "theta": 0.02413002658574917,
+    "xi": 0.29510298556152365,
+    "rho": 0.4825357723119051,
+    "lambda0": 0.4481645383414743,
+    "lambda_bar": 0.42630411962268494,
+    "stationary_mean_intensity": 0.7861138156640775,
+    "branching_ratio": 0.4577068725569207,
+    "alpha": 1.131748553390173,
+    "beta": 2.4726492461601133,
+    "mu_J": -0.07352544189234032,
+    "sigma_J": 0.24049356150613255
+  },
+  "objective": 1.2572589790449342e-06,
+  "success": true,
+  "message": "Optimization terminated successfully",
+  "elapsed_seconds": 221.14100000006147,
+  "nested_bates_objective": 2.3870482687846095e-06,
+  "nested_heston_objective": 1.9020443097127868e-05,
+  "origin": "2026-08-05",
+  "model": "full_bates_hawkes",
+  "measure": "Q",
+  "contracts": 64,
+  "source_sha256": "4a7dde4d95ba57b65fc5862fdba42f18a75627e91a69cc11b063d3c941ec9111",
+  "source_code_sha256": "0ef2e4496e443d3c760d8a19d2d5751c49677bc914de6917d77f80141c0c427f",
+  "status": "DATED_Q_CALIBRATION_NOT_PHYSICAL_FORECAST",
+  "initialization": "Generic population and same-origin nested candidates only"
+}

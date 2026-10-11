@@ -1,0 +1,33 @@
+{
+  "status": "SUFFICIENT_DIFFUSION_CHECK_ONLY",
+  "checks": [
+    {
+      "model": "bates",
+      "eta_variance": -3.651878408787217,
+      "diffusion_novikov_horizon_years": null,
+      "unbounded_sufficient_diffusion_horizon": true,
+      "five_year_diffusion_check": true,
+      "full_joint_model_admitted": false
+    },
+    {
+      "model": "full_bates_hawkes",
+      "eta_variance": -0.2598391963028095,
+      "diffusion_novikov_horizon_years": null,
+      "unbounded_sufficient_diffusion_horizon": true,
+      "five_year_diffusion_check": true,
+      "full_joint_model_admitted": false
+    },
+    {
+      "model": "heston",
+      "eta_variance": -1.9975550200553627,
+      "diffusion_novikov_horizon_years": null,
+      "unbounded_sufficient_diffusion_horizon": true,
+      "five_year_diffusion_check": true,
+      "full_joint_model_admitted": false
+    }
+  ],
+  "limitations": [
+    "Marked point-process density and shared current-state consistency not certified by this check.",
+    "Numerical convergence and empirical identification remain separate."
+  ]
+}

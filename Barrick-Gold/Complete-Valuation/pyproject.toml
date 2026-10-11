@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "barrick-complete-valuation"
+version = "0.1.0"
+description = "LSE-backed research snapshots and provenance-safe analytics for the Barrick unified article."
+requires-python = ">=3.11"
+dependencies = [
+  "lse-data>=0.14,<1",
+  "matplotlib>=3.8,<4",
+  "numpy>=1.26,<3",
+  "pandas>=2.1,<4",
+  "scipy>=1.11,<2",
+  "Pillow>=10,<12",
+]
+
+[project.scripts]
+barrick-unified = "barrick_unified.cli:main"
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+copper = ["ib_insync>=0.9.86,<1", "nelson-siegel-svensson>=0.5,<1"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["barrick_unified*"]
+
+[tool.pytest.ini_options]
+cache_dir = "utilities/.pytest_cache"
+pythonpath = ["src"]
+testpaths = ["utilities/tests"]

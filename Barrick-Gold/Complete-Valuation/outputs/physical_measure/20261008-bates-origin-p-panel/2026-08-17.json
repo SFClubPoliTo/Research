@@ -1,0 +1,124 @@
+{
+  "status": "CONDITIONAL_TWO_STAGE_OOS_NOT_DCF_ADMITTED",
+  "model": "bates",
+  "origin": "2026-08-17",
+  "target_date": "2026-08-18",
+  "training_returns": 1240,
+  "source_q_sha256": "ad070baa030105e2ea4e19356228d52db4da04a98cff66451ffb172af6418be0",
+  "source_code_sha256": "34f87e4ef38f353437977a35d240ae04683e624998b758b913f0f29611f87a5c",
+  "q_parameters": {
+    "v0": 0.04997400181524231,
+    "kappa": 8.024233678603673,
+    "theta": 0.032908213216019944,
+    "sigma": 0.07221049515659228,
+    "rho": 0.3716916144524061,
+    "lambd": 0.30245429591259354,
+    "mu_J": -0.05264001739697555,
+    "sigma_J": 0.3080194982470228,
+    "xi": 0.07221049515659228
+  },
+  "premia": [
+    3.5410196624968426,
+    -0.2185816714258331,
+    0.7543295707380484,
+    -1.249223594996215
+  ],
+  "initialization_source": {
+    "origin": "2026-08-12",
+    "source_file": "2026-08-12.json",
+    "source_sha256": "af5a636a824adeb3e3b2b9c81be51afdb517e98aae4e410929992158d8376327"
+  },
+  "initial_premia": [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "initialization": "Previous successful origin if better than zero on current training likelihood",
+  "active_premia": 4,
+  "optimizer_success": true,
+  "optimizer_message": "Optimization terminated successfully.",
+  "evaluations": 109,
+  "training_particles": 512,
+  "training_substeps": 16,
+  "independent_checks": [
+    {
+      "seed": 1704,
+      "substeps": 16,
+      "nll": -3743.789066909954,
+      "fitted_minus_zero_premium_nll": -10.907371362862705
+    },
+    {
+      "seed": 1705,
+      "substeps": 16,
+      "nll": -3773.778109682978,
+      "fitted_minus_zero_premium_nll": -40.90277614861043
+    },
+    {
+      "seed": 1706,
+      "substeps": 16,
+      "nll": -3740.20480518583,
+      "fitted_minus_zero_premium_nll": -6.892143397669315
+    },
+    {
+      "seed": 1704,
+      "substeps": 32,
+      "nll": -3745.2156377095857,
+      "fitted_minus_zero_premium_nll": -13.499907807133695
+    },
+    {
+      "seed": 1705,
+      "substeps": 32,
+      "nll": -3742.5573099958065,
+      "fitted_minus_zero_premium_nll": 37.85109068833572
+    },
+    {
+      "seed": 1706,
+      "substeps": 32,
+      "nll": -3752.005887655228,
+      "fitted_minus_zero_premium_nll": -16.769236890466345
+    }
+  ],
+  "predictive_mean": 405.47314488531555,
+  "predictive_mean_mc_se": 0.0324972408628612,
+  "predictive_quantiles": [
+    396.2852573514228,
+    399.59542158075305,
+    405.6599674341053,
+    411.8372165486047,
+    415.08230867478676
+  ],
+  "target": 398.55,
+  "forecast_error": 6.923144885315537,
+  "no_change_error": 6.939999999999998,
+  "path_diagnostics": {
+    "seed": 2104,
+    "n_paths": 65536,
+    "steps_per_year": 11680,
+    "total_steps": 32,
+    "underlying_kind": "spot_or_etf",
+    "contract_expiry_time": null,
+    "variance_floor_fraction": 0.0,
+    "shared_origin_variance": 0.04997400181524231,
+    "shared_origin_q_intensity_functional": 0.30245429591259354,
+    "density_bound": {
+      "status": "RESTRICTED_CONTINUOUS_TIME_FINITE_HORIZON_BOUND",
+      "horizon_years": 0.0027378507871321013,
+      "kappa_p": 6.4487383128836555,
+      "entropy_upper_bound": 0.03623910855481228,
+      "log_entropy_upper_bound": -3.317616396487048,
+      "brownian_entropy_coefficient": 250.12348311995763,
+      "jump_entropy_coefficient": 2.1366787291589215,
+      "requires_normal_marks_and_unmarked_linear_hawkes": true,
+      "empirical_or_discrete_likelihood_admission": false
+    },
+    "discretization": "full-truncation Euler variance; frozen-intensity Poisson jumps; right-endpoint excitation",
+    "corporate_or_predictive_admission": false
+  },
+  "limitations": [
+    "Conditional structural Q coefficients over the historical P training sample.",
+    "Parameter and option-state uncertainty not propagated.",
+    "A successful optimizer is not an identification or convergence certificate.",
+    "GLD forecast precedes gold basis, sales, FCFF and corporate valuation."
+  ]
+}

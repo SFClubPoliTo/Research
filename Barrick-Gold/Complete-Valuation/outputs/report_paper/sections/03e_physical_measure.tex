@@ -1,0 +1,74 @@
+\subsection{From pricing measure to physical revenues}
+\label{sec:paper-physical-measure}
+Option coefficients under $\mathbb Q$ do not identify physical commodity
+returns. All four families can be estimated under $\mathbb P$, but their
+cross-measure link requires underlying history and identified risk premia
+\citep{pan2002}. With
+$\dd W^Q=\dd W^P+\eta\sqrt v\dd t$, the restricted variance map is
+$\kappa_P=\kappa_Q-\xi\eta_v$ and
+$\kappa_P\theta_P=\kappa_Q\theta_Q$.
+A positive intensity scaling $c_I$ and normal mark tilt give
+$\lambda_P=c_I\lambda_Q$ and
+$\mu_{J,P}=\mu_{J,Q}+b_J\sigma_J^2$. Thus physical expected price return is
+\begin{equation}
+\mu_t^P=a_t^Q+\eta_Sv_t+
+\lambda_t^Q(c_Ik_P-k_Q),
+\label{eq:paper-physical-drift}
+\end{equation}
+where $a_t^Q$ is pricing carry and $k_M=\mathbb E^M[e^J-1]$.
+Hawkes baseline, initial intensity and excitation scale by $c_I$, while
+decay is unchanged; physical branching must stay below one. Algebraic
+closure does not identify premia. For the restricted CIR and unmarked linear
+Hawkes family, a stopped-density entropy bound establishes equivalence on
+finite horizons; its full assumptions and derivation are in the unified
+study \citep{schonbucher2001,sokol-hansen2015}. Empirical estimation and
+predictive validation remain separate. In
+particular, copper Bates has zero fitted $Q$ jump intensity: an equivalent
+change cannot create physical jumps without a new joint specification.
+
+The 6 October diagnostic, still cut off at 2 September, adds 1,253 GLD
+regular-session prices and 1,003 synchronous GLD--gold observations,
+including early closes. Seven copper deliveries provide 408 accepted
+origin-selected, same-delivery returns; four requested earlier deliveries
+were unavailable. This avoids artificial rollover jumps but does not
+identify copper spot carry or realised selling prices. The approximately
+100-contract option budget is separate from the daily time-series sample.
+
+A training-only GLD GBM with an origin-fitted gold basis produces quarterly
+gold-price RMSE of USD~417.19/oz over 689 overlapping targets, versus
+USD~428.52/oz for a no-change mean. Its nominal 95\% coverage is only
+89.6\%; direct gold GBM has better absolute error and log score. This is a
+physical historical benchmark, not a joint option/history fit. Preliminary
+fixed-current-$Q$ Heston, Bates and Hawkes premium estimates remain sensitive
+to particle and time-step resolution and are not admitted to valuation.
+
+Option repricing OOS, physical commodity OOS and Barrick operating OOS are
+distinct tests. Current pricing coefficients cannot be used at earlier
+physical forecast origins. The intended DCF requires $\mathbb P$ realised
+selling prices. Thirty recovered historical surfaces, each with 64 contracts,
+permit new dated calibrations. A conditional two-stage estimator may fit
+$\mathbb Q$ options and then physical premia using origin-available returns;
+it is not joint maximum likelihood and must address uncertainty from both
+stages. Forward paths share the option-estimated initial state across measures.
+All four physical models now have 29 common next-session targets.
+After origin-only gold conversion, RMSE is USD~66.35/oz for GBM, 66.77
+for Heston, 66.84 for Bates and 65.81 for Bates--Hawkes, versus 66.09
+for no-change. The small Hawkes advantage does not establish superiority:
+nominal 95\% coverage is 27/29 for GBM/Heston and 25/29 for both jump
+models, with parameter and basis uncertainty omitted. Two Heston fits and
+one Hawkes fit fail to converge and remain included; independent filter
+checks show substantial seed sensitivity. Resumed fits use strictly earlier
+parameters as initial guesses with global fallback, while preserving prior
+cold fits and recording the initialization date/hash. This short panel
+does not validate long-horizon physical distributions.
+Analytically integrating normal jump marks reduces seed dispersion in a
+targeted frozen-parameter check, but substantial sensitivity remains; the
+reported panel uses the original filter.
+A fixed-delivery copper future cannot be extended beyond expiry as a spot
+forecast, and a September valuation must exclude elapsed quarterly cash flows.
+The operating bridge also requires attributable
+sales, reconciled FCFF and compatible
+discounting. WACC does not convert $\mathbb Q$ paths to $\mathbb P$; frozen
+scenario values below remain a separate experiment. The unified study gives
+the complete coefficient derivation, data exclusions, numerical checks and
+daily/quarterly baseline results.

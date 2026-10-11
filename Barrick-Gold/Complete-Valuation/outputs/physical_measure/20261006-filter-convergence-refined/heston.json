@@ -1,0 +1,91 @@
+{
+  "status": "NUMERICAL_DIAGNOSTIC_NOT_DCF_ADMITTED",
+  "model": "heston",
+  "parameter_source": "EXPLORATORY_FIXED_Q_NOT_DCF_ADMITTED",
+  "checks": [
+    {
+      "seed": 704,
+      "particles": 4096,
+      "negative_log_likelihood": -3876.3320579105,
+      "terminal_variance_mean": 0.11236573791227465,
+      "terminal_q_intensity_functional_mean": 0.0,
+      "kappa_p": 5.506344504814017,
+      "theta_p": 0.04818402431346512,
+      "intensity_ratio": 1.0,
+      "mark_mean_p": 0.0,
+      "substeps": 16,
+      "variance_floor_fraction": 0.00018205734106679314,
+      "minimum_ess": 66.7629119368521
+    },
+    {
+      "seed": 705,
+      "particles": 4096,
+      "negative_log_likelihood": -3877.6282713658043,
+      "terminal_variance_mean": 0.11290129890339108,
+      "terminal_q_intensity_functional_mean": 0.0,
+      "kappa_p": 5.506344504814017,
+      "theta_p": 0.04818402431346512,
+      "intensity_ratio": 1.0,
+      "mark_mean_p": 0.0,
+      "substeps": 16,
+      "variance_floor_fraction": 0.00017901045826677317,
+      "minimum_ess": 31.620612196538076
+    },
+    {
+      "seed": 706,
+      "particles": 4096,
+      "negative_log_likelihood": -3876.787494070501,
+      "terminal_variance_mean": 0.11319075368492529,
+      "terminal_q_intensity_functional_mean": 0.0,
+      "kappa_p": 5.506344504814017,
+      "theta_p": 0.04818402431346512,
+      "intensity_ratio": 1.0,
+      "mark_mean_p": 0.0,
+      "substeps": 16,
+      "variance_floor_fraction": 0.00017915670864117412,
+      "minimum_ess": 41.06353968136936
+    },
+    {
+      "seed": 704,
+      "particles": 4096,
+      "negative_log_likelihood": -3877.400258491943,
+      "terminal_variance_mean": 0.11167911307774803,
+      "terminal_q_intensity_functional_mean": 0.0,
+      "kappa_p": 5.506344504814017,
+      "theta_p": 0.04818402431346512,
+      "intensity_ratio": 1.0,
+      "mark_mean_p": 0.0,
+      "substeps": 32,
+      "variance_floor_fraction": 8.576975082056211e-05,
+      "minimum_ess": 25.15401135528374
+    },
+    {
+      "seed": 705,
+      "particles": 4096,
+      "negative_log_likelihood": -3877.4064804976983,
+      "terminal_variance_mean": 0.11173726565968257,
+      "terminal_q_intensity_functional_mean": 0.0,
+      "kappa_p": 5.506344504814017,
+      "theta_p": 0.04818402431346512,
+      "intensity_ratio": 1.0,
+      "mark_mean_p": 0.0,
+      "substeps": 32,
+      "variance_floor_fraction": 8.347849495494708e-05,
+      "minimum_ess": 29.915353235495928
+    },
+    {
+      "seed": 706,
+      "particles": 4096,
+      "negative_log_likelihood": -3878.158176769237,
+      "terminal_variance_mean": 0.11348486628014472,
+      "terminal_q_intensity_functional_mean": 0.0,
+      "kappa_p": 5.506344504814017,
+      "theta_p": 0.04818402431346512,
+      "intensity_ratio": 1.0,
+      "mark_mean_p": 0.0,
+      "substeps": 32,
+      "variance_floor_fraction": 8.542849994695986e-05,
+      "minimum_ess": 20.907076467811045
+    }
+  ]
+}

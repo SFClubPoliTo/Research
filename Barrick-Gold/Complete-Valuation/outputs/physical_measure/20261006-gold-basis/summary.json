@@ -1,0 +1,47 @@
+{
+  "status": "BASIS_DIAGNOSTIC_NOT_DCF_ADMITTED",
+  "cutoff": "2026-09-02",
+  "aligned_prices": 1003,
+  "first": "2022-09-02",
+  "last": "2026-09-02",
+  "missing_gld_dates": 250,
+  "early_close_observations": 9,
+  "log_ratio_annual_trend": -0.003957512881707511,
+  "log_ratio_residual_sd": 0.00025828639740270253,
+  "basis_oos_count": 751,
+  "basis_trend_relative_rmse": 0.00027581765955500163,
+  "basis_previous_ratio_relative_rmse": 0.00035844702487837233,
+  "inputs": [
+    {
+      "file": "data/raw/ib_local/physical_history_20261005/gld_schedule.json",
+      "sha256": "5f0a86e9fabdaff7c18c287015309b092f74c6863e43171b09eb5ad87bb82a4e"
+    },
+    {
+      "file": "data/raw/ib_local/physical_history_20261005/gld_rth.csv",
+      "sha256": "30b7a2b20734ac015064f1a10659e3ac8c4232aa68eafcf53ad5be54c2c1bbea"
+    },
+    {
+      "file": "data/raw/ib_local/physical_history_20261005/gold_hourly_chunks/2023.csv",
+      "sha256": "17c586198314f8666f65bdf999e770471ae52e34da8bc69dc8e648f2f4e1a204"
+    },
+    {
+      "file": "data/raw/ib_local/physical_history_20261005/gold_hourly_chunks/2024.csv",
+      "sha256": "2a78a97b197a073264411e5d5a52342c5651be7562676e4317f1dc447c3d1895"
+    },
+    {
+      "file": "data/raw/ib_local/physical_history_20261005/gold_hourly_chunks/2025.csv",
+      "sha256": "75e082721d4179e9e333b606f844ec8f08df44371b5c3fa1977281ae3a82a8a0"
+    },
+    {
+      "file": "data/raw/ib_local/physical_history_20261005/gold_hourly_chunks/2026.csv",
+      "sha256": "ac699c0e250d1ec6f2513652b307db45518881b3c9f2f8f47ec569d8a9b20246"
+    }
+  ],
+  "limitations": [
+    "Hourly bar timestamps are starts; close is matched to the reported exchange-session end.",
+    "GLD trade close versus gold midpoint: quote/trade and venue basis remains.",
+    "Trend estimated empirically, not identified as management fee or structural long-run law.",
+    "Basis-only OOS conditions on target GLD; it does not establish commodity forecast accuracy.",
+    "Missing hourly history excluded, not filled; physical parameter and basis uncertainty remain."
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "v0": 0.0792717175615861,
+    "kappa": 9.569806734639304,
+    "theta": 0.02066114800900063,
+    "xi": 0.015239892587986177,
+    "rho": -0.17176333443291117,
+    "lambda0": 1.2694588141144887,
+    "lambda_bar": 0.7749321158839347,
+    "stationary_mean_intensity": 1.5855990578368109,
+    "branching_ratio": 0.511268556793195,
+    "alpha": 1.9816212064789192,
+    "beta": 3.875891016862343,
+    "mu_J": -0.009627041315078985,
+    "sigma_J": 0.17094308988139428
+  },
+  "objective": 1.0505485386101592e-05,
+  "success": true,
+  "message": "Optimization terminated successfully",
+  "elapsed_seconds": 14.703000000095926,
+  "nested_bates_objective": 1.3325419290345782e-05,
+  "nested_heston_objective": 4.5834297671435564e-05,
+  "nested_heston_parameters": {
+    "v0": 0.10366029412993753,
+    "kappa": 9.569790285746901,
+    "theta": 0.05845009423911773,
+    "sigma": 0.015598735262043535,
+    "rho": -0.17179919537252641
+  },
+  "nested_bates_parameters": {
+    "v0": 0.056425299990013,
+    "kappa": 9.246847168186079,
+    "theta": 0.012057835086560172,
+    "sigma": 0.15217351340941035,
+    "rho": 0.3901663918285137,
+    "lambd": 2.2418661684134302,
+    "mu_J": -0.0120985538259736,
+    "sigma_J": 0.14781157003997208
+  },
+  "warm_start_used": true,
+  "global_search_used": false,
+  "origin": "2026-08-21",
+  "model": "full_bates_hawkes",
+  "measure": "Q",
+  "contracts": 64,
+  "source_sha256": "b2bfc7d725347937341cc1f7eb1191eb3d27d7c2784712b54f4b97576f5b0d95",
+  "source_code_sha256": "312e45b93ab9d6a007ac8c3d48917c880d6910d5dd72089c01249ec123356260",
+  "pricing_code_sha256": {
+    "Heston.py": "b972cce17480a495c9c2e8e3ae3b7c02b732d4d3fd0885b8a62ea7afdf569ede",
+    "Bates.py": "b004f5ae0c8641545f6f7fced928f247b62ee91838ce8e83ac6395a95d377bea",
+    "Hawkes.py": "a4f671f207069d5207d612a6962174a9e8f019030f81e17ef74df186de5a2c39",
+    "calibration_core.py": "9f05d0ff920d04014427366782fe54ccd26f82a92f9e04197d27d14468bd4562",
+    "dated_initialization.py": "6ac044b398baace02206b63ef0e437bb99f234d3a756aaf9a15f4a762b3f8263"
+  },
+  "status": "DATED_Q_CALIBRATION_NOT_PHYSICAL_FORECAST",
+  "initialization": "Previous successful origin with local refinement and global fallback",
+  "initialization_source": {
+    "origin": "2026-08-20",
+    "source_file": "2026-08-20.json",
+    "source_sha256": "d9a12e1f2e903cfcb8d1a26209c69612caa710092174190ab3250edf7c7b23e9"
+  }
+}

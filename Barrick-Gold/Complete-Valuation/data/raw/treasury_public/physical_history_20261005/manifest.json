@@ -1,0 +1,38 @@
+[
+  {
+    "year": 2021,
+    "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2021",
+    "sha256": "7903c4d735ba182ae18157100d8a3671be60692cd565cfcc97b26843ae8d4dc9",
+    "bytes": 362113
+  },
+  {
+    "year": 2022,
+    "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2022",
+    "sha256": "5170652f1f1f2c79c825c695c5c1bacbf9bbc8a095f2ab37c853ee8caed5c4d6",
+    "bytes": 343983
+  },
+  {
+    "year": 2023,
+    "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2023",
+    "sha256": "83f22dbfad894ab783fe98ff8ef15ed66dce7859d5ea8e40eb56d5634928a2d2",
+    "bytes": 284423
+  },
+  {
+    "year": 2024,
+    "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2024",
+    "sha256": "3dab343941ec179822a1dcddbe006408481ac1fe6d86b351e16acb23f6c9c3b7",
+    "bytes": 284423
+  },
+  {
+    "year": 2025,
+    "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2025",
+    "sha256": "fdf5d7f2ecdd459e5c912bb3879fcd70503bd138998dfd8d213d267ced3ae0e6",
+    "bytes": 345104
+  },
+  {
+    "year": 2026,
+    "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2026",
+    "sha256": "6aa865a957b95956feec02c04d36a713dbf0aa23f631d6267e6d7c00273713f4",
+    "bytes": 294223
+  }
+]

@@ -1,0 +1,255 @@
+{
+  "status": "DATED_OBSERVED_INPUTS_NOT_HISTORICAL_Q_PARAMETERS",
+  "budget": 64,
+  "source": "data/processed/audit_inputs/outputs/oos/rolling/option_forecasts.csv",
+  "source_sha256": "48c7a76d87061721d80054e3e3e299c981bc14204deb2f5db6de3553c7a2dc40",
+  "discarded": [
+    "prior-origin model predictions",
+    "benchmark predictions",
+    "support flags"
+  ],
+  "provider_measure": "Preserved legacy observed price and IV fields; not asserted transaction prices.",
+  "private_output": "data/raw/ib_local/gold_origin_surfaces_20261007",
+  "origins": [
+    {
+      "origin": "2026-07-10",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 13,
+      "spot_close_difference": 0.0,
+      "sha256": "1a0c9f4871db23f6f74dec18f281907cade5ef01e88a1b6738a2f4efb6e32ec2"
+    },
+    {
+      "origin": "2026-07-13",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 13,
+      "spot_close_difference": 0.0,
+      "sha256": "5387804a55969e457943367d3d28688b8874bef3f7f587b76400fa1076019c71"
+    },
+    {
+      "origin": "2026-07-14",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 13,
+      "spot_close_difference": 0.0,
+      "sha256": "6d182deea8a27fa82ba8465232ac9576f73eae8da3e87a8b4d4e144194754df5"
+    },
+    {
+      "origin": "2026-07-15",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 13,
+      "spot_close_difference": 0.0,
+      "sha256": "f02723a28dd77841273f593ff61e9a28550fd313a7437383b8411c0812b8b411"
+    },
+    {
+      "origin": "2026-07-16",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 13,
+      "spot_close_difference": 0.0,
+      "sha256": "158e3cc79e18ba4b41f9fd456fa40e204664e3f4d3c4bdd726cc8fc7f9610122"
+    },
+    {
+      "origin": "2026-07-17",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 13,
+      "spot_close_difference": 0.0,
+      "sha256": "e992d5e18c3a491b8ee4c55c246fdf52dd27005c07b88daeab67266e08182e86"
+    },
+    {
+      "origin": "2026-07-20",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 12,
+      "spot_close_difference": 0.0,
+      "sha256": "9d29f51d2eb7502a1e5ca41dffaef0aaf6ac7617fb81d3ae2e843d0883de0e81"
+    },
+    {
+      "origin": "2026-07-21",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 12,
+      "spot_close_difference": 0.0,
+      "sha256": "825cfc27fd114b8b15f4173ec14f316fa4a7466c43930cf4cc442654e00680f8"
+    },
+    {
+      "origin": "2026-07-22",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 12,
+      "spot_close_difference": 0.0,
+      "sha256": "db1b920d6134adee98016fa823f66bf0e19a1ac92c01f584adadd5a655f7200d"
+    },
+    {
+      "origin": "2026-07-23",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 12,
+      "spot_close_difference": 0.0,
+      "sha256": "e949648f6bcce497c82522fd36a96a4f4afe50ca1d1fbcc4cb425aa0a1493356"
+    },
+    {
+      "origin": "2026-07-24",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 12,
+      "spot_close_difference": 0.0,
+      "sha256": "9a0f31710c06d8f117842e8694191db91e3a463d314104b9a0ae8ef332ec55d5"
+    },
+    {
+      "origin": "2026-07-27",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 12,
+      "spot_close_difference": 0.0,
+      "sha256": "df5bda2439cc5f659cc6348796c68fee9031b0b474c785aa4e013d237c323f4e"
+    },
+    {
+      "origin": "2026-07-28",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 12,
+      "spot_close_difference": 0.0,
+      "sha256": "899bc3c89451acacb4bd8128d89a200da0b4a2a38dddb3bffd31d7329b6d33cc"
+    },
+    {
+      "origin": "2026-07-29",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 12,
+      "spot_close_difference": 0.0,
+      "sha256": "1866649310d8a64f12b08510d02e347a877e5ab9911fbe7bc7394fb4098f9ca1"
+    },
+    {
+      "origin": "2026-07-30",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 12,
+      "spot_close_difference": 0.0,
+      "sha256": "4fc2606fbbad06a3d01589b662f89a6a33edc20298e932c4833c6ed0ea928660"
+    },
+    {
+      "origin": "2026-07-31",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 12,
+      "spot_close_difference": 0.0,
+      "sha256": "0ee935c7501a96d39fe8264ef1cf27c7e7488d3a7d25e7f8c168d07c9a707c6b"
+    },
+    {
+      "origin": "2026-08-03",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 11,
+      "spot_close_difference": 0.0,
+      "sha256": "2b95ab44bbc62acaa2bc9ea7dd07491b74a1f74447bab37206f16578926db161"
+    },
+    {
+      "origin": "2026-08-04",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 11,
+      "spot_close_difference": 0.0,
+      "sha256": "5ceb9bfa47f331c7673ab353a2c352e867842fd9f3963e34b8d522465f956b76"
+    },
+    {
+      "origin": "2026-08-05",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 11,
+      "spot_close_difference": 0.0,
+      "sha256": "4a7dde4d95ba57b65fc5862fdba42f18a75627e91a69cc11b063d3c941ec9111"
+    },
+    {
+      "origin": "2026-08-06",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 11,
+      "spot_close_difference": 0.0,
+      "sha256": "2f9bd563f73c714c039a43d963c53462c8fcbce453bf5107780317358f108d11"
+    },
+    {
+      "origin": "2026-08-12",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 11,
+      "spot_close_difference": 0.0,
+      "sha256": "1c5dbae39befa545a3b2391f2790977568d59ce4d04b24be196d4fe436952090"
+    },
+    {
+      "origin": "2026-08-17",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 12,
+      "spot_close_difference": 0.0,
+      "sha256": "56d72dd0b2a572cc686b66893aa70d9d79ebcf7f002711daecc9e9acc34be1fa"
+    },
+    {
+      "origin": "2026-08-19",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 12,
+      "spot_close_difference": 0.0,
+      "sha256": "ed1175c9919552fc389d9faf9d459c07578cd5c130bb80049e6f5fb0d33082ac"
+    },
+    {
+      "origin": "2026-08-20",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 12,
+      "spot_close_difference": 0.0,
+      "sha256": "4583aec4ec7760509d4c5284e915d01b470688597316db2768e576bce8d66ea2"
+    },
+    {
+      "origin": "2026-08-21",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 12,
+      "spot_close_difference": 0.0,
+      "sha256": "b2bfc7d725347937341cc1f7eb1191eb3d27d7c2784712b54f4b97576f5b0d95"
+    },
+    {
+      "origin": "2026-08-24",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 12,
+      "spot_close_difference": 0.0,
+      "sha256": "35ddbe8b4a7881b72316396d85e4e451e8ef14810c62af775925a92ce1ed8ec8"
+    },
+    {
+      "origin": "2026-08-28",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 9,
+      "spot_close_difference": 0.0,
+      "sha256": "a2d3f2bd5e8c69c0cdd2b3add5023d392a5f2ab1bc3b84a259675e23ab029cdb"
+    },
+    {
+      "origin": "2026-08-31",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 9,
+      "spot_close_difference": 0.0,
+      "sha256": "287af552dd7df7a128f8535120f0a3e2923b947e4da6a837a4af78f310aae323"
+    },
+    {
+      "origin": "2026-09-01",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 9,
+      "spot_close_difference": 0.0,
+      "sha256": "f24fddb086d18b53e0a2be168db84976f1614e0c875907020fa272cdadc64607"
+    },
+    {
+      "origin": "2026-09-02",
+      "status": "OBSERVED_INPUTS_RECOVERED_Q_REFIT_REQUIRED",
+      "points": 64,
+      "expiries": 9,
+      "spot_close_difference": 0.0,
+      "sha256": "1ca0591bbd03826ac3ad266d363e64cb24d3964dc815e55cb4fc2446dc560344"
+    }
+  ]
+}

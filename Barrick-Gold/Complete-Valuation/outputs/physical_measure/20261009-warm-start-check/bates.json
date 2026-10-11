@@ -1,0 +1,58 @@
+{
+  "model": "Bates",
+  "parameter_names": [
+    "v0",
+    "kappa",
+    "theta",
+    "sigma",
+    "rho",
+    "lambd",
+    "mu_J",
+    "sigma_J"
+  ],
+  "values": [
+    0.043658407414092916,
+    7.113594569151852,
+    0.029505394630281383,
+    0.4826307237663319,
+    0.13321668628723765,
+    0.8733076505064565,
+    -0.10613443676152731,
+    0.1644958057588141
+  ],
+  "objective": 1.110383279628165e-05,
+  "global_objective": null,
+  "success": true,
+  "message": "Previous-origin local fit: Optimization terminated successfully",
+  "evaluations": 46,
+  "iterations": 5,
+  "elapsed_seconds": 0.10116229997947812,
+  "warm_start_used": true,
+  "global_search_used": false,
+  "parameters": {
+    "v0": 0.043658407414092916,
+    "kappa": 7.113594569151852,
+    "theta": 0.029505394630281383,
+    "sigma": 0.4826307237663319,
+    "rho": 0.13321668628723765,
+    "lambd": 0.8733076505064565,
+    "mu_J": -0.10613443676152731,
+    "sigma_J": 0.1644958057588141,
+    "xi": 0.4826307237663319
+  },
+  "nested_heston_parameters": {
+    "v0": 0.0604599076367179,
+    "kappa": 7.115972618469285,
+    "theta": 0.06017636408474981,
+    "sigma": 0.41030713383558615,
+    "rho": -0.7429615807624101
+  },
+  "total_elapsed_seconds": 0.2824877999955788,
+  "origin": "2026-07-14",
+  "initialization_origin": "2026-07-13",
+  "source_sha256": "6d182deea8a27fa82ba8465232ac9576f73eae8da3e87a8b4d4e144194754df5",
+  "prior_sha256": "429f84d6b119e18cfac47445f011c6ed75f3d3f17f94f086a3005bba7b1c55aa",
+  "cold_result_sha256": "00c28b38ce038b143c5862c0392c6bd665180be8acbda65808e63837714d893f",
+  "frozen_cold_objective": 7.55373909462509e-06,
+  "status": "WARM_START_NUMERICAL_CHECK_NOT_MODEL_SELECTION"
+}

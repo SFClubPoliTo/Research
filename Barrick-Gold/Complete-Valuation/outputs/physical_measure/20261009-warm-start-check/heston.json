@@ -1,0 +1,42 @@
+{
+  "model": "Heston",
+  "parameter_names": [
+    "v0",
+    "kappa",
+    "theta",
+    "sigma",
+    "rho"
+  ],
+  "values": [
+    0.06288156227207758,
+    4.2546114140246285,
+    0.06273322564929042,
+    0.720640704397367,
+    -0.30729187789293655
+  ],
+  "objective": 2.0009436147105703e-05,
+  "global_objective": null,
+  "success": true,
+  "message": "Previous-origin local fit: Optimization terminated successfully",
+  "evaluations": 20,
+  "iterations": 3,
+  "elapsed_seconds": 0.04095339996274561,
+  "warm_start_used": true,
+  "global_search_used": false,
+  "parameters": {
+    "v0": 0.06288156227207758,
+    "kappa": 4.2546114140246285,
+    "theta": 0.06273322564929042,
+    "sigma": 0.720640704397367,
+    "rho": -0.30729187789293655,
+    "xi": 0.720640704397367
+  },
+  "total_elapsed_seconds": 0.04124129994306713,
+  "origin": "2026-07-14",
+  "initialization_origin": "2026-07-13",
+  "source_sha256": "6d182deea8a27fa82ba8465232ac9576f73eae8da3e87a8b4d4e144194754df5",
+  "prior_sha256": "5c92a51a7b42f118610691c618e20920534f95db6e8ce49d72baffffb32edcd9",
+  "cold_result_sha256": "b9ab8c1d5afa84f2e5b0ed521fdfa90b1c7e5fc1418f20bedc9b22dd6ebf6e95",
+  "frozen_cold_objective": 1.8843745224896057e-05,
+  "status": "WARM_START_NUMERICAL_CHECK_NOT_MODEL_SELECTION"
+}

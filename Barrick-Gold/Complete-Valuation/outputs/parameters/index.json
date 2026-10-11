@@ -1,0 +1,89 @@
+{
+  "policy": "Canonical dated parameter sources are indexed without duplicating fitted coefficients.",
+  "files": [
+    {
+      "model": "Bates",
+      "measure": "Q",
+      "instrument": "GLD_USD_PER_SHARE",
+      "as_of": "2026-09-02",
+      "path": "data/processed/physical_measure/q_reference_20260902/bates.json",
+      "sha256": "cdf4be80b96058c0af8986445da16e92f59569a56b8938357f6d8eef453e82c5"
+    },
+    {
+      "model": "Black-Scholes",
+      "measure": "Q",
+      "instrument": "GLD_USD_PER_SHARE",
+      "as_of": "2026-09-02",
+      "path": "data/processed/physical_measure/q_reference_20260902/black_scholes.json",
+      "sha256": "253d9ad64bb0c67c5c78af2af71841879ec93b30da205071998861576808b0c1"
+    },
+    {
+      "model": "Full Bates-Hawkes",
+      "measure": "Q",
+      "instrument": "GLD_USD_PER_SHARE",
+      "as_of": "2026-09-02",
+      "path": "data/processed/physical_measure/q_reference_20260902/full_bates_hawkes.json",
+      "sha256": "d01d8c66fcf3b33807c907011760f818dd262008036409da90ddb04521c69243"
+    },
+    {
+      "model": "Heston",
+      "measure": "Q",
+      "instrument": "GLD_USD_PER_SHARE",
+      "as_of": "2026-09-02",
+      "path": "data/processed/physical_measure/q_reference_20260902/heston.json",
+      "sha256": "3ffddc65eef75cb046661f7b4e8b0b96637b4fbe6593efec076a0d2f0706e700"
+    },
+    {
+      "model": "Black-76",
+      "measure": "Q",
+      "instrument": "HG_DELIVERY_SPECIFIC_FUTURES_USD_PER_LB",
+      "as_of": "2026-09-02",
+      "path": "data/processed/copper/snapshot_20260902/copper_parameters.json",
+      "sha256": "7b28955651b90a038f012286c0dbb674110b20e8b7e90b9895c525ccc8621d90",
+      "json_key": "Black-76"
+    },
+    {
+      "model": "Heston-forward",
+      "measure": "Q",
+      "instrument": "HG_DELIVERY_SPECIFIC_FUTURES_USD_PER_LB",
+      "as_of": "2026-09-02",
+      "path": "data/processed/copper/snapshot_20260902/copper_parameters.json",
+      "sha256": "7b28955651b90a038f012286c0dbb674110b20e8b7e90b9895c525ccc8621d90",
+      "json_key": "Heston-forward"
+    },
+    {
+      "model": "Bates-Poisson-forward",
+      "measure": "Q",
+      "instrument": "HG_DELIVERY_SPECIFIC_FUTURES_USD_PER_LB",
+      "as_of": "2026-09-02",
+      "path": "data/processed/copper/snapshot_20260902/copper_parameters.json",
+      "sha256": "7b28955651b90a038f012286c0dbb674110b20e8b7e90b9895c525ccc8621d90",
+      "json_key": "Bates-Poisson-forward"
+    },
+    {
+      "model": "Full-Bates-Hawkes-forward",
+      "measure": "Q",
+      "instrument": "HG_DELIVERY_SPECIFIC_FUTURES_USD_PER_LB",
+      "as_of": "2026-09-02",
+      "path": "data/processed/copper/snapshot_20260902/copper_parameters.json",
+      "sha256": "7b28955651b90a038f012286c0dbb674110b20e8b7e90b9895c525ccc8621d90",
+      "json_key": "Full-Bates-Hawkes-forward"
+    },
+    {
+      "model": "heston",
+      "measure": "P_CONDITIONAL_FIXED_CURRENT_Q_NOT_DCF_ADMITTED",
+      "instrument": "GLD_USD_PER_SHARE",
+      "as_of": "2026-09-02",
+      "path": "outputs/physical_measure/20261007-refit-resolution-pilot/heston.json",
+      "sha256": "aff6c30cff8ed48e982237d80bd64ef02e41f5b8af440eb20a6824cc3846e562"
+    },
+    {
+      "model": "heston",
+      "measure": "P_CONDITIONAL_FIXED_CURRENT_Q_NOT_DCF_ADMITTED",
+      "instrument": "GLD_USD_PER_SHARE",
+      "as_of": "2026-09-02",
+      "path": "outputs/physical_measure/20261007-refit-resolution-heston/heston.json",
+      "sha256": "1a02db874e21ef1f5a5c0a625497473db0a8547101e5aa34672965eb0f93cbe7"
+    }
+  ]
+}

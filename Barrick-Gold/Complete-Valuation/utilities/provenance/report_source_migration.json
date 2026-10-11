@@ -1,0 +1,1013 @@
+{
+  "status": "PATH_ONLY_MIGRATION_REQUIRES_COMPILE_PARITY",
+  "files": [
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/copper/copper_temporal_oos.png",
+      "destination": "outputs/img/publication/fbc4b158413f5755_copper_temporal_oos.png",
+      "source_sha256": "fbc4b158413f5755dadf2cb4a00308148c6fdc29448df3f9be314991257ca4cc",
+      "destination_sha256": "fbc4b158413f5755dadf2cb4a00308148c6fdc29448df3f9be314991257ca4cc"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/copper/gold_plus_copper_comparison.png",
+      "destination": "outputs/img/publication/0d6debc74fe75420_gold_plus_copper_comparison.png",
+      "source_sha256": "0d6debc74fe75420f87d05359b2e134eb0b9523466df27558ed749ee9a42be4d",
+      "destination_sha256": "0d6debc74fe75420f87d05359b2e134eb0b9523466df27558ed749ee9a42be4d"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/diagnostics/online_oos_r2_by_benchmark.png",
+      "destination": "outputs/img/publication/84abf73b4d15f1bf_online_oos_r2_by_benchmark.png",
+      "source_sha256": "84abf73b4d15f1bf411183a9e1d8df08195c1d58af7c70d7da5b40783f9be7fd",
+      "destination_sha256": "84abf73b4d15f1bf411183a9e1d8df08195c1d58af7c70d7da5b40783f9be7fd"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/Logo_SFClub_Polito.png",
+      "destination": "outputs/img/publication/572456d904007768_Logo_SFClub_Polito.png",
+      "source_sha256": "572456d9040077683067a830041c170b3a1c420db82eb0b319f0d31b9d42d80e",
+      "destination_sha256": "572456d9040077683067a830041c170b3a1c420db82eb0b319f0d31b9d42d80e"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/lse/lse_market_context_20260826.png",
+      "destination": "outputs/img/publication/c54039731f560057_lse_market_context_20260826.png",
+      "source_sha256": "c54039731f560057bbc627e673d142e96b52938f8e2983c2f164f6d4fd443be2",
+      "destination_sha256": "c54039731f560057bbc627e673d142e96b52938f8e2983c2f164f6d4fd443be2"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team4_current/team4_mine_cost_qoq.png",
+      "destination": "outputs/img/publication/ce40d43c378d1fa2_team4_mine_cost_qoq.png",
+      "source_sha256": "ce40d43c378d1fa20bcd757aa0e9ed5908ea2af83c5a033ac3b9addf61f82294",
+      "destination_sha256": "ce40d43c378d1fa20bcd757aa0e9ed5908ea2af83c5a033ac3b9addf61f82294"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team4_current/team4_mine_production_qoq.png",
+      "destination": "outputs/img/publication/50b961f87c5f443e_team4_mine_production_qoq.png",
+      "source_sha256": "50b961f87c5f443ec499b88d22590f7df10ce7a145b2bd5580dc5fd561dbb2f0",
+      "destination_sha256": "50b961f87c5f443ec499b88d22590f7df10ce7a145b2bd5580dc5fd561dbb2f0"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team4_current/team4_operating_contract.png",
+      "destination": "outputs/img/publication/a5190673372d95dd_team4_operating_contract.png",
+      "source_sha256": "a5190673372d95dd02d7a2e1cb6b791b1a5fa642d8f5c3885f0bb01a123e7290",
+      "destination_sha256": "a5190673372d95dd02d7a2e1cb6b791b1a5fa642d8f5c3885f0bb01a123e7290"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team4_current/team4_process_components_qoq.png",
+      "destination": "outputs/img/publication/1ddc31b9d77b0ab4_team4_process_components_qoq.png",
+      "source_sha256": "1ddc31b9d77b0ab4af2cb886c93c598343f30cb64ac5f920aebfe34d9952cb08",
+      "destination_sha256": "1ddc31b9d77b0ab4af2cb886c93c598343f30cb64ac5f920aebfe34d9952cb08"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/acf_abs_returns_gold_silver.png",
+      "destination": "outputs/img/publication/947d32538e7a36b6_acf_abs_returns_gold_silver.png",
+      "source_sha256": "947d32538e7a36b6c45c304d48bd12730c12f07827a921c741c50c7391ab2bcb",
+      "destination_sha256": "947d32538e7a36b6c45c304d48bd12730c12f07827a921c741c50c7391ab2bcb"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/acf_grid_gold_silver.png",
+      "destination": "outputs/img/publication/0bc50334767c3172_acf_grid_gold_silver.png",
+      "source_sha256": "0bc50334767c3172c01daef7f95d74e9d4c4a7821eafe18925860678747803b2",
+      "destination_sha256": "0bc50334767c3172c01daef7f95d74e9d4c4a7821eafe18925860678747803b2"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/arfima_fd_gold.png",
+      "destination": "outputs/img/publication/1ed7701f31854135_arfima_fd_gold.png",
+      "source_sha256": "1ed7701f31854135e5909126494393f7f8e82a42b46b7f4a52e4cd4d091a6fea",
+      "destination_sha256": "1ed7701f31854135e5909126494393f7f8e82a42b46b7f4a52e4cd4d091a6fea"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/arfima_fd_silver.png",
+      "destination": "outputs/img/publication/85bb9ad60d5b65c9_arfima_fd_silver.png",
+      "source_sha256": "85bb9ad60d5b65c915d464fba08c93e79d764192968ff496da309f1b9e90f246",
+      "destination_sha256": "85bb9ad60d5b65c915d464fba08c93e79d764192968ff496da309f1b9e90f246"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/correlation_heatmap.png",
+      "destination": "outputs/img/publication/208a6c6457382403_correlation_heatmap.png",
+      "source_sha256": "208a6c6457382403161bffebee50c06d5b63b1a68852a583d6b578de841d9a74",
+      "destination_sha256": "208a6c6457382403161bffebee50c06d5b63b1a68852a583d6b578de841d9a74"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/garch_condvol_gold.png",
+      "destination": "outputs/img/publication/afc13b2f80014b25_garch_condvol_gold.png",
+      "source_sha256": "afc13b2f80014b254066e68b11f0daa67b0d355f41c6c16160a32becea7530f6",
+      "destination_sha256": "afc13b2f80014b254066e68b11f0daa67b0d355f41c6c16160a32becea7530f6"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/garch_condvol_silver.png",
+      "destination": "outputs/img/publication/3b18a0aa9daae0e4_garch_condvol_silver.png",
+      "source_sha256": "3b18a0aa9daae0e4e6833fc732e643db7f94ba054bd33261317d167f6df21d96",
+      "destination_sha256": "3b18a0aa9daae0e4e6833fc732e643db7f94ba054bd33261317d167f6df21d96"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/hist_normal_gold.png",
+      "destination": "outputs/img/publication/cade4f2733f97d8b_hist_normal_gold.png",
+      "source_sha256": "cade4f2733f97d8baff8fcd3d589d159f4c50117f50bc94b9145278bcf494462",
+      "destination_sha256": "cade4f2733f97d8baff8fcd3d589d159f4c50117f50bc94b9145278bcf494462"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/hist_normal_silver.png",
+      "destination": "outputs/img/publication/33a47b013cdc5552_hist_normal_silver.png",
+      "source_sha256": "33a47b013cdc5552274fd5ebe02d0c7d4cd8dbf14e4379164599c4550226461a",
+      "destination_sha256": "33a47b013cdc5552274fd5ebe02d0c7d4cd8dbf14e4379164599c4550226461a"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/qqplot_normal_gold.png",
+      "destination": "outputs/img/publication/b634a7a755db7d7f_qqplot_normal_gold.png",
+      "source_sha256": "b634a7a755db7d7fb174f9295e2c488570310101ca21a422e725e608b560153f",
+      "destination_sha256": "b634a7a755db7d7fb174f9295e2c488570310101ca21a422e725e608b560153f"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/qqplot_normal_silver.png",
+      "destination": "outputs/img/publication/5a4373ae994c4282_qqplot_normal_silver.png",
+      "source_sha256": "5a4373ae994c42825b53aff0d6efb659425c62104db639b7d4697d5d907593f6",
+      "destination_sha256": "5a4373ae994c42825b53aff0d6efb659425c62104db639b7d4697d5d907593f6"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/returns_rollingvol_gold.png",
+      "destination": "outputs/img/publication/e670a201ce86a5ec_returns_rollingvol_gold.png",
+      "source_sha256": "e670a201ce86a5ec2f3fed3d1029b6fd57cdf75c8c3d8f8fff1b5e688c3881d4",
+      "destination_sha256": "e670a201ce86a5ec2f3fed3d1029b6fd57cdf75c8c3d8f8fff1b5e688c3881d4"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/returns_rollingvol_silver.png",
+      "destination": "outputs/img/publication/a27b1fd9ae7d7a38_returns_rollingvol_silver.png",
+      "source_sha256": "a27b1fd9ae7d7a38ffc3688eed93319f03853a22138009977d802abf8ea5b708",
+      "destination_sha256": "a27b1fd9ae7d7a38ffc3688eed93319f03853a22138009977d802abf8ea5b708"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/rolling_corr_gold_dxy.png",
+      "destination": "outputs/img/publication/f289761147385bd7_rolling_corr_gold_dxy.png",
+      "source_sha256": "f289761147385bd7507d99ae3a6dcb991ce77bfaa83cc7625e8ec8b4153367cd",
+      "destination_sha256": "f289761147385bd7507d99ae3a6dcb991ce77bfaa83cc7625e8ec8b4153367cd"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/rolling_corr_gold_sp500.png",
+      "destination": "outputs/img/publication/cac8e0c90c783576_rolling_corr_gold_sp500.png",
+      "source_sha256": "cac8e0c90c783576b900bc7a8efc0a12be25a59b2c1cac978e0561cb9d458f66",
+      "destination_sha256": "cac8e0c90c783576b900bc7a8efc0a12be25a59b2c1cac978e0561cb9d458f66"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/rolling_corr_gold_ust10y.png",
+      "destination": "outputs/img/publication/15e8739a9649573e_rolling_corr_gold_ust10y.png",
+      "source_sha256": "15e8739a9649573e18bc81522f33c1f9bdfd290c99c6d5067fe015c58af54fd5",
+      "destination_sha256": "15e8739a9649573e18bc81522f33c1f9bdfd290c99c6d5067fe015c58af54fd5"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/rolling_corr_silver_dxy.png",
+      "destination": "outputs/img/publication/446a86ada886cf6f_rolling_corr_silver_dxy.png",
+      "source_sha256": "446a86ada886cf6f8fbf542d5ff49d4fd9f4a5c8a0b7ff579d6246e7206924eb",
+      "destination_sha256": "446a86ada886cf6f8fbf542d5ff49d4fd9f4a5c8a0b7ff579d6246e7206924eb"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/rolling_corr_silver_sp500.png",
+      "destination": "outputs/img/publication/749384e5a43b524a_rolling_corr_silver_sp500.png",
+      "source_sha256": "749384e5a43b524a665dacf7d5c4e980e2325c8aa96cd53bc9cc137076079c86",
+      "destination_sha256": "749384e5a43b524a665dacf7d5c4e980e2325c8aa96cd53bc9cc137076079c86"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team7_empirical/rolling_corr_silver_ust10y.png",
+      "destination": "outputs/img/publication/908c62e76c1ec216_rolling_corr_silver_ust10y.png",
+      "source_sha256": "908c62e76c1ec216ac3f23a3b91e68624308611fe12f3049568525294cd71d85",
+      "destination_sha256": "908c62e76c1ec216ac3f23a3b91e68624308611fe12f3049568525294cd71d85"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team8_empirical/bates_hawkes_residual_heatmap.png",
+      "destination": "outputs/img/publication/4e1468e502c7009e_bates_hawkes_residual_heatmap.png",
+      "source_sha256": "4e1468e502c7009ea9bfd37713a9c06ca72c8bdecb7f41ed7e2fa12642e73404",
+      "destination_sha256": "4e1468e502c7009ea9bfd37713a9c06ca72c8bdecb7f41ed7e2fa12642e73404"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team8_empirical/bates_hawkes_volatility_smile.png",
+      "destination": "outputs/img/publication/f4cfc8e203afcc8e_bates_hawkes_volatility_smile.png",
+      "source_sha256": "f4cfc8e203afcc8e2c294c2fc7bfce0f24c9917fbe0e0011bdda080f84f1bb4f",
+      "destination_sha256": "f4cfc8e203afcc8e2c294c2fc7bfce0f24c9917fbe0e0011bdda080f84f1bb4f"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team8_empirical/bates_hawkes_vs_bates.png",
+      "destination": "outputs/img/publication/b9bb2527125e8077_bates_hawkes_vs_bates.png",
+      "source_sha256": "b9bb2527125e80779d1f3925bf9039dd487222af959fd5347cd243e35f7d7c07",
+      "destination_sha256": "b9bb2527125e80779d1f3925bf9039dd487222af959fd5347cd243e35f7d7c07"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team8_empirical/bates_poisson_jump_paths.png",
+      "destination": "outputs/img/publication/6bcd3ce9516c61e5_bates_poisson_jump_paths.png",
+      "source_sha256": "6bcd3ce9516c61e544d2f236239caefcd3be4343b8b4b4d9d4f0cd86cc457be6",
+      "destination_sha256": "6bcd3ce9516c61e544d2f236239caefcd3be4343b8b4b4d9d4f0cd86cc457be6"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team8_empirical/bates_residual_heatmap.png",
+      "destination": "outputs/img/publication/d9049cd97b310144_bates_residual_heatmap.png",
+      "source_sha256": "d9049cd97b3101447a0004a071dfacff9210e8cad30752db2bfe7d9657d35572",
+      "destination_sha256": "d9049cd97b3101447a0004a071dfacff9210e8cad30752db2bfe7d9657d35572"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team8_empirical/black_scholes_residual_heatmap.png",
+      "destination": "outputs/img/publication/2be275fce48aae5f_black_scholes_residual_heatmap.png",
+      "source_sha256": "2be275fce48aae5f26fb64622379278bd3cc7ba4fbbc332c12e3008af5a53fdd",
+      "destination_sha256": "2be275fce48aae5f26fb64622379278bd3cc7ba4fbbc332c12e3008af5a53fdd"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team8_empirical/gld_return_normality.png",
+      "destination": "outputs/img/publication/c011553eac7f680d_gld_return_normality.png",
+      "source_sha256": "c011553eac7f680d0887de0c0fd2561256544a79afdf16823070a53fca067066",
+      "destination_sha256": "c011553eac7f680d0887de0c0fd2561256544a79afdf16823070a53fca067066"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team8_empirical/hawkes_intensity_comparison.png",
+      "destination": "outputs/img/publication/96da53622b83c105_hawkes_intensity_comparison.png",
+      "source_sha256": "96da53622b83c105b024a6445bb9ea746b96d67d7f868179b6ab79fe2965da02",
+      "destination_sha256": "96da53622b83c105b024a6445bb9ea746b96d67d7f868179b6ab79fe2965da02"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team8_empirical/hawkes_jump_paths.png",
+      "destination": "outputs/img/publication/7c81ef63dcb2d5ac_hawkes_jump_paths.png",
+      "source_sha256": "7c81ef63dcb2d5ac248e700c08c434a77d8f2b7dbac68440afbfeeff0059d4a1",
+      "destination_sha256": "7c81ef63dcb2d5ac248e700c08c434a77d8f2b7dbac68440afbfeeff0059d4a1"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team8_empirical/heston_residual_heatmap.png",
+      "destination": "outputs/img/publication/084da512a991b3bb_heston_residual_heatmap.png",
+      "source_sha256": "084da512a991b3bbfe575fa2566da2c85706331ee55f50d55790d4ceab47c881",
+      "destination_sha256": "084da512a991b3bbfe575fa2566da2c85706331ee55f50d55790d4ceab47c881"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team8_empirical/online_welch_goyal_cumulative.png",
+      "destination": "outputs/img/publication/1b73753c6ec5b836_online_welch_goyal_cumulative.png",
+      "source_sha256": "1b73753c6ec5b836b1530a0e4990b06f7e614a8103656e76193b71d95d9357af",
+      "destination_sha256": "1b73753c6ec5b836b1530a0e4990b06f7e614a8103656e76193b71d95d9357af"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team8_empirical/sampling_comparison.png",
+      "destination": "outputs/img/publication/571681dc4acfdf64_sampling_comparison.png",
+      "source_sha256": "571681dc4acfdf6431bb6288dfc6bb348dbe5102cd224a06d8fa397ba0e74952",
+      "destination_sha256": "571681dc4acfdf6431bb6288dfc6bb348dbe5102cd224a06d8fa397ba0e74952"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team8_empirical/sampling_surface_current.png",
+      "destination": "outputs/img/publication/6c5ba226b4a1f62f_sampling_surface_current.png",
+      "source_sha256": "6c5ba226b4a1f62f2a01e13bc1c43b22ee293173552c5d679f27ee9213cb0395",
+      "destination_sha256": "6c5ba226b4a1f62f2a01e13bc1c43b22ee293173552c5d679f27ee9213cb0395"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team8_empirical/terminal_return_percentiles.png",
+      "destination": "outputs/img/publication/71a73206e69bf734_terminal_return_percentiles.png",
+      "source_sha256": "71a73206e69bf734800f8d9d6c2cbbd29ea7ea75eab67672c836cd9f5d0ab389",
+      "destination_sha256": "71a73206e69bf734800f8d9d6c2cbbd29ea7ea75eab67672c836cd9f5d0ab389"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team8_empirical/usd_treasury_curve.png",
+      "destination": "outputs/img/publication/f751012d2636c3b8_usd_treasury_curve.png",
+      "source_sha256": "f751012d2636c3b853985638c0dead0c8fce20e79f8c88af257b14f4cc74da66",
+      "destination_sha256": "f751012d2636c3b853985638c0dead0c8fce20e79f8c88af257b14f4cc74da66"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/team8_empirical/volatility_state_paths.png",
+      "destination": "outputs/img/publication/7b3ba1b4f37e8920_volatility_state_paths.png",
+      "source_sha256": "7b3ba1b4f37e892038b65a947f84ac47a28fb75d12d04f1cd783522aacf6103c",
+      "destination_sha256": "7b3ba1b4f37e892038b65a947f84ac47a28fb75d12d04f1cd783522aacf6103c"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/valuation/dcf_driver_schedule.png",
+      "destination": "outputs/img/publication/a6d80008228502ce_dcf_driver_schedule.png",
+      "source_sha256": "a6d80008228502ce442fe2b750dee3717c3936b8a1dbac5f9459dd687dd0c311",
+      "destination_sha256": "a6d80008228502ce442fe2b750dee3717c3936b8a1dbac5f9459dd687dd0c311"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/valuation/fig_terminal_multiple.png",
+      "destination": "outputs/img/publication/2f2a7cea66301ac9_fig_terminal_multiple.png",
+      "source_sha256": "2f2a7cea66301ac9e0c1ca5b1276ece792b49a539706614b802ffdf1b395e898",
+      "destination_sha256": "2f2a7cea66301ac9e0c1ca5b1276ece792b49a539706614b802ffdf1b395e898"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/valuation/fig_terminal_share.png",
+      "destination": "outputs/img/publication/d8a6a98d7f5437d7_fig_terminal_share.png",
+      "source_sha256": "d8a6a98d7f5437d7ab74fcbe90900067f8d4137b638249f25e4b08d035f5cf5e",
+      "destination_sha256": "d8a6a98d7f5437d7ab74fcbe90900067f8d4137b638249f25e4b08d035f5cf5e"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/valuation/fig_wacc_assumptions.png",
+      "destination": "outputs/img/publication/23df2023b1bd378f_fig_wacc_assumptions.png",
+      "source_sha256": "23df2023b1bd378fb988f75b661655217da95be38c69a57e44325c885ae4a0c7",
+      "destination_sha256": "23df2023b1bd378fb988f75b661655217da95be38c69a57e44325c885ae4a0c7"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/valuation/full_bates_hawkes_value_distribution.png",
+      "destination": "outputs/img/publication/3ec1f54f55966cd6_full_bates_hawkes_value_distribution.png",
+      "source_sha256": "3ec1f54f55966cd65d197fa5c6acd75da7d394ebb0abc7cadd0a4d1bb9a991fc",
+      "destination_sha256": "3ec1f54f55966cd65d197fa5c6acd75da7d394ebb0abc7cadd0a4d1bb9a991fc"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/valuation/gold_path_bands_four_models.png",
+      "destination": "outputs/img/publication/fed5bbd9aeec921b_gold_path_bands_four_models.png",
+      "source_sha256": "fed5bbd9aeec921be1aff8c72962d9ed0a3569e141344581788f3595413e724a",
+      "destination_sha256": "fed5bbd9aeec921be1aff8c72962d9ed0a3569e141344581788f3595413e724a"
+    },
+    {
+      "edition": "unificato",
+      "kind": "image",
+      "source": "img/valuation/multimodel_value_distribution_comparison.png",
+      "destination": "outputs/img/publication/3cf9768be1456f94_multimodel_value_distribution_comparison.png",
+      "source_sha256": "3cf9768be1456f9427c176d93aa689c9a6259fa6c54208e6cd95a5eb7703dfa1",
+      "destination_sha256": "3cf9768be1456f9427c176d93aa689c9a6259fa6c54208e6cd95a5eb7703dfa1"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "Articolo.pdf",
+      "destination": "outputs/report_unificato/Articolo.pdf",
+      "source_sha256": "8fd0c47a9706d42a848119b1d7cf94ef1417644553870d51ea620ad3affe74eb",
+      "destination_sha256": "8fd0c47a9706d42a848119b1d7cf94ef1417644553870d51ea620ad3affe74eb"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "Articolo.tex",
+      "destination": "outputs/report_unificato/Articolo.tex",
+      "source_sha256": "a7686da2ecf337355d95bd1b73acc33d86ec34db97a3c48deee1a151e6267923",
+      "destination_sha256": "cc3d7f2686ac2616e0d2195248b8857c17526e4d2b40efe75131ca3095f76ae6"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/00-discoveries-at-a-glance.tex",
+      "destination": "outputs/report_unificato/chapters/00-discoveries-at-a-glance.tex",
+      "source_sha256": "905bebf39eca530a2d4c207e8707db100d416b12c6b7354867084b667dd63904",
+      "destination_sha256": "4a3bb1fe7ade598842adf672719a84452d0d95339574f00e7df49f7ef238a482"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/01-introduction.tex",
+      "destination": "outputs/report_unificato/chapters/01-introduction.tex",
+      "source_sha256": "abb28fba479bc5121f25cfa475bcbc9437c97ae1496ab736d717f6baa060ea3c",
+      "destination_sha256": "3e45a14e57467c0daf1f8ae384837b59a9a6fd861702363441e65a32cdad2fa0"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/02-gold-regimes-debasement.tex",
+      "destination": "outputs/report_unificato/chapters/02-gold-regimes-debasement.tex",
+      "source_sha256": "0a736792e527eeeccd1ae8e7c92ba6c36be848380f4f7d2506be97fbc7aef012",
+      "destination_sha256": "0a736792e527eeeccd1ae8e7c92ba6c36be848380f4f7d2506be97fbc7aef012"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/03-company-perimeter.tex",
+      "destination": "outputs/report_unificato/chapters/03-company-perimeter.tex",
+      "source_sha256": "61167fe4a8d33db983ec9eaa3a7be528a59e8e2e7466688553c95716e6c062e5",
+      "destination_sha256": "f739c1a17ebcb38a7dbd4b21fae5afb548a7f71f6b9fb589b7d827f3780ed8ba"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/03-current-lse-diagnostics.tex",
+      "destination": "outputs/report_unificato/chapters/03-current-lse-diagnostics.tex",
+      "source_sha256": "328decd2b4e7de46ed80e319bf84a3133447da8f3f87871d640d8c4821288322",
+      "destination_sha256": "b3c50f56baae56d5c6bce093094617f68166444a787b407de740df9a858aee4a"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/03-data-and-design.tex",
+      "destination": "outputs/report_unificato/chapters/03-data-and-design.tex",
+      "source_sha256": "57af26dce215dd99d8ee0fd562a6ebcadc129cf0420aa1062b2a45ad7de344f9",
+      "destination_sha256": "57af26dce215dd99d8ee0fd562a6ebcadc129cf0420aa1062b2a45ad7de344f9"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/03-team-study-synthesis.tex",
+      "destination": "outputs/report_unificato/chapters/03-team-study-synthesis.tex",
+      "source_sha256": "72e1538f03effe1cbb39e78b0a35e62581bafd3cc5bfadeac52c26fe73231c58",
+      "destination_sha256": "81b7bb3974756a9be6c700ff5d858684477f671956c6a7f583886d01ec24ad80"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/04-probability-and-pricing.tex",
+      "destination": "outputs/report_unificato/chapters/04-probability-and-pricing.tex",
+      "source_sha256": "4e13f12c424566878db3493a952a3cbd7bf6339cd1db27cd5b78a5aba444a2da",
+      "destination_sha256": "c8d632f48114118c0045e61155639deacf64ab22c354cde3ce90b97761031749"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/05-econometrics-and-time-series.tex",
+      "destination": "outputs/report_unificato/chapters/05-econometrics-and-time-series.tex",
+      "source_sha256": "3986e0d960be024f59565af0f125f437a3e4d8cbdba6e4a735b7ce40aaae482b",
+      "destination_sha256": "3986e0d960be024f59565af0f125f437a3e4d8cbdba6e4a735b7ce40aaae482b"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/06-monte-carlo.tex",
+      "destination": "outputs/report_unificato/chapters/06-monte-carlo.tex",
+      "source_sha256": "ebcb12e99bf99c38e3a638ae805a5eac49f01ad427f283a7db1312ec76c81189",
+      "destination_sha256": "9966f2b1e5f65f50f0b5e20a6f0f3ba6e77d1b4629e94f20b6da12c95d90dc27"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/07-gold-econometrics.tex",
+      "destination": "outputs/report_unificato/chapters/07-gold-econometrics.tex",
+      "source_sha256": "3208962578e6a59cc199e96dc245ba17f150c9833cd21ebe9c1c48cff3a9ffff",
+      "destination_sha256": "9704ab11087483e93e492561616217bc502685416928b1057c014ccaa56fbcce"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/08-volatility-jumps-affine.tex",
+      "destination": "outputs/report_unificato/chapters/08-volatility-jumps-affine.tex",
+      "source_sha256": "7857bd24d2a0fc11be0f17e6798f6210972d3a00599fa5baf2516c6ff8006a54",
+      "destination_sha256": "47e4031de3af6aa89d5a26fea6c011ef453111a7a93e9972fdcde300fd20c99e"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/09-current-lse-surface.tex",
+      "destination": "outputs/report_unificato/chapters/09-current-lse-surface.tex",
+      "source_sha256": "ccbf26c32b8fd46da68ad932417038d917dba0b741284aa5c10adf24f0cb6ced",
+      "destination_sha256": "6e1aefa4df0c23e48136107bd751324b8ed27eee74ffbaac6645cd6a0900e183"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/09-option-calibration.tex",
+      "destination": "outputs/report_unificato/chapters/09-option-calibration.tex",
+      "source_sha256": "9858f0e946eaddaf9d32e99c2a5a55fe4eb7e69bdd5d0eaf35f1c8336c3d6abf",
+      "destination_sha256": "36b610ec1510134b99c230bcf7deb119bc6bd4b915fce117f97fd59750e0d5a6"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/09-physical-measure.tex",
+      "destination": "outputs/report_unificato/chapters/09-physical-measure.tex",
+      "source_sha256": "4d332a8fdaf5a31c78342474e66d89429057d5df4928847a13cbdb1ef4f5d846",
+      "destination_sha256": "2db1908165a3655a08b1b7704c7404dc377f13a9f7fd776cd19bee8766a49262"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/09-team8-calibration-evidence.tex",
+      "destination": "outputs/report_unificato/chapters/09-team8-calibration-evidence.tex",
+      "source_sha256": "ef27d6d3927042263e1fdfba6300b1b249b71c47cb8ae750ba5eaaf61d5d9fbe",
+      "destination_sha256": "6ab7ebdfe86dc7f68b1967bee3b98e2e9739ecc60bd6fc9b6c88eaca075a38bd"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/09-team8-simulation-evidence.tex",
+      "destination": "outputs/report_unificato/chapters/09-team8-simulation-evidence.tex",
+      "source_sha256": "4d52c296278b876b5f7f94d1e38b124bdfb8222079223ef54cdc973a8b19329c",
+      "destination_sha256": "3ab85e904f33614a0b273765e1d738d49eaa9fd299d75ecb3d4b298f48e784b7"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/10-copper-evidence.tex",
+      "destination": "outputs/report_unificato/chapters/10-copper-evidence.tex",
+      "source_sha256": "357081d1f6dcfadde25ddd8377c0d129ece0ab4c34cc31afbf7fa70c80925240",
+      "destination_sha256": "f5e5bcfb2f451279955e62e4bacde2b2851851545679a3cb406337205392f8e8"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/10-operations-ebitda.tex",
+      "destination": "outputs/report_unificato/chapters/10-operations-ebitda.tex",
+      "source_sha256": "96cd7253fd8a17d6b0dcff4028f0b497990494b5c158ba4ff05de99f6f08a0ad",
+      "destination_sha256": "96cd7253fd8a17d6b0dcff4028f0b497990494b5c158ba4ff05de99f6f08a0ad"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/10-team4-operations-evidence.tex",
+      "destination": "outputs/report_unificato/chapters/10-team4-operations-evidence.tex",
+      "source_sha256": "6bd0c8685d365fb03c910c00a535703c843b44c56b3694cb8ec4f27c8c0ad093",
+      "destination_sha256": "d7846db75fdb1a21157c2f9e852039a23f4d8ff7853fda5d4d0c87985d4f1d4b"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/11-dcf.tex",
+      "destination": "outputs/report_unificato/chapters/11-dcf.tex",
+      "source_sha256": "fd817a1ea03cd9ea272e874e2e79a0d1e0b51a956fd07e7c143c92c259b2015a",
+      "destination_sha256": "646f97983c4d441b07b22999aaf97e6dbc1c43ed1fa583c7490084084b6787b1"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/12-unified-experiment.tex",
+      "destination": "outputs/report_unificato/chapters/12-unified-experiment.tex",
+      "source_sha256": "8d180d7b6eff660e1fbcece4ae2ea5a717473f26b342f814068c63c2179a8786",
+      "destination_sha256": "c9b93571f01af80beb8d498eea6f2f7fe8cecc094414d1b5e5d156a2face119c"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/13-validation.tex",
+      "destination": "outputs/report_unificato/chapters/13-validation.tex",
+      "source_sha256": "2618880cba1dfb2ca5a2a6969e35976085694f263a21a83cb985de0732b378b8",
+      "destination_sha256": "2d3453a37fc279881865444b5b73df1b63e5ed4c7a5ec4946080c05f293306a1"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/14-discussion-conclusion.tex",
+      "destination": "outputs/report_unificato/chapters/14-discussion-conclusion.tex",
+      "source_sha256": "52f00993d08532f109dc732b6566ded6a6a7df91ee159f4b6f149ed4943e8e54",
+      "destination_sha256": "52f00993d08532f109dc732b6566ded6a6a7df91ee159f4b6f149ed4943e8e54"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/generated/copper-results.tex",
+      "destination": "outputs/report_unificato/chapters/generated/copper-results.tex",
+      "source_sha256": "ed0fd7fef0c9c5c9d7adc0fe7cda99c561812f7650d0e209defc629767aa1207",
+      "destination_sha256": "381e02e8def134bade61aa02765d0488257346c0c8001c0cf8f22713cf4b4436"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/generated/current-valuation-diagnostics.tex",
+      "destination": "outputs/report_unificato/chapters/generated/current-valuation-diagnostics.tex",
+      "source_sha256": "6dbe57fa6c9992f93537e168e0c2f2bd40dde7c59a66d063173a8974358561b5",
+      "destination_sha256": "f6b0d82fbde287aa6e0a768e167291208c37b5ce22569e93e19e89b4db77a1d4"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/generated/current-valuation-method.tex",
+      "destination": "outputs/report_unificato/chapters/generated/current-valuation-method.tex",
+      "source_sha256": "840cdf076ddfa3706e4d08bb5bba4d2ea27502f152ab1142fea0c1ced511715f",
+      "destination_sha256": "c2c1055f6389a127b6984af88dba53eb1913144ec2b0a21a1760bd607bc52b61"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/generated/current-valuation-multimodel-quantiles.tex",
+      "destination": "outputs/report_unificato/chapters/generated/current-valuation-multimodel-quantiles.tex",
+      "source_sha256": "662abdf45a447a6f421c699b8b964f96490c36cd906d34d0a6d1a46b561bb3ba",
+      "destination_sha256": "f634d5f31320a47f28e55d07c6b94f61f91475799a7d176728f1e485f7bf8d5e"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "chapters/generated/current-valuation-summary.tex",
+      "destination": "outputs/report_unificato/chapters/generated/current-valuation-summary.tex",
+      "source_sha256": "cfd73df6b8dcbe301d29751e03c67a0c37d8fdccf609ab680fea53d3f68ba7db",
+      "destination_sha256": "9320919c6067a879ddc03cfbe39dccc742088cfed1f20f3a8b5dc99c67be9da6"
+    },
+    {
+      "edition": "unificato",
+      "kind": "report",
+      "source": "Copertina_research.pdf",
+      "destination": "outputs/report_unificato/Copertina_research.pdf",
+      "source_sha256": "ba63b79e871c1eaa01f5f5519510d147733e12c0cb0b15fe0d8791828ec7819b",
+      "destination_sha256": "ba63b79e871c1eaa01f5f5519510d147733e12c0cb0b15fe0d8791828ec7819b"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "img/contact_email.png",
+      "destination": "outputs/img/publication/8fedf2bb8bed3ca1_contact_email.png",
+      "source_sha256": "8fedf2bb8bed3ca19863dfa3e496bfdd385c44473d0ff46eb86683ad41417678",
+      "destination_sha256": "8fedf2bb8bed3ca19863dfa3e496bfdd385c44473d0ff46eb86683ad41417678"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "img/contact_github.png",
+      "destination": "outputs/img/publication/79d19491a73dad7e_contact_github.png",
+      "source_sha256": "79d19491a73dad7e69e8e2a8f27d6da08f4c051a92ddad1a1fc1213473045d7d",
+      "destination_sha256": "79d19491a73dad7e69e8e2a8f27d6da08f4c051a92ddad1a1fc1213473045d7d"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "img/contact_instagram.png",
+      "destination": "outputs/img/publication/31b19f2ba436aac3_contact_instagram.png",
+      "source_sha256": "31b19f2ba436aac3ed7ed9c090cb535a18b531fc6b5c74a00c55d28f94d9dc48",
+      "destination_sha256": "31b19f2ba436aac3ed7ed9c090cb535a18b531fc6b5c74a00c55d28f94d9dc48"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "img/contact_linkedin.png",
+      "destination": "outputs/img/publication/19547bce5dddbce5_contact_linkedin.png",
+      "source_sha256": "19547bce5dddbce54d7b40ab01e625d359fabf5ee43561ebedcb7e94904b9c76",
+      "destination_sha256": "19547bce5dddbce54d7b40ab01e625d359fabf5ee43561ebedcb7e94904b9c76"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "img/contact_website.png",
+      "destination": "outputs/img/publication/385027198bc15712_contact_website.png",
+      "source_sha256": "385027198bc15712f9e7b54d7b4b424016bc6681b66840dad0a85d44cd0ce3cf",
+      "destination_sha256": "385027198bc15712f9e7b54d7b4b424016bc6681b66840dad0a85d44cd0ce3cf"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "img/FONT-AWESOME-LICENSE.txt",
+      "destination": "outputs/img/publication/9b914eae88817d63_FONT-AWESOME-LICENSE.txt",
+      "source_sha256": "9b914eae88817d63b576eab5aafde7068c7a1abae125d7cdfb034f1da43a9afc",
+      "destination_sha256": "9b914eae88817d63b576eab5aafde7068c7a1abae125d7cdfb034f1da43a9afc"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "img/Logo_SFClub_Polito.png",
+      "destination": "outputs/img/publication/572456d904007768_Logo_SFClub_Polito.png",
+      "source_sha256": "572456d9040077683067a830041c170b3a1c420db82eb0b319f0d31b9d42d80e",
+      "destination_sha256": "572456d9040077683067a830041c170b3a1c420db82eb0b319f0d31b9d42d80e"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/bates_hawkes_residual_heatmap.png",
+      "destination": "outputs/img/publication/2010a278a2236376_bates_hawkes_residual_heatmap.png",
+      "source_sha256": "2010a278a223637665a2e11f0ee1275cabb660fd9333a251054be232978bc66f",
+      "destination_sha256": "2010a278a223637665a2e11f0ee1275cabb660fd9333a251054be232978bc66f"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/bates_residual_heatmap.png",
+      "destination": "outputs/img/publication/c781ab07f8781171_bates_residual_heatmap.png",
+      "source_sha256": "c781ab07f87811715742918471983475d9a37b18b7254f462e897723d7019dfd",
+      "destination_sha256": "c781ab07f87811715742918471983475d9a37b18b7254f462e897723d7019dfd"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/black_scholes_residual_heatmap.png",
+      "destination": "outputs/img/publication/7e856d08ef304414_black_scholes_residual_heatmap.png",
+      "source_sha256": "7e856d08ef304414e78fd92214171a35b2c007df81148148fe0e0f74b0c489e7",
+      "destination_sha256": "7e856d08ef304414e78fd92214171a35b2c007df81148148fe0e0f74b0c489e7"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/fig_dcf_growth_roic.png",
+      "destination": "outputs/img/publication/ed4f022292eacd31_fig_dcf_growth_roic.png",
+      "source_sha256": "ed4f022292eacd31fdace97e3065cf41025624349ff9f820ccf3da1b0d645028",
+      "destination_sha256": "ed4f022292eacd31fdace97e3065cf41025624349ff9f820ccf3da1b0d645028"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/fig_dcf_reinvestment.png",
+      "destination": "outputs/img/publication/ccbd1218e069545e_fig_dcf_reinvestment.png",
+      "source_sha256": "ccbd1218e069545eae40f8a027b301efb9d028160e7d08732f280ec7a45de9da",
+      "destination_sha256": "ccbd1218e069545eae40f8a027b301efb9d028160e7d08732f280ec7a45de9da"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/fig_terminal_multiple.png",
+      "destination": "outputs/img/publication/2f2a7cea66301ac9_fig_terminal_multiple.png",
+      "source_sha256": "2f2a7cea66301ac9e0c1ca5b1276ece792b49a539706614b802ffdf1b395e898",
+      "destination_sha256": "2f2a7cea66301ac9e0c1ca5b1276ece792b49a539706614b802ffdf1b395e898"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/fig_terminal_share.png",
+      "destination": "outputs/img/publication/938fcc0ee9ab77b8_fig_terminal_share.png",
+      "source_sha256": "938fcc0ee9ab77b8374e544a35ced8339a3a26f7a797481ab85e21dc22227f17",
+      "destination_sha256": "938fcc0ee9ab77b8374e544a35ced8339a3a26f7a797481ab85e21dc22227f17"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/fig_val_multi.png",
+      "destination": "outputs/img/publication/e3fadd22107a54a6_fig_val_multi.png",
+      "source_sha256": "e3fadd22107a54a67f81071237225275608e520a0e6c965251634857b64143f4",
+      "destination_sha256": "e3fadd22107a54a67f81071237225275608e520a0e6c965251634857b64143f4"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/fig_val_primary.png",
+      "destination": "outputs/img/publication/f8262e458f7545b1_fig_val_primary.png",
+      "source_sha256": "f8262e458f7545b1df4c4580a34db4784bc32690a7a1b8e5ee2de55664828ac0",
+      "destination_sha256": "f8262e458f7545b1df4c4580a34db4784bc32690a7a1b8e5ee2de55664828ac0"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/fig_wacc_assumptions.png",
+      "destination": "outputs/img/publication/23df2023b1bd378f_fig_wacc_assumptions.png",
+      "source_sha256": "23df2023b1bd378fb988f75b661655217da95be38c69a57e44325c885ae4a0c7",
+      "destination_sha256": "23df2023b1bd378fb988f75b661655217da95be38c69a57e44325c885ae4a0c7"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/hawkes_intensity_comparison.png",
+      "destination": "outputs/img/publication/96da53622b83c105_hawkes_intensity_comparison.png",
+      "source_sha256": "96da53622b83c105b024a6445bb9ea746b96d67d7f868179b6ab79fe2965da02",
+      "destination_sha256": "96da53622b83c105b024a6445bb9ea746b96d67d7f868179b6ab79fe2965da02"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/heston_residual_heatmap.png",
+      "destination": "outputs/img/publication/6249da19d5f7cfbb_heston_residual_heatmap.png",
+      "source_sha256": "6249da19d5f7cfbb80b5c1c1bceb9375fdce202f7c8ee66da36f3864b25dc56b",
+      "destination_sha256": "6249da19d5f7cfbb80b5c1c1bceb9375fdce202f7c8ee66da36f3864b25dc56b"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/online_welch_goyal_cumulative.png",
+      "destination": "outputs/img/publication/1b73753c6ec5b836_online_welch_goyal_cumulative.png",
+      "source_sha256": "1b73753c6ec5b836b1530a0e4990b06f7e614a8103656e76193b71d95d9357af",
+      "destination_sha256": "1b73753c6ec5b836b1530a0e4990b06f7e614a8103656e76193b71d95d9357af"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/oos_r2.png",
+      "destination": "outputs/img/publication/d8d1f86669e697e3_oos_r2.png",
+      "source_sha256": "d8d1f86669e697e376581c30dceb1a29a0963a6ba287f3e13be040334434d3cd",
+      "destination_sha256": "d8d1f86669e697e376581c30dceb1a29a0963a6ba287f3e13be040334434d3cd"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/oos_rmse.png",
+      "destination": "outputs/img/publication/925cb5fcc5b8400a_oos_rmse.png",
+      "source_sha256": "925cb5fcc5b8400a2b844bead13423777c29eff4e7e7d5fcb84c6dd2c16ccbe1",
+      "destination_sha256": "925cb5fcc5b8400a2b844bead13423777c29eff4e7e7d5fcb84c6dd2c16ccbe1"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/sampling_nodes.png",
+      "destination": "outputs/img/publication/498fa63273eb3ac5_sampling_nodes.png",
+      "source_sha256": "498fa63273eb3ac564a927b99834b9a682d099fdcd62bc659620f586406543b4",
+      "destination_sha256": "498fa63273eb3ac564a927b99834b9a682d099fdcd62bc659620f586406543b4"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/sampling_surface.png",
+      "destination": "outputs/img/publication/6c5ba226b4a1f62f_sampling_surface_current.png",
+      "source_sha256": "6c5ba226b4a1f62f2a01e13bc1c43b22ee293173552c5d679f27ee9213cb0395",
+      "destination_sha256": "6c5ba226b4a1f62f2a01e13bc1c43b22ee293173552c5d679f27ee9213cb0395"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/team4_mine_cost_qoq.png",
+      "destination": "outputs/img/publication/ce40d43c378d1fa2_team4_mine_cost_qoq.png",
+      "source_sha256": "ce40d43c378d1fa20bcd757aa0e9ed5908ea2af83c5a033ac3b9addf61f82294",
+      "destination_sha256": "ce40d43c378d1fa20bcd757aa0e9ed5908ea2af83c5a033ac3b9addf61f82294"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/team4_mine_production_qoq.png",
+      "destination": "outputs/img/publication/50b961f87c5f443e_team4_mine_production_qoq.png",
+      "source_sha256": "50b961f87c5f443ec499b88d22590f7df10ce7a145b2bd5580dc5fd561dbb2f0",
+      "destination_sha256": "50b961f87c5f443ec499b88d22590f7df10ce7a145b2bd5580dc5fd561dbb2f0"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/team4_operating_contract.png",
+      "destination": "outputs/img/publication/a5190673372d95dd_team4_operating_contract.png",
+      "source_sha256": "a5190673372d95dd02d7a2e1cb6b791b1a5fa642d8f5c3885f0bb01a123e7290",
+      "destination_sha256": "a5190673372d95dd02d7a2e1cb6b791b1a5fa642d8f5c3885f0bb01a123e7290"
+    },
+    {
+      "edition": "paper",
+      "kind": "image",
+      "source": "figures/team4_process_components_qoq.png",
+      "destination": "outputs/img/publication/1ddc31b9d77b0ab4_team4_process_components_qoq.png",
+      "source_sha256": "1ddc31b9d77b0ab4af2cb886c93c598343f30cb64ac5f920aebfe34d9952cb08",
+      "destination_sha256": "1ddc31b9d77b0ab4af2cb886c93c598343f30cb64ac5f920aebfe34d9952cb08"
+    },
+    {
+      "edition": "paper",
+      "kind": "report",
+      "source": "Articolo.pdf",
+      "destination": "outputs/report_paper/Articolo.pdf",
+      "source_sha256": "de857e6057ec5b7124f8dc2ca4f8d3bb570522c5e3abfe04cccebacc100f7f15",
+      "destination_sha256": "de857e6057ec5b7124f8dc2ca4f8d3bb570522c5e3abfe04cccebacc100f7f15"
+    },
+    {
+      "edition": "paper",
+      "kind": "report",
+      "source": "Articolo.tex",
+      "destination": "outputs/report_paper/Articolo.tex",
+      "source_sha256": "cfccbe7eceac9c413e2ac8b93ec1a6975e2122bc6d7ccf930eca18129d3171e2",
+      "destination_sha256": "ed9fbccb23dadec454aa940a7d673d723e6efa5aab7e5091e9715d23e230479b"
+    },
+    {
+      "edition": "paper",
+      "kind": "report",
+      "source": "Copertina_research.pdf",
+      "destination": "outputs/report_paper/Copertina_research.pdf",
+      "source_sha256": "655e8b04a0c7e098d0d6b599186e0be658fb69c2fb5101ac20e5fa79ac7dc8a7",
+      "destination_sha256": "655e8b04a0c7e098d0d6b599186e0be658fb69c2fb5101ac20e5fa79ac7dc8a7"
+    },
+    {
+      "edition": "paper",
+      "kind": "report",
+      "source": "sections/01_introduction.tex",
+      "destination": "outputs/report_paper/sections/01_introduction.tex",
+      "source_sha256": "e88513f7977db5d2102cbac9cc2ad360a9eb00caa13ca1b019039553af555b6e",
+      "destination_sha256": "e88513f7977db5d2102cbac9cc2ad360a9eb00caa13ca1b019039553af555b6e"
+    },
+    {
+      "edition": "paper",
+      "kind": "report",
+      "source": "sections/02_data_assumptions.tex",
+      "destination": "outputs/report_paper/sections/02_data_assumptions.tex",
+      "source_sha256": "a268e9f0c94d7791cc8edc1f0f32d44d84006a53852c3735b2f689150352e902",
+      "destination_sha256": "a268e9f0c94d7791cc8edc1f0f32d44d84006a53852c3735b2f689150352e902"
+    },
+    {
+      "edition": "paper",
+      "kind": "report",
+      "source": "sections/03_methodology.tex",
+      "destination": "outputs/report_paper/sections/03_methodology.tex",
+      "source_sha256": "3fde539f7b4d51c9ab320de9acd814c031742224e7662467663bc8d4f1d86165",
+      "destination_sha256": "3fde539f7b4d51c9ab320de9acd814c031742224e7662467663bc8d4f1d86165"
+    },
+    {
+      "edition": "paper",
+      "kind": "report",
+      "source": "sections/03b_calibration_audit.tex",
+      "destination": "outputs/report_paper/sections/03b_calibration_audit.tex",
+      "source_sha256": "bf73f222b82cf8146716304c35bd2582ff5c2cbb1d951a0625c48d8b53e96eba",
+      "destination_sha256": "fa928c0a9d97dbc680cd6dda91a1a28d78fa45f42fb213a46bd36ea2f43a48ce"
+    },
+    {
+      "edition": "paper",
+      "kind": "report",
+      "source": "sections/03c_operating_evidence.tex",
+      "destination": "outputs/report_paper/sections/03c_operating_evidence.tex",
+      "source_sha256": "4ff3adfb81097bf597580a400b7411c6b2b292fa4d6c37db2e39eba839b83305",
+      "destination_sha256": "89a8d7c796e8794e65ec743e4fb6a9a25bdf2a0c2750fc5b76a43621085df35c"
+    },
+    {
+      "edition": "paper",
+      "kind": "report",
+      "source": "sections/03d_valuation_audit.tex",
+      "destination": "outputs/report_paper/sections/03d_valuation_audit.tex",
+      "source_sha256": "3f5027cfbf5aa20aa2738696da0c2895d86f041e51828846a56b67f5a3c079b1",
+      "destination_sha256": "e903b110d2c552bd2ae1b90210ba1e05030522ee0cd8d3d0dc286e3f83373909"
+    },
+    {
+      "edition": "paper",
+      "kind": "report",
+      "source": "sections/03e_physical_measure.tex",
+      "destination": "outputs/report_paper/sections/03e_physical_measure.tex",
+      "source_sha256": "bd8033d9d79b37be5cc04af3c7b7965f5b3c05aafbdf88450e02e6e8aa99ba78",
+      "destination_sha256": "9e58afef8980ac2d4e39d00d259a58f26dc40a2263f504a3ff369ceb72fc6241"
+    },
+    {
+      "edition": "paper",
+      "kind": "report",
+      "source": "sections/04_results.tex",
+      "destination": "outputs/report_paper/sections/04_results.tex",
+      "source_sha256": "decb37a354d7a84b281505fe514d8e8c635d98b0ad8c56950cc64500534b8995",
+      "destination_sha256": "6959d41d739fd1ca57c87b76e311d32a96b1ddee6a00849ed552a5d71263a814"
+    },
+    {
+      "edition": "paper",
+      "kind": "report",
+      "source": "sections/04b_copper_extension.tex",
+      "destination": "outputs/report_paper/sections/04b_copper_extension.tex",
+      "source_sha256": "f1658394ed35a629a145f981a4a6eb8d7ea75769d7d0c814d635a6abf79aa755",
+      "destination_sha256": "f1658394ed35a629a145f981a4a6eb8d7ea75769d7d0c814d635a6abf79aa755"
+    },
+    {
+      "edition": "paper",
+      "kind": "report",
+      "source": "sections/05_robustness.tex",
+      "destination": "outputs/report_paper/sections/05_robustness.tex",
+      "source_sha256": "5058412a24eb6158af875c6dcc8af88b6da191193710a9084bbd3ffa8029a60b",
+      "destination_sha256": "b0a0170f80e5ded841ea0bdefb463ab828c1e60eaec5d7736d185a0f4e89fde2"
+    },
+    {
+      "edition": "paper",
+      "kind": "report",
+      "source": "sections/06_conclusion.tex",
+      "destination": "outputs/report_paper/sections/06_conclusion.tex",
+      "source_sha256": "b776060c0001f899157c38e89fd0423572dfc06167b1cd22bec6875e46236a57",
+      "destination_sha256": "b776060c0001f899157c38e89fd0423572dfc06167b1cd22bec6875e46236a57"
+    },
+    {
+      "edition": "paper",
+      "kind": "report",
+      "source": "sections/07_references.tex",
+      "destination": "outputs/report_paper/sections/07_references.tex",
+      "source_sha256": "501c1f9bbf032d77ffd22485fad9b2c5a0e21566f0c31a68a7bbd1b3ec0984b0",
+      "destination_sha256": "501c1f9bbf032d77ffd22485fad9b2c5a0e21566f0c31a68a7bbd1b3ec0984b0"
+    }
+  ]
+}

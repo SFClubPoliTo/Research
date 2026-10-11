@@ -1,0 +1,91 @@
+{
+  "status": "NUMERICAL_DIAGNOSTIC_NOT_DCF_ADMITTED",
+  "model": "full_bates_hawkes",
+  "parameter_source": "EXPLORATORY_FIXED_Q_NOT_DCF_ADMITTED",
+  "checks": [
+    {
+      "seed": 704,
+      "particles": 4096,
+      "negative_log_likelihood": -3877.906892675863,
+      "terminal_variance_mean": 0.11648769442759761,
+      "terminal_q_intensity_functional_mean": 1.9686773033280476,
+      "kappa_p": 4.234564512279817,
+      "theta_p": 0.05968387556433546,
+      "intensity_ratio": 1.3566528689257653,
+      "mark_mean_p": -0.04418546032746173,
+      "substeps": 16,
+      "variance_floor_fraction": 0.0001551228971146166,
+      "minimum_ess": 6.271425340137101
+    },
+    {
+      "seed": 705,
+      "particles": 4096,
+      "negative_log_likelihood": -3878.109078110233,
+      "terminal_variance_mean": 0.11593818954996636,
+      "terminal_q_intensity_functional_mean": 2.7107995856203364,
+      "kappa_p": 4.234564512279817,
+      "theta_p": 0.05968387556433546,
+      "intensity_ratio": 1.3566528689257653,
+      "mark_mean_p": -0.04418546032746173,
+      "substeps": 16,
+      "variance_floor_fraction": 0.000156402587890625,
+      "minimum_ess": 4.217342723621658
+    },
+    {
+      "seed": 706,
+      "particles": 4096,
+      "negative_log_likelihood": -3881.318390051105,
+      "terminal_variance_mean": 0.11795526986458316,
+      "terminal_q_intensity_functional_mean": 2.0949480568349466,
+      "kappa_p": 4.234564512279817,
+      "theta_p": 0.05968387556433546,
+      "intensity_ratio": 1.3566528689257653,
+      "mark_mean_p": -0.04418546032746173,
+      "substeps": 16,
+      "variance_floor_fraction": 0.00015825509263303714,
+      "minimum_ess": 5.11245422779928
+    },
+    {
+      "seed": 704,
+      "particles": 4096,
+      "negative_log_likelihood": -3880.4649298021495,
+      "terminal_variance_mean": 0.11726970600935208,
+      "terminal_q_intensity_functional_mean": 2.4027432717974904,
+      "kappa_p": 4.234564512279817,
+      "theta_p": 0.05968387556433546,
+      "intensity_ratio": 1.3566528689257653,
+      "mark_mean_p": -0.04418546032746173,
+      "substeps": 32,
+      "variance_floor_fraction": 7.58978505484974e-05,
+      "minimum_ess": 5.018953949036411
+    },
+    {
+      "seed": 705,
+      "particles": 4096,
+      "negative_log_likelihood": -3881.454112966272,
+      "terminal_variance_mean": 0.11689903334156826,
+      "terminal_q_intensity_functional_mean": 2.3336747983110566,
+      "kappa_p": 4.234564512279817,
+      "theta_p": 0.05968387556433546,
+      "intensity_ratio": 1.3566528689257653,
+      "mark_mean_p": -0.04418546032746173,
+      "substeps": 32,
+      "variance_floor_fraction": 7.430737772688698e-05,
+      "minimum_ess": 6.247040600487694
+    },
+    {
+      "seed": 706,
+      "particles": 4096,
+      "negative_log_likelihood": -3880.069010217496,
+      "terminal_variance_mean": 0.11422933040180863,
+      "terminal_q_intensity_functional_mean": 2.104847197768878,
+      "kappa_p": 4.234564512279817,
+      "theta_p": 0.05968387556433546,
+      "intensity_ratio": 1.3566528689257653,
+      "mark_mean_p": -0.04418546032746173,
+      "substeps": 32,
+      "variance_floor_fraction": 7.397831438448482e-05,
+      "minimum_ess": 4.963015263566422
+    }
+  ]
+}

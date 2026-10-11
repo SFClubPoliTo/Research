@@ -1,0 +1,124 @@
+{
+  "status": "CONDITIONAL_TWO_STAGE_OOS_NOT_DCF_ADMITTED",
+  "model": "bates",
+  "origin": "2026-08-06",
+  "target_date": "2026-08-07",
+  "training_returns": 1233,
+  "source_q_sha256": "c3e778fce0230577ee24540a8e8b70c8a4638ccc3805116ae5f64230c65664b6",
+  "source_code_sha256": "34f87e4ef38f353437977a35d240ae04683e624998b758b913f0f29611f87a5c",
+  "q_parameters": {
+    "v0": 0.041998978424681345,
+    "kappa": 3.4189937805535804,
+    "theta": 0.041851942782692504,
+    "sigma": 0.5127156009065288,
+    "rho": -0.5269092043161948,
+    "lambd": 0.18969148003146247,
+    "mu_J": 0.27396542494450965,
+    "sigma_J": 0.11915375601561255,
+    "xi": 0.5127156009065288
+  },
+  "premia": [
+    7.671867111702479,
+    0.4205279054284311,
+    0.6440187213431701,
+    1.0945287667961106
+  ],
+  "initialization_source": {
+    "origin": "2026-08-05",
+    "source_file": "2026-08-05.json",
+    "source_sha256": "71186d3a3ad34eb8b87b89f7620d6c2fb0cd68c8972144279687b6f38fd657e0"
+  },
+  "initial_premia": [
+    0.8091580568103522,
+    -0.21230481860300493,
+    0.8893484025945346,
+    -2.006301017085714
+  ],
+  "initialization": "Previous successful origin if better than zero on current training likelihood",
+  "active_premia": 4,
+  "optimizer_success": true,
+  "optimizer_message": "Optimization terminated successfully.",
+  "evaluations": 110,
+  "training_particles": 512,
+  "training_substeps": 16,
+  "independent_checks": [
+    {
+      "seed": 1704,
+      "substeps": 16,
+      "nll": -3790.689362560811,
+      "fitted_minus_zero_premium_nll": -1.1724042531755003
+    },
+    {
+      "seed": 1705,
+      "substeps": 16,
+      "nll": -3794.875160139776,
+      "fitted_minus_zero_premium_nll": -12.76813626860121
+    },
+    {
+      "seed": 1706,
+      "substeps": 16,
+      "nll": -3797.3233291968527,
+      "fitted_minus_zero_premium_nll": -4.421528814289104
+    },
+    {
+      "seed": 1704,
+      "substeps": 32,
+      "nll": -3800.6448919090367,
+      "fitted_minus_zero_premium_nll": -6.056149251890929
+    },
+    {
+      "seed": 1705,
+      "substeps": 32,
+      "nll": -3800.9750744723933,
+      "fitted_minus_zero_premium_nll": -7.225823967501583
+    },
+    {
+      "seed": 1706,
+      "substeps": 32,
+      "nll": -3797.472749909169,
+      "fitted_minus_zero_premium_nll": -2.2853975537273072
+    }
+  ],
+  "predictive_mean": 390.2017315185847,
+  "predictive_mean_mc_se": 0.032524757422146534,
+  "predictive_quantiles": [
+    381.5771711865186,
+    384.585618626071,
+    390.01621930549,
+    395.3250498379282,
+    398.08440012664056
+  ],
+  "target": 398.47,
+  "forecast_error": -8.268268481415305,
+  "no_change_error": -8.800000000000011,
+  "path_diagnostics": {
+    "seed": 2104,
+    "n_paths": 65536,
+    "steps_per_year": 11680,
+    "total_steps": 32,
+    "underlying_kind": "spot_or_etf",
+    "contract_expiry_time": null,
+    "variance_floor_fraction": 0.0,
+    "shared_origin_variance": 0.041998978424681345,
+    "shared_origin_q_intensity_functional": 0.18969148003146247,
+    "density_bound": {
+      "status": "RESTRICTED_CONTINUOUS_TIME_FINITE_HORIZON_BOUND",
+      "horizon_years": 0.0027378507871321013,
+      "kappa_p": 5.206324814701179,
+      "entropy_upper_bound": 0.004184122967274785,
+      "log_entropy_upper_bound": -5.476458162767359,
+      "brownian_entropy_coefficient": 29.643030811639985,
+      "jump_entropy_coefficient": 1.4627297810213857,
+      "requires_normal_marks_and_unmarked_linear_hawkes": true,
+      "empirical_or_discrete_likelihood_admission": false
+    },
+    "discretization": "full-truncation Euler variance; frozen-intensity Poisson jumps; right-endpoint excitation",
+    "corporate_or_predictive_admission": false
+  },
+  "limitations": [
+    "Conditional structural Q coefficients over the historical P training sample.",
+    "Parameter and option-state uncertainty not propagated.",
+    "A successful optimizer is not an identification or convergence certificate.",
+    "GLD forecast precedes gold basis, sales, FCFF and corporate valuation."
+  ]
+}

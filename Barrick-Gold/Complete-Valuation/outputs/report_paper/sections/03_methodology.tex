@@ -1,0 +1,123 @@
+\section{Methodology}
+
+\subsection{Gold-price engines}
+The four Team 8 specifications relax one restriction at a time. Under $\mathbb Q$, Black--Scholes/GBM uses constant volatility,
+\begin{equation}
+\frac{\dd S_t}{S_t}=(r_t-q_t)\dd t+\sigma\dd W_t.
+\label{eq:gbm}
+\end{equation}
+GBM is the constant-volatility benchmark.
+Heston introduces mean-reverting stochastic variance \citep{heston1993},
+\begin{align}
+\frac{\dd S_t}{S_t}&=(r_t-q_t)\dd t+\sqrt{v_t}\dd W_t^{S},\\
+\dd v_t&=\kappa(\theta-v_t)\dd t+\xi\sqrt{v_t}\dd W_t^{v},
+\qquad \dd W_t^S\dd W_t^v=\rho\dd t.
+\label{eq:heston}
+\end{align}
+Bates adds compensated compound-Poisson jumps \citep{bates1996},
+\begin{equation}
+\frac{\dd S_t}{S_{t^-}}=(r_t-q_t-\lambda k)\dd t+\sqrt{v_t}\dd W_t^S+(e^J-1)\dd N_t,
+\label{eq:bates}
+\end{equation}
+where $k=\E^{\mathbb Q}[e^J-1]$.
+
+\subsection{Full Bates--Hawkes: implemented affine engine}
+The full engine preserves Heston variance but replaces the constant Poisson arrival rate with an exponential Hawkes state \citep{hawkes1971}:
+\begin{align}
+\frac{\dd S_t}{S_{t^-}}&=(r_t-q_t-\lambda_t k)\dd t+\sqrt{v_t}\dd W_t^S+(e^J-1)\dd N_t,\\
+\dd v_t&=\kappa(\theta_v-v_t)\dd t+\xi\sqrt{v_t}\dd W_t^v,\\
+\dd\lambda_t&=\beta(\bar\lambda-\lambda_t)\dd t+\alpha\dd N_t,
+\qquad n=\alpha/\beta<1.
+\label{eq:full_bh_sde}
+\end{align}
+Under the implemented exponential-kernel specification, pricing exploits the affine Markov structure rather than a standalone finite-difference PIDE. Writing $X_t=\log S_t$, the characteristic function factorizes into Heston diffusion and Hawkes jump blocks,
+\begin{equation}
+\phi_{X_T}(u)=\phi_{\mathrm{diff}}(u)\exp\!\left(A(u,T)+B(u,T)\lambda_0\right),
+\label{eq:bh_cf}
+\end{equation}
+with the jump block determined by the Riccati system
+\begin{align}
+\frac{\dd B}{\dd\tau}&=\psi_J(u)e^{\alpha B}-\beta B-iuk-1,\\
+\frac{\dd A}{\dd\tau}&=\beta\bar\lambda B,
+\qquad A(0)=B(0)=0,
+\label{eq:bh_riccati}
+\end{align}
+where $\psi_J(u)=\exp(iu\mu_J-\tfrac12\sigma_J^2u^2)$. European call prices use Fourier-COS inversion \citep{cos2008}, with independent diffusion and jump drivers. The identities $\phi(0)=1$, the martingale condition at $u=-i$, and the limit $\alpha\to0$, $\lambda_0=\bar\lambda$, back to Bates are used as implementation checks.
+
+\begin{methodbox}[Model-role constraint]
+These processes govern commodity prices only. The copper extension uses forward-price analogues; neither price layer generates Barrick production or costs.
+\end{methodbox}
+
+\subsection{Option-surface calibration and predictive test}
+Every model is fitted to the same structured GLD surface by minimizing a vega-scaled price loss,
+\begin{equation}
+F(\theta)=\frac{1}{N}\sum_{i=1}^{N}
+\left[\frac{C_i^{model}(\theta)-C_i^{mkt}}
+{\max(\mathrm{Vega}_i,\varepsilon)}\right]^2,
+\label{eq:calibration_loss}
+\end{equation}
+with Vega per unit decimal volatility and $\varepsilon=10^{-4}$. This is price-based MSE; exact IV RMSE uses inversion, a square root and $10^4$ scaling. Nested starts are retained during SLSQP refinement. A Feller strict-positivity constraint is imposed by choice; Hawkes stability requires $n<1$.
+
+Calibration fit and forecasting are evaluated separately. A date is admitted to the rolling test only when at least 64 eligible observations and three expiries survive the common filters. Each CC64 origin is scored on the next dense date. With $n_t$ common targets on date $t$, equal-date performance is
+\begin{equation}
+R^2_{OOS,m\mid b}=1-\frac{\sum_t n_t^{-1}\sum_j e_{m,t,j}^2}{\sum_t n_t^{-1}\sum_j e_{b,t,j}^2},
+\label{eq:oos_r2}
+\end{equation}
+against both the origin cross-sectional mean IV and an origin observed-IV surface interpolated in maturity and log-moneyness inside its convex hull. The target spot and rate curve enter only as scoring-date conditioning variables. This design prevents the lowest in-sample IV error from being interpreted automatically as predictive dominance.
+
+% Expansion p2 - 2026-09-06
+Origin parameters are frozen before next-date scoring; target quotes do not select them. Conditioning on target spot and rates makes this a repricing test, not a joint ex ante forecast. Persistence is evaluated only on its interpolation support; unmatched observations are not zero losses.
+
+\input{sections/03e_physical_measure}
+
+\subsection{Team 4 cost and production models}
+\label{sec:paper-operating-models}
+For costs, Team 4 first builds a log-space global master chain from mine-level series and then selects an \textbf{ARIMA(3,1,0) with drift} by automated information-criterion search. The admitted specification is
+\begin{equation}
+(1+0.9501B+0.6128B^2+0.3003B^3)(1-B)y_t
+=0.0222+\varepsilon_t.
+\label{eq:cost_arima}
+\end{equation}
+The selected model minimizes both $AIC=-94.64$ and $BIC=-86.87$ \citep{akaike1974,schwarz1978}, where $p$ counts parameters and $N$ observations,
+\begin{equation}
+AIC=2p-2\log\widehat L,\qquad BIC=p\log N-2\log\widehat L.
+\label{eq:aicbic}
+\end{equation}
+The source's 12-quarter cost hold-out reports log-scale RMSE of 0.0504 against 0.1512 for a random walk. Its 0.603\% MAPE is computed on log values, not USD/oz; it must not be read as a cost-level percentage error. This is source evidence, not independent replication.
+
+Team 4 models production components without claiming AIC/BIC selection. With ore in kt, grade in g/t and recovery as a fraction, physical output in koz is
+\begin{equation}
+Q_t^{phys}=\mathrm{Ore}_t\,\mathrm{Grade}_t\,\mathrm{Recovery}_t/31.1035,
+\label{eq:production_formula}
+\end{equation}
+with ore modelled as $SARIMA(1,0,1)(1,0,0)_4$, grade as a non-seasonal AR(1), and recovery sampled uniformly from historical extrema widened by one percentage point and truncated to $[0.50,1.00]$. Team 4 additionally applies a 0.91 empirical realization factor, not a unit conversion; its transfer across mines remains unvalidated. The valuation retains the frozen Team 4 vectors, not the Goodman distributions; production bands are 80\% and cost bands 95\%, while product-variance formulas require explicit dependence assumptions.
+
+\subsection{Valuation mapping}
+Team 5 makes growth internally consistent with reinvestment through
+\begin{equation}
+b_t=\frac{g_t}{ROIC_t},\qquad
+F_t^{proxy}=M_t^{AT}-\max(M_t^{AT},0)b_t,
+\label{eq:reinvestment}
+\end{equation}
+where $M_t^{AT}$ is the after-tax component margin. Over the five explicit years, $g_t$ declines linearly from 8.50\% to 2.50\%, $ROIC_t$ from 14.50\% to 10.50\%, and the implied reinvestment rate from 58.62\% to 23.81\%.
+
+The common discount-rate process is mean reverting,
+\begin{equation}
+w_{t+1}=\bar w+(w_t-\bar w)e^{-\kappa_w}+\sigma_w^*\varepsilon_{t+1},
+\label{eq:wacc_process}
+\end{equation}
+with $w_0=9.10\%$, $\bar w=8.30\%$, $\kappa_w=0.45$ and annual volatility 0.90\%. It is clipped to $[g_\infty+1.00\%,25.00\%]=[3.50\%,25.00\%]$; every gold engine receives the same 8,192-path shock array.
+
+For simulated path $i$, the common operating contract and discount rates define the operating proxy,
+\begin{equation}
+V_{op}^{(i)}=\sum_{t=1}^{T}\frac{F_t^{proxy,(i)}}{\prod_{s=1}^{t}(1+WACC_s^{(i)})}
++\frac{TV_T^{(i)}}{\prod_{s=1}^{T}(1+WACC_s^{(i)})}.
+\label{eq:stochvalue}
+\end{equation}
+The terminal block uses $g_\infty=2.50\%$, $ROIC_\infty=10.50\%$ and therefore $b_\infty=23.81\%$:
+\begin{equation}
+TV_T^{(i)}=\frac{M_T^{AT,(i)}(1+g_\infty)(1-g_\infty/ROIC_\infty)}{WACC_T^{(i)}-g_\infty},
+\label{eq:terminal_value}
+\end{equation}
+The WACC floor ensures a positive spread. A signed terminal removes the legacy zero floor; $TV=0$ gives a five-year-only sensitivity.
+Neither closure is a reserve-calibrated mine life or an optimal abandonment rule. No equity/share bridge is inferred.

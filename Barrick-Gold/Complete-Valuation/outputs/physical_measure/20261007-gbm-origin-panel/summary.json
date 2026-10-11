@@ -1,0 +1,18 @@
+{
+  "status": "CONDITIONAL_TWO_STAGE_GBM_OOS_NOT_DCF_ADMITTED",
+  "targets": 29,
+  "first_origin": "2026-07-10",
+  "last_origin": "2026-09-01",
+  "rmse": 6.119154624790501,
+  "no_change_rmse": 6.11742508374009,
+  "mean_price_log_score": -3.3540488703456313,
+  "coverage95": 0.9310344827586207,
+  "source_code_sha256": "11b46652234392c3ba4218022cde53618aa1739a46ed05721c29bbc999c36b5e",
+  "limitations": [
+    "Short historical option window; no 90-day targets within freeze.",
+    "Conditional origin Q diffusion held constant over P training and forecast.",
+    "Plug-in intervals omit structural parameter, drift and state uncertainty.",
+    "Exact GBM prediction removes simulation error, not model misspecification.",
+    "GLD USD/share, before gold basis, realized sales and FCFF."
+  ]
+}

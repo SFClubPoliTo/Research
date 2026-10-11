@@ -1,0 +1,69 @@
+{
+  "status": "INTERRUPTED_SPARSE_ACQUISITION_ATTEMPT",
+  "calendar": [
+    "2026-07-09",
+    "2026-07-10",
+    "2026-07-13",
+    "2026-07-14",
+    "2026-07-15",
+    "2026-07-16",
+    "2026-07-17",
+    "2026-07-20",
+    "2026-07-21",
+    "2026-07-22",
+    "2026-07-23",
+    "2026-07-24",
+    "2026-07-27",
+    "2026-07-28",
+    "2026-07-29",
+    "2026-07-30",
+    "2026-07-31",
+    "2026-08-03",
+    "2026-08-04",
+    "2026-08-05",
+    "2026-08-06",
+    "2026-08-12",
+    "2026-08-17",
+    "2026-08-19",
+    "2026-08-20",
+    "2026-08-21",
+    "2026-08-24",
+    "2026-08-28",
+    "2026-08-31",
+    "2026-09-01",
+    "2026-09-02"
+  ],
+  "processed_dates": [
+    "2026-07-09",
+    "2026-07-10",
+    "2026-07-13"
+  ],
+  "admitted_dates": [],
+  "origin_target_pairs": 0,
+  "forecast_design": "conditional next-admitted-date IV repricing; structural parameters origin-only, projected variance/intensity; target matching HG forwards and as-of NSS condition scoring",
+  "threshold": {
+    "min_actual_quotes": 64,
+    "min_expiries": 3,
+    "min_dte": 75,
+    "max_age_seconds": 120,
+    "max_relative_spread": 0.2
+  },
+  "rate_history_sha256": "94268DEBA502A8DDABA81B120C8ADFD49B59D87D459056DD4AA407D9F0879F0E",
+  "optimizer": {
+    "maxiter": 35,
+    "popsize": 6
+  },
+  "source_code_sha256": "E7AAF079AE7BF962CC092E65BA962DBE8B9AF8C33415377F3EB03795748FF238",
+  "panel_manifest_sha256": "0098C616D6213945DECBDB03CC8A236555D59A36AC9D2B7133B20C752DC14FD6",
+  "sampling": "all eligible origin quotes from approx100 uniformly spaced requests; not the gold CC64 sample",
+  "limitations": [
+    "Currently discoverable contract universe has survivorship limits",
+    "Constant-volatility de-Americanization approximation",
+    "Conditional repricing is not a physical price forecast"
+  ],
+  "updated_at_utc": "2026-10-03T12:50:43.780869+00:00",
+  "files": {
+    "origin_target_coverage.csv": "A26F65BEDEFC3B76D6450F8026AF948F04F52524B2CA1368935967AF4A29AC72"
+  },
+  "superseded_by": "../copper_temporal_oos_budget112_20261003"
+}

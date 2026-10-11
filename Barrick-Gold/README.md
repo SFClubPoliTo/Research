@@ -14,8 +14,7 @@
 | Article 6 | [Beyond Black-Scholes Synthetic Examples](./JumpSVFourier/) | Davide Sisto, Matteo Armando | June 12, 2026 | Jump/stochastic-volatility simulations and reproducibility assets. |
 | Article 7 | [Gold, Monetary Regimes, and Volatility Dynamics](./Gold-Volatility-Research/) | Davide D'Amico, Pietro Weisz | June 19, 2026 | Gold/silver econometrics, volatility diagnostics and generated tables. |
 | Article 8 | [Advanced Stochastic Modeling for Gold Options](./Gold-Options-Stochastic-Modeling/) | Alessandro Coco, Salvatore Gabriele Messina | **September 4, 2026** | Public Team 8 source package, same-date Treasury curve, aggregate calibration/OOS evidence and figures. |
-| Unified thesis | [Barrick Mining UNIFICATO](./Barrick%20Mining%20UNIFICATO/) | Barrick Gold Research Teams | **TBD** | Working thesis plus the versioned executable companion. |
-| Research paper | [Barrick Mining PAPER](./Barrick%20Mining%20PAPER/) | Barrick Gold Research Teams | **07/09/2026** | Eight-page operating-proxy sensitivity draft; audited code, curated inputs and technical supplement included. |
+| Complete Valuation | [Shared research project](./Complete-Valuation/) | Barrick Gold Research Teams | Research in progress | One code and data infrastructure; full unified report and condensed Paper, dated physical-price experiments, operating models and valuation reconciliation. |
 
 ## Repository map
 
@@ -29,11 +28,23 @@ Barrick-Gold/
 |-- JumpSVFourier/
 |-- Gold-Volatility-Research/
 |-- Gold-Options-Stochastic-Modeling/
-|-- Barrick Mining UNIFICATO/
-`-- Barrick Mining PAPER/
+`-- Complete-Valuation/
+    |-- data/{raw,processed}/
+    |-- outputs/{img,parameters,report_unificato,report_paper}/
+    |-- src/
+    |-- utilities/
+    `-- README.md
 ```
 
 ## Reproducibility boundary
+
+The [unified report](./Complete-Valuation/outputs/report_unificato/Articolo.pdf) and
+[Paper](./Complete-Valuation/outputs/report_paper/Articolo.pdf) use the same code,
+dated inputs and publication images. Each report directory includes its LaTeX
+source and a standalone Overleaf archive. The [project README](./Complete-Valuation/)
+distinguishes completed numerical experiments from the remaining physical-price
+validation and corporate cash-flow reconciliation; the folder name does not
+certify a completed company valuation.
 
 - Each project README identifies the runnable entry points and outputs.
 - Licensed/provider-controlled row-level option data are excluded; public code, hashes, manifests and aggregate evidence remain auditable.

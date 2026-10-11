@@ -1,0 +1,48 @@
+{
+  "model": "bates",
+  "parameter_names": [
+    "v0",
+    "kappa",
+    "theta",
+    "sigma",
+    "rho",
+    "lambd",
+    "mu_J",
+    "sigma_J"
+  ],
+  "values": [
+    0.043123235551077346,
+    3.9023227541838104,
+    0.0328481754167358,
+    0.3102487424267756,
+    0.4978703207684809,
+    0.43387527723403124,
+    -0.18196204061511556,
+    0.1961867675112624
+  ],
+  "objective": 1.0214060885063886e-05,
+  "global_objective": 1.0336067183198182e-05,
+  "success": true,
+  "message": "Optimization terminated successfully",
+  "evaluations": 11,
+  "iterations": 1,
+  "elapsed_seconds": 9.01712169998791,
+  "parameters": {
+    "v0": 0.043123235551077346,
+    "kappa": 3.9023227541838104,
+    "theta": 0.0328481754167358,
+    "sigma": 0.3102487424267756,
+    "rho": 0.4978703207684809,
+    "lambd": 0.43387527723403124,
+    "mu_J": -0.18196204061511556,
+    "sigma_J": 0.1961867675112624,
+    "xi": 0.3102487424267756
+  },
+  "origin": "2026-07-23",
+  "measure": "Q",
+  "contracts": 64,
+  "source_sha256": "e949648f6bcce497c82522fd36a96a4f4afe50ca1d1fbcc4cb425aa0a1493356",
+  "source_code_sha256": "df4b9ac04529d1b906f91e0d42327c7eed142bc7d820957d3699cc4675eebc61",
+  "status": "DATED_Q_CALIBRATION_NOT_PHYSICAL_FORECAST",
+  "initialization": "Generic population and same-origin nested candidates only"
+}

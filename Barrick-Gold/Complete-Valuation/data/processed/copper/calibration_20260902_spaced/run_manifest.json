@@ -1,0 +1,109 @@
+{
+  "filter_config": {
+    "max_quote_age_seconds": 120.0,
+    "max_relative_spread": 0.2,
+    "min_implied_vol": 0.01,
+    "max_implied_vol": 2.0,
+    "chebyshev_maturities": 8,
+    "chebyshev_moneyness": 8
+  },
+  "nss_fit": {
+    "success": true,
+    "message": "Optimization terminated successfully.",
+    "objective": 3.819881072754773e-06,
+    "parameters": {
+      "beta0": 0.058921141999577334,
+      "beta1": -0.020553940005815632,
+      "beta2": 0.005868309230169861,
+      "beta3": -0.0268074582353816,
+      "tau1": 2.0,
+      "tau2": 5.0
+    }
+  },
+  "input_rows": 88,
+  "exclusion_counts": {
+    "eligible": 76,
+    "wide_relative_spread": 12
+  },
+  "eligible_rows": 76,
+  "american_approximation": {
+    "method": "600-step constant-volatility CRR futures IV, then equivalent Black-76 European bid/ask/mid",
+    "exact_for_stochastic_volatility_and_jumps": false,
+    "max_abs_adjustment_usd_per_lb": 0.003636218080661058,
+    "max_300_600_iv_difference_bp": 3.428912598554823,
+    "note": "Tree discretization comparison; not an error bound on stochastic-model early exercise."
+  },
+  "within_expiry_shape_diagnostics": [
+    {
+      "expiry": "20261027",
+      "rows": 9,
+      "midpoint_monotonicity_violations": 0,
+      "midpoint_convexity_violations": 0
+    },
+    {
+      "expiry": "20261124",
+      "rows": 9,
+      "midpoint_monotonicity_violations": 0,
+      "midpoint_convexity_violations": 0
+    },
+    {
+      "expiry": "20261228",
+      "rows": 12,
+      "midpoint_monotonicity_violations": 0,
+      "midpoint_convexity_violations": 0
+    },
+    {
+      "expiry": "20270126",
+      "rows": 12,
+      "midpoint_monotonicity_violations": 0,
+      "midpoint_convexity_violations": 0
+    },
+    {
+      "expiry": "20270324",
+      "rows": 12,
+      "midpoint_monotonicity_violations": 0,
+      "midpoint_convexity_violations": 0
+    },
+    {
+      "expiry": "20270427",
+      "rows": 12,
+      "midpoint_monotonicity_violations": 0,
+      "midpoint_convexity_violations": 0
+    },
+    {
+      "expiry": "20270525",
+      "rows": 10,
+      "midpoint_monotonicity_violations": 0,
+      "midpoint_convexity_violations": 0
+    }
+  ],
+  "calendar_policy": "No cross-expiry calendar monotonicity imposed on different deliverable futures",
+  "status": "CONDITIONAL_COPPER_OPTION_CALIBRATION",
+  "instrument": "COMEX HG/HXE",
+  "market_date": "2026-09-02T20:00:00Z",
+  "training_rows": 62,
+  "reserved_rows": 14,
+  "holdout_scope": "Interpolation across reserved strikes; NOT temporal out-of-sample validation",
+  "input_path": "data\\raw\\ib_local\\20261003-acquired-hg-20260902-spaced112\\hg_futures_option_bid_ask.csv",
+  "input_sha256": "34BF7A644DB9F7E7CA5E9A04766A1BEF27CEB78CB0832B1382E6535262C719E1",
+  "pricing_source": "paper_audit/pricing: audited candidate retention and nested limits",
+  "optimizer": {
+    "maxiter": 35,
+    "popsize": 6,
+    "seeds": [
+      20261003,
+      20261004,
+      20261005
+    ]
+  },
+  "generated_at_utc": "2026-10-03T12:16:32.224849+00:00",
+  "files": {
+    "copper_calibration_surface.csv": "FC3D5D31A290C04C59C5471BDD5F22F602FAA6C884D8C99F52E62B37A880CEEA",
+    "copper_model_metrics.csv": "14B8254339853BB2A06FB623A9F2A47BD4FA99AD6BD0AF0E960E16AC3EBAB75A",
+    "copper_model_residuals.csv": "E4EB9AEB87D33B80A0C72DA2C445AB5B495DB582115E18B7AA14D1B5C626BC67",
+    "copper_parameters.json": "E431CBEB54E0379C4816D5CFA45A9AE4C0BB520ACA68DFE60445A9724DEBD5CC",
+    "quote_and_american_audit.csv": "42D60EAA52CE1BE8B083E2216232D3E48A502E0F2C627943467CBC2F62004CF3",
+    "reserved_strikes.csv": "C05137488182AF691FFFF1F0A8AEC3C9A30E070B1EA9A2DFB3AD51F83E9CA5A7",
+    "training_strikes.csv": "FA745C326C11EAD927CAAA0D9A2FF904E3616D7CC2E69E97D9FF010B25288A49"
+  }
+}

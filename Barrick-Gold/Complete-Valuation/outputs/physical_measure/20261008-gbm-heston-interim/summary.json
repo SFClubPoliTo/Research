@@ -1,0 +1,120 @@
+{
+  "status": "MATCHED_PHYSICAL_FORECAST_DIAGNOSTIC_NOT_DCF_ADMITTED",
+  "common_targets": 9,
+  "common_pairs": [
+    [
+      "2026-07-10",
+      "2026-07-13"
+    ],
+    [
+      "2026-07-13",
+      "2026-07-14"
+    ],
+    [
+      "2026-07-14",
+      "2026-07-15"
+    ],
+    [
+      "2026-07-15",
+      "2026-07-16"
+    ],
+    [
+      "2026-07-16",
+      "2026-07-17"
+    ],
+    [
+      "2026-07-17",
+      "2026-07-20"
+    ],
+    [
+      "2026-07-20",
+      "2026-07-21"
+    ],
+    [
+      "2026-07-21",
+      "2026-07-22"
+    ],
+    [
+      "2026-07-22",
+      "2026-07-23"
+    ]
+  ],
+  "no_change_rmse": 5.947414937974694,
+  "models": {
+    "gbm": {
+      "total_completed": 29,
+      "matched": 9,
+      "unmatched": 20,
+      "rmse": 6.059485190879801,
+      "mae": 5.165263293232499,
+      "mean_error": 0.8953508377168886,
+      "mean_squared_loss_difference_vs_no_change": 1.3456163340470848,
+      "coverage95": 1.0,
+      "coverage80": 0.5555555555555556,
+      "p_optimizer_failures": 0,
+      "p_optimizer_status_not_applicable_or_unrecorded": 9
+    },
+    "heston": {
+      "total_completed": 9,
+      "matched": 9,
+      "unmatched": 0,
+      "rmse": 6.171460594649793,
+      "mae": 5.239898455017037,
+      "mean_error": 1.026291917672874,
+      "mean_squared_loss_difference_vs_no_change": 2.71518142687065,
+      "coverage95": 1.0,
+      "coverage80": 0.5555555555555556,
+      "p_optimizer_failures": 0,
+      "p_optimizer_status_not_applicable_or_unrecorded": 0
+    }
+  },
+  "interpretation": "Descriptive paired losses; no significance or model-selection claim. GLD USD/share.",
+  "inputs": [
+    {
+      "path": "outputs/physical_measure/20261007-gbm-origin-panel/origins.json",
+      "sha256": "0762b68ccd4a35a1c8969cfa4ffce07d95a4212bb1683c590c58363c6c3cbbc8"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-pilot/2026-07-10.json",
+      "sha256": "dbeb03fb499415aaa063525ac79571848e4a8bbf90c51d8a710127125f73201c"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-13.json",
+      "sha256": "5c92a51a7b42f118610691c618e20920534f95db6e8ce49d72baffffb32edcd9"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-14.json",
+      "sha256": "b9ab8c1d5afa84f2e5b0ed521fdfa90b1c7e5fc1418f20bedc9b22dd6ebf6e95"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-15.json",
+      "sha256": "ac24aff57188ec8e0a13ca24c74f9493f1f95f05f5dceb119b96273aab43ef5f"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-16.json",
+      "sha256": "97f86baf35915f7fe063c9579a12d9795ed76bd8d3c1d3a7c31fed4bff514093"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-17.json",
+      "sha256": "eb0137430e2a5e3258d3482f6fc62b512ff3af024265c898e0943956033349de"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-20.json",
+      "sha256": "567144f97694b14fa70fdeb39f6b1cbe1d2723f4b94024efe83c8c49a22c3898"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-21.json",
+      "sha256": "fd53368e69383873c3a2b64881f760769e4ef3f5a39c636c2a22503d9f7bdbf1"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-22.json",
+      "sha256": "a85463c57c70940758b4c947fbf42ee3fa4400a3f89ed92dbfae07aada45306b"
+    }
+  ],
+  "requested_experiments": [
+    "gbm=20261007-gbm-origin-panel",
+    "heston=20261007-heston-origin-pilot",
+    "heston=20261007-heston-origin-panel"
+  ],
+  "source_code_sha256": "e42c3483e088fe218914204b308b1b7b574240e2d53f8be0225f33d1b0aa93ad"
+}

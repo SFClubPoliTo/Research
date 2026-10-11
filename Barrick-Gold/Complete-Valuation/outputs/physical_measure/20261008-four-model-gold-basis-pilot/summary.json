@@ -1,0 +1,92 @@
+{
+  "status": "ORIGIN_PHYSICAL_GOLD_BASIS_DIAGNOSTIC_NOT_DCF_ADMITTED",
+  "common_targets": 1,
+  "common_pairs": [
+    [
+      "2026-07-10",
+      "2026-07-13"
+    ]
+  ],
+  "no_change_rmse": 106.44999999999982,
+  "models": {
+    "gbm": {
+      "total_completed": 29,
+      "matched": 1,
+      "unmatched": 28,
+      "rmse": 114.0423095546812,
+      "mae": 114.0423095546812,
+      "mean_error": 114.0423095546812,
+      "mean_squared_loss_difference_vs_no_change": 1674.0458685657686,
+      "coverage95": 1.0,
+      "coverage80": 1.0,
+      "p_optimizer_failures": 0,
+      "p_optimizer_status_not_applicable_or_unrecorded": 1
+    },
+    "heston": {
+      "total_completed": 1,
+      "matched": 1,
+      "unmatched": 0,
+      "rmse": 119.30771619549068,
+      "mae": 119.30771619549068,
+      "mean_error": 119.30771619549068,
+      "mean_squared_loss_difference_vs_no_change": 2902.7286437837884,
+      "coverage95": 1.0,
+      "coverage80": 0.0,
+      "p_optimizer_failures": 0,
+      "p_optimizer_status_not_applicable_or_unrecorded": 0
+    },
+    "bates": {
+      "total_completed": 1,
+      "matched": 1,
+      "unmatched": 0,
+      "rmse": 131.90604635560612,
+      "mae": 131.90604635560612,
+      "mean_error": 131.90604635560612,
+      "mean_squared_loss_difference_vs_no_change": 6067.602565167352,
+      "coverage95": 1.0,
+      "coverage80": 0.0,
+      "p_optimizer_failures": 0,
+      "p_optimizer_status_not_applicable_or_unrecorded": 0
+    },
+    "hawkes": {
+      "total_completed": 1,
+      "matched": 1,
+      "unmatched": 0,
+      "rmse": 105.06921276497906,
+      "mae": 105.06921276497906,
+      "mean_error": 105.06921276497906,
+      "mean_squared_loss_difference_vs_no_change": -292.063028947523,
+      "coverage95": 1.0,
+      "coverage80": 0.0,
+      "p_optimizer_failures": 0,
+      "p_optimizer_status_not_applicable_or_unrecorded": 0
+    }
+  },
+  "interpretation": "Matched conditional physical gold predictions; deterministic estimated basis and plug-in parameters.",
+  "units": "USD_PER_TROY_OUNCE",
+  "excluded": [],
+  "inputs": [
+    {
+      "path": "outputs/physical_measure/20261007-gbm-origin-panel/origins.json",
+      "sha256": "0762b68ccd4a35a1c8969cfa4ffce07d95a4212bb1683c590c58363c6c3cbbc8"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-pilot/2026-07-10.json",
+      "sha256": "dbeb03fb499415aaa063525ac79571848e4a8bbf90c51d8a710127125f73201c"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-bates-origin-p-pilot/2026-07-10.json",
+      "sha256": "8910bec977ee6cc92604f63c693887c27421b4761e5805f7151e9539b2d11a9d"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-hawkes-origin-p-pilot/2026-07-10.json",
+      "sha256": "11085ddcd54c44e4af6fd443e7e10cd4224b5a0a588c765abf0e06f727ee8832"
+    }
+  ],
+  "basis_sha256": "edf15dfc12d278ae54552d5378fce1e9e93bc2d9870377dd9b26bc8dae0e2a32",
+  "limitations": [
+    "Basis and parameter uncertainty omitted.",
+    "Gold midpoint is not Barrick realized selling price.",
+    "No FCFF, capital structure or corporate valuation inferred."
+  ]
+}

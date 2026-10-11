@@ -1,0 +1,540 @@
+{
+  "status": "ORIGIN_PHYSICAL_GOLD_BASIS_DIAGNOSTIC_NOT_DCF_ADMITTED",
+  "common_targets": 29,
+  "common_pairs": [
+    [
+      "2026-07-10",
+      "2026-07-13"
+    ],
+    [
+      "2026-07-13",
+      "2026-07-14"
+    ],
+    [
+      "2026-07-14",
+      "2026-07-15"
+    ],
+    [
+      "2026-07-15",
+      "2026-07-16"
+    ],
+    [
+      "2026-07-16",
+      "2026-07-17"
+    ],
+    [
+      "2026-07-17",
+      "2026-07-20"
+    ],
+    [
+      "2026-07-20",
+      "2026-07-21"
+    ],
+    [
+      "2026-07-21",
+      "2026-07-22"
+    ],
+    [
+      "2026-07-22",
+      "2026-07-23"
+    ],
+    [
+      "2026-07-23",
+      "2026-07-24"
+    ],
+    [
+      "2026-07-24",
+      "2026-07-27"
+    ],
+    [
+      "2026-07-27",
+      "2026-07-28"
+    ],
+    [
+      "2026-07-28",
+      "2026-07-29"
+    ],
+    [
+      "2026-07-29",
+      "2026-07-30"
+    ],
+    [
+      "2026-07-30",
+      "2026-07-31"
+    ],
+    [
+      "2026-07-31",
+      "2026-08-03"
+    ],
+    [
+      "2026-08-03",
+      "2026-08-04"
+    ],
+    [
+      "2026-08-04",
+      "2026-08-05"
+    ],
+    [
+      "2026-08-05",
+      "2026-08-06"
+    ],
+    [
+      "2026-08-06",
+      "2026-08-07"
+    ],
+    [
+      "2026-08-12",
+      "2026-08-13"
+    ],
+    [
+      "2026-08-17",
+      "2026-08-18"
+    ],
+    [
+      "2026-08-19",
+      "2026-08-20"
+    ],
+    [
+      "2026-08-20",
+      "2026-08-21"
+    ],
+    [
+      "2026-08-21",
+      "2026-08-24"
+    ],
+    [
+      "2026-08-24",
+      "2026-08-25"
+    ],
+    [
+      "2026-08-28",
+      "2026-08-31"
+    ],
+    [
+      "2026-08-31",
+      "2026-09-01"
+    ],
+    [
+      "2026-09-01",
+      "2026-09-02"
+    ]
+  ],
+  "no_change_rmse": 66.08567644379892,
+  "models": {
+    "gbm": {
+      "total_completed": 29,
+      "matched": 29,
+      "unmatched": 0,
+      "rmse": 66.34643120611759,
+      "mae": 51.98631427209698,
+      "mean_error": -2.5993609608041472,
+      "mean_squared_loss_difference_vs_no_change": 34.53230275361458,
+      "coverage95": 0.9310344827586207,
+      "coverage80": 0.7241379310344828,
+      "p_optimizer_failures": 0,
+      "p_optimizer_status_not_applicable_or_unrecorded": 29
+    },
+    "heston": {
+      "total_completed": 29,
+      "matched": 29,
+      "unmatched": 0,
+      "rmse": 66.77371603020345,
+      "mae": 52.069416158633445,
+      "mean_error": -1.1556244201102532,
+      "mean_squared_loss_difference_vs_no_change": 91.4125214477689,
+      "coverage95": 0.9310344827586207,
+      "coverage80": 0.6896551724137931,
+      "p_optimizer_failures": 2,
+      "p_optimizer_status_not_applicable_or_unrecorded": 0
+    },
+    "bates": {
+      "total_completed": 29,
+      "matched": 29,
+      "unmatched": 0,
+      "rmse": 66.83584760717207,
+      "mae": 51.45642826197086,
+      "mean_error": -2.129991883327201,
+      "mean_squared_loss_difference_vs_no_change": 99.71389433465022,
+      "coverage95": 0.8620689655172413,
+      "coverage80": 0.5862068965517241,
+      "p_optimizer_failures": 0,
+      "p_optimizer_status_not_applicable_or_unrecorded": 0
+    },
+    "full_bates_hawkes": {
+      "total_completed": 29,
+      "matched": 29,
+      "unmatched": 0,
+      "rmse": 65.81307933041818,
+      "mae": 51.980216190297625,
+      "mean_error": -3.781855675869322,
+      "mean_squared_loss_difference_vs_no_change": -35.95522008256298,
+      "coverage95": 0.8620689655172413,
+      "coverage80": 0.5517241379310345,
+      "p_optimizer_failures": 1,
+      "p_optimizer_status_not_applicable_or_unrecorded": 0
+    }
+  },
+  "interpretation": "Matched conditional physical gold predictions; deterministic estimated basis and plug-in parameters.",
+  "units": "USD_PER_TROY_OUNCE",
+  "excluded": [],
+  "inputs": [
+    {
+      "path": "outputs/physical_measure/20261007-gbm-origin-panel/origins.json",
+      "sha256": "0762b68ccd4a35a1c8969cfa4ffce07d95a4212bb1683c590c58363c6c3cbbc8"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-pilot/2026-07-10.json",
+      "sha256": "dbeb03fb499415aaa063525ac79571848e4a8bbf90c51d8a710127125f73201c"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-13.json",
+      "sha256": "5c92a51a7b42f118610691c618e20920534f95db6e8ce49d72baffffb32edcd9"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-14.json",
+      "sha256": "b9ab8c1d5afa84f2e5b0ed521fdfa90b1c7e5fc1418f20bedc9b22dd6ebf6e95"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-15.json",
+      "sha256": "ac24aff57188ec8e0a13ca24c74f9493f1f95f05f5dceb119b96273aab43ef5f"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-16.json",
+      "sha256": "97f86baf35915f7fe063c9579a12d9795ed76bd8d3c1d3a7c31fed4bff514093"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-17.json",
+      "sha256": "eb0137430e2a5e3258d3482f6fc62b512ff3af024265c898e0943956033349de"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-20.json",
+      "sha256": "567144f97694b14fa70fdeb39f6b1cbe1d2723f4b94024efe83c8c49a22c3898"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-21.json",
+      "sha256": "fd53368e69383873c3a2b64881f760769e4ef3f5a39c636c2a22503d9f7bdbf1"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-22.json",
+      "sha256": "a85463c57c70940758b4c947fbf42ee3fa4400a3f89ed92dbfae07aada45306b"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation/2026-07-23.json",
+      "sha256": "a3845613970edf332a3da764969a5268ca584d9d3e67f98917461845c97c1e6b"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-07-24.json",
+      "sha256": "2c9152b4ecca947ea9ad6ff970a66024633568ee8adb3b4920a0eb6f1f245861"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-07-27.json",
+      "sha256": "15d6031ced331dd69d91fb0f652c9c37523f091c9e1843876f7f845d1ab63b55"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-07-28.json",
+      "sha256": "c60c48cd9a2e796bfbdc3d68d5f7778cd05b5332d9e4851ab017a056f07dc6d8"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-07-29.json",
+      "sha256": "3a8c1758e2045d113616e74866efbb5f8e9e84690c0aad8f586be9244cf36bb8"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-07-30.json",
+      "sha256": "d1e632b87caf9c46583a48eda8d81e612fa65eab24acf560fde65d98d574931a"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-07-31.json",
+      "sha256": "dc3b4239c788e0f9b83c204bf53154a1ec9ca582fcdbd92c13330f569c1908d1"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-03.json",
+      "sha256": "17ddd9a2e9d68a0f73071945663e093a011d961a6aeb41d0bc28b9d438686677"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-04.json",
+      "sha256": "ebc979e06f481b4523e2775674cb50e4f0eebd8c45f3f655e413690cd2a39fb7"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-05.json",
+      "sha256": "3f5d12eed614811ced1878881fac03404ea550589fcca24080bf37c69fb70969"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-06.json",
+      "sha256": "fc9d8a95420363de53ffa99d29698f31a302d78420fcef93f406bf81f369da4f"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-12.json",
+      "sha256": "393ce94fd5639cbc9f425c3a4624e95cf0a24ece1341590253bf7b5a41fc3279"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-17.json",
+      "sha256": "90317950d0f8fae995b5b1969f874ad14d40ca7a559a8b45af4ae4bbbdb0858a"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-19.json",
+      "sha256": "c6d5577c35b8959daa8cd2500dd8954517aa643ed8bba4509e5dd2f0fd709b0d"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-20.json",
+      "sha256": "9602b51f5d74dff53e048c9553d2416542ac539cd3975ad902ae969d5c40123f"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-21.json",
+      "sha256": "adfbb49dd204997a5747c26e2c2181364f1fddf368ddbf357939843485ae1c79"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-24.json",
+      "sha256": "9b2a137060bb04f27baa73dace5b0bf9c2dc72ab85ce8224be0a00957f67b405"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-28.json",
+      "sha256": "63beace038630bbb7f44b870cd5088fc47d0e1228e8758d7869fa965c12a844f"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-31.json",
+      "sha256": "1226c7d8ad5ba5990927fe968b4e038a0c9f256154d817656732d4bdf2eec5a1"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-09-01.json",
+      "sha256": "9e7062878528a5a4ac08617a4c8d2bad2b42fb3074e5d408890bf0e975ed7bb6"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-bates-origin-p-pilot/2026-07-10.json",
+      "sha256": "8910bec977ee6cc92604f63c693887c27421b4761e5805f7151e9539b2d11a9d"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-07-13.json",
+      "sha256": "e74520e20757ef354f728219c8dad1010d1a970e179e488fea2229d3bf70c267"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-07-14.json",
+      "sha256": "30db6791bc261389f86dcb12decdeea9dc1d5e37c8db82cd7b8c6ca322c505cb"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-07-15.json",
+      "sha256": "523b864f91a641c4af79c532a56128caf1ebd26281429aa0cec6969064126842"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-07-16.json",
+      "sha256": "e7c6600913c4045933a9eb3862346d3e5a97b85e22a40fba00a56d898c5eff10"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-07-17.json",
+      "sha256": "1edda9c9524e27158bb931d94b9d8b1fdc4be3287a46a6efb59d0f7fb1bdbedc"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-07-20.json",
+      "sha256": "8ff96cc11859dd46245638a8f89ea0e132fcd6ddbd25920d7548d12a0ed3dd44"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-07-21.json",
+      "sha256": "9cb4bb12c392b69c882600f7356780492313ca20d738be386bfc3e45adb404be"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-07-22.json",
+      "sha256": "960957fd862cd4016c3ee93091586ad6daff9b916109518c043144ee92a09f99"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-07-23.json",
+      "sha256": "bcadfdb4d41f7bf402b4f7098eb4eb6117815befcba28d309ecbb4a23ef3e0ce"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-07-24.json",
+      "sha256": "ba9dd4bbe2be08509f31129de374ad5d6b844185ec2b820232478a64eba33824"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-07-27.json",
+      "sha256": "7b0024b7a30e5bb93f184214d5f3df639cb0f993a1052cac7d96c3ed5b406fd6"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-07-28.json",
+      "sha256": "3c9bf75844b110b60090c2601b5d08f00dc8e17f405650491508927772e6fd5e"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-07-29.json",
+      "sha256": "58f357766867797ca8b5ee827cc695c5ae0a9d8d644e1b640693884882c0e786"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-07-30.json",
+      "sha256": "3592d620f3aae60b4f9016094d88c6c60d0da903145356469a99a0531f765639"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-07-31.json",
+      "sha256": "33a9eb984a821a3e8fa46a4cc065c67836b53b48e973b63c495f260efee0afaf"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-08-03.json",
+      "sha256": "8ad94a562ff7b1d32f7cc06f6d9a17b21d8b54dba1e7f64f2762aab0d6027f64"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-08-04.json",
+      "sha256": "5da758c3e69e0a252d63be76166e8e37f6a39ac9ad5982dbfce262ef909649e0"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-08-05.json",
+      "sha256": "71186d3a3ad34eb8b87b89f7620d6c2fb0cd68c8972144279687b6f38fd657e0"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-08-06.json",
+      "sha256": "c63995e222e9c09220bbff86e63d51d00286a6e9123e1c0421f2f9260394a731"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-08-12.json",
+      "sha256": "af5a636a824adeb3e3b2b9c81be51afdb517e98aae4e410929992158d8376327"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-08-17.json",
+      "sha256": "a4797bc1ae24b0f09002218ce1752b086dc18542830bf7b21c14fc0089707d02"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-08-19.json",
+      "sha256": "af9e0c6eac47c78156806d87063b4ec2764df158827643a072f1134d05bcb282"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-08-20.json",
+      "sha256": "1abd9fee14235baaf03a8b556869d08137a22bd5e9b233a6f4fc66873ee9ca58"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-08-21.json",
+      "sha256": "757d9701d3d79deaac77e8a8e57972d3f423cda46d82238fed03d610e6176b34"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-08-24.json",
+      "sha256": "fffafe71cf3f1b4b003d7b484106a50799adc4e2e9ff82750e0351aac52f51c0"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-08-28.json",
+      "sha256": "63c175e03c29e6b95ce9435bf9758074ed6b2d45e7ef2d0bf67e8779544e8d26"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-08-31.json",
+      "sha256": "2d49b934ccde104b0cfbbfb1a5dac070524a10d9638535cdedd9a0a2bdea2161"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-bates-origin-p-panel/2026-09-01.json",
+      "sha256": "17ee16662e742195d2c4965df1daacbaca9845415d546f6130eafeba63a07411"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-hawkes-origin-p-pilot/2026-07-10.json",
+      "sha256": "11085ddcd54c44e4af6fd443e7e10cd4224b5a0a588c765abf0e06f727ee8832"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-07-13.json",
+      "sha256": "21db59812b20230fcd70e32b8e75c94797e446e019d399e18bcdfd0edb2edbe1"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-07-14.json",
+      "sha256": "51169428cbccbb674a153ce00729ad3e539e2c483bb60034ef0565b7cfa104fc"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-07-15.json",
+      "sha256": "d84cf9589bd2ff8c2801531ec94be779c40778deb1c3555077acddbed605b21b"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-07-16.json",
+      "sha256": "f4ae1239f8ac4c75a3fb62055c305fe81f6a33087700866274eb0d1f3f8d31d2"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-07-17.json",
+      "sha256": "1b13686696ceb75a30d08d1290340f891e22fdc0d6a09f994caa9bb928ba9e95"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-07-20.json",
+      "sha256": "ea071250c41f67299bf588ada12808f85f32d6e2e59fda6027fb7bd4cf4d86e4"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-07-21.json",
+      "sha256": "59b850d0b7e7fe9512fbf25ab1b152dddacfa6d4e0a39399500225780c6ddd65"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-07-22.json",
+      "sha256": "fa0d63161a39f87f83d8c5ee66759dd0e753e9c301a651bb722bbf1d0acf9fb2"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-07-23.json",
+      "sha256": "2365572bf4f727adf023fd2c2617472b6a78a2652c3c5189f9480bbe64269c9c"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-07-24.json",
+      "sha256": "10a51c4a2ee9776c7067ea04c72b8ac9b0ad7f3393a419c51be491ce0291f9fa"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-07-27.json",
+      "sha256": "dc12097951650fbe43afb91376011a2b198dfc8d2127d70cc2644de79559b770"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-07-28.json",
+      "sha256": "2d0cd9ae991bae9574172831a45e74f0b3d0fc47609414be5357d80542640790"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-07-29.json",
+      "sha256": "72764b2db3133c0f9cfad636f7156956d232b54ae5826ed8ded7fdb88de5e340"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-07-30.json",
+      "sha256": "a2989fb30c320306e1cdbbcff82a1bf1f13109a1012b7d0abf6acacd0073e17f"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-07-31.json",
+      "sha256": "a59fea1df3e771b22ac870de0e17c2e019eab80c37c779c72f95051427ab8596"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-08-03.json",
+      "sha256": "bb9b23949f08adea20507d38b9ea08377ffc56b5d7641fb99b5848172a64ae94"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-08-04.json",
+      "sha256": "df517d482f8ba013d330f00150000107e8d220e32949ead15ec948f5834b2c38"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-08-05.json",
+      "sha256": "e129f6caf5de96c88b54732b25a9228fe5eb8337172cd9481364e0ee226f9ca2"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-08-06.json",
+      "sha256": "e63c02aa462a55f9708da8dacf374a3f3e3cb64e680789eaae3c8032beecc295"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-08-12.json",
+      "sha256": "1d78fa438d5263058b352074bcf278f79fb9ae5c229cab08a5faa5f0b8207b5d"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-08-17.json",
+      "sha256": "bd56b95fd579c3c39c4e10cab597b8eaf7f58b755f2d3c4b91984df44e0e318a"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-08-19.json",
+      "sha256": "bb63eecc28aa79673a08cbd29c1e50c74ecbe9e75fe7fe007601c3d6eb4010d6"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-08-20.json",
+      "sha256": "65737837ce0d85c7c4f3e15fda2bfa8adb994b65abdd0b9a67e69f42e0cd8480"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-08-21.json",
+      "sha256": "429140196b8a9b8f796fc2ed0da82b50ebf640ea0e5d2b44cf44ccf90163b8f0"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-08-24.json",
+      "sha256": "2473e24364d194e63db6ae9204239e0657878b838a0813103b4b119b1a6e4cbd"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-08-28.json",
+      "sha256": "77997928021494c4403ddbc4fe2a74af000cbe65cc26b2a1be6bfa9b728103a6"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-08-31.json",
+      "sha256": "b49546eec6f7bafb98f9565efbb2089d25cfbeb65a745085628dda44d8127335"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-full_bates_hawkes-origin-p-panel/2026-09-01.json",
+      "sha256": "5b2e7446dc0a63180abb37a095edc23d9304ae1e5116182288df7286945bb74a"
+    }
+  ],
+  "basis_sha256": "edf15dfc12d278ae54552d5378fce1e9e93bc2d9870377dd9b26bc8dae0e2a32",
+  "limitations": [
+    "Basis and parameter uncertainty omitted.",
+    "Gold midpoint is not Barrick realized selling price.",
+    "No FCFF, capital structure or corporate valuation inferred."
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "status": "EXPLORATORY_FIXED_Q_NOT_DCF_ADMITTED",
+  "model": "bates",
+  "underlying": "GLD_USD_PER_SHARE",
+  "cutoff": "2026-09-02",
+  "training_first": "2021-09-07",
+  "observations": 1252,
+  "q_parameters": {
+    "v0": 0.06429079463832513,
+    "kappa": 4.048162389956614,
+    "theta": 0.06539709599905669,
+    "sigma": 0.7276510890193096,
+    "rho": -0.02220015944091226,
+    "lambd": 0.24388348938326662,
+    "mu_J": -0.00038667063774483484,
+    "sigma_J": 0.0001247636409599174,
+    "xi": 0.7276510890193096
+  },
+  "premia_names": [
+    "eta_price",
+    "log_kappa_p_over_q",
+    "log_intensity_ratio",
+    "mark_shift_in_sd"
+  ],
+  "premia": [
+    3.5410196624968435,
+    0.5046584300227127,
+    0.827268044298511,
+    0.6098151744482275
+  ],
+  "negative_log_likelihood": -3874.7615606932422,
+  "optimizer_success": true,
+  "optimizer_message": "Optimization terminated successfully.",
+  "evaluations": 139,
+  "elapsed_seconds": 13.224822759628296,
+  "particle_checks": [
+    {
+      "particles": 512,
+      "seed": 704,
+      "negative_log_likelihood": -3874.160693382153,
+      "terminal_variance_mean": 0.10958086985802695,
+      "terminal_q_intensity_functional_mean": 0.24388348938326662,
+      "kappa_p": 6.705455691076736,
+      "theta_p": 0.03948099527196381,
+      "intensity_ratio": 2.2870620454543613,
+      "mark_mean_p": -0.00031058787626806676,
+      "variance_floor_fraction": 0.0051433331669329075,
+      "minimum_ess": 14.95029033715317
+    },
+    {
+      "particles": 1024,
+      "seed": 704,
+      "negative_log_likelihood": -3875.0863452012195,
+      "terminal_variance_mean": 0.10717767755499936,
+      "terminal_q_intensity_functional_mean": 0.24388348938326662,
+      "kappa_p": 6.705455691076736,
+      "theta_p": 0.03948099527196381,
+      "intensity_ratio": 2.2870620454543613,
+      "mark_mean_p": -0.00031058787626806676,
+      "variance_floor_fraction": 0.005077032997204473,
+      "minimum_ess": 25.86260463337797
+    },
+    {
+      "particles": 1024,
+      "seed": 705,
+      "negative_log_likelihood": -3876.713302484234,
+      "terminal_variance_mean": 0.11198967354993135,
+      "terminal_q_intensity_functional_mean": 0.24388348938326662,
+      "kappa_p": 6.705455691076736,
+      "theta_p": 0.03948099527196381,
+      "intensity_ratio": 2.2870620454543613,
+      "mark_mean_p": -0.00031058787626806676,
+      "variance_floor_fraction": 0.005137093150958467,
+      "minimum_ess": 13.145486699643929
+    },
+    {
+      "particles": 1024,
+      "seed": 706,
+      "negative_log_likelihood": -3875.9355212229025,
+      "terminal_variance_mean": 0.1114329797235391,
+      "terminal_q_intensity_functional_mean": 0.24388348938326662,
+      "kappa_p": 6.705455691076736,
+      "theta_p": 0.03948099527196381,
+      "intensity_ratio": 2.2870620454543613,
+      "mark_mean_p": -0.00031058787626806676,
+      "variance_floor_fraction": 0.005080153005191693,
+      "minimum_ess": 13.439761254169753
+    }
+  ],
+  "limitations": [
+    "Current Q coefficients imposed over historical training, not historical OOS.",
+    "Euler particle likelihood requires time-step and particle convergence.",
+    "Parameter uncertainty and identification not established.",
+    "One-month Treasury par yields are a short-rate proxy.",
+    "GLD-to-gold basis and corporate FCFF are not implemented by this fit."
+  ]
+}

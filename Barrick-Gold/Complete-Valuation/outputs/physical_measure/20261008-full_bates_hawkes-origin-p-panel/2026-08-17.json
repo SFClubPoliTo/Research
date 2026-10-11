@@ -1,0 +1,128 @@
+{
+  "status": "CONDITIONAL_TWO_STAGE_OOS_NOT_DCF_ADMITTED",
+  "model": "full_bates_hawkes",
+  "origin": "2026-08-17",
+  "target_date": "2026-08-18",
+  "training_returns": 1240,
+  "source_q_sha256": "97e2bf05ea1acad60febb9ff4d3209e7246460367740c8f7c8e56adea016af41",
+  "source_code_sha256": "34f87e4ef38f353437977a35d240ae04683e624998b758b913f0f29611f87a5c",
+  "q_parameters": {
+    "v0": 0.04660908069443903,
+    "kappa": 8.02425489589763,
+    "theta": 0.030939084633118907,
+    "xi": 0.07235351746929046,
+    "rho": 0.3716796488519163,
+    "lambda0": 0.30149068740373053,
+    "lambda_bar": 0.3087753484269921,
+    "stationary_mean_intensity": 0.3096199555769233,
+    "branching_ratio": 0.002727883441354377,
+    "alpha": 0.028730345847162515,
+    "beta": 10.532101706258416,
+    "mu_J": -0.05778564096242018,
+    "sigma_J": 0.3222130032417098
+  },
+  "premia": [
+    7.921294041033802,
+    -0.2543984347930425,
+    0.9851124514801401,
+    -1.5278052795672379
+  ],
+  "initialization_source": {
+    "origin": "2026-08-12",
+    "source_file": "2026-08-12.json",
+    "source_sha256": "1d78fa438d5263058b352074bcf278f79fb9ae5c229cab08a5faa5f0b8207b5d"
+  },
+  "initial_premia": [
+    7.921294041033802,
+    -0.2543984347930425,
+    0.9851124514801401,
+    -1.5278052795672379
+  ],
+  "initialization": "Previous successful origin if better than zero on current training likelihood",
+  "active_premia": 4,
+  "optimizer_success": true,
+  "optimizer_message": "Optimization terminated successfully.",
+  "evaluations": 54,
+  "training_particles": 512,
+  "training_substeps": 16,
+  "independent_checks": [
+    {
+      "seed": 1704,
+      "substeps": 16,
+      "nll": -3753.3959772247317,
+      "fitted_minus_zero_premium_nll": 18.429589040431438
+    },
+    {
+      "seed": 1705,
+      "substeps": 16,
+      "nll": -3745.0473283104584,
+      "fitted_minus_zero_premium_nll": -17.51256906585286
+    },
+    {
+      "seed": 1706,
+      "substeps": 16,
+      "nll": -3752.6004832488757,
+      "fitted_minus_zero_premium_nll": -18.433077697112367
+    },
+    {
+      "seed": 1704,
+      "substeps": 32,
+      "nll": -3785.484728454465,
+      "fitted_minus_zero_premium_nll": -54.30085382730658
+    },
+    {
+      "seed": 1705,
+      "substeps": 32,
+      "nll": -3745.3467856244283,
+      "fitted_minus_zero_premium_nll": 26.292123809247187
+    },
+    {
+      "seed": 1706,
+      "substeps": 32,
+      "nll": -3742.8789389531066,
+      "fitted_minus_zero_premium_nll": -12.148485037191222
+    }
+  ],
+  "predictive_mean": 405.5356779022785,
+  "predictive_mean_mc_se": 0.03788143109081998,
+  "predictive_quantiles": [
+    396.75511316978805,
+    399.9986360685393,
+    405.87187241759716,
+    411.841932664212,
+    414.9775444578747
+  ],
+  "target": 398.55,
+  "forecast_error": 6.985677902278496,
+  "no_change_error": 6.939999999999998,
+  "path_diagnostics": {
+    "seed": 2104,
+    "n_paths": 65536,
+    "steps_per_year": 11680,
+    "total_steps": 32,
+    "underlying_kind": "spot_or_etf",
+    "contract_expiry_time": null,
+    "variance_floor_fraction": 0.0,
+    "shared_origin_variance": 0.04660908069443903,
+    "shared_origin_q_intensity_functional": 0.30149068740373053,
+    "density_bound": {
+      "status": "RESTRICTED_CONTINUOUS_TIME_FINITE_HORIZON_BOUND",
+      "horizon_years": 0.0027378507871321013,
+      "kappa_p": 6.221869237169889,
+      "entropy_upper_bound": 0.04348869469488029,
+      "log_entropy_upper_bound": -3.135254266737013,
+      "brownian_entropy_coefficient": 311.31245299824576,
+      "jump_entropy_coefficient": 4.0857404074296895,
+      "requires_normal_marks_and_unmarked_linear_hawkes": true,
+      "empirical_or_discrete_likelihood_admission": false
+    },
+    "discretization": "full-truncation Euler variance; frozen-intensity Poisson jumps; right-endpoint excitation",
+    "corporate_or_predictive_admission": false
+  },
+  "limitations": [
+    "Conditional structural Q coefficients over the historical P training sample.",
+    "Parameter and option-state uncertainty not propagated.",
+    "A successful optimizer is not an identification or convergence certificate.",
+    "GLD forecast precedes gold basis, sales, FCFF and corporate valuation."
+  ]
+}

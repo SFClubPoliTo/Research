@@ -1,0 +1,126 @@
+{
+  "origin": "2026-07-13",
+  "target_date": "2026-07-14",
+  "status": "CONDITIONAL_TWO_STAGE_OOS_NOT_DCF_ADMITTED",
+  "training_returns": 1215,
+  "training_last": "2026-07-13",
+  "surface_rows": 64,
+  "source_sha256": "5387804a55969e457943367d3d28688b8874bef3f7f587b76400fa1076019c71",
+  "q_fit": {
+    "model": "Heston",
+    "parameter_names": [
+      "v0",
+      "kappa",
+      "theta",
+      "sigma",
+      "rho"
+    ],
+    "values": [
+      0.07423498932297823,
+      4.254472529386117,
+      0.061311516276972566,
+      0.7221814928239589,
+      -0.3072018136966261
+    ],
+    "objective": 3.192274059692214e-05,
+    "global_objective": 3.192274059692214e-05,
+    "success": true,
+    "message": "Optimization terminated successfully",
+    "evaluations": 6,
+    "iterations": 1,
+    "elapsed_seconds": 3.817225300008431,
+    "parameters": {
+      "v0": 0.07423498932297823,
+      "kappa": 4.254472529386117,
+      "theta": 0.061311516276972566,
+      "sigma": 0.7221814928239589,
+      "rho": -0.3072018136966261
+    }
+  },
+  "premia": [
+    3.541019662496844,
+    0.49140750902201047,
+    0.0,
+    0.0
+  ],
+  "p_optimizer_success": true,
+  "p_optimizer_message": "Optimization terminated successfully.",
+  "p_evaluations": 72,
+  "p_particles": 512,
+  "p_substeps": 16,
+  "independent_checks": [
+    {
+      "substeps": 16,
+      "seed": 1704,
+      "nll": -3770.4725317593698,
+      "fitted_minus_zero_premium_nll": 0.9123243807994186
+    },
+    {
+      "substeps": 16,
+      "seed": 1705,
+      "nll": -3770.9158599700336,
+      "fitted_minus_zero_premium_nll": -2.381928716607945
+    },
+    {
+      "substeps": 16,
+      "seed": 1706,
+      "nll": -3769.1188050799697,
+      "fitted_minus_zero_premium_nll": -2.294885074621561
+    },
+    {
+      "substeps": 32,
+      "seed": 1704,
+      "nll": -3771.546771430753,
+      "fitted_minus_zero_premium_nll": -3.7702357835551084
+    },
+    {
+      "substeps": 32,
+      "seed": 1705,
+      "nll": -3773.2478368866773,
+      "fitted_minus_zero_premium_nll": -4.635705620322369
+    },
+    {
+      "substeps": 32,
+      "seed": 1706,
+      "nll": -3771.4658854156833,
+      "fitted_minus_zero_premium_nll": -0.20981668149897814
+    }
+  ],
+  "predictive_mean": 367.4076493255934,
+  "predictive_mean_mc_se": 0.020467515563715146,
+  "predictive_quantiles": [
+    357.0023131873367,
+    360.67717188925445,
+    367.4173278042538,
+    374.1107211453817,
+    377.5924817890525
+  ],
+  "target": 372.15,
+  "forecast_error": -4.742350674406566,
+  "no_change_error": -5.019999999999982,
+  "coverage95": true,
+  "path_diagnostics": {
+    "seed": 2104,
+    "n_paths": 65536,
+    "steps_per_year": 11680,
+    "total_steps": 32,
+    "underlying_kind": "spot_or_etf",
+    "contract_expiry_time": null,
+    "variance_floor_fraction": 0.0,
+    "shared_origin_variance": 0.07423498932297823,
+    "shared_origin_q_intensity_functional": 0.0,
+    "density_bound": {
+      "status": "RESTRICTED_CONTINUOUS_TIME_FINITE_HORIZON_BOUND",
+      "horizon_years": 0.0027378507871321013,
+      "kappa_p": 6.954426049066412,
+      "entropy_upper_bound": 0.0020726283223289404,
+      "log_entropy_upper_bound": -6.178937756186931,
+      "brownian_entropy_coefficient": 10.148900340585742,
+      "jump_entropy_coefficient": 0.0,
+      "requires_normal_marks_and_unmarked_linear_hawkes": true,
+      "empirical_or_discrete_likelihood_admission": false
+    },
+    "discretization": "full-truncation Euler variance; frozen-intensity Poisson jumps; right-endpoint excitation",
+    "corporate_or_predictive_admission": false
+  }
+}

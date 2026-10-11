@@ -1,0 +1,192 @@
+{
+  "edition": "paper",
+  "archive_sha256": "86441c8d358002eeeee45f8bc6cf7edfd9470ac8493aeb445b5b7077bf075af2",
+  "file_count": 46,
+  "shared_images": 27,
+  "files": [
+    {
+      "path": "Articolo.pdf",
+      "sha256": "8176b8d9bcb44b86a59a0f30dc60edcdceb4a44d3c86673595728274bec1afa3"
+    },
+    {
+      "path": "Articolo.tex",
+      "sha256": "7c661f534b9d60b8dc9917b10f736fcc06b423453f6a346291256d5c4e736bca"
+    },
+    {
+      "path": "Copertina_research.pdf",
+      "sha256": "655e8b04a0c7e098d0d6b599186e0be658fb69c2fb5101ac20e5fa79ac7dc8a7"
+    },
+    {
+      "path": "img/19547bce5dddbce5_contact_linkedin.png",
+      "sha256": "19547bce5dddbce54d7b40ab01e625d359fabf5ee43561ebedcb7e94904b9c76"
+    },
+    {
+      "path": "img/1b73753c6ec5b836_online_welch_goyal_cumulative.png",
+      "sha256": "1b73753c6ec5b836b1530a0e4990b06f7e614a8103656e76193b71d95d9357af"
+    },
+    {
+      "path": "img/1ddc31b9d77b0ab4_team4_process_components_qoq.png",
+      "sha256": "1ddc31b9d77b0ab4af2cb886c93c598343f30cb64ac5f920aebfe34d9952cb08"
+    },
+    {
+      "path": "img/2010a278a2236376_bates_hawkes_residual_heatmap.png",
+      "sha256": "2010a278a223637665a2e11f0ee1275cabb660fd9333a251054be232978bc66f"
+    },
+    {
+      "path": "img/23df2023b1bd378f_fig_wacc_assumptions.png",
+      "sha256": "23df2023b1bd378fb988f75b661655217da95be38c69a57e44325c885ae4a0c7"
+    },
+    {
+      "path": "img/2f2a7cea66301ac9_fig_terminal_multiple.png",
+      "sha256": "2f2a7cea66301ac9e0c1ca5b1276ece792b49a539706614b802ffdf1b395e898"
+    },
+    {
+      "path": "img/31b19f2ba436aac3_contact_instagram.png",
+      "sha256": "31b19f2ba436aac3ed7ed9c090cb535a18b531fc6b5c74a00c55d28f94d9dc48"
+    },
+    {
+      "path": "img/385027198bc15712_contact_website.png",
+      "sha256": "385027198bc15712f9e7b54d7b4b424016bc6681b66840dad0a85d44cd0ce3cf"
+    },
+    {
+      "path": "img/498fa63273eb3ac5_sampling_nodes.png",
+      "sha256": "498fa63273eb3ac564a927b99834b9a682d099fdcd62bc659620f586406543b4"
+    },
+    {
+      "path": "img/50b961f87c5f443e_team4_mine_production_qoq.png",
+      "sha256": "50b961f87c5f443ec499b88d22590f7df10ce7a145b2bd5580dc5fd561dbb2f0"
+    },
+    {
+      "path": "img/572456d904007768_Logo_SFClub_Polito.png",
+      "sha256": "572456d9040077683067a830041c170b3a1c420db82eb0b319f0d31b9d42d80e"
+    },
+    {
+      "path": "img/6249da19d5f7cfbb_heston_residual_heatmap.png",
+      "sha256": "6249da19d5f7cfbb80b5c1c1bceb9375fdce202f7c8ee66da36f3864b25dc56b"
+    },
+    {
+      "path": "img/6c5ba226b4a1f62f_sampling_surface_current.png",
+      "sha256": "6c5ba226b4a1f62f2a01e13bc1c43b22ee293173552c5d679f27ee9213cb0395"
+    },
+    {
+      "path": "img/79d19491a73dad7e_contact_github.png",
+      "sha256": "79d19491a73dad7e69e8e2a8f27d6da08f4c051a92ddad1a1fc1213473045d7d"
+    },
+    {
+      "path": "img/7e856d08ef304414_black_scholes_residual_heatmap.png",
+      "sha256": "7e856d08ef304414e78fd92214171a35b2c007df81148148fe0e0f74b0c489e7"
+    },
+    {
+      "path": "img/8fedf2bb8bed3ca1_contact_email.png",
+      "sha256": "8fedf2bb8bed3ca19863dfa3e496bfdd385c44473d0ff46eb86683ad41417678"
+    },
+    {
+      "path": "img/925cb5fcc5b8400a_oos_rmse.png",
+      "sha256": "925cb5fcc5b8400a2b844bead13423777c29eff4e7e7d5fcb84c6dd2c16ccbe1"
+    },
+    {
+      "path": "img/938fcc0ee9ab77b8_fig_terminal_share.png",
+      "sha256": "938fcc0ee9ab77b8374e544a35ced8339a3a26f7a797481ab85e21dc22227f17"
+    },
+    {
+      "path": "img/96da53622b83c105_hawkes_intensity_comparison.png",
+      "sha256": "96da53622b83c105b024a6445bb9ea746b96d67d7f868179b6ab79fe2965da02"
+    },
+    {
+      "path": "img/a5190673372d95dd_team4_operating_contract.png",
+      "sha256": "a5190673372d95dd02d7a2e1cb6b791b1a5fa642d8f5c3885f0bb01a123e7290"
+    },
+    {
+      "path": "img/c781ab07f8781171_bates_residual_heatmap.png",
+      "sha256": "c781ab07f87811715742918471983475d9a37b18b7254f462e897723d7019dfd"
+    },
+    {
+      "path": "img/ccbd1218e069545e_fig_dcf_reinvestment.png",
+      "sha256": "ccbd1218e069545eae40f8a027b301efb9d028160e7d08732f280ec7a45de9da"
+    },
+    {
+      "path": "img/ce40d43c378d1fa2_team4_mine_cost_qoq.png",
+      "sha256": "ce40d43c378d1fa20bcd757aa0e9ed5908ea2af83c5a033ac3b9addf61f82294"
+    },
+    {
+      "path": "img/d8d1f86669e697e3_oos_r2.png",
+      "sha256": "d8d1f86669e697e376581c30dceb1a29a0963a6ba287f3e13be040334434d3cd"
+    },
+    {
+      "path": "img/e3fadd22107a54a6_fig_val_multi.png",
+      "sha256": "e3fadd22107a54a67f81071237225275608e520a0e6c965251634857b64143f4"
+    },
+    {
+      "path": "img/ed4f022292eacd31_fig_dcf_growth_roic.png",
+      "sha256": "ed4f022292eacd31fdace97e3065cf41025624349ff9f820ccf3da1b0d645028"
+    },
+    {
+      "path": "img/f8262e458f7545b1_fig_val_primary.png",
+      "sha256": "f8262e458f7545b1df4c4580a34db4784bc32690a7a1b8e5ee2de55664828ac0"
+    },
+    {
+      "path": "sections/01_introduction.tex",
+      "sha256": "e88513f7977db5d2102cbac9cc2ad360a9eb00caa13ca1b019039553af555b6e"
+    },
+    {
+      "path": "sections/02_data_assumptions.tex",
+      "sha256": "a268e9f0c94d7791cc8edc1f0f32d44d84006a53852c3735b2f689150352e902"
+    },
+    {
+      "path": "sections/03_methodology.tex",
+      "sha256": "3fde539f7b4d51c9ab320de9acd814c031742224e7662467663bc8d4f1d86165"
+    },
+    {
+      "path": "sections/03b_calibration_audit.tex",
+      "sha256": "e2962d103cafabf14439a5b1e5bfbd42df9beba62147a6c3998577f3a32d0c5e"
+    },
+    {
+      "path": "sections/03c_operating_evidence.tex",
+      "sha256": "55548e60ba6354403151bf842705bcecbcdffaf507beadbe1c50308431714da3"
+    },
+    {
+      "path": "sections/03d_valuation_audit.tex",
+      "sha256": "e7f9b92da7fd182b1d286b6764718d7ae4c232222a3a047c724d271268f082a5"
+    },
+    {
+      "path": "sections/03e_physical_measure.tex",
+      "sha256": "3a8b0a78ce737bfe967565b63d3a45775a2d2d2cbc34d1c44c08d69ff81ebdfc"
+    },
+    {
+      "path": "sections/04_results.tex",
+      "sha256": "db412e5b65162d299ae8c8b0c6150285409ace91bdf40b3e732683b7f455985b"
+    },
+    {
+      "path": "sections/04b_copper_extension.tex",
+      "sha256": "f1658394ed35a629a145f981a4a6eb8d7ea75769d7d0c814d635a6abf79aa755"
+    },
+    {
+      "path": "sections/05_robustness.tex",
+      "sha256": "58c7baaebada50c9aecd3cd2109c2e5185877dcd66cb590b6b7eea1292a67b0c"
+    },
+    {
+      "path": "sections/06_conclusion.tex",
+      "sha256": "b776060c0001f899157c38e89fd0423572dfc06167b1cd22bec6875e46236a57"
+    },
+    {
+      "path": "sections/07_references.tex",
+      "sha256": "85fbcdd3dcd16071bb506755047d200754d48c60b821fa3dc182e94b404f1e7f"
+    },
+    {
+      "path": "supplements/copper_technical_audit.pdf",
+      "sha256": "785539b59b5d943119236182c235c0b82fb07a14c2d318f26041c23eb01805bd"
+    },
+    {
+      "path": "supplements/copper_technical_audit.tex",
+      "sha256": "65f0afb17a9a22c4672a17a83845008e01c5dfbbdd7af4eea2e76ddb901bedd5"
+    },
+    {
+      "path": "supplements/technical_audit.pdf",
+      "sha256": "180176e935c1f58dbfec6fe5907b6416960585fd8140639b224007b41a58c9bd"
+    },
+    {
+      "path": "supplements/technical_audit.tex",
+      "sha256": "bfae11c33edfe02607b2afa1ec710f0e6b9c3a2f1ec843dbaefcf9a2cee88e27"
+    }
+  ]
+}

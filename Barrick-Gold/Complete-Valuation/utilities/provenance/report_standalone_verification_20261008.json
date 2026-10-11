@@ -1,0 +1,14 @@
+[
+  {
+    "edition": "unificato",
+    "standalone_compilation": true,
+    "text_identical": true,
+    "archive_sha256": "350869d1649006db28f9df7a7007daf5f7a40ed75cb0c3332d950756ecfc44e5"
+  },
+  {
+    "edition": "paper",
+    "standalone_compilation": true,
+    "text_identical": true,
+    "archive_sha256": "463c975ae14efbc0fdeff82346c19da263961644550b67b0dbb7b566ce75c06f"
+  }
+]

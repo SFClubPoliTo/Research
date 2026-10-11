@@ -1,0 +1,62 @@
+{
+  "status": "EXACT_RESTRICTED_FAMILY_BOUND_NOT_EMPIRICAL_ADMISSION",
+  "checks": [
+    {
+      "model": "bates",
+      "parameter_source": "outputs/physical_measure/20261006-fixed-q-candidates/bates.json",
+      "source_sha256": "d6e59a5eade251a6f11dec1612d63a05c83d246a87bb7a6867f899545831441a",
+      "status": "RESTRICTED_CONTINUOUS_TIME_FINITE_HORIZON_BOUND",
+      "horizon_years": 5.0,
+      "kappa_p": 6.705455691076736,
+      "entropy_upper_bound": 47.20858802064934,
+      "log_entropy_upper_bound": 3.854575825630719,
+      "brownian_entropy_coefficient": 12.65667733988467,
+      "jump_entropy_coefficient": 1.03020138112064,
+      "requires_normal_marks_and_unmarked_linear_hawkes": true,
+      "empirical_or_discrete_likelihood_admission": false
+    },
+    {
+      "model": "full_bates_hawkes",
+      "parameter_source": "outputs/physical_measure/20261006-fixed-q-candidates/full_bates_hawkes.json",
+      "source_sha256": "3005cab693072d7a4b972320403aba0b3907421f35da4e2a421ed1438667a369",
+      "status": "RESTRICTED_CONTINUOUS_TIME_FINITE_HORIZON_BOUND",
+      "horizon_years": 5.0,
+      "kappa_p": 4.234564512279817,
+      "entropy_upper_bound": 75766.64395269573,
+      "log_entropy_upper_bound": 11.235413421384038,
+      "brownian_entropy_coefficient": 3.7858945781804247,
+      "jump_entropy_coefficient": 0.05796163649014127,
+      "requires_normal_marks_and_unmarked_linear_hawkes": true,
+      "empirical_or_discrete_likelihood_admission": false
+    },
+    {
+      "model": "heston",
+      "parameter_source": "outputs/physical_measure/20261006-fixed-q-candidates/heston.json",
+      "source_sha256": "f65672e5cc84c256254ef3f3ca7ac1567fbfc3c8e918f047fd3923789b7eaa20",
+      "status": "RESTRICTED_CONTINUOUS_TIME_FINITE_HORIZON_BOUND",
+      "horizon_years": 5.0,
+      "kappa_p": 5.506344504814017,
+      "entropy_upper_bound": 15.65782365082087,
+      "log_entropy_upper_bound": 2.7509707058613637,
+      "brownian_entropy_coefficient": 4.303464758807796,
+      "jump_entropy_coefficient": 0.0,
+      "requires_normal_marks_and_unmarked_linear_hawkes": true,
+      "empirical_or_discrete_likelihood_admission": false
+    },
+    {
+      "model": "heston",
+      "parameter_source": "outputs/physical_measure/20261007-refit-resolution-heston/heston.json",
+      "source_sha256": "1a02db874e21ef1f5a5c0a625497473db0a8547101e5aa34672965eb0f93cbe7",
+      "status": "RESTRICTED_CONTINUOUS_TIME_FINITE_HORIZON_BOUND",
+      "horizon_years": 5.0,
+      "kappa_p": 4.84777898488362,
+      "entropy_upper_bound": 6.277878071150337,
+      "log_entropy_upper_bound": 1.8370320366240138,
+      "brownian_entropy_coefficient": 1.7254394762500327,
+      "jump_entropy_coefficient": 0.0,
+      "requires_normal_marks_and_unmarked_linear_hawkes": true,
+      "empirical_or_discrete_likelihood_admission": false
+    }
+  ],
+  "proof": "utilities/docs/RESTRICTED-JOINT-DENSITY.md"
+}

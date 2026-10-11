@@ -1,0 +1,492 @@
+\section{From option pricing to physical commodity forecasts}
+\label{sec:physical-measure-bridge}
+
+The option evidence above identifies a pricing layer. The operating chapters
+that follow require a different object: a distribution of future selling
+prices from which revenue can be forecast. This section places the change of
+measure at that interface, before production, costs and discounted cash flow.
+It applies to all four model families and to both commodities. It is not an
+editorial qualification appended to a completed corporate valuation.
+
+\chapterstatus{Research update of 6 October 2026, retaining the market cutoff
+of 2 September 2026. Historical inputs, restricted coefficient maps, initial
+physical estimates and numerical diagnostics have been implemented. A
+training-only physical GBM baseline has been scored at daily and quarterly
+horizons. Joint identification, numerical convergence of the richer models,
+commodity basis uncertainty and the corporate cash-flow bridge remain open.
+None of these diagnostics replaces the frozen scenario outputs with a
+validated corporate valuation.}
+
+\subsection{The economic object and the two probability measures}
+
+An option calibration estimates coefficients under a pricing measure
+$\mathbb Q$, conditional on the chosen model and market inputs. Expected
+realised commodity prices and revenue forecasts require the physical measure
+$\mathbb P$. An option-implied distribution alone does not identify expected
+physical returns, volatility risk premia or jump risk premia. Joint
+underlying and option evidence is therefore relevant to identification
+\cite{pan2002}. The model families themselves are not restricted to
+$\mathbb Q$: GBM, stochastic variance, Poisson jumps and Hawkes arrivals can
+be specified under $\mathbb P$. What cannot be assumed is that their fitted
+coefficients are identical under both measures.
+
+There are two coherent valuation routes. A corporate DCF forecasts physical
+cash flows and uses a discounting convention appropriate to their risk. A
+pricing approach values appropriately specified claims under a pricing
+measure and numeraire, or with a compatible stochastic discount factor.
+Using option-implied paths and subsequently applying WACC does not perform
+a change of measure. Nor does assigning independent stochastic WACC draws
+to physical paths automatically identify a valid pricing kernel. The
+cash-flow definition, risk adjustment and treatment of dependence must be
+reconciled in either route.
+
+The intended route here is physical commodity paths, realised selling-price
+basis, attributable sales volumes, revenue, reconciled FCFF and corporate
+discounting. Gold is required in USD per troy ounce and copper in USD per
+pound, with explicit conversion to the financial reporting scale. GLD shares,
+a copper futures delivery and Barrick's quarterly average realised selling
+price are distinct economic objects. Restarting the first at the level of
+the last does not resolve their differences.
+
+\subsection{A restricted coefficient map for all four families}
+
+The implemented starting specification preserves the same underlying and
+event support across measures. Write the uncompensated pricing dynamics as
+\begin{equation}
+\frac{\dd S_t}{S_{t^-}}=(a_t^{Q}-\lambda_t^{Q}k_Q)\dd t
+ +\sqrt{v_t}\dd W_t^{S,Q}+(e^J-1)\dd N_t,
+\qquad k_Q=\mathbb E^Q[e^J-1].
+\label{eq:pq-price-start}
+\end{equation}
+Here $a_t^Q$ is a supported carry specification; it is not WACC. For the
+usual ETF formulation it is $r_t-q_t$. A fixed-delivery futures formulation
+has zero pricing drift under deterministic rates; the slope across delivery
+dates is not its physical time-series drift. Commodity spot carry may also
+require storage costs and convenience yield \cite{schwartz1997}.
+
+Use the Brownian convention
+$\dd W_t^{S,Q}=\dd W_t^{S,P}+\eta_S\sqrt{v_t}\dd t$ and
+$\dd W_t^{v,Q}=\dd W_t^{v,P}+\eta_v\sqrt{v_t}\dd t$.
+For $|\rho|<1$, the two shifts are represented through the correlated
+Brownian covariance matrix; they are not independent Brownian drivers when
+$\rho\ne0$. Quadratic variation preserves $\xi$, $\rho$ and the diffusion
+coefficient on the same path. Substitution into CIR variance gives
+\begin{equation}
+\kappa_P=\kappa_Q-\xi\eta_v>0,\qquad
+\theta_P=\frac{\kappa_Q\theta_Q}{\kappa_P}.
+\label{eq:pq-variance-map}
+\end{equation}
+Thus $\kappa\theta$ is preserved in this restricted family. This is a
+consequence of the selected square-root shift, not a universal restriction
+on every possible stochastic-volatility measure change. The estimation
+parameterisation uses $\log(\kappa_P/\kappa_Q)$ to enforce positivity.
+
+For normally distributed log jump sizes, a separate positive intensity
+ratio $c_I$ and an exponential mark tilt $b_J$ specify
+\begin{align}
+\nu_P(\dd j)&=c_I\frac{e^{b_Jj}}{M_Q(b_J)}\nu_Q(\dd j),&
+ M_Q(b_J)&=e^{b_J\mu_{J,Q}+b_J^2\sigma_J^2/2},\\
+\lambda_t^P&=c_I\lambda_t^Q,&
+\mu_{J,P}&=\mu_{J,Q}+b_J\sigma_J^2.
+\label{eq:pq-jump-map}
+\end{align}
+The mark variance is unchanged under this tilt. Let
+$k_P=\exp(\mu_{J,P}+\sigma_J^2/2)-1$. The physical expected instantaneous
+price return, including jump compensation, is
+\begin{equation}
+\mu_t^P=a_t^Q+\eta_Sv_t+
+ \lambda_t^Q(c_Ik_P-k_Q).
+\label{eq:pq-total-drift}
+\end{equation}
+Changing only the diffusion drift while retaining an inconsistent jump
+compensator would give the wrong physical mean and hence the wrong expected
+revenue. Equivalently, the uncompensated physical drift is
+$a_t^Q+\eta_Sv_t-\lambda_t^Qk_Q$, with arrivals and marks generated under
+$\mathbb P$.
+
+For exponential Hawkes arrivals, $\lambda_t^Q$ denotes the pricing-intensity
+functional evaluated on the same realised counting history. Constant scaling
+then preserves the exponential form:
+\begin{equation}
+\lambda_{0,P}=c_I\lambda_{0,Q},\quad
+\bar\lambda_P=c_I\bar\lambda_Q,\quad
+\alpha_P=c_I\alpha_Q,\quad\beta_P=\beta_Q.
+\label{eq:pq-hawkes-map}
+\end{equation}
+Both branching ratios are constrained below one; in particular
+$c_I\alpha_Q/\beta_Q<1$. Stationarity and the algebra above do not, by
+themselves, prove that the candidate density is a true martingale over the
+required horizon. The finite-horizon argument below establishes the density for the stated
+restricted coefficient family. Initial-state consistency and empirical
+admission remain separate requirements.
+
+The Brownian part is checked separately using Novikov's sufficient condition.
+With $C=\left(\begin{smallmatrix}1&\rho\\\rho&1\end{smallmatrix}\right)$,
+set $\gamma=\tfrac12\eta^\top C^{-1}\eta$. The required CIR exponential
+moment has Riccati equation
+$B'=\gamma-\kappa_QB+\tfrac12\xi^2B^2$, $B(0)=0$.
+If $\kappa_Q^2-2\xi^2\gamma\geq0$, this moment has no finite positive-time
+explosion. Otherwise, with $d=\sqrt{2\xi^2\gamma-\kappa_Q^2}$, its explosion
+time is $2[\pi/2+\arctan(\kappa_Q/d)]/d$; the tested horizon must lie strictly
+below it. The three current conditional premium estimates pass the stronger
+non-explosion criterion, including the five-year horizon. This establishes
+the sufficient diffusion-density check for those coefficients; it does not
+establish shared filtered states, empirical identification or estimation
+convergence. The joint density requires the additional argument below.
+
+\paragraph{Finite-horizon joint density.}
+For the exact restricted family, the marked Girsanov formula
+\cite{schonbucher2001} can be combined with a localization and entropy
+argument. The need for a true density, rather than an algebraic intensity
+change, is emphasized by Sokol and Hansen \cite{sokol-hansen2015}; the
+following bounds are derived here for our specification. Assume finite
+constant coefficients, deterministic finite initial states, nonnegative CIR
+variance, unmarked linear Hawkes excitation, normal conditional marks and
+$c_I>0$. Let $Z$ be the product of the Brownian stochastic exponential and
+\begin{equation}
+ Z_t^{J}=\exp\!\left\{
+ \sum_{s\leq t}\left[\log c_I+b_JJ_s-b_J\mu_{J,Q}
+                   -\tfrac12b_J^2\sigma_J^2\right]
+ -(c_I-1)\int_0^t\lambda_s^Q\,\dd s\right\}.
+\label{eq:pq-jump-density}
+\end{equation}
+Continuous and jump density local martingales have zero mutual quadratic
+covariation; independence of their density factors is not required.
+Take localizing times $\tau_n$ bounding the states and event counts and let
+$\mathbb P_n$ have density $Z_{T\wedge\tau_n}$. With $\kappa_P>0$, dropping
+the negative CIR mean-reversion term gives
+$\mathbb E^{\mathbb P_n}[v_{t\wedge\tau_n}]
+ \leq v_0+\kappa_Q\theta_Qt$.
+Dropping the negative intensity decay term and applying Gronwall gives
+$\mathbb E^{\mathbb P_n}[\lambda^Q_{t\wedge\tau_n}]
+ \leq(\lambda_0^Q+\beta_Q\bar\lambda_QT)e^{c_I\alpha_Qt}$.
+Hence, uniformly in $n$,
+\begin{align}
+ B_v(T)&=v_0T+\tfrac12\kappa_Q\theta_QT^2,\\
+ B_\lambda(T)&=T(\lambda_0^Q+\beta_Q\bar\lambda_QT)e^{c_I\alpha_QT},\\
+ H_J&=c_I\log c_I-c_I+1+\tfrac12c_Ib_J^2\sigma_J^2,\\
+ \mathbb E^Q[Z_{T\wedge\tau_n}\log Z_{T\wedge\tau_n}]
+ &\leq\gamma B_v(T)+H_JB_\lambda(T)<\infty.
+\label{eq:pq-joint-entropy}
+\end{align}
+The jump term follows from conditional normal-mark entropy; it vanishes
+when there are no jumps. Uniform stopped-density entropy implies uniform
+integrability, so $\mathbb E^Q[Z_T]=1$. Nonexplosion, finite state integrals
+and a strictly positive tilt imply $Z_T>0$ almost surely. Thus the two laws
+are equivalent on every fixed finite horizon for this exact family.
+This does not assert uniform integrability as $T\to\infty$. Stationarity is
+an additional long-run restriction; a changed initial-state law,
+mark-dependent excitation or state-dependent tilt needs a separate argument.
+The executable entropy bound checks these coefficient conditions, not the
+accuracy of a discretized likelihood or the identification of a risk premium.
+
+GBM is the constant-variance, no-jump special case; Heston retains only the
+Brownian premia; Bates adds intensity and mark premia; Hawkes also requires
+the linked excitation dynamics. If a calibrated Bates model has exactly
+zero jump intensity, an equivalent measure cannot create jump events on a
+previously null event set. The current copper Bates fit has this boundary
+case. A physical jump requirement would therefore call for a separately
+versioned joint refit, not an arbitrary positive intensity inserted into the
+frozen fit. Very small jump marks can likewise make risk-premium estimates
+weakly identified even when the algebra is admissible.
+
+\subsection{Historical information, clocks and the commodity basis}
+
+The additional IB API history contains 1,253 GLD regular-session daily closes
+from 7 September 2021 to 2 September 2026. Its 168 overlapping observations
+match the existing Paper series exactly. Full-session closes were not
+interchangeable with that series and are kept separate. Daily underlying
+observations serve time-series estimation; the roughly 100-contract budget
+for a sparse option surface governs a different, cross-sectional sample.
+
+Gold midpoint hourly bars and the exchange-session schedule yield 1,003
+synchronous GLD--gold observations from 2 September 2022 to the cutoff,
+including nine early-closing sessions. Hourly timestamps denote bar starts;
+the selected bar ends at the reported equity-session close. The 250 GLD
+dates without a matched gold observation are excluded, not filled. The
+comparison remains one between a trade close and a midpoint from a different
+market, rather than a claim of identical executions.
+
+Let $B_t=\log(G_t/X_t)$, where $G_t$ is GLD in USD/share and $X_t$ is gold in
+USD/oz. A descriptive linear fit to $B_t$ has annual slope $-0.003958$ and
+residual standard deviation $0.000258$. These are empirical basis statistics,
+not an identification of management fees or a permanent structural law.
+An expanding-origin basis-only check gives relative conversion RMSE of
+$0.0276\%$, versus $0.0358\%$ for the preceding observed ratio, over 751
+targets. That check conditions on the target GLD price: it validates a
+conversion diagnostic, not an ex ante gold-price forecast. A stochastic basis
+model and its dependence on GLD would be needed to propagate basis risk fully.
+
+Copper histories were obtained for seven deliveries, September 2025 through
+December 2026. The requested December 2024 and March, May and July 2025
+deliveries were unavailable in the attempted retrievals. The available
+universe is therefore not a reconstruction of the historical front month.
+Neither thin far-delivery observations nor an undocumented continuous-contract
+adjustment are silently treated as spot history.
+
+The explicit return diagnostic selects the nearest available delivery with
+at least 100 contracts of volume and at least 30 calendar days to expiry,
+using origin information. It then computes the next observation's return
+from two prices of that same delivery. Missing or illiquid targets are
+excluded without selecting a different contract retrospectively. There are
+408 accepted returns from 14 November 2024 to 2 September 2026, 65 origin
+failures and 14 target-liquidity exclusions. These rotating-delivery returns
+avoid artificial rollover jumps but do not identify spot drift, convenience
+yield, collateral returns or a five-year realised selling-price curve.
+
+\subsection{Estimation and numerical evidence}
+
+For GBM, actual calendar gaps enter the likelihood. If $x_j$ is a log return
+over $h_j$ years, the constant log drift estimate is
+$\widehat a=\sum_jx_j/\sum_jh_j$, and the arithmetic drift is
+$\widehat\mu_P=\widehat a+\widehat\sigma^2/2$. On the five-year GLD sample,
+the historical diffusion estimate is $20.87\%$ and arithmetic drift
+$19.75\%$ annually. Holding the current option-implied diffusion at
+$25.09\%$ gives drift $20.72\%$, with a model-conditional approximate
+95\% interval from $-1.30\%$ to $42.74\%$. This wide interval matters for
+multi-year revenues. The fixed-current-$Q$ estimate is in-sample and is not
+used to score historical forecasts.
+
+The richer preliminary fits hold the current audited Paper pricing
+coefficients fixed and estimate the restricted physical premia against
+historical GLD returns with a particle likelihood. They are exploratory
+conditional fits, not jointly estimated historical $P/Q$ systems. In
+particular, imposing today's pricing coefficients throughout a past sample
+cannot support an origin-only OOS claim. The filtered physical terminal
+variance and option-implied current variance must also be reconciled as
+information about the same latent state.
+
+The numerical implementation integrates latent variance and jump intensity
+over substeps and weights the aggregate observed daily return. It does not
+invent intraday equity observations. Independent price Brownian increments
+are integrated out conditionally; state particles are resampled after each
+observed return. Gaussian-limit, jump-support and coefficient-map checks
+pass, but those identities are distinct from convergence of the estimated
+parameters.
+
+Refinement at 4,096 particles and three seeds changes likelihood levels:
+mean negative log likelihood moves approximately from $-3874.56$ to
+$-3876.82$ for Heston, from $-3875.82$ to $-3877.13$ for Bates, and from
+$-3878.72$ to $-3881.11$ for Hawkes when moving from one to eight substeps
+per observation. Parameters are held fixed during this check. Remaining
+simulation variation and discretisation sensitivity prevent these likelihoods
+from establishing a reliable model ranking. Parameter refitting at a
+converged resolution, multiple starts, identification checks and uncertainty
+assessment remain necessary; optimizer success alone does not satisfy them.
+Further checks at 16 and 32 substeps leave seed variation: at 32 substeps
+the three-seed means are approximately $-3877.65$, $-3877.41$ and
+$-3880.66$, respectively. Heston and Bates even reverse their mean ordering
+relative to the one-step diagnostic. This refinement does not establish
+convergence of a refitted estimator or an OOS advantage for Hawkes.
+
+\subsection{Three validation targets and the first physical baseline}
+
+Option repricing, physical commodity prediction and operating prediction
+answer different questions. The existing option test evaluates pricing
+functions under $\mathbb Q$, conditional on target forwards and rates;
+the observed evolution of the surface itself occurs under $\mathbb P$.
+The new commodity test forecasts future prices using only origin information.
+Barrick's operating test compares production, sales, costs and cash flows
+with later reports. A comparison with Barrick's stock quote is not an
+observed intrinsic-value target.
+
+The first gold physical baseline estimates GBM from historical prices alone.
+At each origin it separately fits the GLD--gold log-ratio trend and forecasts
+the target gold price without using target GLD. It is a physical benchmark
+within the GBM family, not a joint calibration to historical options. Direct
+gold GBM and a no-change conditional mean, with historically estimated gold
+volatility, provide comparators. Each fit uses only available origin history.
+The basis requires at least 253 training prices; the GLD volatility history
+is longer, so the variants differ in both input history and basis treatment.
+
+\begin{table}[H]
+\centering\small
+\caption{Training-only physical gold baselines, cutoff 2 September 2026.
+RMSE is in USD/oz; coverage is realised coverage of nominal 95\% plug-in
+intervals. Quarterly forecasts overlap.}
+\label{tab:physical-gold-baseline}
+\begin{tabularx}{\textwidth}{@{}Xrrrr@{}}
+\toprule
+ & \multicolumn{2}{c}{Next session: 750 targets}
+ & \multicolumn{2}{c}{90 days: 689 targets}\\
+Model & RMSE & Coverage & RMSE & Coverage\\
+\midrule
+GLD GBM plus basis trend & 53.82 & 89.3\% & 417.19 & 89.6\%\\
+Direct gold GBM & 53.77 & 90.0\% & 421.17 & 92.6\%\\
+Gold no-change mean & 53.86 & 89.7\% & 428.52 & 82.4\%\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Quarterly targets are the first observed session at or after 90 calendar
+days. They are not 689 independent experiments. The GLD/basis variant has
+slightly lower quarterly RMSE but worse absolute error and average log score
+than direct gold GBM; there is no unanimous ranking. All reported 95\%
+coverages fall below their nominal level. Parameter uncertainty and stochastic
+basis uncertainty are omitted from these plug-in intervals. The results
+therefore establish an executable physical evaluation, not adequate long-run
+distribution calibration or superiority of the option-calibrated engines.
+
+For the richer models, every historical origin must use the pricing
+calibration and underlying history available at that origin, with latent-state
+filtering and physical premium estimation completed before the target is
+observed. Daily distribution scores, interval coverage and quarterly price
+errors must remain separate from option IV errors. Reusing a September
+calibration to forecast earlier dates would violate this design.
+
+Thirty historical surfaces have now been recovered from the observed fields
+of the frozen rolling panel, each with 64 contracts across at least three
+expiries. The recovery excludes prior model predictions and support-selection
+flags; all dated spot levels agree with independently acquired GLD regular-session
+closes. These are observed legacy option-price fields, not asserted transaction
+prices. Recovering the observations does not recover historical model parameters:
+each origin still requires its own calibration. The window supports short-horizon
+experiments, but no 90-day target after the first July origin lies within the
+2 September market freeze.
+
+Joint maximum likelihood is not a mathematical requirement of changing measure.
+A conditional two-stage estimator can calibrate structural pricing coefficients
+on origin-date options and then estimate physical premia from returns available
+by that origin, holding those coefficients fixed. This imposes their constancy
+over the estimation history and must not be described as joint maximum likelihood.
+The forward simulation conditions on the option-estimated current variance,
+shared under both measures; the historical return filter starts from its stated
+physical long-run mean. Its terminal estimate provides a separate diagnostic,
+not an automatic replacement for the option state. Parameter and state-estimation
+uncertainty from both stages must be assessed before interpreting plug-in
+intervals as unconditional predictive coverage.
+
+The completed conditional GBM experiment has 29 next-session targets, from
+10 July--1 September origins. Each origin has a new option-volatility fit;
+the physical log drift is estimated from returns available by that origin.
+Exact lognormal prediction gives RMSE of USD~6.119 per GLD share against
+USD~6.117 for the no-change mean. Twenty-seven of the 29 nominal 95\%
+intervals cover the observed price. This short sample supplies no RMSE
+advantage, and it does not establish long-horizon calibration. These GLD
+errors are distinct from the USD/oz errors of the longer historical-only
+gold benchmark above. The richer-model origin experiment must additionally
+resolve particle and time-discretisation sensitivity.
+
+The Heston panel has subsequently completed the same 29 forecast origins.
+Its GLD RMSE is USD~6.157 per share, against 6.119 for conditional GBM and
+6.117 for no-change. Two physical optimisations exhaust their evaluation
+budget; their forecasts remain in the comparison rather than being removed
+after observing the errors. Applying the origin-fitted deterministic gold
+basis to both models gives RMSE of USD~66.77/oz for Heston and 66.35/oz for
+GBM, against 66.09/oz for gold no-change. Both nominal 95\% intervals cover
+27 of 29 gold targets. These matched-sample results establish no RMSE
+advantage, and do not certify parameter identification or long-horizon
+distributional accuracy.
+
+The Bates and Bates--Hawkes panels subsequently completed all 29 matched
+origins, including the separately saved 10 July pilot. The common targets
+and the origin-only gold conversion exclude no observations from any model.
+Table~\ref{tab:physical-four-family-complete} supersedes the single-origin
+comparison as the descriptive panel result. Bates--Hawkes has a slightly
+lower RMSE than no-change on both scales; this short sample does not
+establish statistical superiority or long-horizon accuracy. Its gold MAE
+is USD~51.98/oz, whereas Bates has USD~51.46/oz, so the apparent ranking
+also depends on the loss function.
+
+\begin{table}[H]
+\centering\small
+\caption{Completed conditional physical experiment: 29 common next-session
+targets, 13 July--2 September 2026. Gold conversion uses an origin-estimated
+deterministic basis; parameter and basis uncertainty are omitted.}
+\label{tab:physical-four-family-complete}
+\begin{tabular}{lrrcc}
+\toprule
+Model & GLD RMSE & Gold RMSE & Gold 95\% & Gold 80\%\\
+ & USD/share & USD/oz & coverage & coverage\\
+\midrule
+GBM & 6.119 & 66.35 & 27/29 & 21/29\\
+Heston & 6.157 & 66.77 & 27/29 & 20/29\\
+Bates & 6.162 & 66.84 & 25/29 & 17/29\\
+Bates--Hawkes & 6.072 & 65.81 & 25/29 & 16/29\\
+No-change mean & 6.117 & 66.09 & --- & ---\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Numerical reliability and chronological initialization.}
+Two Heston physical optimizations (24 July and 20 August) and one
+Bates--Hawkes optimization (19 August) report failure; their forecasts
+remain included. Across three independent seeds at each of two time grids,
+the fitted physical premia improve on zero premia in every check at only
+10/29 Heston, 6/29 Bates and 9/29 Bates--Hawkes origins. The maximum
+within-grid negative-log-likelihood spread across seeds is approximately
+6.08, 455.38 and 402.10 respectively. These are numerical diagnostics,
+not confidence intervals: optimizer termination does not certify a stable
+likelihood estimate or identified premia.
+
+The resumed computation initializes from the latest successful strictly
+earlier origin, then refits on the current origin's information. Heston
+and Bates first try constrained local refinement with global fallback;
+Bates--Hawkes also retains a current-origin nested Bates candidate. The
+physical stage compares earlier premia with zero premia on the current
+training likelihood before choosing its start. Saved artifacts record
+the source date and hash. Existing cold-start results are preserved, so
+this completed panel has a documented mixture of initialization policies;
+it is not a uniform warm-start experiment. A same-surface numerical check
+found different local minima for Heston and Bates, which prevents claiming
+that the faster initialization reproduces the original global optimum.
+The artifact audit verifies 58 pricing-to-physical hash links and 49
+strictly backward initialization links. Those checks establish provenance,
+not numerical convergence. The aggregate freezes are
+\texttt{20261011-four-model-complete} and
+\texttt{20261011-four-model-gold-complete}.
+
+The original 10 July pilot, trained on 1,214 GLD returns and forecasting
+13 July, is included in the panel. Its gold absolute errors were
+USD~114.04, 119.31, 131.91 and 105.07 per ounce for GBM, Heston, Bates
+and Bates--Hawkes respectively,
+against 106.45 for no-change. Conversion fits the log GLD/gold ratio only
+through each origin and multiplies the forecast mean and quantiles by the
+predicted factor, without using the target GLD price. The gold no-change
+benchmark uses the actual origin gold price. Gold midpoints remain distinct
+from Barrick's realised selling prices.
+
+\paragraph{Analytical integration of normal marks.}
+An optional filter variant integrates jump amplitudes analytically. Given
+the simulated variance path and event counts, a total of $N$ independent
+normal marks contributes mean $N\mu_{J,P}$ and variance $N\sigma_J^2$ to
+the conditional daily-return density. This is valid for the implemented
+nonmark-dependent intensity and variance dynamics. Event counts and
+variance paths remain sampled; the frozen panel above retains its original
+filter. The new variant matches the one-step compound-Poisson normal-mixture
+reference and leaves the zero-jump filter unchanged.
+
+A targeted check uses 24 July, selected separately for each jump family
+because it has the largest saved within-grid seed spread. Holding premia
+fixed, analytical marks reduce the maximum spread across the two tested
+grids from 455.38 to 152.97 for Bates and from 402.10 to 139.39 for Hawkes.
+Substantial sensitivity remains, including a larger Hawkes spread at the
+finer grid. This is a numerical stress check, not a refit, new OOS evidence
+or a convergence certificate; it identifies further particle/count
+integration work before relying on long-horizon physical distributions.
+
+\subsection{Consequences for the operating and valuation layers}
+
+The required revenue input is $\mathbb E^P[P_t^{\rm realised}Q_t^{\rm sold}]$
+on the admitted ownership basis. It reduces to a deterministic sales volume
+times the expected realised price only under that operating simplification;
+with stochastic sales, dependence matters. Royalties, price-linked taxes,
+inventory timing and realised-price basis also belong in the operating
+transformation. Depreciation inside Cost of Sales must be reconciled with
+cash capital expenditure and the EBIT-to-FCFF bridge.
+
+Instrument identity and the valuation clock impose further restrictions. A
+fixed-delivery copper future cannot be continued beyond expiry as a five-year
+spot process: rotating-delivery returns alone do not identify that extension.
+A copper term-structure and realised-price basis are required. Likewise, a
+2 September valuation excludes already elapsed first- and second-quarter cash
+flows from future enterprise value. The remaining third-quarter stub, later
+quarters and balance-sheet claims must use a consistent valuation date.
+
+The frozen option-shape scenario law remains a separate experiment. None of
+its valuation quantiles is retroactively relabelled physical because a
+coefficient map or a preliminary estimate now exists. A replacement requires
+admissible and identified physical models, origin-only validation, uncertainty
+propagation, compatible discounting and reconciled corporate inputs. The
+following chapters supply the operating quantities and expose the additional
+accounting conditions that must hold before that replacement can be made.

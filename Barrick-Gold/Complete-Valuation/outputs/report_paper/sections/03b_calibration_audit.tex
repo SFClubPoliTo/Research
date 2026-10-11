@@ -1,0 +1,67 @@
+\section{Calibration Sample Audit}
+
+\noindent\begin{minipage}{\columnwidth}
+{\centering
+  \includegraphics[width=\columnwidth]{../img/publication/6c5ba226b4a1f62f_sampling_surface_current.png}
+  \captionof{figure}{(a) GLD implied-volatility surface, 2 September 2026, with CC64 nodes. Interpolation is used for display only.}
+  \label{fig:chebyshev_audit}
+\par}
+\end{minipage}\par
+
+\noindent\begin{minipage}{\columnwidth}
+{\centering
+  \includegraphics[width=0.95\columnwidth]{../img/publication/498fa63273eb3ac5_sampling_nodes.png}
+  \captionof*{figure}{\textbf{Figure~\ref{fig:chebyshev_audit} (continued).} (b) The 64 actual contracts selected from 605 eligible calls across 12 expiries and 146 strikes.}
+\par}
+\end{minipage}\par
+
+\subsection{Why structured sampling is retained}
+The option surface is irregular in strike and maturity. Team 8 therefore passes a fixed $8\times8$ Chebyshev--Chebyshev subset to the optimizer rather than allowing densely listed regions to dominate the loss. Every target is mapped to the nearest still-unused actual option: the 64-point calibration set contains no synthetic contracts. The figure audits the same 2 September parameter snapshot used by the refreshed valuation.
+
+\begin{methodbox}[Evidence status]
+The calibrated inputs, residual maps and valuation paths share the same 2 September Team 8 parameter set. The U.S. Treasury curve is dated 2 September as well; the separate Q2 realized-gold level anchor remains explicit in the valuation contract.
+\end{methodbox}
+
+\subsection{What the residual maps add}
+The residual heatmaps show where each specification systematically over- or under-prices the observed implied-volatility surface. Black--Scholes leaves the strongest smile and term-structure pattern. Table~\ref{tab:iv_rmse} compares current-surface fit; Audited Bates and Hawkes fits improve on the nested starts. Hawkes branching is 0.5594. All maps use one colour scale; calibration fit does not establish economic superiority.
+
+
+\noindent\begin{minipage}{\columnwidth}
+{\centering
+  \includegraphics[width=0.95\linewidth]{../img/publication/7e856d08ef304414_black_scholes_residual_heatmap.png}
+  \par\vspace{1pt}{\footnotesize\textbf{(a)} Black--Scholes\par}
+  \vspace{3pt}
+  \includegraphics[width=0.95\linewidth]{../img/publication/6249da19d5f7cfbb_heston_residual_heatmap.png}
+  \par\vspace{1pt}{\footnotesize\textbf{(b)} Heston\par}
+  \captionof{figure}{Implied-volatility residual maps for the common 2 September CC64 sample. Blue denotes model IV above market IV and red denotes model IV below market; the audited fits retain feasible nested candidates.}
+  \label{fig:residual_maps}
+\par}
+\end{minipage}\par
+
+\vspace{4pt}
+\noindent\begin{minipage}{\columnwidth}
+{\centering
+  \includegraphics[width=0.95\linewidth]{../img/publication/c781ab07f8781171_bates_residual_heatmap.png}
+  \par\vspace{1pt}{\footnotesize\textbf{(c)} Bates--Poisson\par}
+  \vspace{3pt}
+  \includegraphics[width=0.95\linewidth]{../img/publication/2010a278a2236376_bates_hawkes_residual_heatmap.png}
+  \par\vspace{1pt}{\footnotesize\textbf{(d)} Full Bates--Hawkes\par}
+  \captionof*{figure}{\textbf{Figure~\ref{fig:residual_maps} (continued).} Bates--Poisson and Full Bates--Hawkes residual maps; all colourbars share the same residual range.}
+\par}
+\end{minipage}\par
+
+\begin{table}[H]
+\centering
+\caption{Current-surface IV calibration RMSE.}
+\label{tab:iv_rmse}
+\begin{tabular}{@{}lr@{}}
+\toprule
+Model & RMSE (bp) \\
+\midrule
+Black--Scholes & 97.2107 \\
+Heston & 49.4881 \\
+Bates--Poisson & 49.4077 \\
+Full Bates--Hawkes & 49.3258 \\
+\bottomrule
+\end{tabular}
+\end{table}

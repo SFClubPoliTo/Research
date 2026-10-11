@@ -1,0 +1,42 @@
+{
+  "status": "SAVED_LINKS_AND_CHRONOLOGY_VERIFIED_NOT_CONVERGENCE_CERTIFICATE",
+  "summary_sha256": "ac56501b8a4a48df67d9f56af628a01a4224e2a12f206ec7bc7a6b8a28375cb5",
+  "source_code_sha256": "1cd75798e6556be09ac7b924847b148bdc6aa5958ce6cc92d751e4a587a9cc2d",
+  "q_links_verified": 58,
+  "warm_links_verified": 49,
+  "models": {
+    "heston": {
+      "origins": 29,
+      "optimizer_failures": [
+        "2026-07-24",
+        "2026-08-20"
+      ],
+      "recorded_warm_initializations": 0,
+      "origins_all_independent_losses_improve": 10,
+      "origins_mixed_or_no_improvement": 19,
+      "within_grid_seed_nll_spread_median": 2.2298924937824722,
+      "within_grid_seed_nll_spread_max": 6.077029261528878
+    },
+    "bates": {
+      "origins": 29,
+      "optimizer_failures": [],
+      "recorded_warm_initializations": 16,
+      "origins_all_independent_losses_improve": 6,
+      "origins_mixed_or_no_improvement": 23,
+      "within_grid_seed_nll_spread_median": 4.962465028996348,
+      "within_grid_seed_nll_spread_max": 455.3797863773375
+    },
+    "full_bates_hawkes": {
+      "origins": 29,
+      "optimizer_failures": [
+        "2026-08-19"
+      ],
+      "recorded_warm_initializations": 27,
+      "origins_all_independent_losses_improve": 9,
+      "origins_mixed_or_no_improvement": 20,
+      "within_grid_seed_nll_spread_median": 9.443575957164512,
+      "within_grid_seed_nll_spread_max": 402.1043662417537
+    }
+  },
+  "note": "Seed spreads are numerical diagnostics, not confidence intervals or uncertainty propagation."
+}

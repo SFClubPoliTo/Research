@@ -1,0 +1,27 @@
+{
+  "status": "FIXED_DELIVERY_HISTORY_AUDIT_NOT_P_FIT_OR_DCF",
+  "cutoff": "2026-09-02",
+  "contract": "HGZ6",
+  "conId": 517660690,
+  "expiry": "20261229",
+  "original_rows": 764,
+  "rows_after_cutoff_excluded": 1,
+  "historical_rows": 763,
+  "zero_volume_rows": 422,
+  "minimum_volume": 100,
+  "eligible_prices": 148,
+  "eligible_adjacent_return_pairs": 128,
+  "observed_pair_years": 0.5229295003422314,
+  "longest_eligible_observation_run": 101,
+  "first_eligible": "2025-03-19",
+  "last_eligible": "2026-09-02",
+  "raw_sha256": "096dd585653839789d8aa4d64e2fc15fc96ab22af3e37123ae6a2c84046fc591",
+  "source_code_sha256": "efe720bc39f14f0ac01877d95e798ecd44a3ae748baa43c59bd4d397cfd6ce99",
+  "limitations": [
+    "Daily futures closes may be settlement prices, not synchronized option snapshot prices.",
+    "Target liquidity filtering creates selected observed-return support; exclusions must be retained.",
+    "Gaps require latent-state propagation rather than treating accepted pairs as consecutive observations.",
+    "A fixed delivery expires in 2026 and does not identify a five-year spot or rolling-delivery law.",
+    "Rotating delivery histories cannot be substituted silently for this contract."
+  ]
+}

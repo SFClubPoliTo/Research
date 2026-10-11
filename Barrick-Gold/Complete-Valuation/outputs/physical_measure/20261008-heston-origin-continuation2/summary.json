@@ -1,0 +1,37 @@
+{
+  "status": "CONDITIONAL_TWO_STAGE_OOS_NOT_DCF_ADMITTED",
+  "origins_requested": [
+    "2026-07-24",
+    "2026-07-27",
+    "2026-07-28",
+    "2026-07-29",
+    "2026-07-30",
+    "2026-07-31",
+    "2026-08-03",
+    "2026-08-04",
+    "2026-08-05",
+    "2026-08-06",
+    "2026-08-12",
+    "2026-08-17",
+    "2026-08-19",
+    "2026-08-20",
+    "2026-08-21",
+    "2026-08-24",
+    "2026-08-28",
+    "2026-08-31",
+    "2026-09-01"
+  ],
+  "targets": 19,
+  "source_code_sha256": "be5efe1f68cb83f85d7faa643831c34cc97a45d1706b49e96b8d078ee2c5b6cc",
+  "rmse": 6.310312769062709,
+  "no_change_rmse": 6.35267742973904,
+  "limitations": [
+    "Conditional two-stage estimation, not joint maximum likelihood.",
+    "Options condition the initial forecast variance; historical filter starts at theta_P.",
+    "Constant structural Q coefficients imposed over each origin training history.",
+    "Parameter and option-state estimation uncertainty are not propagated.",
+    "Single forecast simulation resolution; independent likelihood refinement reported.",
+    "GLD USD/share forecasts, not physical gold selling prices or FCFF.",
+    "Observed legacy option prices are not asserted to be transaction prices."
+  ]
+}

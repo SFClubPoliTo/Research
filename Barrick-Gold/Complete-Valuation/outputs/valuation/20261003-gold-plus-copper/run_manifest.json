@@ -1,0 +1,115 @@
+{
+  "status": "CONDITIONAL_OPERATING_VALUE_PROXY_NOT_CORPORATE_FAIR_VALUE",
+  "market_snapshot": "2026-09-02T20:00:00Z",
+  "generated_at_utc": "2026-10-03T12:16:43.218353+00:00",
+  "copper_calibration_dir": "data\\processed\\copper\\calibration_20260902_spaced",
+  "calibration_manifest_sha256": "FC0704F33507274B463D693D7FFEAFBCF92C0CE4B17662EE5730F44288C38A5E",
+  "copper_operating_config_sha256": "C6B320504368EE1852FFA03EEDBB569D42D4D544B0D73FC0B8A5558DF97E7827",
+  "gold_experiment_config_sha256": "93AB9FF5778508E9E6863EC20FEDFF45B11557DC0721F5E8776ADD8969B86845",
+  "paths": 8192,
+  "copper_price_seed": 20262003,
+  "dependence_seed": 20263003,
+  "primary_horizon": "Five years, no terminal value",
+  "sensitivity_terminal": "Signed perpetuity using inherited growth/ROIC/WACC assumptions",
+  "copper_curve": {
+    "start_usd_per_lb": 6.608750000000001,
+    "last_observed_maturity_years": 0.7255304585900069,
+    "construction": "log-linear matched-HG forward anchors; last level held flat beyond observed support",
+    "spot_forecast": false
+  },
+  "dependence": "rho=0 independent; +/-0.5 terminal Gaussian-score copula sensitivities, whole-path permutation preserving copper marginal paths; no estimated Brownian correlation",
+  "ops": {
+    "status": "CONDITIONAL_ATTRIBUTABLE_COPPER_COMPONENT_MARGIN_SCENARIO",
+    "source_period": "2026Q2",
+    "source_url": "https://s25.q4cdn.com/322814910/files/doc_financial/quarterly_results/2026/q2/Barrick_Q2_2026_Mine_Stats.pdf",
+    "source_sha256": "967251969C528C1898045302533B7F46BBABB34D0654DCCEBCAD0789A87BD63A",
+    "source_table": "Mine Statistics (Copper), three months ended June 30, physical page 8",
+    "volume_basis": "ALREADY_BARRICK_ATTRIBUTABLE; ownership retained as metadata, not multiplied again",
+    "horizon_quarters": 20,
+    "projection": "Freeze Q2 sales and unit CoS at each mine for all forward quarters; explicit scenario assumption, not a mine forecast or company guidance",
+    "mines": [
+      {
+        "mine": "Lumwana",
+        "ownership": 1.0,
+        "production_kt": 41,
+        "sales_kt": 40,
+        "cost_of_sales_usd_per_lb": 3.14,
+        "depreciation_usd_per_lb": 0.8,
+        "sustaining_capex_usd_mn": 87,
+        "project_capex_usd_mn": 146,
+        "total_capex_usd_mn": 242
+      },
+      {
+        "mine": "Zaldivar",
+        "ownership": 0.5,
+        "production_kt": 9,
+        "sales_kt": 9,
+        "cost_of_sales_usd_per_lb": 4.89,
+        "depreciation_usd_per_lb": 1.12,
+        "sustaining_capex_usd_mn": 30,
+        "project_capex_usd_mn": 23,
+        "total_capex_usd_mn": 53
+      },
+      {
+        "mine": "Jabal Sayid",
+        "ownership": 0.5,
+        "production_kt": 6,
+        "sales_kt": 5,
+        "cost_of_sales_usd_per_lb": 2.63,
+        "depreciation_usd_per_lb": 0.65,
+        "sustaining_capex_usd_mn": 2,
+        "project_capex_usd_mn": 2,
+        "total_capex_usd_mn": 4
+      }
+    ],
+    "company_totals": {
+      "production_kt": 56,
+      "sales_kt": 54,
+      "revenue_usd_mn": 697,
+      "cost_of_sales_usd_per_lb": 3.39,
+      "total_capex_usd_mn": 299
+    },
+    "rounding_note": "Mine unit costs and kt volumes are rounded source values; weighted mine CoS need not equal reported total exactly. Capex components do not sum exactly to total because total includes other capitalized amounts.",
+    "cash_flow_scope": "CoS margin added before the common methodological tax/growth/ROIC transform; NOT reconciled EBITDA/FCFF. Capex and depreciation are source facts, not additional deductions in this margin experiment.",
+    "excluded_growth_projects": [
+      "Lumwana Super Pit expansion incremental production and investment plan",
+      "Reko Diq",
+      "Norte Abierto"
+    ],
+    "terminal_policy_primary": "none",
+    "limitations": [
+      "Copper realized-price vs COMEX basis not estimated",
+      "Gold/copper dependence assumed independent, not estimated",
+      "Q/P bridge remains unvalidated",
+      "No full corporate equity bridge or per-share fair value",
+      "Mine reserves and closure obligations not modeled",
+      "Frozen gold operating-vector chronology inherited from baseline and not reforecast here"
+    ]
+  },
+  "american_approximation": {
+    "method": "600-step constant-volatility CRR futures IV, then equivalent Black-76 European bid/ask/mid",
+    "exact_for_stochastic_volatility_and_jumps": false,
+    "max_abs_adjustment_usd_per_lb": 0.003636218080661058,
+    "max_300_600_iv_difference_bp": 3.428912598554823,
+    "note": "Tree discretization comparison; not an error bound on stochastic-model early exercise."
+  },
+  "gold_baseline_preservation": "Frozen parameters and common gold/WACC paths; compare the same terminal policy and aggregate pathwise before percentiles",
+  "limitations": [
+    "Copper realized-price vs COMEX basis not estimated",
+    "Gold/copper dependence assumed independent, not estimated",
+    "Q/P bridge remains unvalidated",
+    "No full corporate equity bridge or per-share fair value",
+    "Mine reserves and closure obligations not modeled",
+    "Frozen gold operating-vector chronology inherited from baseline and not reforecast here",
+    "European stochastic models fitted to constant-volatility American-equivalent quotes",
+    "Reserved-strike validation is not temporal OOS",
+    "Tax/growth/ROIC margin transform is not reconciled copper cash flow"
+  ],
+  "files": {
+    "copper_forward_anchor.csv": "D2B4C7503222BC3C1BE938A8A56E61955BD29C09345A5E30DA3F56B561B29C38",
+    "copper_mine_quarter_scenarios.csv": "BED0FE1F69DC7AFAF202E8F6B75A1CF0E32342C30CE29AD73731994B50DC1398",
+    "gold_plus_copper_comparison.png": "FE139BD510CAFF713A6DEE0092D743E76C777338F49171D808114D36579446A3",
+    "gold_plus_copper_quantiles.csv": "693B4B63C8B2ADE3CAEE25F46280CEA2C9C3D10AA05A68ECB84C8133CF8F3016",
+    "gold_plus_copper_summary.csv": "5971ABF10CDA97B9FC94F0CE5F145AF4EF4720ECE23F7B043D6D84AB11148566"
+  }
+}

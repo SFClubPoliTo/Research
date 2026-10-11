@@ -1,0 +1,282 @@
+{
+  "status": "ORIGIN_PHYSICAL_GOLD_BASIS_DIAGNOSTIC_NOT_DCF_ADMITTED",
+  "common_targets": 29,
+  "common_pairs": [
+    [
+      "2026-07-10",
+      "2026-07-13"
+    ],
+    [
+      "2026-07-13",
+      "2026-07-14"
+    ],
+    [
+      "2026-07-14",
+      "2026-07-15"
+    ],
+    [
+      "2026-07-15",
+      "2026-07-16"
+    ],
+    [
+      "2026-07-16",
+      "2026-07-17"
+    ],
+    [
+      "2026-07-17",
+      "2026-07-20"
+    ],
+    [
+      "2026-07-20",
+      "2026-07-21"
+    ],
+    [
+      "2026-07-21",
+      "2026-07-22"
+    ],
+    [
+      "2026-07-22",
+      "2026-07-23"
+    ],
+    [
+      "2026-07-23",
+      "2026-07-24"
+    ],
+    [
+      "2026-07-24",
+      "2026-07-27"
+    ],
+    [
+      "2026-07-27",
+      "2026-07-28"
+    ],
+    [
+      "2026-07-28",
+      "2026-07-29"
+    ],
+    [
+      "2026-07-29",
+      "2026-07-30"
+    ],
+    [
+      "2026-07-30",
+      "2026-07-31"
+    ],
+    [
+      "2026-07-31",
+      "2026-08-03"
+    ],
+    [
+      "2026-08-03",
+      "2026-08-04"
+    ],
+    [
+      "2026-08-04",
+      "2026-08-05"
+    ],
+    [
+      "2026-08-05",
+      "2026-08-06"
+    ],
+    [
+      "2026-08-06",
+      "2026-08-07"
+    ],
+    [
+      "2026-08-12",
+      "2026-08-13"
+    ],
+    [
+      "2026-08-17",
+      "2026-08-18"
+    ],
+    [
+      "2026-08-19",
+      "2026-08-20"
+    ],
+    [
+      "2026-08-20",
+      "2026-08-21"
+    ],
+    [
+      "2026-08-21",
+      "2026-08-24"
+    ],
+    [
+      "2026-08-24",
+      "2026-08-25"
+    ],
+    [
+      "2026-08-28",
+      "2026-08-31"
+    ],
+    [
+      "2026-08-31",
+      "2026-09-01"
+    ],
+    [
+      "2026-09-01",
+      "2026-09-02"
+    ]
+  ],
+  "no_change_rmse": 66.08567644379892,
+  "models": {
+    "gbm": {
+      "total_completed": 29,
+      "matched": 29,
+      "unmatched": 0,
+      "rmse": 66.34643120611759,
+      "mae": 51.98631427209698,
+      "mean_error": -2.5993609608041472,
+      "mean_squared_loss_difference_vs_no_change": 34.53230275361458,
+      "coverage95": 0.9310344827586207,
+      "coverage80": 0.7241379310344828,
+      "p_optimizer_failures": 0,
+      "p_optimizer_status_not_applicable_or_unrecorded": 29
+    },
+    "heston": {
+      "total_completed": 29,
+      "matched": 29,
+      "unmatched": 0,
+      "rmse": 66.77371603020345,
+      "mae": 52.069416158633445,
+      "mean_error": -1.1556244201102532,
+      "mean_squared_loss_difference_vs_no_change": 91.4125214477689,
+      "coverage95": 0.9310344827586207,
+      "coverage80": 0.6896551724137931,
+      "p_optimizer_failures": 2,
+      "p_optimizer_status_not_applicable_or_unrecorded": 0
+    }
+  },
+  "interpretation": "Matched conditional physical gold predictions; deterministic estimated basis and plug-in parameters.",
+  "units": "USD_PER_TROY_OUNCE",
+  "excluded": [],
+  "inputs": [
+    {
+      "path": "outputs/physical_measure/20261007-gbm-origin-panel/origins.json",
+      "sha256": "0762b68ccd4a35a1c8969cfa4ffce07d95a4212bb1683c590c58363c6c3cbbc8"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-pilot/2026-07-10.json",
+      "sha256": "dbeb03fb499415aaa063525ac79571848e4a8bbf90c51d8a710127125f73201c"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-13.json",
+      "sha256": "5c92a51a7b42f118610691c618e20920534f95db6e8ce49d72baffffb32edcd9"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-14.json",
+      "sha256": "b9ab8c1d5afa84f2e5b0ed521fdfa90b1c7e5fc1418f20bedc9b22dd6ebf6e95"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-15.json",
+      "sha256": "ac24aff57188ec8e0a13ca24c74f9493f1f95f05f5dceb119b96273aab43ef5f"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-16.json",
+      "sha256": "97f86baf35915f7fe063c9579a12d9795ed76bd8d3c1d3a7c31fed4bff514093"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-17.json",
+      "sha256": "eb0137430e2a5e3258d3482f6fc62b512ff3af024265c898e0943956033349de"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-20.json",
+      "sha256": "567144f97694b14fa70fdeb39f6b1cbe1d2723f4b94024efe83c8c49a22c3898"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-21.json",
+      "sha256": "fd53368e69383873c3a2b64881f760769e4ef3f5a39c636c2a22503d9f7bdbf1"
+    },
+    {
+      "path": "outputs/physical_measure/20261007-heston-origin-panel/2026-07-22.json",
+      "sha256": "a85463c57c70940758b4c947fbf42ee3fa4400a3f89ed92dbfae07aada45306b"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation/2026-07-23.json",
+      "sha256": "a3845613970edf332a3da764969a5268ca584d9d3e67f98917461845c97c1e6b"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-07-24.json",
+      "sha256": "2c9152b4ecca947ea9ad6ff970a66024633568ee8adb3b4920a0eb6f1f245861"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-07-27.json",
+      "sha256": "15d6031ced331dd69d91fb0f652c9c37523f091c9e1843876f7f845d1ab63b55"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-07-28.json",
+      "sha256": "c60c48cd9a2e796bfbdc3d68d5f7778cd05b5332d9e4851ab017a056f07dc6d8"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-07-29.json",
+      "sha256": "3a8c1758e2045d113616e74866efbb5f8e9e84690c0aad8f586be9244cf36bb8"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-07-30.json",
+      "sha256": "d1e632b87caf9c46583a48eda8d81e612fa65eab24acf560fde65d98d574931a"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-07-31.json",
+      "sha256": "dc3b4239c788e0f9b83c204bf53154a1ec9ca582fcdbd92c13330f569c1908d1"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-03.json",
+      "sha256": "17ddd9a2e9d68a0f73071945663e093a011d961a6aeb41d0bc28b9d438686677"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-04.json",
+      "sha256": "ebc979e06f481b4523e2775674cb50e4f0eebd8c45f3f655e413690cd2a39fb7"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-05.json",
+      "sha256": "3f5d12eed614811ced1878881fac03404ea550589fcca24080bf37c69fb70969"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-06.json",
+      "sha256": "fc9d8a95420363de53ffa99d29698f31a302d78420fcef93f406bf81f369da4f"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-12.json",
+      "sha256": "393ce94fd5639cbc9f425c3a4624e95cf0a24ece1341590253bf7b5a41fc3279"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-17.json",
+      "sha256": "90317950d0f8fae995b5b1969f874ad14d40ca7a559a8b45af4ae4bbbdb0858a"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-19.json",
+      "sha256": "c6d5577c35b8959daa8cd2500dd8954517aa643ed8bba4509e5dd2f0fd709b0d"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-20.json",
+      "sha256": "9602b51f5d74dff53e048c9553d2416542ac539cd3975ad902ae969d5c40123f"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-21.json",
+      "sha256": "adfbb49dd204997a5747c26e2c2181364f1fddf368ddbf357939843485ae1c79"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-24.json",
+      "sha256": "9b2a137060bb04f27baa73dace5b0bf9c2dc72ab85ce8224be0a00957f67b405"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-28.json",
+      "sha256": "63beace038630bbb7f44b870cd5088fc47d0e1228e8758d7869fa965c12a844f"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-08-31.json",
+      "sha256": "1226c7d8ad5ba5990927fe968b4e038a0c9f256154d817656732d4bdf2eec5a1"
+    },
+    {
+      "path": "outputs/physical_measure/20261008-heston-origin-continuation2/2026-09-01.json",
+      "sha256": "9e7062878528a5a4ac08617a4c8d2bad2b42fb3074e5d408890bf0e975ed7bb6"
+    }
+  ],
+  "basis_sha256": "edf15dfc12d278ae54552d5378fce1e9e93bc2d9870377dd9b26bc8dae0e2a32",
+  "limitations": [
+    "Basis and parameter uncertainty omitted.",
+    "Gold midpoint is not Barrick realized selling price.",
+    "No FCFF, capital structure or corporate valuation inferred."
+  ]
+}

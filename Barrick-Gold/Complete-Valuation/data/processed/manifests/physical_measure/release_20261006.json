@@ -1,0 +1,146 @@
+{
+  "revision": "2026-10-06",
+  "market_cutoff": "2026-09-02",
+  "status": "PHYSICAL_RESEARCH_DIAGNOSTICS_NOT_CORPORATE_VALUATION",
+  "hash_semantics": "Release snapshot hashes; not a claim that all exploratory runs were executed with the final refactored file bytes.",
+  "files": [
+    {
+      "file": "data/processed/physical_measure/q_reference_20260902/bates.json",
+      "sha256": "cdf4be80b96058c0af8986445da16e92f59569a56b8938357f6d8eef453e82c5"
+    },
+    {
+      "file": "data/processed/physical_measure/q_reference_20260902/black_scholes.json",
+      "sha256": "253d9ad64bb0c67c5c78af2af71841879ec93b30da205071998861576808b0c1"
+    },
+    {
+      "file": "data/processed/physical_measure/q_reference_20260902/full_bates_hawkes.json",
+      "sha256": "d01d8c66fcf3b33807c907011760f818dd262008036409da90ddb04521c69243"
+    },
+    {
+      "file": "data/processed/physical_measure/q_reference_20260902/heston.json",
+      "sha256": "3ffddc65eef75cb046661f7b4e8b0b96637b4fbe6593efec076a0d2f0706e700"
+    },
+    {
+      "file": "outputs/physical_measure/20261005-gbm-diagnostic/summary.json",
+      "sha256": "b30b7c4d738f4815616011b86e1c3f6d12adf20498f1c6840d00c527326fe7aa"
+    },
+    {
+      "file": "outputs/physical_measure/20261006-copper-history/summary.json",
+      "sha256": "f1541f0e5d02e08c2f1b914a100d0567343c68158f6e448aac645ddf5fcadfa6"
+    },
+    {
+      "file": "outputs/physical_measure/20261006-diffusion-admissibility/summary.json",
+      "sha256": "38ed4309ad4fb65bb172710ce264857fc9584e69f2fc2477194026e176e937ed"
+    },
+    {
+      "file": "outputs/physical_measure/20261006-filter-convergence-refined/bates.json",
+      "sha256": "ef1727832c7bab18e0824997eae91c32dc588dd6cdb307ea8fe430b7d4d28460"
+    },
+    {
+      "file": "outputs/physical_measure/20261006-filter-convergence-refined/full_bates_hawkes.json",
+      "sha256": "5f13ece94ace69363318d85c7491ab23376ea59ad3ac00aad37b56d11c9a7b5b"
+    },
+    {
+      "file": "outputs/physical_measure/20261006-filter-convergence-refined/heston.json",
+      "sha256": "b0dea77b730a5dcf1be508206baf6f43730042fa86aa4432fed78c2897152834"
+    },
+    {
+      "file": "outputs/physical_measure/20261006-filter-convergence/bates.json",
+      "sha256": "271925df3bb1a3bfda78de59342a2b8069a5cfd4d9cfc2ec1101e45e94b31ac1"
+    },
+    {
+      "file": "outputs/physical_measure/20261006-filter-convergence/full_bates_hawkes.json",
+      "sha256": "2feae238178e9199191e5886f5d8554b2a72eeabbc5e38d4e323d9d26d972d57"
+    },
+    {
+      "file": "outputs/physical_measure/20261006-filter-convergence/heston.json",
+      "sha256": "b5b21bb398ff01caadc237a5ffd0e910a71ffd3274c96b8b9edcfcf9dfca6db1"
+    },
+    {
+      "file": "outputs/physical_measure/20261006-fixed-q-candidates/bates.json",
+      "sha256": "d6e59a5eade251a6f11dec1612d63a05c83d246a87bb7a6867f899545831441a"
+    },
+    {
+      "file": "outputs/physical_measure/20261006-fixed-q-candidates/full_bates_hawkes.json",
+      "sha256": "3005cab693072d7a4b972320403aba0b3907421f35da4e2a421ed1438667a369"
+    },
+    {
+      "file": "outputs/physical_measure/20261006-fixed-q-candidates/heston.json",
+      "sha256": "f65672e5cc84c256254ef3f3ca7ac1567fbfc3c8e918f047fd3923789b7eaa20"
+    },
+    {
+      "file": "outputs/physical_measure/20261006-gold-basis/summary.json",
+      "sha256": "33c9f31b1ada16ec598d51fd1cd20ad4a56c4fc64bcb4f0260305cb8e35bdd11"
+    },
+    {
+      "file": "outputs/physical_measure/20261006-gold-physical-baseline/summary.json",
+      "sha256": "302376ba4b572ac8cd6579641e5c9082e06455807fbddd1c43fe9d9f677d675d"
+    },
+    {
+      "file": "src/barrick_unified/futures_history.py",
+      "sha256": "123b6c74bc76385265e06b5b43dfe55a52982e986df7eee34b8c6e2789f1fa48"
+    },
+    {
+      "file": "src/barrick_unified/physical_filter.py",
+      "sha256": "32efe75fb1043772d9785bf2ecc051bf81fda329978298487e68a741bc61eb24"
+    },
+    {
+      "file": "src/barrick_unified/physical_gbm.py",
+      "sha256": "4859d11e107ab957c13f8386c21d0938fd48528de08a61a217d3bf9b021d8d68"
+    },
+    {
+      "file": "src/barrick_unified/physical_measure.py",
+      "sha256": "619b98840fe0e7baac303fa10539713f64ab6d0b1dfb68527d8d46552ee4f122"
+    },
+    {
+      "file": "tests/test_futures_history.py",
+      "sha256": "7de9ce4a9b3ffaced3b36f1635171993a3740eedaefa899ef55e57916755a8b0"
+    },
+    {
+      "file": "tests/test_physical_filter.py",
+      "sha256": "26197c98bcae833cbf883441b9b1e43a02b6f3acf9046b6d0e6d2b0df9564f4a"
+    },
+    {
+      "file": "tests/test_physical_gbm.py",
+      "sha256": "1dd04be8da05680e6e44ef6d56a67d969ce727ef2970de3b9afd8c886e04578d"
+    },
+    {
+      "file": "tests/test_physical_measure.py",
+      "sha256": "49ed7093e03fd0fea3867022dc63c2a6ba3190ffd502ca1aeee590949e72c01c"
+    },
+    {
+      "file": "tools/audit_gold_physical_basis.py",
+      "sha256": "22b9f566e41bdbf6692ebf796b3deae7242390271588b9e763d6684d9681346a"
+    },
+    {
+      "file": "tools/audit_gold_physical_basis.py",
+      "sha256": "22b9f566e41bdbf6692ebf796b3deae7242390271588b9e763d6684d9681346a"
+    },
+    {
+      "file": "tools/build_copper_physical_history.py",
+      "sha256": "dbd60fc4712bb8abab93a51a04d7f97f57799c1eb908fff1f979a34b5d5115d1"
+    },
+    {
+      "file": "tools/check_physical_filter_convergence.py",
+      "sha256": "8338be2d456d318666453ccc9ddd2735ec6f1368d31ef55cb9369e130bca193b"
+    },
+    {
+      "file": "tools/fetch_ib_physical_history.py",
+      "sha256": "1bce9a8f2495f3d612d00d2ff40aa4754678f709942b8d11220792f11789438a"
+    },
+    {
+      "file": "tools/fit_physical_candidates.py",
+      "sha256": "f5126d09166affee93311518f87da476d75dbbb9dda811e28c7c89582705c536"
+    },
+    {
+      "file": "tools/fit_physical_gbm_diagnostic.py",
+      "sha256": "e8c3764b32bf73ce99da5d3796741e7e2bdc4ebb908f27eef1f2c23af232b278"
+    },
+    {
+      "file": "tools/validate_gold_physical_baseline.py",
+      "sha256": "c8fdd4df46f1c17c1b5fe76b58dcf5f832118e0a2b2f9cd2863155af02247d31"
+    }
+  ],
+  "licensed_raw_distributed": false,
+  "corporate_valuation_ready": false
+}

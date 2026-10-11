@@ -1,0 +1,75 @@
+{
+  "status": "HISTORICAL_P_BASELINE_NOT_JOINT_P_Q_OR_DCF",
+  "cutoff": "2026-09-02",
+  "minimum_basis_training_prices": 253,
+  "summaries": [
+    {
+      "horizon": "90_calendar_days",
+      "model": "direct_gold_gbm",
+      "n": 689,
+      "rmse_usd_oz": 421.16589489482755,
+      "mae_usd_oz": 295.7353298478249,
+      "mean_log_density_usd_oz": -7.131093569271551,
+      "coverage_80": 0.6966618287373004,
+      "coverage_95": 0.9259796806966618
+    },
+    {
+      "horizon": "90_calendar_days",
+      "model": "gld_gbm_trend_basis",
+      "n": 689,
+      "rmse_usd_oz": 417.1880941846861,
+      "mae_usd_oz": 305.3851763917024,
+      "mean_log_density_usd_oz": -7.23478524448837,
+      "coverage_80": 0.6284470246734397,
+      "coverage_95": 0.895500725689405
+    },
+    {
+      "horizon": "90_calendar_days",
+      "model": "gold_no_change_mean",
+      "n": 689,
+      "rmse_usd_oz": 428.51633633175874,
+      "mae_usd_oz": 333.66686502177066,
+      "mean_log_density_usd_oz": -7.484050604363641,
+      "coverage_80": 0.5442670537010159,
+      "coverage_95": 0.8243831640058055
+    },
+    {
+      "horizon": "next_session",
+      "model": "direct_gold_gbm",
+      "n": 750,
+      "rmse_usd_oz": 53.77156437657904,
+      "mae_usd_oz": 32.96009460630954,
+      "mean_log_density_usd_oz": -5.197789821775239,
+      "coverage_80": 0.7653333333333333,
+      "coverage_95": 0.9
+    },
+    {
+      "horizon": "next_session",
+      "model": "gld_gbm_trend_basis",
+      "n": 750,
+      "rmse_usd_oz": 53.821721831256255,
+      "mae_usd_oz": 33.00647380211915,
+      "mean_log_density_usd_oz": -5.223403214023137,
+      "coverage_80": 0.752,
+      "coverage_95": 0.8933333333333333
+    },
+    {
+      "horizon": "next_session",
+      "model": "gold_no_change_mean",
+      "n": 750,
+      "rmse_usd_oz": 53.86417218027818,
+      "mae_usd_oz": 33.173106666666676,
+      "mean_log_density_usd_oz": -5.203260282892022,
+      "coverage_80": 0.756,
+      "coverage_95": 0.8973333333333333
+    }
+  ],
+  "input_sha256": "edf15dfc12d278ae54552d5378fce1e9e93bc2d9870377dd9b26bc8dae0e2a32",
+  "limitations": [
+    "P-only historical GBM diffusion: no historical option calibration used or validated by this run.",
+    "Basis trend is estimated at each origin and treated as deterministic in forecast distributions.",
+    "Parameter uncertainty is omitted from plug-in forecast intervals.",
+    "Quarterly targets use the first observed session at or after 90 calendar days; forecasts overlap.",
+    "Physical spot forecasts do not reconcile Barrick realized selling price, operations, FCFF or equity claims."
+  ]
+}

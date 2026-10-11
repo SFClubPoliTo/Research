@@ -1,0 +1,124 @@
+{
+  "status": "CONDITIONAL_TWO_STAGE_OOS_NOT_DCF_ADMITTED",
+  "model": "bates",
+  "origin": "2026-08-19",
+  "target_date": "2026-08-20",
+  "training_returns": 1242,
+  "source_q_sha256": "60863590a168eff0e2b5e694bc5b9f32cac0a36fb614a2523090b65aceed9105",
+  "source_code_sha256": "34f87e4ef38f353437977a35d240ae04683e624998b758b913f0f29611f87a5c",
+  "q_parameters": {
+    "v0": 0.06504631382288556,
+    "kappa": 9.569899907798542,
+    "theta": 0.022518187738228473,
+    "sigma": 0.01542215304463273,
+    "rho": -0.17175617600181514,
+    "lambd": 0.7991672961695375,
+    "mu_J": -0.01882520420984952,
+    "sigma_J": 0.21122342045967998,
+    "xi": 0.01542215304463273
+  },
+  "premia": [
+    6.384943819813302,
+    -0.4797748200845411,
+    0.8637431610031988,
+    -0.9087720916778838
+  ],
+  "initialization_source": {
+    "origin": "2026-08-17",
+    "source_file": "2026-08-17.json",
+    "source_sha256": "a4797bc1ae24b0f09002218ce1752b086dc18542830bf7b21c14fc0089707d02"
+  },
+  "initial_premia": [
+    3.5410196624968426,
+    -0.2185816714258331,
+    0.7543295707380484,
+    -1.249223594996215
+  ],
+  "initialization": "Previous successful origin if better than zero on current training likelihood",
+  "active_premia": 4,
+  "optimizer_success": true,
+  "optimizer_message": "Optimization terminated successfully.",
+  "evaluations": 207,
+  "training_particles": 512,
+  "training_substeps": 16,
+  "independent_checks": [
+    {
+      "seed": 1704,
+      "substeps": 16,
+      "nll": -3704.038867026683,
+      "fitted_minus_zero_premium_nll": -144.59795537170248
+    },
+    {
+      "seed": 1705,
+      "substeps": 16,
+      "nll": -3763.2832429062214,
+      "fitted_minus_zero_premium_nll": -106.6988006050924
+    },
+    {
+      "seed": 1706,
+      "substeps": 16,
+      "nll": -3755.475475941511,
+      "fitted_minus_zero_premium_nll": -129.25126421363075
+    },
+    {
+      "seed": 1704,
+      "substeps": 32,
+      "nll": -3754.0635216833944,
+      "fitted_minus_zero_premium_nll": -141.26330083486664
+    },
+    {
+      "seed": 1705,
+      "substeps": 32,
+      "nll": -3743.8466099968496,
+      "fitted_minus_zero_premium_nll": -163.4053695665366
+    },
+    {
+      "seed": 1706,
+      "substeps": 32,
+      "nll": -3731.4659155867644,
+      "fitted_minus_zero_premium_nll": -164.82217133909944
+    }
+  ],
+  "predictive_mean": 413.9045409792135,
+  "predictive_mean_mc_se": 0.03720866541451059,
+  "predictive_quantiles": [
+    403.0447817526637,
+    407.1200809472449,
+    414.25456402975635,
+    421.4626815677108,
+    425.25915205930005
+  ],
+  "target": 415.26,
+  "forecast_error": -1.3554590207864976,
+  "no_change_error": -1.420000000000016,
+  "path_diagnostics": {
+    "seed": 2104,
+    "n_paths": 65536,
+    "steps_per_year": 11680,
+    "total_steps": 32,
+    "underlying_kind": "spot_or_etf",
+    "contract_expiry_time": null,
+    "variance_floor_fraction": 0.0,
+    "shared_origin_variance": 0.06504631382288556,
+    "shared_origin_q_intensity_functional": 0.7991672961695375,
+    "density_bound": {
+      "status": "RESTRICTED_CONTINUOUS_TIME_FINITE_HORIZON_BOUND",
+      "horizon_years": 0.0027378507871321013,
+      "kappa_p": 5.923028721144285,
+      "entropy_upper_bound": 5.208929420047493,
+      "log_entropy_upper_bound": 1.6503743490547271,
+      "brownian_entropy_coefficient": 29097.025143204475,
+      "jump_entropy_coefficient": 1.6562830541325302,
+      "requires_normal_marks_and_unmarked_linear_hawkes": true,
+      "empirical_or_discrete_likelihood_admission": false
+    },
+    "discretization": "full-truncation Euler variance; frozen-intensity Poisson jumps; right-endpoint excitation",
+    "corporate_or_predictive_admission": false
+  },
+  "limitations": [
+    "Conditional structural Q coefficients over the historical P training sample.",
+    "Parameter and option-state uncertainty not propagated.",
+    "A successful optimizer is not an identification or convergence certificate.",
+    "GLD forecast precedes gold basis, sales, FCFF and corporate valuation."
+  ]
+}

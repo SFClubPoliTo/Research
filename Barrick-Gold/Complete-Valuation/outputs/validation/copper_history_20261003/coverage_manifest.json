@@ -1,0 +1,27 @@
+{
+  "status": "INSUFFICIENT_DENSE_HISTORY_FOR_TEMPORAL_OOS",
+  "planned_dates": 31,
+  "acquired_dates": 2,
+  "admitted_dates": [],
+  "possible_next_admitted_date_pairs": 0,
+  "threshold": {
+    "minimum_actual_quotes": 64,
+    "minimum_expiries": 3,
+    "minimum_dte": 75,
+    "max_age_seconds": 120,
+    "max_relative_spread": 0.2
+  },
+  "interpretation": "Retrieval failure or unacquired dates do not establish historical data absence. No OOS scores may be reported without eligible chronological pairs.",
+  "date_specific_rates": {
+    "source": "C:\\Users\\salvm\\Desktop\\SF\\Research projects\\Barrick gold\\UNIFICATO\\Github-Branch\\paper_audit\\team8_data\\data\\processed\\usd_treasury_history.csv",
+    "sha256": "94268DEBA502A8DDABA81B120C8ADFD49B59D87D459056DD4AA407D9F0879F0E",
+    "selection": "latest curve date <= observation date"
+  },
+  "inputs": {
+    "data\\raw\\ib_local\\copper_rolling_20260709_20260902\\2026-07-09\\hg_futures_option_bid_ask.csv": "7EB70257593DA06F682A3DDDA54A9D260D4FC514F645237F5CA74B08F8DA61A6",
+    "data\\raw\\ib_local\\copper_rolling_20260709_20260902\\2026-07-10\\hg_futures_option_bid_ask.csv": "91D7BC2554079A3E6F5D1F5C34094547484F4EC58D22F0E42DC1FC7F4D9A0567"
+  },
+  "files": {
+    "historical_coverage.csv": "94940D4409355DD5BDE62152F0BB2A27CCA04AE208620B5A4484042030E0A2D2"
+  }
+}

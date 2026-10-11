@@ -1,0 +1,26 @@
+[
+  {
+    "source": "src/reference/team-8-current/src/BnS.py",
+    "target": "src/pricing/BnS.py",
+    "sha256": "9b27e73408bb833cb33b151519bd4ba54ed69e76d5f0d4b5511c3dfcf7c51db7",
+    "transformation": "Exact active copy; immutable reference retained"
+  },
+  {
+    "source": "src/reference/team-8-current/src/Sampling.py",
+    "target": "src/pricing/Sampling.py",
+    "sha256": "a81faad14e0d0d28e62ef1482eb277fc1daf9dedd4991d9ae20b27a95e62dbfb",
+    "transformation": "Exact active copy; immutable reference retained"
+  },
+  {
+    "source": "src/reference/team-8-current/src/rates.py",
+    "target": "src/pricing/rates.py",
+    "sha256": "2c69409cd5d5438d2a3979c37f770228c5cc22dcf397a1ede741fc86b486d229",
+    "transformation": "Exact active copy; immutable reference retained"
+  },
+  {
+    "source": "src/reference/team-8-current/src/surface_builder.py",
+    "target": "src/pricing/surface_builder.py",
+    "sha256": "664cde4c38e53a4597b2990e4ecdc227c8da2067b2668c45e16532b7d95a2ff6",
+    "transformation": "Exact active copy; immutable reference retained"
+  }
+]
