@@ -34,29 +34,29 @@ editions use the same executable infrastructure.
 | `outputs/physical_measure` | Physical-estimation, convergence, basis and OOS experiments. |
 | `outputs/report_unificato` | Full report sources, PDF and standalone Overleaf archive. |
 | `outputs/report_paper` | Condensed report sources, PDF and standalone Overleaf archive. |
-| `src` | Shared domain modules, command line entry point and research stages. |
-| `utilities` | Offline tests, provenance, notebooks, research documentation and knowledge graph. |
+| `src` | Five numbered workflow notebooks only; no subdirectories. |
+| `utilities` | Shared Python modules, frozen source studies, offline tests, provenance, research documentation and knowledge graph. |
 
 ## Commands
 
 Run commands from this directory, using Python 3.11 or later. Install `requirements.txt`; the local acquisition adapter also requires an authorized running IB API session.
 
 ```powershell
-python -B src/main.py status
-python -B src/main.py test -q
-python -B src/main.py run paper-audit
-python -B src/main.py run gold-basis
-python -B src/main.py run copper-history
-python -B src/main.py run gold-physical-oos
-python -B src/main.py run physical-refit --run-id my-refit --models heston --particles 512 --substeps 16
-python -B src/main.py run physical-origins
-python -B src/main.py run physical-gbm-oos --run-id my-gbm-origin-panel
-python -B src/main.py run physical-heston-oos --run-id my-heston-origin --origins 2026-07-10
-python -B src/tools/package_report.py unificato
-python -B src/tools/package_report.py paper
+python -B utilities/python/main.py status
+python -B utilities/python/main.py test -q
+python -B utilities/python/main.py run paper-audit
+python -B utilities/python/main.py run gold-basis
+python -B utilities/python/main.py run copper-history
+python -B utilities/python/main.py run gold-physical-oos
+python -B utilities/python/main.py run physical-refit --run-id my-refit --models heston --particles 512 --substeps 16
+python -B utilities/python/main.py run physical-origins
+python -B utilities/python/main.py run physical-gbm-oos --run-id my-gbm-origin-panel
+python -B utilities/python/main.py run physical-heston-oos --run-id my-heston-origin --origins 2026-07-10
+python -B utilities/python/tools/package_report.py unificato
+python -B utilities/python/tools/package_report.py paper
 ```
 
-The status command audits repository structure. It does not certify a forecasting model or valuation. Acquisition and physical diagnostics require their exact local licensed input freezes; the offline suite and public aggregates remain separately reproducible. `utilities/notebooks/Main.ipynb` is a thin facade; executable logic lives in `src`.
+The status command audits repository structure. It does not certify a forecasting model or valuation. Acquisition and physical diagnostics require their exact local licensed input freezes; the offline suite and public aggregates remain separately reproducible. Start with `src/00_Overview.ipynb`, then follow the numbered notebooks for data/basis, Q options, P estimation/OOS, and valuation/reports. Shared executable logic lives in `utilities/python`; notebooks do not duplicate numerical implementations.
 
 ## Reports and scientific interpretation
 

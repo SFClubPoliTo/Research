@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 @pytest.fixture
 def modules(monkeypatch):
-    monkeypatch.syspath_prepend(str(ROOT/'src/pricing'))
+    monkeypatch.syspath_prepend(str(ROOT/'utilities/python/pricing'))
     return importlib.import_module('dated_initialization'), importlib.import_module('calibration_core')
 
 

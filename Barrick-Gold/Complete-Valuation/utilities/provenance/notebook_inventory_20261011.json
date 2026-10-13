@@ -1,0 +1,50 @@
+[
+  {
+    "path": "utilities/reference/team-8/Bates Calibration.ipynb",
+    "cells": 5,
+    "sha256": "4feddb25bf9dfb870264f4249f021f1de6ba57f915ca9f37b160850db67f6f53",
+    "role": "Frozen source, not an active pipeline entry point"
+  },
+  {
+    "path": "utilities/reference/team-8/Bates-Hawkes Proxy Calibration.ipynb",
+    "cells": 5,
+    "sha256": "426165d25feeb56b8c0ad2be8b83ee62f319cf66b00142be8676394b559a02d7",
+    "role": "Frozen source, not an active pipeline entry point"
+  },
+  {
+    "path": "utilities/reference/team-8/Black and Scholes Calibration.ipynb",
+    "cells": 22,
+    "sha256": "fce778e7869ee0271289764aa47c43687cfaa69aa0d4d256c3c24f2ccd5e1096",
+    "role": "Frozen source, not an active pipeline entry point"
+  },
+  {
+    "path": "utilities/reference/team-8/Hawkes Calibration.ipynb",
+    "cells": 4,
+    "sha256": "49843c651e8364852aafaf73ceeea84daf3d29a59e733c7834571941cbfa5631",
+    "role": "Frozen source, not an active pipeline entry point"
+  },
+  {
+    "path": "utilities/reference/team-8/Heston Calibration.ipynb",
+    "cells": 21,
+    "sha256": "82e8b48080451b7444efa4d1baec536288b2c3835c3e460dd8ee86875f6303d1",
+    "role": "Frozen source, not an active pipeline entry point"
+  },
+  {
+    "path": "utilities/reference/team-8/Main.ipynb",
+    "cells": 2,
+    "sha256": "19b1aad0b2a0c3120cb7e7a6211c614647761337efad59a0485575d5a4d017a6",
+    "role": "Frozen source, not an active pipeline entry point"
+  },
+  {
+    "path": "utilities/reference/team-4/ebitda_montecarlo/ebitda_mc.ipynb",
+    "cells": 4,
+    "sha256": "ae85933e6b0f0f915933a24c7a3212433c76c6e8099d57b5746faa757ff65c31",
+    "role": "Frozen source, not an active pipeline entry point"
+  },
+  {
+    "path": "utilities/reference/team-4/production/production_forecast.ipynb",
+    "cells": 5,
+    "sha256": "2a8608b0d1a3c1c40de42c84c4fe843149f778050430fb13758f9e3123e7e798",
+    "role": "Frozen source, not an active pipeline entry point"
+  }
+]

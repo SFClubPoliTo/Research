@@ -3,7 +3,7 @@ import sys
 import numpy as np
 from scipy.optimize import OptimizeResult
 from time import perf_counter
-sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'src/pricing'))
+sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'utilities/python/pricing'))
 from calibration_core import CalibrationReport
 from Bates import Bates
 from Heston import Heston

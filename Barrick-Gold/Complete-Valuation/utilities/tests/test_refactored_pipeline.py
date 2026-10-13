@@ -11,9 +11,9 @@ import pytest
 
 from barrick_unified.multimodel_valuation import MODEL_ORDER, run_multimodel_valuation
 from barrick_unified.refactored import RefactoredBarrickPipeline
-from barrick_unified.refactored.domain.policy import ConditionalBridgePolicy
-from barrick_unified.refactored.domain.time import QuarterGrid
-from barrick_unified.refactored.domain.units import Unit, UnitArray
+from barrick_unified.refactored.domain_policy import ConditionalBridgePolicy
+from barrick_unified.refactored.domain_time import QuarterGrid
+from barrick_unified.refactored.domain_units import Unit, UnitArray
 from barrick_unified.refactored.reporting import ThesisFigureService
 
 
@@ -97,7 +97,7 @@ def test_thesis_figures_have_png_pdf_csv_json_and_manifest(
             output_dir=output,
             run_id="pytest-figures",
             input_paths=[CONFIG],
-            code_paths=[ROOT / 'src/run_refactored_thesis_figures.py'],
+            code_paths=[ROOT / 'utilities/python/run_refactored_thesis_figures.py'],
         )
         assert manifest["status"] == "FIGURE_OUTPUT_CANDIDATE"
         assert len(manifest["artifacts"]) == 24

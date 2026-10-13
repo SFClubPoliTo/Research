@@ -14,7 +14,7 @@ def test_unimplemented_valuation_measures_rejected(law):
 
 def test_fixed_delivery_and_cross_delivery_mean_are_distinct():
     root = Path(__file__).resolve().parents[2]
-    spec = importlib.util.spec_from_file_location('measure_paths', root/'src/reference/team-8-current/path_simulation.py')
+    spec = importlib.util.spec_from_file_location('measure_paths', root/'utilities/reference/team-8-current/path_simulation.py')
     paths = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(paths)
     n, steps, dt = 50000, 20, .05

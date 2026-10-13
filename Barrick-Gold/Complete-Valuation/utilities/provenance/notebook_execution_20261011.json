@@ -1,0 +1,65 @@
+{
+  "mode": "Default read-only plan; no calibration, acquisition or valuation rerun",
+  "checks": [
+    {
+      "notebook": "00_Overview.ipynb",
+      "cwd": ".",
+      "status": "PASS",
+      "sha256": "3f42e0d607563bc516c6394f72914b719b1514dcee7b80a4ae1e76779f37e9b3"
+    },
+    {
+      "notebook": "01_Data_and_Basis.ipynb",
+      "cwd": ".",
+      "status": "PASS",
+      "sha256": "6e54938abdc196ee154eeb184c574a3d504a1cacb5808f33963af7bdcb31d752"
+    },
+    {
+      "notebook": "02_Options_Q.ipynb",
+      "cwd": ".",
+      "status": "PASS",
+      "sha256": "9386e2d56a85c65e9e03fdbde76ef958274c21c9207768ea4af2e2758a9ae7c2"
+    },
+    {
+      "notebook": "03_Physical_P_and_OOS.ipynb",
+      "cwd": ".",
+      "status": "PASS",
+      "sha256": "ecfdf4a4366208c57910b77e5a60030327bc9a1ad440e1dfef6cfd706a6a1503"
+    },
+    {
+      "notebook": "04_Valuation_and_Reports.ipynb",
+      "cwd": ".",
+      "status": "PASS",
+      "sha256": "522e75be03dacb2de074d19c302245a70d59de6c8d7cabe408de28ffbd19befd"
+    },
+    {
+      "notebook": "00_Overview.ipynb",
+      "cwd": "src",
+      "status": "PASS",
+      "sha256": "3f42e0d607563bc516c6394f72914b719b1514dcee7b80a4ae1e76779f37e9b3"
+    },
+    {
+      "notebook": "01_Data_and_Basis.ipynb",
+      "cwd": "src",
+      "status": "PASS",
+      "sha256": "6e54938abdc196ee154eeb184c574a3d504a1cacb5808f33963af7bdcb31d752"
+    },
+    {
+      "notebook": "02_Options_Q.ipynb",
+      "cwd": "src",
+      "status": "PASS",
+      "sha256": "9386e2d56a85c65e9e03fdbde76ef958274c21c9207768ea4af2e2758a9ae7c2"
+    },
+    {
+      "notebook": "03_Physical_P_and_OOS.ipynb",
+      "cwd": "src",
+      "status": "PASS",
+      "sha256": "ecfdf4a4366208c57910b77e5a60030327bc9a1ad440e1dfef6cfd706a6a1503"
+    },
+    {
+      "notebook": "04_Valuation_and_Reports.ipynb",
+      "cwd": "src",
+      "status": "PASS",
+      "sha256": "522e75be03dacb2de074d19c302245a70d59de6c8d7cabe408de28ffbd19befd"
+    }
+  ]
+}

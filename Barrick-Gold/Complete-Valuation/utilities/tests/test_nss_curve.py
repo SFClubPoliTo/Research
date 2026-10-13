@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 
 
-TEAM8 = Path(__file__).resolve().parents[2] / 'src/reference' / "team-8"
+TEAM8 = Path(__file__).resolve().parents[2] / 'utilities/reference' / "team-8"
 if str(TEAM8) not in sys.path:
     sys.path.insert(0, str(TEAM8))
 

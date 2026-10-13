@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def test_every_registered_stage_exists_in_shared_source_tree():
     for name, relative in UnifiedWorkflow.ENTRY_POINTS.items():
-        assert relative.startswith('src/'), name
+        assert relative.startswith('utilities/python/'), name
         assert (ROOT/relative).is_file(), name
 
 

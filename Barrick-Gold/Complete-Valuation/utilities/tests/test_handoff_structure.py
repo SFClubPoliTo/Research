@@ -14,14 +14,16 @@ def test_handoff_status_is_ready() -> None:
     status = UnifiedWorkflow(ROOT).status()
     assert status["status"] == "READY"
     assert all(status["directories"].values())
-    assert status["curated_notebooks"] == ["Main.ipynb"]
+    assert status["curated_notebooks"] == sorted(p.name for p in (ROOT/'src').glob('*.ipynb'))
+    assert len(status["curated_notebooks"]) == 5
+    assert all(p.is_file() and p.suffix == '.ipynb' for p in (ROOT/'src').iterdir())
     assert status["indexed_publication_tables"] == 7
     assert status["broken_table_links"] == []
     assert status["operational_artifacts"] == []
 
 
 def test_curated_notebook_is_thin_and_valid() -> None:
-    notebook = json.loads((ROOT / "utilities/notebooks/Main.ipynb").read_text(encoding="utf-8"))
+    notebook = json.loads((ROOT / "src/00_Overview.ipynb").read_text(encoding="utf-8"))
     assert notebook["nbformat"] == 4
     assert len(notebook["cells"]) == 4
     code = "\n".join(

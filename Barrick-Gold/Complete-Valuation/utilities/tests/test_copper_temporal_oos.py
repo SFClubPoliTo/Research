@@ -6,7 +6,7 @@ import pandas as pd
 import pytest
 
 spec = importlib.util.spec_from_file_location(
-    'copper_oos_test_module', Path(__file__).resolve().parents[2] / 'src/tools/run_copper_oos.py')
+    'copper_oos_test_module', Path(__file__).resolve().parents[2] / 'utilities/python/tools/run_copper_oos.py')
 oos = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(oos)
 

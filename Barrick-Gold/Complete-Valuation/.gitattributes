@@ -1,5 +1,6 @@
 # Dated provenance records hash exact bytes; preserve source line endings.
 * -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 src/reference/** -whitespace
+utilities/reference/** -whitespace
 data/raw/** -whitespace
 data/raw/treasury_public/** -whitespace

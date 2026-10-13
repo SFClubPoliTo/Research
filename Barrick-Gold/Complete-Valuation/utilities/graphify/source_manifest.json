@@ -269,1093 +269,33 @@
     },
     {
       "source": "README.md",
-      "sha256": "05e0f91c238407dd88d90dc7c6a7682ab8af790bf30f355ead324926ecd90037",
+      "sha256": "1db65b0883ee12b1760f8fcdc6a4d69020db4f2ca817a09c65621dcf9a0511b5",
       "kind": "document"
     },
     {
-      "source": "src/audit.py",
-      "sha256": "f2ccfdeed04a8525c1906c440789b01807b443105e7e38bc6e1b3e8cb2591e6f",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/__init__.py",
-      "sha256": "d0b0cc70706edb42599ef122558aea3644ba4f498e56ddae824cfb1dd3efa050",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/cli.py",
-      "sha256": "b09ca7ad5022968e771e0e0edc96da9e8139b2d3683dcc49d30cc1ef98dc33df",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/copper.py",
-      "sha256": "95e84248ec679c261b03e307698858824a4a2f525ee9612eb432873feef2915f",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/empirical_figures.py",
-      "sha256": "815bb6d6485255ce4fe7dcedd37d43f4fd23719dd293eacaa87ef73ad570e4f3",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/futures_history.py",
-      "sha256": "4ea2c00977040a82162f9447d67a2441d256b3cf3aee468e56a2c7aa0e313a75",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/gold_basis.py",
-      "sha256": "cb44c7811310cece25e923ebfb9a9bf58a3d72d015e34224e2ef84238f5b5020",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/ib_gold_adapter.py",
-      "sha256": "8c96bc8ee8f5bd58e1656a9c5a9ff629daa86275f7bb23fbfcec6d2cfe724c31",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/ib_gold_calibration.py",
-      "sha256": "c5fa49565b45952e1f0517a4776e47b5cda70dfcb43ed438d42eb9ddca54ce68",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/ib_gold_surface.py",
-      "sha256": "d7f67b5fd6e39a9ddbb117b4cd78aab7ec9cc16a86e3b4c2cab9da2a3d368e00",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/layout.py",
-      "sha256": "8b215a9d5d23c18c51ca977b1d2500f295c1ced3b31a629a582004c336b71353",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/lse_adapter.py",
-      "sha256": "9d8a5b88107c8b3f357260369cc72bdfaeeb24f62f777ca318e5dfe75c811413",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/market_data.py",
-      "sha256": "2e807b4cd0a69ec3b133ed8205e9c136f88d3b425af7af5053417363625c595a",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/measure_contract.py",
-      "sha256": "0716a826419a4897518c21a4733ed0f2c6ab6977237a4fc0117d2f62a0b4d354",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/multimodel_reporting.py",
-      "sha256": "7d43b3a6b8e4b6ab11fc3f8752944326b092b2074bb6cf4a4d9577249b232805",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/multimodel_valuation.py",
-      "sha256": "8509d71e7d07f40862bf0ad4b26af14b52945c5109d60beb148d898a8ca7ff69",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/physical_filter.py",
-      "sha256": "91ebcfe0fe1724799a319110748e489e9f2bfa41e50b8cf73ffe8604b165b885",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/physical_gbm.py",
-      "sha256": "c305e6a353f57ecdd9722e4daeffbf1d4cf85d7574c6abbbacc652fc69b20276",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/physical_measure.py",
-      "sha256": "dd21b2ed249ecfd3cd3ec2d7759a9afddb7a9261b7d4bace9ca5c21100f8a9c7",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/physical_oos_summary.py",
-      "sha256": "6f29b75fb302976f9702e8966976cd76b12affac1447b4f5f0d81a3ec5c9e9d3",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/physical_origins.py",
-      "sha256": "82e573082a15aada430887802cb8d5878ac3ad12eaffc788703caab555eb0225",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/physical_paths.py",
-      "sha256": "1328cb4b72d09adf0cfdae945a70f19d7a3f09eaf7d8d01f007fb2a367912b0f",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/project.py",
-      "sha256": "2c01b55ab4f62987e6a888ada5a920f52164614d07a4fb7ea16f456a04b747eb",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/__init__.py",
-      "sha256": "011485e877c475850a993c72803cfd2a8a85c7372fd6131a9b7a3356ceec639b",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/application/__init__.py",
-      "sha256": "15974dc18687f1c2c48eabb3b46f3e8e87d0bd585f2af95598f66a4352b134c0",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/application/pipeline.py",
-      "sha256": "1de4f53d77a6c05aeba8be87656abc0991e14c22ab279809f178ff887018dc3f",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/domain/__init__.py",
-      "sha256": "d276a76a8a881fdbe58d958f85eb815866f52bbfcbbc9375a7c52308ac0a4470",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/domain/policy.py",
-      "sha256": "cc01604d1d8a45d27379bd009766925ebae1841e09858bb7c95b39576003af42",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/domain/provenance.py",
-      "sha256": "4f2106835ebc5cc802bcf2c2a039a8d6d8871781be101609be6a80febc66a87f",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/domain/time.py",
-      "sha256": "4d1067517c8edd544757915b7801b7e4c3f6143b61417f6cb77358ae62336a11",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/domain/units.py",
-      "sha256": "6e1318f660ed7d933a8c67cf46567d412ba0fe425552067b070311891220e0c6",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/gold/__init__.py",
-      "sha256": "ea080f63267d50790f091d2ee54b3288e1edcbe3da08848014388af54f01d5d5",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/gold/base.py",
-      "sha256": "2bd84e720135e7a990e100a0d53b36b6c52f6460e20ab44f2b2862b30589aa4b",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/gold/bates_hawkes.py",
-      "sha256": "365afb1183585babbdcf571da092305b6fe36753617517697ae87b16fc4f9e9a",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/gold/bates_poisson.py",
-      "sha256": "428a93dde639bed034b1694e20595c9b8e7cdf019655df6f47e0d3017c89e444",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/gold/black_scholes.py",
-      "sha256": "aa3e1b9cec87a944dd9d67d93be945dd85a556ad9373281695d87cd507093334",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/gold/heston.py",
-      "sha256": "b16429f31f35392ecd72f2b2bcb849678eb8cbb8a09069e21781e105d07cb6a1",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/gold/registry.py",
-      "sha256": "165dad57c17a869f28e2e11d35522a2356cd322703fb896a5a6b9e695e3d3e6d",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/operations/__init__.py",
-      "sha256": "48050ab06190ec9ca05d025bbdb2e68873573d820b4d27630ae6c264cfa1cc11",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/operations/costs.py",
-      "sha256": "7689c221086a051b097e6d9e97801861ecb2be3f6eb2f162d084dafcffd2d5d1",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/operations/margin.py",
-      "sha256": "761550d439fc91fb5364c4d8c9035383a8ece59a9fdd0c88086dda932b312496",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/operations/production.py",
-      "sha256": "981557b06892f4afb97ef7492d3a088da267a24249f2dbbf138a3e68c5c52bb5",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/operations/projection.py",
-      "sha256": "334587cb387f271e0dc8511675727ec7ff7b4ccd1597a9f5dc1a019613e74f76",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/reporting/__init__.py",
-      "sha256": "ce18b2d3887dbb7c9ec05dcece8f646f13e52504414b46743e056fb9b2f0d045",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/reporting/figures.py",
-      "sha256": "a609199ccf887a370bf8c99aa0a880d1752bd25e9d347d17d4914df4e211f6e4",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/simulation/__init__.py",
-      "sha256": "bce6abee269922032bb908f5517acecc09af78fff75d972ca7677839567802b6",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/simulation/engine.py",
-      "sha256": "bca9736972a4c425440929fb8527324eda93d38c743185f5c1e2b4cba2b8091b",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/simulation/randomness.py",
-      "sha256": "ebbba9e71da9be11c5583e2ca4aed30837a9c718849302908881aaac737daaa9",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/valuation/__init__.py",
-      "sha256": "78315c5c5d3090c3b4365fcedcfccf4d8d8bcbe738f59cf0b88c8f50c873a421",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/valuation/dcf.py",
-      "sha256": "11c450a69b986c937d5f365b099cbf5434bdd6b9f637ca5eff7a579f02c3b882",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/valuation/equity_bridge.py",
-      "sha256": "323232d33e54724013e52c3242ea9735c33deb37760d0b6c98ce795626b3fe19",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/refactored/valuation/wacc.py",
-      "sha256": "5a91a31bb3b284017c376733c9288b229e01cac38c1f0d9fd01bfda8ca5e067c",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/research_snapshot.py",
-      "sha256": "efdeeac9eb3a32d4486b9ba97888d4428f1799d60c9381bc21dd9bcfb72c43ae",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/team4_operating_figures.py",
-      "sha256": "e72ee231f50e1b4c9c09e457cecb87d8afb148ecdf86ce9328cf2fbd2c395f3d",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/team8_option_audit.py",
-      "sha256": "81d2b158c520ee8b5e03db4390cdd03fcd30e4b9ae799dccd1b45388bea03f8f",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/team8_rate_curve.py",
-      "sha256": "1b4944f9c015d9454838f418dfdccd8eb7f581ce7d1cd05fdc5da191313b8a93",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/valuation.py",
-      "sha256": "41fbbd7aac1a50774d77040317cdf3d5290b4448f061982837a9b7e39a6e9208",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/valuation_clock.py",
-      "sha256": "899708ce445fed5740245dc41fafb965ec021b2b58b30ee1fb0eb672bc31c484",
-      "kind": "code"
-    },
-    {
-      "source": "src/barrick_unified/valuation_reporting.py",
-      "sha256": "354a4aa22da924019dc0c88da92eb5aed683b39fe174534e77244f81f24bd336",
-      "kind": "code"
-    },
-    {
-      "source": "src/build_audited_results.py",
-      "sha256": "c109274fdcf3bda4903e274eefb10145ebb62b559fd17a10246caa0bc888422f",
-      "kind": "code"
-    },
-    {
-      "source": "src/build_proxy_results.py",
-      "sha256": "785153689500db497529d907a484795ce4c7211aea198903b4174cd0dbd2ef13",
-      "kind": "code"
-    },
-    {
-      "source": "src/main.py",
-      "sha256": "9f0a6f28f501f006428b9821f91aedfe5ea5b0b5fb7b22176aad931d40f7bb05",
-      "kind": "code"
-    },
-    {
-      "source": "src/numerical_sensitivity.py",
-      "sha256": "25d012e10fe785affbc13b99b3281b7600746a17ae36ae4fb95d61c40ff92925",
-      "kind": "code"
-    },
-    {
-      "source": "src/paper_cli.py",
-      "sha256": "296806c0b43445079d8bbba2791cc2e7345546ebc6b1fa1d713a423b49421bd4",
-      "kind": "code"
-    },
-    {
-      "source": "src/pricing/Bates.py",
-      "sha256": "b004f5ae0c8641545f6f7fced928f247b62ee91838ce8e83ac6395a95d377bea",
-      "kind": "code"
-    },
-    {
-      "source": "src/pricing/BatesHawkesExact.py",
-      "sha256": "425542194c56a21a0fe30c6bedcb773b854e3fb8da4dec878a3ac4315fe0c469",
-      "kind": "code"
-    },
-    {
-      "source": "src/pricing/BnS.py",
-      "sha256": "9b27e73408bb833cb33b151519bd4ba54ed69e76d5f0d4b5511c3dfcf7c51db7",
-      "kind": "code"
-    },
-    {
-      "source": "src/pricing/calibrate_one_day.py",
-      "sha256": "4c03cbf20076fe9368c0c5e9d344e1ccec4c7032d778575bdc3841f51a39adce",
-      "kind": "code"
-    },
-    {
-      "source": "src/pricing/calibrate_surface.py",
-      "sha256": "1396edb6b3273181003777009f63545fced667452bc461c269efcb3672adde39",
-      "kind": "code"
-    },
-    {
-      "source": "src/pricing/calibration_core.py",
-      "sha256": "9f05d0ff920d04014427366782fe54ccd26f82a92f9e04197d27d14468bd4562",
-      "kind": "code"
-    },
-    {
-      "source": "src/pricing/dated_initialization.py",
-      "sha256": "6ac044b398baace02206b63ef0e437bb99f234d3a756aaf9a15f4a762b3f8263",
-      "kind": "code"
-    },
-    {
-      "source": "src/pricing/fourier_pricing.py",
-      "sha256": "77ec16ff53c7b024f3e50edae8521b58a96b7f3e42e352406bacb6b909adbaab",
-      "kind": "code"
-    },
-    {
-      "source": "src/pricing/Hawkes.py",
-      "sha256": "a4f671f207069d5207d612a6962174a9e8f019030f81e17ef74df186de5a2c39",
-      "kind": "code"
-    },
-    {
-      "source": "src/pricing/Heston.py",
-      "sha256": "b972cce17480a495c9c2e8e3ae3b7c02b732d4d3fd0885b8a62ea7afdf569ede",
-      "kind": "code"
-    },
-    {
-      "source": "src/pricing/oos_validation.py",
-      "sha256": "25328195f29ce90b683570009a350acfe24bfe2abd71b96cd23269d8f34cd282",
-      "kind": "code"
-    },
-    {
-      "source": "src/pricing/rates.py",
-      "sha256": "2c69409cd5d5438d2a3979c37f770228c5cc22dcf397a1ede741fc86b486d229",
-      "kind": "code"
-    },
-    {
-      "source": "src/pricing/Sampling.py",
-      "sha256": "a81faad14e0d0d28e62ef1482eb277fc1daf9dedd4991d9ae20b27a95e62dbfb",
-      "kind": "code"
-    },
-    {
-      "source": "src/pricing/surface_builder.py",
-      "sha256": "664cde4c38e53a4597b2990e4ecdc227c8da2067b2668c45e16532b7d95a2ff6",
-      "kind": "code"
-    },
-    {
-      "source": "src/README.md",
-      "sha256": "035a57ac658f65dfea5fc03ee703b979df76c2732c84ee6f08aeaffe45788a33",
+      "source": "src/00_Overview.ipynb",
+      "sha256": "3f42e0d607563bc516c6394f72914b719b1514dcee7b80a4ae1e76779f37e9b3",
       "kind": "document"
     },
     {
-      "source": "src/reference/team-3/examples/run_reproducibility.py",
-      "sha256": "4fac1945ddfea571d02448679fb0d5818c748ce694f11cb9392bfdec4454583e",
-      "kind": "code"
+      "source": "src/01_Data_and_Basis.ipynb",
+      "sha256": "6e54938abdc196ee154eeb184c574a3d504a1cacb5808f33963af7bdcb31d752",
+      "kind": "document"
     },
     {
-      "source": "src/reference/team-3/src/monte_carlo_risk/__init__.py",
-      "sha256": "6dd682cf5e51fb6fbc441dac42d5c24f94471a45c3bf9f5d375b04eaa3485465",
-      "kind": "code"
+      "source": "src/02_Options_Q.ipynb",
+      "sha256": "9386e2d56a85c65e9e03fdbde76ef958274c21c9207768ea4af2e2758a9ae7c2",
+      "kind": "document"
     },
     {
-      "source": "src/reference/team-3/src/monte_carlo_risk/option_pricing.py",
-      "sha256": "694c172795b8c0e6151b4b7b5ca27e531b6b546cd067e2540e86f1cb3444ac1f",
-      "kind": "code"
+      "source": "src/03_Physical_P_and_OOS.ipynb",
+      "sha256": "ecfdf4a4366208c57910b77e5a60030327bc9a1ad440e1dfef6cfd706a6a1503",
+      "kind": "document"
     },
     {
-      "source": "src/reference/team-3/src/monte_carlo_risk/random_generators.py",
-      "sha256": "fa055cc75e7f624ddf6bb1d6005f5c4f6f367e5afd8466d503838de48b093068",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-3/src/monte_carlo_risk/returns.py",
-      "sha256": "58c05bc8ea91b07f3f4123b14f03c79f2ea3308f2ed81927bd82766f23090e05",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-3/src/monte_carlo_risk/stochastic_processes.py",
-      "sha256": "58edc613267264a6f0419d3fc0df9b174bef51edce8455f4514d7e743ea033ae",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-3/src/monte_carlo_risk/variance_reduction.py",
-      "sha256": "36fedef7c0d86e4e0bda03df452df6d9b49fa392be883d6a0031539ce1dab1ed",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-5/current/src/generate_three_stage_dcf.py",
-      "sha256": "def6aa639195b7f530ac5b969dd4f54d700fe8eb0e636248ef954e5e5054ee34",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-6/1 Simulations/simulate_examples.py",
-      "sha256": "e99b0e0e712f9f271687c0ef6a12a33c83ee688ea7c1e3f085df5e1dc7127d34",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-7/src/01_data_download.py",
-      "sha256": "f295eee7d6463c9112bf03e966bc0f15b4e6574c3e960a9565519a057f777727",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-7/src/02_data_preparation.py",
-      "sha256": "b5d0269016f0fa64e80f90cede39d38bc3425edd3b3924d9d71183f18a5fc021",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-7/src/03_descriptive_analysis.py",
-      "sha256": "43c3907816b56163753dd5cf89b3a960f55a6dda52c6b81f95fb9a384175f61c",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-7/src/04_gold_regressions.py",
-      "sha256": "0acfdbf808e6db57bf3c5488904f8a10890dc1d1fb3eb79f828f1a4beca35ffd",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-7/src/05_silver_regressions.py",
-      "sha256": "8f25917dcdff1bc0fcc8ee5aa7fa56667dc3d8dafdf39472fd196a093adb9258",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-7/src/06_stylized_facts.py",
-      "sha256": "2a1e06a1f66af7b8a8b57a91206721c06228a0599b28a74bcce9262f1bb86c3f",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-7/src/06b_ar_mean_models.py",
-      "sha256": "7faeb26f6c043cc6a8f8a6b655440421aaa48dcd0a4da4bbe4810fb4254d8dc6",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-7/src/06c_arma_mean_models.py",
-      "sha256": "e06e06b6d76a66cfad71ad68f92dd5dbd0d6e2126ca3e8ee72cc908bfcc7119f",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-7/src/06d_arima_mean_models.py",
-      "sha256": "d020874c610745fd90227e1eabef73d42827d0b6c030e680a4d33a37d28b4299",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-7/src/07_garch_estimation.py",
-      "sha256": "1de5c63f2cb5d0c57a94668df9200d25007d0702c6a4d7c1ea36a59d57279006",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-7/src/08_arfima_analysis.py",
-      "sha256": "3e1ab631bd02017f613328fba82f4032bd888e1f721a1f4b888b157a111dd635",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-7/src/09_regression_tables.py",
-      "sha256": "313ab027ae31d32560f4172d1957621d6b69b0834ee8ec4762414e0123701f6e",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-7/src/config.py",
-      "sha256": "2fe6f1f96329159aff4f2c7c8b76fba39796d1c9ccefd23ae4d042e15701c6ec",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-7/src/main.py",
-      "sha256": "fa2209c95d3f5f7d5dea2f475984d37918ba573c9c70d71c13c311e3f73acbd8",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-7/src/utils.py",
-      "sha256": "5bdf36e1ae0dda1d9f998c7bfba7b5769b908a3bb2a299908b4d6e98e014b7d7",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/Bates.py",
-      "sha256": "ccf5145ee1497bbb01891d6cb0c95803d7d9fd0f61eca537be81afea61f463c2",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/BatesHawkes.py",
-      "sha256": "606810ca162af2b682788b88349b07119117bb3a2ec90e6243e4a344004b5790",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/BatesHawkesExact.py",
-      "sha256": "59f1207c9230e6522c2a0cfa5a66b638b05ab745b8d1c1be7643e1de169f8153",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/benchmarks/benchmark_pricing.py",
-      "sha256": "3ad7d76b0ce58c8c240090e8b87f683e8e5d0bd32ee32db2dfea38255d661bf3",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/BnS.py",
-      "sha256": "07465d4c9ccaac9ea6a4ca28744875747685c88c5a5bb5beb733c6c361a2ef04",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/calibration_core.py",
-      "sha256": "280c2603e19e0096200bb50c772e0f3d52c8929256cbe252be5a28055e10bd8d",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/calibration_workflow.py",
-      "sha256": "c05094e7289c2d40385c7201624d2cd4338636292a4fe4d413c0ab4cadce431d",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/fourier_pricing.py",
-      "sha256": "3e212417d9b1a937f21ebb32e04c41c1883b26c4f5978f2ca3a3f16541a87f38",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/Hawkes.py",
-      "sha256": "afb1b48d86f7a0e00aada1091583f73c21bf3bb1cf6add7cc552bd1178658bbb",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/Heston.py",
-      "sha256": "9d145e9f5a0ddf60fec99be4cca39a2a48ca73cde7089a83c0b8c53f67163794",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/historical_validation.py",
-      "sha256": "19e0a28292b49e993f5408d8ba365dd4738860801f8c6e0b28f705ca24edb6e1",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/lse_dataset.py",
-      "sha256": "ec0078df602252037a1e4f65c0cf8473087e6baa86805139c379eb109c6f0270",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/main.py",
-      "sha256": "c8042519ced867a59619ae0c7582dad9ee2f8170e5e98cce2811e6985f5464e7",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/nss_curve.py",
-      "sha256": "37ff13090289c8c0c238b625091146bea1999bea2ff30c7455fed785d385de47",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/online_validation.py",
-      "sha256": "b393ffc9c1ea3fef8d2fceded206c79e332827c1674c090d759f9ab2ea3a3fe5",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/path_simulation.py",
-      "sha256": "de6aa684eb0937bfb808173b2a2518d9c5c1c2a3be3533736f6a12fc6f4232bc",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/Sampling.py",
-      "sha256": "cc5f0bffa5cc10da35574204fc8b2fe5e283ba39cb1c9b5cebf4e39e617e8ff7",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/tests/test_bates_refactor.py",
-      "sha256": "6cc512dd8cf5434aa67aec4c04e756b6ea6d922b9f4eb9f8c46d3de20feeea49",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/tests/test_hawkes_calibration.py",
-      "sha256": "458ce6d74fef84b37859b2aacb51649b20849a0bbe99091b16bc6ae8c86c9e97",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/tests/test_hawkes_exact.py",
-      "sha256": "4ebb3acc30bc088893f9702792f9c4de1f077d050d0ea882229922a357cce5b5",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/tests/test_historical_validation.py",
-      "sha256": "d0c51948f22c9632cd9b21b1324d6dee7bbf0042a6cd9d1eca00db0c13f33e2f",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/tests/test_lse_dataset.py",
-      "sha256": "6a4e2e743940e3827b5ee009184e9787e4e60cd29282e12efb699e540e2b6150",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/tests/test_path_simulation.py",
-      "sha256": "6cef6a561d516110468f1339376c8dba5b65840c5413c8074577a55391d0a6ed",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/tools/rebuild_bates_notebooks.py",
-      "sha256": "2b8591ee199d546bb6ec4f022458da9f3d48baa6cc960fbf7501a1365dd3eea1",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/tools/rebuild_exact_hawkes_outputs.py",
-      "sha256": "1fc6e2da47a537479464151552c21ff909e1053e27feb137cefc29caba3accfd",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/tools/rebuild_lse_benchmarks.py",
-      "sha256": "268f92c2bfd8481a040847fd68110cf5c3f0f04cfd4e69234dd299f62cede884",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/tools/rebuild_online_validation.py",
-      "sha256": "3713c814ff6b3a8e732f5a6f5492c4ede438928b54281a56ba1797c4ba988d2c",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/tools/rebuild_oos_validation.py",
-      "sha256": "9222bac01cfeb51485b762edc31e2a9fc838c36a595bc6922c7091ab1347ed6d",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8/tools/rebuild_path_outputs.py",
-      "sha256": "3186ddd3f7728024d7e92b1e48f7f1d11ba19f50c7db91ca7e12eb7fdc02de39",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/path_simulation.py",
-      "sha256": "b7c8caff3f82e49b777d9111b3afe9e94983257f9583a9922aac15ec4a399bb2",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/audit_market_data.py",
-      "sha256": "cc0dbdacaf0ea0710452e331bead7e33a201458b6fda2c0a153063b2d507c5bb",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/batch_calibrate.py",
-      "sha256": "74fa06bccae7244126e57d04e46e14dd8a9c222dc898691d4b19fd24326145cd",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/batch_sampling_offline.py",
-      "sha256": "705f8a1c1e27c5fe7bba286f6d019a59524915f1d243ab6d224df22728847907",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/Bates.py",
-      "sha256": "a9cb926366f71ca817a6465f7776052a2014d4ec29b600a9296cdb578fc7f1a5",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/BatesHawkesExact.py",
-      "sha256": "d62b986c4827e0ef82970bb02185c7bdc8866d81ed7ee48c4426bc9d409e4e64",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/BnS.py",
-      "sha256": "9b27e73408bb833cb33b151519bd4ba54ed69e76d5f0d4b5511c3dfcf7c51db7",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/calibrate_one_day.py",
-      "sha256": "2a67eb16b9a9e57ff0380e446d326ffb3233dcf6dd0fd3deca923d6f35a10189",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/calibrate_surface.py",
-      "sha256": "c0f030ae1c843b18d8a9f6b2682767c80b0961ca38e3ab13ab21e5b8ef437b73",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/calibration_core.py",
-      "sha256": "4ad0a8364f8319d831ebd13a5e127d8dab59ba53e8c205e1fa2c82ad8a51d54e",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/compare_sampling_all.py",
-      "sha256": "6d17b8a5ce49ee578857396229247f7eb95c079f6f121acfcf62df702f72da1b",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/fourier_pricing.py",
-      "sha256": "77ec16ff53c7b024f3e50edae8521b58a96b7f3e42e352406bacb6b909adbaab",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/Hawkes.py",
-      "sha256": "76902c2ffe2274e0e4bd68ba177f9e6105b64589714d26a1f4d1d8c0363d4966",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/Heston.py",
-      "sha256": "90b1b973e6546592e05972dd42239e7dd3ae74deece6e44ca6f18536721e4340",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/ibkr_gld_historical_surface.py",
-      "sha256": "abae806f5e0135fc0f848cef898ef0959c523d2ce7f7f5797ca07b9f4c971f7b",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/ibkr_gld_today_surface.py",
-      "sha256": "c87ba35f60713bb298b9c54dea522f8ad0c17482a9ec6b247a0b77dd907fa733",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/make_missing_ibkr_figures.py",
-      "sha256": "73c6a85cf948db0f9e4430a7fa0c6ebe71c8235fe62d2a841f1cc66d045d59cf",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/model_smoke_test.py",
-      "sha256": "46b7efe88cb6c14eb5b579cddccc319c5a19434bc46156d80282addf338d108e",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/oos_validation.py",
-      "sha256": "3deca7df9ee2009a4220fa8f6dd74e84b0366f479f9f6685c5879e4178254a19",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/rates.py",
-      "sha256": "2c69409cd5d5438d2a3979c37f770228c5cc22dcf397a1ede741fc86b486d229",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/rebuild_full_surface_nss.py",
-      "sha256": "639ba91b47aa0620da64bf023587f2dff046a5499a39b94366b863f930336a2f",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/Sampling.py",
-      "sha256": "a81faad14e0d0d28e62ef1482eb277fc1daf9dedd4991d9ae20b27a95e62dbfb",
-      "kind": "code"
-    },
-    {
-      "source": "src/reference/team-8-current/src/surface_builder.py",
-      "sha256": "664cde4c38e53a4597b2990e4ecdc227c8da2067b2668c45e16532b7d95a2ff6",
-      "kind": "code"
-    },
-    {
-      "source": "src/refine_hawkes.py",
-      "sha256": "f5d3f5eab321e8b6fe01f280ee6ca79f4aae8a33dabe74bb545c0a49cd62763a",
-      "kind": "code"
-    },
-    {
-      "source": "src/replay.py",
-      "sha256": "cf04381bf380cce50bda9ddee0b6eaa6f97ee7f038be70cbbe5ce092c0df18df",
-      "kind": "code"
-    },
-    {
-      "source": "src/run_all_thesis_figures.py",
-      "sha256": "5747aead9d32018df01099c5d1a13ff641fce871268470a198b4a21a1aa1ae6d",
-      "kind": "code"
-    },
-    {
-      "source": "src/run_copper_valuation.py",
-      "sha256": "c996a98179b3216e1676cb893d1f5ed93ee6fc7ad056d0573d8fe68adeb66b1e",
-      "kind": "code"
-    },
-    {
-      "source": "src/run_empirical_thesis_figures.py",
-      "sha256": "0820e954667fd11165e1537a76882f329c2d99a8b2e396b44194792f146075fc",
-      "kind": "code"
-    },
-    {
-      "source": "src/run_multimodel_valuation.py",
-      "sha256": "de4096d525dd1e1d3f660e6c383dc6828385603ee0a255c1028c3b2d5fea8e39",
-      "kind": "code"
-    },
-    {
-      "source": "src/run_provisional_valuation.py",
-      "sha256": "35842207b5b1c256e865fe61e84896ff5b1eb181b9749039cea37cf03ceabeff",
-      "kind": "code"
-    },
-    {
-      "source": "src/run_refactored_thesis_figures.py",
-      "sha256": "928bde14bd9d2cae9ddf2a1265235cc6a3e858bdccd086c3bbcd286de284db5f",
-      "kind": "code"
-    },
-    {
-      "source": "src/run_research_snapshot.py",
-      "sha256": "7d36a4cd01c10547656b9a1b853c13dc870fb5987660a9e74f235e781e38a250",
-      "kind": "code"
-    },
-    {
-      "source": "src/test_implementation.py",
-      "sha256": "a9819a9a1ff32f7154d025507af34eb80968b3ba0b10ad94a84901be736181d4",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/__init__.py",
-      "sha256": "a3bb0fe002ef9701b6e61a3328578b76b70e39ff6b4924483c5b970d17a3bcc8",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/audit_completed_physical_panel.py",
-      "sha256": "1cd75798e6556be09ac7b924847b148bdc6aa5958ce6cc92d751e4a587a9cc2d",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/audit_copper_fixed_delivery_history.py",
-      "sha256": "efe720bc39f14f0ac01877d95e798ecd44a3ae748baa43c59bd4d397cfd6ce99",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/audit_copper_panel.py",
-      "sha256": "b4c910db537ab5c7f40be183b4a187cfe7170fc827a991b3ebc4993fdaf42bf8",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/audit_gold_physical_basis.py",
-      "sha256": "d90683c9ae2cf75de219ade7c0cbee558e72444d0bb1da7cdd4133855cb004fb",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/audit_joint_density.py",
-      "sha256": "1d1e0be10d70f7ca3a586295a6c1d1311a0dd56ecd3f2a0cf4038873a85bbfd6",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/audit_lse_us10y_retry.py",
-      "sha256": "58190e957e013a269a80395f6b7c86e33eeced3c339bf6fa8d2024970d25c748",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/audit_thesis_figure_provenance.py",
-      "sha256": "646b8ec6a3da4578cb12db139c8e88ec342df554381957493bef3d1c00944bfc",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/build_copper_physical_history.py",
-      "sha256": "16ecf0179949e56913495c48cadf4d05303d31cf3ce2dc80cb984bab8340e783",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/build_ib_gold_surface.py",
-      "sha256": "7953db8dd9443acb6ffb4a9ea735b2e8fd3b0b8bf5d8f9dda6fea49e11346f3a",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/build_lse_nss_manifest.py",
-      "sha256": "69f30025c2ef5994487b5f0fcf26dfb3e22b84557b7a4d283206eb1dbf65c053",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/build_team4_operating_figures.py",
-      "sha256": "523e49331c26d58cd4a4ca45f6e42374737c82bd667ecf9478b24c48cefcaf7a",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/build_team5_dcf_figure.py",
-      "sha256": "f70d8e484cf8e014f51d51fd398a301724d4a4a952bed4f3487d9aeac7803ae8",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/build_team7_manifests.py",
-      "sha256": "366a0bdf8cebe42b985f2c56be789311d04f6cc84bb2f257ca8e1908b2836bf4",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/build_team7_parity_report.py",
-      "sha256": "266aeaa502749be3ff502bdb4a782465d5c9028cd0a92760d716ae4599bde88e",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/build_team8_oos_r2_figure.py",
-      "sha256": "bdc7294394fe900e5f2725412c05d8da728ad3c590e36425bcd35ecbc10bc07e",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/build_team8_thesis_figures.py",
-      "sha256": "5b002b4ea10288247bbfb254c49c6ade94b14f7102b3727e632936ca1b0666b0",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/calibrate_ib_copper_models.py",
-      "sha256": "c6419a2e0bd4baffa682408817c33a6c4f1ef47e176c310a8783dae2fe81619b",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/calibrate_ib_gold_models.py",
-      "sha256": "02f01546ef8293906f5945ebcb8fc4c3baa976963aa9d41129db93279c2ffd4b",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/calibrate_physical_origin_q.py",
-      "sha256": "312e45b93ab9d6a007ac8c3d48917c880d6910d5dd72089c01249ec123356260",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/check_integrated_marks.py",
-      "sha256": "1e9d064dbb69ad8216aefd5a269b786c8f14c4224d2ce6d39b5b4cc21d0e2120",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/check_origin_warm_start.py",
-      "sha256": "c6a3202654eac6401240803efb2cb108c65f3c4957cac4f813b086a8788c4943",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/check_physical_filter_convergence.py",
-      "sha256": "2c6a283244b7f6defc57b643cbf374a5f7a000e022935aaaead9ab1814498a16",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/fetch_barrick_operating_sources.py",
-      "sha256": "23151cfd7afc19c40f68ca9276d8e2b6e3803be321f1978df191ee64b3280740",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/fetch_empirical_figure_inputs.py",
-      "sha256": "cb0f987e64c441f63cb5d0095ed469a3acfcfe121af33ff1d0e4a539f1a2087c",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/fetch_ib_copper_options.py",
-      "sha256": "b1f00e2a327d870c560d68c839646d3e6ae10a0ea2e90dddea7af535a20ba688",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/fetch_ib_copper_panel.py",
-      "sha256": "16fb683a55ab8de79b49cef0a105ad11482142cb6376a18bb4a4e7c0be722615",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/fetch_ib_copper_strip.py",
-      "sha256": "305b83b48a79fb0cdf376b01f62093e471e5d283ee85d76a0565e739500a25ba",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/fetch_ib_gold_options.py",
-      "sha256": "d0b116ba8bc06d582230c2b08d5522096e16c0faf6d30fe77a2d044932cd6ca0",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/fetch_ib_physical_history.py",
-      "sha256": "d163d6303d2365e7719956e2c88a576859b6ae3d35047d9065094ba024e62754",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/fetch_lse_gold_options.py",
-      "sha256": "dbd643a216859918a7c33f02c58595fc16b5384d3c637a56a1e52d887f7601ea",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/fit_physical_candidates.py",
-      "sha256": "1b3f8db4a12133e9ac7eda376482a995549cc3957195c428e061ee6f96acc5eb",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/fit_physical_gbm_diagnostic.py",
-      "sha256": "0c53f79b24d07b4c80edc540b2fbd520338c2c472ac9e861fc24c340f41d4d81",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/fit_physical_origin_p.py",
-      "sha256": "34f87e4ef38f353437977a35d240ae04683e624998b758b913f0f29611f87a5c",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/lse_barrick_snapshot.py",
-      "sha256": "5374754e858c70be2e39eef934efd76b337b4632e05fb7b65725d06db180c0bd",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/migrate_report_sources.py",
-      "sha256": "f026fadf1ef37eff918d74f30fc55e7c279acb6039599e7a5ad53827f81e2dae",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/package_report.py",
-      "sha256": "d71855551280054b9f3f39c829f6edbf9e1e45d5317019c3f43b4b63abb9e821",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/probe_ib_copper_history.py",
-      "sha256": "8f2e9c3791f2880b4a75766af582e61aaee466ef9c3f1bbff472b67aecf13153",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/recover_gold_origin_surfaces.py",
-      "sha256": "210112f4067e492c0444f6987f7a16b72bf982e9fe65d3d11377dd1ab5241e4d",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/refit_physical_candidates.py",
-      "sha256": "9bf7f09d02ee35c3f885cec30ea0c1f5ed3c65c1b622f9f292c0f1cb49bb30fe",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/run_copper_oos.py",
-      "sha256": "3106c368e1f32622ea53c663eeb7e0ae6041d171d7fa595f8ff1afebf27bea46",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/run_team8_g14.py",
-      "sha256": "b602bfe01c185cc87ccafeb76d6d0b657fa6d79c1c8a63f0944d0d8bf55834b8",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/score_copper_fixed_origin.py",
-      "sha256": "01a6d907a51ee0b14f7d3b20a6920947d90f6018857e3f31dea0e8c2cb859647",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/summarize_physical_origin_runs.py",
-      "sha256": "e42c3483e088fe218914204b308b1b7b574240e2d53f8be0225f33d1b0aa93ad",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/sync_report_delivery.py",
-      "sha256": "284a2331cd718d09a2a34ae557a865b784df994bb358d88388fc8cf4598afc61",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/validate_gbm_physical_origins.py",
-      "sha256": "11b46652234392c3ba4218022cde53618aa1739a46ed05721c29bbc999c36b5e",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/validate_gold_physical_baseline.py",
-      "sha256": "84554ebb3570a25b598c3cb6111494dbccd8cf72decc42c715bbde5539e7fcc4",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/validate_heston_physical_origins.py",
-      "sha256": "19e909170f169d5d7a85b228d7d5151daf8e5a39116b07368811037f3838559b",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/validate_origin_gold_basis.py",
-      "sha256": "42e900242137fd6ccff7e8559c0fac9e472b817a3f81d39cfe9df51911fa1a5b",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/validate_team7_parity.py",
-      "sha256": "ef98f55ea0b7ed0ef3206241581f2ad23e59a2d6af80743d9816ef9a23e1adb5",
-      "kind": "code"
-    },
-    {
-      "source": "src/tools/verify_code010_refactor.py",
-      "sha256": "a12d2fcc336f656a7ddb258beaa1acaa4063ca301febc658ce8a28126012ba2d",
-      "kind": "code"
-    },
-    {
-      "source": "src/unified_cli.py",
-      "sha256": "d6b6bb5bdd35f72216ffb6044294da8ae02216a671dd7b0a938cc6187eff8d41",
-      "kind": "code"
+      "source": "src/04_Valuation_and_Reports.ipynb",
+      "sha256": "522e75be03dacb2de074d19c302245a70d59de6c8d7cabe408de28ffbd19befd",
+      "kind": "document"
     },
     {
       "source": "utilities/chat/README.md",
@@ -1379,7 +319,7 @@
     },
     {
       "source": "utilities/docs/PHYSICAL-FORECAST-PLAN.md",
-      "sha256": "d0193131415ad4415b86296eaf9d66580c3d95bd114af6b5a69614210963e055",
+      "sha256": "f0d8e3afac2b3c049059a64d79908148ef87a5de2a393dcc46cc57e5bb7ba205",
       "kind": "document"
     },
     {
@@ -1393,14 +333,724 @@
       "kind": "document"
     },
     {
+      "source": "utilities/docs/SOURCE-LAYOUT.md",
+      "sha256": "feee0bc1ff5f2ef9fff522ea601fc81671d21c6db717ee0b598cd534fb33ab99",
+      "kind": "document"
+    },
+    {
       "source": "utilities/docs/TEAM8-20260902-REFRESH.md",
       "sha256": "7c62d79b3be401cfe1f2c0d56c1bad9e13a9bc5e05477cb548083311a70cf2a0",
       "kind": "document"
     },
     {
       "source": "utilities/PHYSICAL-FORECAST-PLAN.md",
-      "sha256": "42d0e6dc36145c2121aae75d9e382db4466a50625ae71370725301220555de0c",
+      "sha256": "57dd5d0a1cdb5d37155aae2a6dc115eab548cd47a35b50baccf67180d20cb8ed",
       "kind": "document"
+    },
+    {
+      "source": "utilities/python/audit.py",
+      "sha256": "7fe51554b0daff1c9e5ee059ef17e43ee88147087cfc4d5faea3db5320714f1e",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/__init__.py",
+      "sha256": "d0b0cc70706edb42599ef122558aea3644ba4f498e56ddae824cfb1dd3efa050",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/cli.py",
+      "sha256": "b09ca7ad5022968e771e0e0edc96da9e8139b2d3683dcc49d30cc1ef98dc33df",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/copper.py",
+      "sha256": "95e84248ec679c261b03e307698858824a4a2f525ee9612eb432873feef2915f",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/empirical_figures.py",
+      "sha256": "815bb6d6485255ce4fe7dcedd37d43f4fd23719dd293eacaa87ef73ad570e4f3",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/futures_history.py",
+      "sha256": "4ea2c00977040a82162f9447d67a2441d256b3cf3aee468e56a2c7aa0e313a75",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/gold_basis.py",
+      "sha256": "cb44c7811310cece25e923ebfb9a9bf58a3d72d015e34224e2ef84238f5b5020",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/ib_gold_adapter.py",
+      "sha256": "8c96bc8ee8f5bd58e1656a9c5a9ff629daa86275f7bb23fbfcec6d2cfe724c31",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/ib_gold_calibration.py",
+      "sha256": "c5fa49565b45952e1f0517a4776e47b5cda70dfcb43ed438d42eb9ddca54ce68",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/ib_gold_surface.py",
+      "sha256": "d7f67b5fd6e39a9ddbb117b4cd78aab7ec9cc16a86e3b4c2cab9da2a3d368e00",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/layout.py",
+      "sha256": "aff2334133174c45fa325f25b31f3d03143c84a2bc05f10289791af5f12c865f",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/lse_adapter.py",
+      "sha256": "9d8a5b88107c8b3f357260369cc72bdfaeeb24f62f777ca318e5dfe75c811413",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/market_data.py",
+      "sha256": "2e807b4cd0a69ec3b133ed8205e9c136f88d3b425af7af5053417363625c595a",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/measure_contract.py",
+      "sha256": "0716a826419a4897518c21a4733ed0f2c6ab6977237a4fc0117d2f62a0b4d354",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/multimodel_reporting.py",
+      "sha256": "c7d2b6a0feaed4c0cd9fe09deb3bce9d16166525ba0f2eb9bde674ea766cd405",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/multimodel_valuation.py",
+      "sha256": "408e07ebce824848978c1646959c50996be4b39a1fcfa04827d7ee85e562097e",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/physical_filter.py",
+      "sha256": "91ebcfe0fe1724799a319110748e489e9f2bfa41e50b8cf73ffe8604b165b885",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/physical_gbm.py",
+      "sha256": "c305e6a353f57ecdd9722e4daeffbf1d4cf85d7574c6abbbacc652fc69b20276",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/physical_measure.py",
+      "sha256": "dd21b2ed249ecfd3cd3ec2d7759a9afddb7a9261b7d4bace9ca5c21100f8a9c7",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/physical_oos_summary.py",
+      "sha256": "6f29b75fb302976f9702e8966976cd76b12affac1447b4f5f0d81a3ec5c9e9d3",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/physical_origins.py",
+      "sha256": "82e573082a15aada430887802cb8d5878ac3ad12eaffc788703caab555eb0225",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/physical_paths.py",
+      "sha256": "1328cb4b72d09adf0cfdae945a70f19d7a3f09eaf7d8d01f007fb2a367912b0f",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/project.py",
+      "sha256": "8025daea93421aacdcfe4b57dee3d4c1d50c5664e9395be8933061c3467712c0",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/__init__.py",
+      "sha256": "c98758d49eeb6c1f9988ac36e8467560bd35083106d2fb65a1081c9afa87ea1b",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/application.py",
+      "sha256": "0d38125f931b6eedc07be8f52d95d8403c84e46785c2e0c275dcb8077cfb3e94",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/application_pipeline.py",
+      "sha256": "9af99464ef2519a216cee0f5cbd20cd5469e5334f85b9100522e97c89c15c7ec",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/domain.py",
+      "sha256": "9698ddad592ec50434a775178a144c17c724ae4a5ed537524eecd92ddbf321c1",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/domain_policy.py",
+      "sha256": "cc01604d1d8a45d27379bd009766925ebae1841e09858bb7c95b39576003af42",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/domain_provenance.py",
+      "sha256": "4f2106835ebc5cc802bcf2c2a039a8d6d8871781be101609be6a80febc66a87f",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/domain_time.py",
+      "sha256": "4d1067517c8edd544757915b7801b7e4c3f6143b61417f6cb77358ae62336a11",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/domain_units.py",
+      "sha256": "6e1318f660ed7d933a8c67cf46567d412ba0fe425552067b070311891220e0c6",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/gold.py",
+      "sha256": "efa9af2dd91ec1e4b7ae6331acd6140a697b9a51320ee07f53c4684db56b3ea4",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/gold_base.py",
+      "sha256": "26a23df148d885871f7bf63e2df9cb62cc3062fe450ef2c8afcbfadf21102864",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/gold_bates_hawkes.py",
+      "sha256": "3324b2aa541caf995b578a9878661dbf13746886804269b4e677c5bf8fd780fa",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/gold_bates_poisson.py",
+      "sha256": "793e0e4f42fb0ec2d2a798661e2e51a405d5265f9d165996f44c7ec5083d70f2",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/gold_black_scholes.py",
+      "sha256": "7828da898e0effe36eaaafc1797c5a4ab96e47350952526d39e29460551e94f8",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/gold_heston.py",
+      "sha256": "8350585a25627ec1b61d3884ba16bfe2d0b14ed176ec8ede388325b57966c4d6",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/gold_registry.py",
+      "sha256": "96bcb37c9743795eed8e6e5b15b75ace3ed0de8b944ed38d88629018b6a60cc4",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/operations.py",
+      "sha256": "379eea528f37c3f562ca74535e08601c84df671cff754e84ecbd8e4ec6fb8e7d",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/operations_costs.py",
+      "sha256": "17d153f1e2fd3a3c695e17bc60dfc95a662e56ecc5717ed3e7c1878750409bae",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/operations_margin.py",
+      "sha256": "05809eda9fce961d29b1b8b10fa59db81cd26bf4fa99fe6827c363ee7ad5f452",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/operations_production.py",
+      "sha256": "0e75dd8a771e84ae71e29ecdadef339dfd51c341c26ca2adfbe46dd1f38ff3b4",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/operations_projection.py",
+      "sha256": "fd687fafd3d39ae13d9691597cf42229a46c729845706d42b93cfc20e027bf9d",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/reporting.py",
+      "sha256": "e129ba943588e1a811ac54a2bfa0cf2b9b817356cdff22677adb7710dd6a9d49",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/reporting_figures.py",
+      "sha256": "c6f69b9a2a91feadc554bae99a7b3e9712811bb05ada069dfc74b872095624e7",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/simulation.py",
+      "sha256": "c723c43c7345de446eea4aa6d931f523f9ede19450babb970c6ccf00042627d5",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/simulation_engine.py",
+      "sha256": "19fd72a5fc5d0249e256c300f90709044d3277cb1603c1f3f20c966accf21873",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/simulation_randomness.py",
+      "sha256": "e77555076aeb0e583fe898b27ab86564484c1f6089ad5555d7e16a7f7b2fe5cb",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/valuation.py",
+      "sha256": "0009189e34404e0946f7c32cb894f07d247afa71460188e24566618f5faa9556",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/valuation_dcf.py",
+      "sha256": "eafb4e79dacf80aa4e8dc24e60fc905eaf397e4b932d23250fa53b4d55fe3008",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/valuation_equity_bridge.py",
+      "sha256": "58a22ce2ae61c1a8c71b29ee8d425d7f63ebeb17ae5fa9403507989d0a645e82",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/refactored/valuation_wacc.py",
+      "sha256": "a80c67ae53608cf8f92683942d3f0a3a8a4957d67ac0b0ca780b97864abd61d8",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/research_snapshot.py",
+      "sha256": "efdeeac9eb3a32d4486b9ba97888d4428f1799d60c9381bc21dd9bcfb72c43ae",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/team4_operating_figures.py",
+      "sha256": "e72ee231f50e1b4c9c09e457cecb87d8afb148ecdf86ce9328cf2fbd2c395f3d",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/team8_option_audit.py",
+      "sha256": "81d2b158c520ee8b5e03db4390cdd03fcd30e4b9ae799dccd1b45388bea03f8f",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/team8_rate_curve.py",
+      "sha256": "1b4944f9c015d9454838f418dfdccd8eb7f581ce7d1cd05fdc5da191313b8a93",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/valuation.py",
+      "sha256": "41fbbd7aac1a50774d77040317cdf3d5290b4448f061982837a9b7e39a6e9208",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/valuation_clock.py",
+      "sha256": "899708ce445fed5740245dc41fafb965ec021b2b58b30ee1fb0eb672bc31c484",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/barrick_unified/valuation_reporting.py",
+      "sha256": "1c7a8ab29122d998d6617435a8fabec07fce5d3c411aa1cc3292a10d11b4f93c",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/build_audited_results.py",
+      "sha256": "eea3f0f56f8cebb52ffaa7b6b603af833c7d8ce2ec782cf17e5d2689ba7cebc5",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/build_proxy_results.py",
+      "sha256": "98a65a2babdb43b17cbccb7dafb5e07ed2dc5a07c517e7d54d17e2436c59faac",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/main.py",
+      "sha256": "1476a8b2d4acfb5a1915560d4ede10e5732bf787e9ac47def941eaca8a4a3f1a",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/numerical_sensitivity.py",
+      "sha256": "d9bd48dc7774ba725e330daf712f1b47cb61ef38f632ad962f2a9d1540b71fca",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/paper_cli.py",
+      "sha256": "99cfe27ff9aad86aed9e49582a5adec04ced4a432a9038424c0a90331bf8d52f",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/pricing/Bates.py",
+      "sha256": "b004f5ae0c8641545f6f7fced928f247b62ee91838ce8e83ac6395a95d377bea",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/pricing/BatesHawkesExact.py",
+      "sha256": "425542194c56a21a0fe30c6bedcb773b854e3fb8da4dec878a3ac4315fe0c469",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/pricing/BnS.py",
+      "sha256": "9b27e73408bb833cb33b151519bd4ba54ed69e76d5f0d4b5511c3dfcf7c51db7",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/pricing/calibrate_one_day.py",
+      "sha256": "4c03cbf20076fe9368c0c5e9d344e1ccec4c7032d778575bdc3841f51a39adce",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/pricing/calibrate_surface.py",
+      "sha256": "1396edb6b3273181003777009f63545fced667452bc461c269efcb3672adde39",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/pricing/calibration_core.py",
+      "sha256": "9f05d0ff920d04014427366782fe54ccd26f82a92f9e04197d27d14468bd4562",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/pricing/dated_initialization.py",
+      "sha256": "6ac044b398baace02206b63ef0e437bb99f234d3a756aaf9a15f4a762b3f8263",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/pricing/fourier_pricing.py",
+      "sha256": "77ec16ff53c7b024f3e50edae8521b58a96b7f3e42e352406bacb6b909adbaab",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/pricing/Hawkes.py",
+      "sha256": "a4f671f207069d5207d612a6962174a9e8f019030f81e17ef74df186de5a2c39",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/pricing/Heston.py",
+      "sha256": "b972cce17480a495c9c2e8e3ae3b7c02b732d4d3fd0885b8a62ea7afdf569ede",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/pricing/oos_validation.py",
+      "sha256": "25328195f29ce90b683570009a350acfe24bfe2abd71b96cd23269d8f34cd282",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/pricing/rates.py",
+      "sha256": "2c69409cd5d5438d2a3979c37f770228c5cc22dcf397a1ede741fc86b486d229",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/pricing/Sampling.py",
+      "sha256": "a81faad14e0d0d28e62ef1482eb277fc1daf9dedd4991d9ae20b27a95e62dbfb",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/pricing/surface_builder.py",
+      "sha256": "664cde4c38e53a4597b2990e4ecdc227c8da2067b2668c45e16532b7d95a2ff6",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/README.md",
+      "sha256": "a7270ed660b951873c06dd8a218475d1b81f7b95cfca6aaed01c5fc650d0ce3e",
+      "kind": "document"
+    },
+    {
+      "source": "utilities/python/refine_hawkes.py",
+      "sha256": "db8fcb0e75356870bc3ccb707424808f904f7f2423aabf354240d19cf6d4be99",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/replay.py",
+      "sha256": "c474527dfd7a7da873a1a5babcaf3cc6b9000aaddd43582bdfc873b60f592ccd",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/run_all_thesis_figures.py",
+      "sha256": "9cfc0d53df7d819b774decef82366dd39617a1fa961c6298914aec653fa73c94",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/run_copper_valuation.py",
+      "sha256": "1fba0717acf10559188365cacb7f79541346b35ac5441b76050624075a47a804",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/run_empirical_thesis_figures.py",
+      "sha256": "62673bc32d5506bb7c4c92c450baa77b4937ce5a1e06a13fa7eb490f67e69e7f",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/run_multimodel_valuation.py",
+      "sha256": "a85885e86b7c1d5b07378b75724c7e2a73d1a170214ab2ef1679088664bb227d",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/run_provisional_valuation.py",
+      "sha256": "35842207b5b1c256e865fe61e84896ff5b1eb181b9749039cea37cf03ceabeff",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/run_refactored_thesis_figures.py",
+      "sha256": "94227c82d1f2a26100572d6e4ba95eea888794176979c3d524e7308f2cad4d96",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/run_research_snapshot.py",
+      "sha256": "47743eb4d4821aa68dabb9163fdf53d69eea26f07d3a2d078ab979bc43ff4ebe",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/test_implementation.py",
+      "sha256": "3cb718fca2a40cc1a5773becb3c4df482c20d2dc09a398bd426587a7dfed4a0e",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/__init__.py",
+      "sha256": "a3bb0fe002ef9701b6e61a3328578b76b70e39ff6b4924483c5b970d17a3bcc8",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/audit_completed_physical_panel.py",
+      "sha256": "1cd75798e6556be09ac7b924847b148bdc6aa5958ce6cc92d751e4a587a9cc2d",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/audit_copper_fixed_delivery_history.py",
+      "sha256": "efe720bc39f14f0ac01877d95e798ecd44a3ae748baa43c59bd4d397cfd6ce99",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/audit_copper_panel.py",
+      "sha256": "ccdf2576b6a3a074e4e50e00e198e1b4fac990d668d60fb69d2b426ca21546b7",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/audit_gold_physical_basis.py",
+      "sha256": "d90683c9ae2cf75de219ade7c0cbee558e72444d0bb1da7cdd4133855cb004fb",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/audit_joint_density.py",
+      "sha256": "dd083d6f23a35428908ae69366f20a9a4970c23251358a829f9e955fc15df55b",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/audit_lse_us10y_retry.py",
+      "sha256": "58190e957e013a269a80395f6b7c86e33eeced3c339bf6fa8d2024970d25c748",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/audit_thesis_figure_provenance.py",
+      "sha256": "3961d4a49c44c34292da1ebfa6922ffc464f0eb946608baf6e035a76e225dff1",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/build_copper_physical_history.py",
+      "sha256": "b31ba8ce6167da3c2dfec3a4642af390fb32d88f7a57d3fafeb2719272d35604",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/build_ib_gold_surface.py",
+      "sha256": "bdf3428cc81b3f4fd8124871d620966cdb06ee5d70fd10e2d96b5ba5c96402b5",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/build_lse_nss_manifest.py",
+      "sha256": "e3d364bbd1c3ddbc0ef862b99c8a9e4201ca1f032d6e09d7827039162c43c7b3",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/build_team4_operating_figures.py",
+      "sha256": "4ebb48b24bde9c33b95c40392eb1e2d005c5884ec985f4699b6172b1703223d2",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/build_team5_dcf_figure.py",
+      "sha256": "0d7d4da19910a07a831537440ee50a2b98f3809a801467e466cb1bcd3e967d20",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/build_team7_manifests.py",
+      "sha256": "2a5d617c2ff7cb49a2681225a3fa5ace4f77db64dddbe2ef9507fc3b85890be6",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/build_team7_parity_report.py",
+      "sha256": "266aeaa502749be3ff502bdb4a782465d5c9028cd0a92760d716ae4599bde88e",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/build_team8_oos_r2_figure.py",
+      "sha256": "099a00cb52220d4851de89bf105aa7206ebdd2e3875ba19acecad3bfb6ad7f6e",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/build_team8_thesis_figures.py",
+      "sha256": "3ad9accc438bbe9601153fb08cc123274472710b6b2b6ad9489bbc07d712266c",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/calibrate_ib_copper_models.py",
+      "sha256": "7141cf538cfc48b0fddf4d6d843c03bb2a864c0acfa703336d3f48a8d0bd7980",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/calibrate_ib_gold_models.py",
+      "sha256": "061dd966f9ba19fc683642262c4158e22163bee0049fee6498f1ef757e8d14e7",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/calibrate_physical_origin_q.py",
+      "sha256": "54c099d084159cebf65ae8feccf6f475fb798c0dd0a00d9b06a2821a6bfb953b",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/check_integrated_marks.py",
+      "sha256": "34898dae77de00b537b9b8ca660ae26ff2467258ee33d1c407e443813d9b6993",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/check_origin_warm_start.py",
+      "sha256": "c6a3202654eac6401240803efb2cb108c65f3c4957cac4f813b086a8788c4943",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/check_physical_filter_convergence.py",
+      "sha256": "2c6a283244b7f6defc57b643cbf374a5f7a000e022935aaaead9ab1814498a16",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/fetch_barrick_operating_sources.py",
+      "sha256": "23151cfd7afc19c40f68ca9276d8e2b6e3803be321f1978df191ee64b3280740",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/fetch_empirical_figure_inputs.py",
+      "sha256": "cff3b3c546aff991de4a793a6506395b176646b867b7bfe0a418dbe60ad99eeb",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/fetch_ib_copper_options.py",
+      "sha256": "8d7233224659f9d879680913c9c99b65db46838f8ff5d78adefafafca4bd61ab",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/fetch_ib_copper_panel.py",
+      "sha256": "e8c6b603273240759695f5cc723db6d70f90e9880ff547a180ef00a0b1543502",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/fetch_ib_copper_strip.py",
+      "sha256": "b8a65498cc41412728177cf68fc752161b9966b27158847c7d254c8fdaa26a46",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/fetch_ib_gold_options.py",
+      "sha256": "f524bdc792c0d91f2a111291575e68ec39ff110f806713346c939ad2b7f64478",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/fetch_ib_physical_history.py",
+      "sha256": "d163d6303d2365e7719956e2c88a576859b6ae3d35047d9065094ba024e62754",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/fetch_lse_gold_options.py",
+      "sha256": "676fbcf44ad68571c03451a6fdee17154c7bff5a0621b37f60446417594a8ccb",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/fit_physical_candidates.py",
+      "sha256": "ed3258c340c7b9f12c734502816c3c4f2189c55abcdb9d0f201eb9e1fc613117",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/fit_physical_gbm_diagnostic.py",
+      "sha256": "183e1757e3aa8f71802f483c3fc46edebb9765f26a95317d2f84e5dc8f056b42",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/fit_physical_origin_p.py",
+      "sha256": "c5dc452fbfdda9eaa8911e7705d10d5e6fdc16d9e718ddc488062b0c81a071a2",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/lse_barrick_snapshot.py",
+      "sha256": "5374754e858c70be2e39eef934efd76b337b4632e05fb7b65725d06db180c0bd",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/migrate_report_sources.py",
+      "sha256": "f026fadf1ef37eff918d74f30fc55e7c279acb6039599e7a5ad53827f81e2dae",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/package_report.py",
+      "sha256": "d71855551280054b9f3f39c829f6edbf9e1e45d5317019c3f43b4b63abb9e821",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/probe_ib_copper_history.py",
+      "sha256": "028a81b8ff03f88ec4cf2c87452cfcb7acc7f209356319c7fc960258606d342e",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/recover_gold_origin_surfaces.py",
+      "sha256": "b26c32fb033cb265dcf69f0d5ff5a2c16894f3cd7175eb969f15839af458ffb6",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/refit_physical_candidates.py",
+      "sha256": "9bf7f09d02ee35c3f885cec30ea0c1f5ed3c65c1b622f9f292c0f1cb49bb30fe",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/run_copper_oos.py",
+      "sha256": "5e3bec9053e16a20dc0bf618c497ad8609566da8b58d870c65446229bcc8a6d6",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/run_team8_g14.py",
+      "sha256": "81090200833e2cc9016f2897d68435302267014fb30a881e3591538498994398",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/score_copper_fixed_origin.py",
+      "sha256": "01a6d907a51ee0b14f7d3b20a6920947d90f6018857e3f31dea0e8c2cb859647",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/summarize_physical_origin_runs.py",
+      "sha256": "a743404b7ca3b04fd81f79bc85cbb6c00c9756b9358118b4dc2ad1cff5d63090",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/sync_report_delivery.py",
+      "sha256": "284a2331cd718d09a2a34ae557a865b784df994bb358d88388fc8cf4598afc61",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/validate_gbm_physical_origins.py",
+      "sha256": "11b46652234392c3ba4218022cde53618aa1739a46ed05721c29bbc999c36b5e",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/validate_gold_physical_baseline.py",
+      "sha256": "88efc0c5e37d1bc96c8bc9869eaef5342dd95109d0f3af0d382fbdac68d8ca85",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/validate_heston_physical_origins.py",
+      "sha256": "a180c8019b8564b3347b99d2e1d81cfdecff08b7652c66d4d69cf0e3316ded4b",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/validate_origin_gold_basis.py",
+      "sha256": "e741dc5f16eef0eb7fb29aa38632ebdaf9ae4ea241843b4850338eb0a08e138b",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/validate_team7_parity.py",
+      "sha256": "ef98f55ea0b7ed0ef3206241581f2ad23e59a2d6af80743d9816ef9a23e1adb5",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/tools/verify_code010_refactor.py",
+      "sha256": "b3d7120e32620e211be80929e02e41af2e2969c088d9a8c00f311f250c1bcfed",
+      "kind": "code"
+    },
+    {
+      "source": "utilities/python/unified_cli.py",
+      "sha256": "d6b6bb5bdd35f72216ffb6044294da8ae02216a671dd7b0a938cc6187eff8d41",
+      "kind": "code"
     },
     {
       "source": "utilities/tests/conftest.py",
@@ -1408,8 +1058,13 @@
       "kind": "code"
     },
     {
+      "source": "utilities/tests/test_artifact_scan.py",
+      "sha256": "181ccc4b031af015a495f60d224ef3c209816631658c390085e9fbd695374677",
+      "kind": "code"
+    },
+    {
       "source": "utilities/tests/test_calibration_safeguards.py",
-      "sha256": "82b484e896583a009cd6c38b1d649ff0d027e04da0f3034fbb85cb57807123a3",
+      "sha256": "55191c80bb87bf174a4f1fa88442c0541e7887468307c5cbcdae9797b1905c6d",
       "kind": "code"
     },
     {
@@ -1429,12 +1084,12 @@
     },
     {
       "source": "utilities/tests/test_copper_temporal_oos.py",
-      "sha256": "42d395da13cc957c845668e2f3c36187471be3d8a50ba7394182a101d521bc47",
+      "sha256": "e76a9a03fc77ac925dbf0c915ebd97eaa86dfd9705f68b20df193be4e6175ceb",
       "kind": "code"
     },
     {
       "source": "utilities/tests/test_dated_warm_start.py",
-      "sha256": "aea1796c29612a8bb91466e32ac09bc00f0f79c51abf67adb33bac8d519bc82a",
+      "sha256": "0e3aeb1520a177e56dc34a0e5e246721671f589efb67238a22036a48bd7954a2",
       "kind": "code"
     },
     {
@@ -1454,7 +1109,7 @@
     },
     {
       "source": "utilities/tests/test_handoff_structure.py",
-      "sha256": "f990b9f5a77448d5daba25ce039638815341d134d4881e3884b9008bfd81e0ad",
+      "sha256": "61b93099859ca45a59cfaf1da6432f167654a4251f5fe2b4ce3140d8e958ed9a",
       "kind": "code"
     },
     {
@@ -1489,17 +1144,17 @@
     },
     {
       "source": "utilities/tests/test_measure_contract.py",
-      "sha256": "4d267996679d8f32af78af2fa787ea029231634a8509c107ca4d192ab752d892",
+      "sha256": "6653529cb827cc048fa560c7257141cbe7ab3cb861269a7efc3150e063939f7b",
       "kind": "code"
     },
     {
       "source": "utilities/tests/test_multimodel_valuation.py",
-      "sha256": "03180f63c0bb6840a2b2e3ea3cd0c5eea792cc5bf7809c65996c5fb25df0b538",
+      "sha256": "4746691e4b224c8d0d20704f201d6d533ec4f005734b6eaa5d0fc355846373b5",
       "kind": "code"
     },
     {
       "source": "utilities/tests/test_nss_curve.py",
-      "sha256": "6eb8fdb3d6aec68edb838a93397e7ad8124172cb6a90eb3131c422e1d217d57e",
+      "sha256": "51b3056442199deb6c51bf0ea3a8dda241bbf25b70f206376e43d9d7da4d91b0",
       "kind": "code"
     },
     {
@@ -1534,17 +1189,17 @@
     },
     {
       "source": "utilities/tests/test_pricing_entrypoints.py",
-      "sha256": "72d0ee4d9cb20ca066ef450db78b0b604fd0e21467ba7c65f4eab2a9e376b154",
+      "sha256": "174a840f88e6e960526b50d899865ba84eb2099f1d6e12a2c72f23820ac906d2",
       "kind": "code"
     },
     {
       "source": "utilities/tests/test_provisional_valuation.py",
-      "sha256": "c9f066977b8c4586429d4061883e06fb251a4f0e4ced912042ad42c07e44d0df",
+      "sha256": "372f420964d73d8a42d013e13e49df948a81c837ed308dc8a20024c03fdabe9c",
       "kind": "code"
     },
     {
       "source": "utilities/tests/test_refactored_pipeline.py",
-      "sha256": "334084f2d9643f9f695c2130eaed4f9de65b72f8c704da9479eab8b90e5bb0d4",
+      "sha256": "3155f7d9656872a94a246fc5e9b615f333a8ab063750732fb899d86ee816f877",
       "kind": "code"
     },
     {
@@ -1554,12 +1209,12 @@
     },
     {
       "source": "utilities/tests/test_research_snapshot.py",
-      "sha256": "6bba0401b68bcb2b8db4a42e0ae162089a72bc1350daeeec8bdfa487ecf808fd",
+      "sha256": "69a1ecd4f9fc398583c503eda67d5c6bef7d80c743ae17167b13d555953e0426",
       "kind": "code"
     },
     {
       "source": "utilities/tests/test_shared_infrastructure.py",
-      "sha256": "ae54a36808a66d3439c844cccec9ea65daeaf88a429915e2880cba9e0193cb57",
+      "sha256": "453c706ea84b3560631e972c0c17e5357afc0037c254312c7ad49e6986c6e48d",
       "kind": "code"
     },
     {
@@ -1579,7 +1234,7 @@
     },
     {
       "source": "utilities/tests/test_valuation_assumption_dashboard.py",
-      "sha256": "de9f2191f277d90deef1cdbc4013c7a7304684644b802eff7eaa5baf596ce9f2",
+      "sha256": "8ffcb455f888d63b353b86afe737cc71a24dd11bcb7793409ccb0683438ddd43",
       "kind": "code"
     },
     {

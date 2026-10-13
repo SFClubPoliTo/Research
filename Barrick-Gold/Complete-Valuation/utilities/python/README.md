@@ -1,0 +1,29 @@
+# Source inventory
+
+Application code lives in `barrick_unified/`. Repository-root entry points orchestrate these modules; licensed raw observations are not source assets.
+
+| Module | Responsibility |
+| --- | --- |
+| `cli.py` | `status`, `test` and named `run` dispatch. |
+| `project.py` | Project discovery, handoff audit and entry points. |
+| `market_data.py` | Canonical schemas and validation. |
+| `lse_adapter.py` | Historical provider-data adaptation. |
+| `research_snapshot.py` | Dated snapshot assembly and provenance. |
+| `empirical_figures.py` | Historical market/econometric figures. |
+| `ib_gold_adapter.py` | Experimental futures-option acquisition, not the admitted GLD valuation input. |
+| `ib_gold_surface.py` | Experimental futures-option surface checks. |
+| `ib_gold_calibration.py` | Experimental futures-option calibration. |
+| `team8_option_audit.py` | Surface and calibration audit. |
+| `team8_rate_curve.py` | Treasury/NSS interface. |
+| `team4_operating_figures.py` | Operating actuals/forecast figures. |
+| `valuation.py` | Common operating, DCF, WACC and equity-proxy contract. |
+| `valuation_reporting.py` | Single-configuration reporting. |
+| `multimodel_valuation.py` | Four-engine comparison with identical non-gold inputs. |
+| `multimodel_reporting.py` | Tables, figures and byte-hashed manifests. |
+| `__init__.py` | Package boundary. |
+
+`refactored/` is a flat module package: filename prefixes identify application, domain, gold, operations, simulation, valuation and reporting responsibilities. Its gold adapters are checked against the legacy engine using deterministic array-equality tests. Historical and September snapshots remain separate; production guards reject conflicting cached engines.
+
+This directory contains the shared executable Python implementation. Original sources live in `utilities/reference`; their bytes are preserved for parity. The five numbered notebooks in `src` provide the user-facing workflow, without duplicated pricing or Q/P implementations.
+
+Editable-install `*.egg-info/` is local build metadata, not authored source. See the [root README](../../README.md) for setup and outputs.

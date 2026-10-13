@@ -193,7 +193,7 @@ def test_cli_writes_complete_outputs_to_requested_root(tmp_path: Path) -> None:
     completed = subprocess.run(
         [
             sys.executable,
-            str(PROJECT_ROOT / 'src/run_provisional_valuation.py'),
+            str(PROJECT_ROOT / 'utilities/python/run_provisional_valuation.py'),
             "--run-id",
             run_id,
             "--output-root",

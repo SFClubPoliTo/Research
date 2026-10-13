@@ -219,7 +219,7 @@ def test_ambiguous_or_incomplete_contract_fails_closed(
 def test_team8_module_cache_rejects_another_source_tree(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    source = PROJECT_ROOT / 'src/reference' / "team-8"
+    source = PROJECT_ROOT / 'utilities/reference' / "team-8"
     load_team8_path_module(source)
     fake_dependency = type("Fake", (), {"__file__": str(tmp_path / "Hawkes.py")})()
     monkeypatch.setitem(sys.modules, "Hawkes", fake_dependency)
@@ -274,7 +274,7 @@ def test_cli_end_to_end_and_refuses_overwrite(tmp_path: Path, small_config: dict
     environment.pop("PYTHONPATH", None)
     command = [
         sys.executable,
-        str(PROJECT_ROOT / 'src/run_multimodel_valuation.py'),
+        str(PROJECT_ROOT / 'utilities/python/run_multimodel_valuation.py'),
         "--config",
         str(config_path),
         "--run-id",

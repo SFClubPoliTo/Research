@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 
 from barrick_unified.valuation import ValuationInputs
-from barrick_unified.refactored.valuation.wacc import WACCProcess
+from barrick_unified.refactored.valuation_wacc import WACCProcess
 
 
 ROOT = next(p for p in Path(__file__).resolve().parents if (p/'pyproject.toml').is_file())

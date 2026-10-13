@@ -1,0 +1,28 @@
+{
+  "scope": "Local repository status I/O only; not a model calibration benchmark",
+  "source_freezes_unchanged": 223,
+  "timings": {
+    "five_recursive_scans": {
+      "median_seconds": 0.15822209999896586,
+      "observations_seconds": [
+        0.1641943999857176,
+        0.16866329999174923,
+        0.15598929999396205,
+        0.15182489997823723,
+        0.15822209999896586
+      ],
+      "findings": []
+    },
+    "single_pruned_scan": {
+      "median_seconds": 0.01753789998474531,
+      "observations_seconds": [
+        0.01754980001715012,
+        0.01752759999362752,
+        0.01753789998474531,
+        0.017473100015195087,
+        0.017538099986268207
+      ],
+      "findings": []
+    }
+  }
+}
