@@ -11,3 +11,5 @@ test-temp-parent/
 *.egg-info/
 **/.ipynb_checkpoints/
 .env
+utilities/
+tests/
