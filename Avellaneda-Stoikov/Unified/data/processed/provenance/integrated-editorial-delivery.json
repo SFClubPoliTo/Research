@@ -1,0 +1,35 @@
+{
+  "zip": "Drive/Market_Making_completo_Overleaf_revisionati.zip",
+  "zip_sha256": "6314925b268c6bd50ebd5cf4537a3800c6ae6394f19919f4743e7214dfb7273a",
+  "zip_files": 42,
+  "directories": [
+    "chapters",
+    "img"
+  ],
+  "root_files": [
+    "paper.tex",
+    "unificato.tex",
+    "Copertina_research.pdf"
+  ],
+  "compiler": "pdfLaTeX",
+  "versions": [
+    {
+      "edition": "paper",
+      "pages": 8,
+      "sha256": "02cc57f61fcfcec7785698239d02abf69dfad4d4cb3e4c7c3dff313382caea76",
+      "undefined": false,
+      "overfull": 0,
+      "zip_files": 6,
+      "independent_import_text_and_all_page_pixels_identical": true
+    },
+    {
+      "edition": "unificato",
+      "pages": 85,
+      "sha256": "60e52492448c31a273d628dda559beb422f02e1df00ad68fcc67d5272b6d76a0",
+      "undefined": false,
+      "overfull": 0,
+      "zip_files": 39,
+      "independent_import_text_and_all_page_pixels_identical": true
+    }
+  ]
+}

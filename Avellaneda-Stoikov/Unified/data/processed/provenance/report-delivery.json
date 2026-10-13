@@ -1,0 +1,16 @@
+[
+  {
+    "edition": "unificato",
+    "sha256": "60e52492448c31a273d628dda559beb422f02e1df00ad68fcc67d5272b6d76a0",
+    "zip_files": 39,
+    "undefined": false,
+    "overfull": 0
+  },
+  {
+    "edition": "paper",
+    "sha256": "02cc57f61fcfcec7785698239d02abf69dfad4d4cb3e4c7c3dff313382caea76",
+    "zip_files": 6,
+    "undefined": false,
+    "overfull": 0
+  }
+]

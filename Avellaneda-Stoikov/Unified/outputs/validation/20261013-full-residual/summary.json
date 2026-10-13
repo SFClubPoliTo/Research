@@ -1,0 +1,29 @@
+{
+  "seed": 20261013,
+  "samples": 1500,
+  "interior_samples": 1379,
+  "all_finite": true,
+  "policy_source_sha256": "56084a70d51c21c3d3fc0442f17c3ba4861c41a6b32b45423af8922729a89cf2",
+  "reduced_sum": {
+    "rms": 0.00463808057521644,
+    "max_abs": 0.015606630770962582,
+    "mean": -0.0034281139093140997
+  },
+  "full_separate": {
+    "rms": 2.481439609268112,
+    "max_abs": 10.208533888695275,
+    "mean": -0.11671241881907929
+  },
+  "full_covariance_proxy": {
+    "rms": 5.069319918249445,
+    "max_abs": 29.031313006815395,
+    "mean": 0.8350735002285445
+  },
+  "derivatives": "Cubic time/state spline baseline; analytic covariance gradient/Hessian and time derivative; full nonlinear arrivals and factor correlations",
+  "limitations": [
+    "Derivative reconstruction is not an independently converged reference solution",
+    "No derivative/simulation convergence certificate",
+    "No fitted P3",
+    "Residual change is not economic objective improvement"
+  ]
+}

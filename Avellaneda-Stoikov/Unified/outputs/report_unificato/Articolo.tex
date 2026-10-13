@@ -1,0 +1,159 @@
+% Main document: unificato.tex | Compiler: pdfLaTeX
+% Preamble and layout settings are below; content files are in chapters/.
+\documentclass[a4paper,10pt,titlepage,oneside,openany]{book}
+% Document class is set in the root main file.
+
+% ===== Pacchetti =====
+\usepackage[skip=6pt]{parskip}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{changepage} % per adjustwidth in pseudocode
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{pdfpages}
+\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=blue]{hyperref}
+\usepackage{etoolbox}   % patch capitoli
+\usepackage{ragged2e}   % per \justifying
+
+% Giustificazione e no-indent di default su tutto il documento
+\AtBeginDocument{\justifying}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% -------------------------------
+% Da cambiare quando si copia il template in \graphicspath{{img/}}
+% -------------------------------
+\graphicspath{{img/}}
+
+% ===== Header / Footer =====
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{Starting Finance Club PoliTo}}
+\fancyhead[R]{\includegraphics[width=1cm]{img/Logo_SFClub_Polito.png}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\headheight}{25pt}
+\setlength{\headsep}{24pt} % spazio sotto l'header
+
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyhead[L]{\textbf{Starting Finance Club PoliTo}}
+  \fancyhead[R]{\includegraphics[width=1cm]{img/Logo_SFClub_Polito.png}}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+}
+
+% ===== Ambienti theorem ecc. =====
+\theoremstyle{plain}\newtheorem{theorem}{Theorem}[chapter]
+\theoremstyle{definition}\newtheorem{definition}{Definition}[chapter]
+\newtheorem{notation}{Notation}[chapter]
+\theoremstyle{remark}\newtheorem{remark}{Remark}[chapter]
+
+\newenvironment{pseudocode}{\par\small\ttfamily\begin{adjustwidth}{1em}{1em}}{\end{adjustwidth}\par}
+
+\newenvironment{tightabstract}[1][0.88]{%
+  \begin{center}
+  \begin{tcolorbox}[title={Abstract}, width=#1\textwidth, left=5mm, right=5mm,
+    colback=white, boxrule=0.4pt]
+  \small\justifying
+}{%
+  \end{tcolorbox}
+  \end{center}
+}
+
+% Bibliography come chapter* + TOC + header
+
+\makeatletter
+\newenvironment{references}{%
+  \chapter*{Bibliography}%
+  \addcontentsline{toc}{chapter}{Bibliography}%
+  \markboth{Bibliography}{Bibliography}%
+  \list{\@biblabel{\@arabic\c@enumiv}}{%
+    \settowidth\labelwidth{\@biblabel{99}}%
+    \leftmargin\labelwidth
+    \advance\leftmargin\labelsep
+    \@openbib@code
+    \usecounter{enumiv}%
+    \let\p@enumiv\@empty
+    \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+  \sloppy
+  \clubpenalty4000
+  \@clubpenalty\clubpenalty
+  \widowpenalty4000
+  \sfcode`\.\@m
+}{%
+  \def\@noitemerr{\@latex@warning{Empty `references' environment}}%
+  \endlist
+}
+\makeatother
+
+% ===== Fix capitoli: -18pt e dimensioni numeriche =====
+\makeatletter
+\patchcmd{\@makechapterhead}{\vspace*{50\p@}}{\vspace*{-18\p@}}{}{}
+\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{\vspace*{-18\p@}}{}{}
+\patchcmd{\@makechapterhead}{\huge}{\fontsize{17}{20}\selectfont\bfseries}{}{}
+\patchcmd{\@makechapterhead}{\Huge}{\fontsize{20}{24}\selectfont\bfseries}{}{}
+\patchcmd{\@makeschapterhead}{\Huge}{\fontsize{20}{24}\selectfont\bfseries}{}{}
+\patchcmd{\@makechapterhead}{\vskip 20\p@}{\vskip 6\p@}{}{}
+\patchcmd{\@makechapterhead}{\vskip 40\p@}{\vskip 10\p@}{}{}
+\patchcmd{\@makeschapterhead}{\vskip 40\p@}{\vskip 10\p@}{}{}
+\makeatother
+
+% ===============================
+\newcommand{\miniabstract}[1]{\begin{tcolorbox}[colback=gray!6,colframe=black!15,boxrule=0.3pt]\small\textit{Mini-abstract.} #1\end{tcolorbox}}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[ruled,vlined]{algorithm2e}
+\newcommand{\textcite}[1]{\cite{#1}}
+\newcommand{\parencite}[1]{\cite{#1}}
+\newtheorem{proposition}{Proposition}[chapter]
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\Texp}{\mathrm{T}}
+\newcommand{\argmin}{\operatorname*{arg\,min}}
+\newcommand{\safeincludegraphics}[2][]{\includegraphics[#1]{#2}}
+\newcommand{\sourcecontext}[1]{\begin{tcolorbox}[colback=gray!5,colframe=gray!35,boxrule=.3pt]\small #1\end{tcolorbox}}
+
+\begin{document}
+\includepdf[pages=1,fitpaper=true,pagecommand={\thispagestyle{empty}}]{Copertina_research.pdf}
+\begin{titlepage}\thispagestyle{empty}\begin{center}
+\includegraphics[width=2.4cm]{img/Logo_SFClub_Polito.png}\par\vspace{.7cm}
+{\LARGE\bfseries High-Frequency Market Making:\\Models, Rough States and Numerical Control\par}\vspace{.3cm}
+{\large Unified study\par}\vspace{.5cm}
+Inventory control across Markovian and memory-dependent models\\
+Original contributions: Salvatore Gabriele Messina and Niccol\`o Soriano (HFT1/HFT2); Salvatore Gabriele Messina (HFT3).\\[.3cm]
+Revision: 13 October 2026. Publication date not assigned.\\[.4cm]
+Starting Finance Club PoliTo\\
+\url{https://github.com/StartingFinanceClubPoliTo/Research}
+\end{center}\begin{tightabstract}We study one inventory-control problem across Markovian diffusions, non-Markovian memory drivers and finite Markovian lifts. Shared cash--inventory accounting connects the models, while their predictive states and approximation errors remain distinct. A common numerical framework compares classical quoting, historical scalar controls and a positive bounded-control baseline. In a synthetic two-asset experiment, a covariance proxy lowers accumulated price risk but lowers mean liquidated PnL and sample CARA certainty equivalent and increases the reconstructed full HJB residual. The evidence explains why inventory hedging, utility improvement and residual correction require separate checks. No fitted P3, exact memory-model solution, convergence certificate or latency advantage is claimed.\end{tightabstract}\end{titlepage}
+\setcounter{tocdepth}{1}
+\tableofcontents
+\input{chapters/01_common}
+\input{chapters/02_markov}
+\input{chapters/03_memory}
+\input{chapters/04_lift}
+\input{chapters/05_control}
+\input{chapters/06_numerics}
+\input{chapters/07_results}
+\input{chapters/08_corrections}
+\input{chapters/09_conclusion}
+\input{chapters/references_unificato}\end{document}

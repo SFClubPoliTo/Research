@@ -1,0 +1,74 @@
+{
+  "configuration": "Supplied Article1 configuration:5000 scalar paths;3000 multivariate paths;rho_AB=.65,rho_AC=-.55,rho_BC=-.35. The preceding generator freeze remains separately preserved.",
+  "scalar_paths": 5000,
+  "multiasset_paths": 3000,
+  "multiasset_correlation": [
+    [
+      1.0,
+      0.65,
+      -0.55
+    ],
+    [
+      0.65,
+      1.0,
+      -0.35
+    ],
+    [
+      -0.55,
+      -0.35,
+      1.0
+    ]
+  ],
+  "statistics": {
+    "BM_Naive": {
+      "mean_pnl": 67.14475643527157,
+      "std_pnl": 12.17815974856645,
+      "mean_absinv": 7.817,
+      "sharpe": 5.513538812230641
+    },
+    "BM_AS": {
+      "mean_pnl": 63.92958125579078,
+      "std_pnl": 6.679903876601462,
+      "mean_absinv": 3.1156,
+      "sharpe": 9.570434311145611
+    },
+    "GBM_Naive": {
+      "mean_pnl": 67.10892256403855,
+      "std_pnl": 12.315593435304143,
+      "mean_absinv": 7.8966,
+      "sharpe": 5.449101816860667
+    },
+    "GBM_AS": {
+      "mean_pnl": 63.893980599869124,
+      "std_pnl": 6.717562784252,
+      "mean_absinv": 3.0948,
+      "sharpe": 9.511482460520718
+    }
+  },
+  "multiasset_statistics": {
+    "pnl_n": {
+      "mean": 158.70880331038097,
+      "std": 16.438863055651407
+    },
+    "pnl_as": {
+      "mean": 154.5557131594117,
+      "std": 10.546873489358546
+    },
+    "gross_n": {
+      "mean": 21.948666666666668,
+      "std": 9.893332681940679
+    },
+    "gross_as": {
+      "mean": 11.203333333333333,
+      "std": 5.20429203211691
+    },
+    "risk_n": {
+      "mean": 17.050986913984683,
+      "std": 9.245948297810767
+    },
+    "risk_as": {
+      "mean": 7.419097799297149,
+      "std": 3.3696468426920045
+    }
+  }
+}

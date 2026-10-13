@@ -1,0 +1,7 @@
+# Versions used for the audited Python 3.12.5 replay
+numpy==2.1.0
+pandas==2.3.3
+scipy==1.14.1
+matplotlib==3.9.2
+nbformat==5.10.4
+Pillow==10.4.0

@@ -1,0 +1,22 @@
+{
+  "sources": [
+    {
+      "path": "data/raw/source_freezes/manuscripts/hft1/Article1.tex",
+      "sha256": "58dde5f5b23f64e8166ca75442f4cecb09a759d6cb5f46b9e6fe619da2c5da33"
+    },
+    {
+      "path": "data/raw/source_freezes/manuscripts/hft2/Article2.tex",
+      "sha256": "5c8521e29688b3440f9db3607d1a177f145939d9ff51e7e71f32ee7c351e8068"
+    },
+    {
+      "path": "data/raw/source_freezes/manuscripts/hft3/body.tex",
+      "sha256": "ff45bcd428f430a089204f28de32174a53a71f8fb062484585763061ea4712d5"
+    },
+    {
+      "path": "data/raw/source_freezes/manuscripts/hft3/multiasset.tex",
+      "sha256": "afe91fe8a906703c1991141569df7bd90c9cbcb9fa7d0c6c426a046cb80dcfbd"
+    }
+  ],
+  "unresolved_images": [],
+  "coverage_status": "All source blocks retained or explicitly relocated; supplied-source/PDF identity not certified"
+}

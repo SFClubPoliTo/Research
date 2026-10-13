@@ -1,0 +1,26 @@
+[
+  {
+    "file": "src/hft3/audit_hft2.py",
+    "change": "shared output paths and package imports; numerical formulas unchanged"
+  },
+  {
+    "file": "src/hft3/multiasset_model.py",
+    "change": "shared output paths and package imports; numerical formulas unchanged"
+  },
+  {
+    "file": "src/hft3/simulate_market.py",
+    "change": "shared output paths and package imports; numerical formulas unchanged"
+  },
+  {
+    "file": "src/hft3/simulate_multiasset.py",
+    "change": "shared output paths and package imports; numerical formulas unchanged"
+  },
+  {
+    "file": "src/hft3/temporal_policy.py",
+    "change": "shared output paths and package imports; numerical formulas unchanged"
+  },
+  {
+    "file": "src/hft3/__init__.py",
+    "change": "shared output paths and package imports; numerical formulas unchanged"
+  }
+]

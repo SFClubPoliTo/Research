@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.jupyter/
+.jupyter_runtime/
+.venv/
+# Companion notebooks intentionally retained for this article.

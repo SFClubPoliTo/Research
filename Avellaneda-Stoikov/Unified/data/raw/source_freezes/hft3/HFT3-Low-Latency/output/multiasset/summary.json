@@ -1,0 +1,143 @@
+{
+  "results": [
+    {
+      "rho": 0.7,
+      "steps": 3900,
+      "paths": 400,
+      "seed": 73,
+      "mean_pnl": [
+        14.433479362229402,
+        14.090450963950184
+      ],
+      "certainty_equivalent": [
+        12.305356430514722,
+        12.234513600666403
+      ],
+      "mean_integrated_variance": [
+        5.8442802919783094,
+        4.960777585192819
+      ],
+      "mean_abs_preclose_inventory": [
+        [
+          0.5275,
+          0.4825
+        ],
+        [
+          0.53,
+          0.52
+        ]
+      ],
+      "paired_pnl": {
+        "mean": -0.34302839827921844,
+        "se": 0.09077787341403348
+      },
+      "paired_integrated_variance": {
+        "mean": -0.8835027067854901,
+        "se": 0.10849785347320492
+      },
+      "covariance_reconstruction_error": 9.75781955236954e-19,
+      "accounting_error": 1.5631940186722204e-13,
+      "clamped_lookups": 0
+    },
+    {
+      "rho": 0.7,
+      "steps": 1950,
+      "paths": 400,
+      "seed": 73,
+      "mean_pnl": [
+        13.932312108121096,
+        13.663207323149395
+      ],
+      "certainty_equivalent": [
+        11.922233681004252,
+        11.50777206043041
+      ],
+      "mean_integrated_variance": [
+        5.978060811890901,
+        5.2542698078992975
+      ],
+      "mean_abs_preclose_inventory": [
+        [
+          0.43,
+          0.5
+        ],
+        [
+          0.4575,
+          0.525
+        ]
+      ],
+      "paired_pnl": {
+        "mean": -0.2691047849716993,
+        "se": 0.09204676629953693
+      },
+      "paired_integrated_variance": {
+        "mean": -0.7237910039916049,
+        "se": 0.12064723379122652
+      },
+      "covariance_reconstruction_error": 8.673617379884035e-19,
+      "accounting_error": 1.4344081478157023e-13,
+      "clamped_lookups": 0
+    },
+    {
+      "rho": 0.0,
+      "steps": 390,
+      "paths": 20,
+      "seed": 73,
+      "mean_pnl": [
+        13.750442938806296,
+        13.750442938806296
+      ],
+      "certainty_equivalent": [
+        11.275027877967675,
+        11.275027877967675
+      ],
+      "mean_integrated_variance": [
+        6.255156479311017,
+        6.255156479311017
+      ],
+      "mean_abs_preclose_inventory": [
+        [
+          0.35,
+          0.4
+        ],
+        [
+          0.35,
+          0.4
+        ]
+      ],
+      "paired_pnl": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "paired_integrated_variance": {
+        "mean": 0.0,
+        "se": 0.0
+      },
+      "covariance_reconstruction_error": 2.2768245622195593e-18,
+      "accounting_error": 9.414691248821327e-14,
+      "clamped_lookups": 0
+    }
+  ],
+  "asset_count": 2,
+  "factors_per_asset": 6,
+  "price_correlation": 0.7,
+  "volatility_driver_correlation": 0.35,
+  "initial_inventory": [
+    3,
+    0
+  ],
+  "initial_cash": -300,
+  "price0": [
+    100,
+    100
+  ],
+  "correction": "Frozen-covariance cross-inventory proxy on separable P2; not fitted full-HJB P3",
+  "limitations": [
+    "Synthetic uncalibrated assets A/B",
+    "rho fixed; covariance stochastic",
+    "Two step sizes are a diagnostic, not convergence certification",
+    "No full multiasset reference HJB or residual decrease certified",
+    "Sample certainty equivalents have no confidence interval",
+    "No latency advantage measured"
+  ]
+}

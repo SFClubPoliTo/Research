@@ -1,0 +1,37 @@
+[
+  {
+    "original": "Article1.tex",
+    "runtime": "data/raw/source_freezes/manuscripts/hft1/Article1.tex",
+    "sha256": "58dde5f5b23f64e8166ca75442f4cecb09a759d6cb5f46b9e6fe619da2c5da33"
+  },
+  {
+    "original": "published HFT1 PDF page34/35 image extraction",
+    "runtime": "data/raw/source_freezes/manuscripts/hft1/img/1/Corr.png",
+    "sha256": "a6526c2688dabac5607cb2212ec47ad32ecf65c571be5ecb59eab5f548d12bac"
+  },
+  {
+    "original": "published HFT1 PDF page34/35 image extraction",
+    "runtime": "data/raw/source_freezes/manuscripts/hft1/img/1/py3.png",
+    "sha256": "d209bb880eac60734fcac9d0bd8335d0e2ec7d7a23b331f7d0c8fcdae795850b"
+  },
+  {
+    "original": "Article2.tex",
+    "runtime": "data/raw/source_freezes/manuscripts/hft2/Article2.tex",
+    "sha256": "5c8521e29688b3440f9db3607d1a177f145939d9ff51e7e71f32ee7c351e8068"
+  },
+  {
+    "original": "Team 3 - HFT 3/Overleaf/body.tex",
+    "runtime": "data/raw/source_freezes/manuscripts/hft3/body.tex",
+    "sha256": "ff45bcd428f430a089204f28de32174a53a71f8fb062484585763061ea4712d5"
+  },
+  {
+    "original": "Team 3 - HFT 3/Overleaf/multiasset.tex",
+    "runtime": "data/raw/source_freezes/manuscripts/hft3/multiasset.tex",
+    "sha256": "afe91fe8a906703c1991141569df7bd90c9cbcb9fa7d0c6c426a046cb80dcfbd"
+  },
+  {
+    "original": "Team 3 - HFT 3/Overleaf/preamble.tex",
+    "runtime": "data/raw/source_freezes/manuscripts/hft3/preamble.tex",
+    "sha256": "e042f5262e5ba86c9a5dd33001306c817d52da8a6fad15426bd30530dde5cbd5"
+  }
+]

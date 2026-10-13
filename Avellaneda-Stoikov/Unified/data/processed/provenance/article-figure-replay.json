@@ -1,0 +1,455 @@
+{
+  "scientific_figures": 26,
+  "exact_computed_figures": 22,
+  "qualified_historical_rerenders": 4,
+  "publication_assets": "Immutable original PNGs; historical rerenders do not replace manuscript figures",
+  "environment": {
+    "python": "3.12.5",
+    "numpy": "2.1.0",
+    "matplotlib": "3.9.2"
+  },
+  "rows": [
+    {
+      "figure": "hft1-Corr.png",
+      "reference": "data/processed/manuscript_authoring/img/hft1-Corr.png",
+      "computed": "outputs/img/publication/hft1/Corr.png",
+      "reference_sha256": "a6526c2688dabac5607cb2212ec47ad32ecf65c571be5ecb59eab5f548d12bac",
+      "computed_sha256": "2ada2b01899845af7ec7dce7ed80b805f323e5d3ac10163e06020b153326f59a",
+      "pixels_identical": false,
+      "reference_size": [
+        485,
+        409
+      ],
+      "replay_size": [
+        484,
+        409
+      ],
+      "qualification": "Correlation entries and coolwarm scale are exact; original PDF raster extraction has different bounding-box geometry. The numerical renderer preserves labels and colors."
+    },
+    {
+      "figure": "hft1-py1.png",
+      "reference": "data/processed/manuscript_authoring/img/hft1-py1.png",
+      "computed": "outputs/img/publication/hft1/py1.png",
+      "reference_sha256": "a1f2c37589e760ebd4a097f483e2c66fd15c1f93c46ea6ea56d3635a2b4cfd3f",
+      "computed_sha256": "a1f2c37589e760ebd4a097f483e2c66fd15c1f93c46ea6ea56d3635a2b4cfd3f",
+      "pixels_identical": true,
+      "reference_size": [
+        1908,
+        1179
+      ],
+      "replay_size": [
+        1908,
+        1179
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft1-py2.png",
+      "reference": "data/processed/manuscript_authoring/img/hft1-py2.png",
+      "computed": "outputs/img/publication/hft1/py2.png",
+      "reference_sha256": "29375a4047d8635c38b3d74fdb673a3c6e28540896dea116d5a06ed25058f9f0",
+      "computed_sha256": "29375a4047d8635c38b3d74fdb673a3c6e28540896dea116d5a06ed25058f9f0",
+      "pixels_identical": true,
+      "reference_size": [
+        1930,
+        1179
+      ],
+      "replay_size": [
+        1930,
+        1179
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft1-py3.png",
+      "reference": "data/processed/manuscript_authoring/img/hft1-py3.png",
+      "computed": "outputs/img/publication/hft1/py3.png",
+      "reference_sha256": "d209bb880eac60734fcac9d0bd8335d0e2ec7d7a23b331f7d0c8fcdae795850b",
+      "computed_sha256": "b52eb1a23401ff083de032343ad15430943b42df3f8e20396eb2eacafc582bdf",
+      "pixels_identical": false,
+      "reference_size": [
+        1930,
+        1179
+      ],
+      "replay_size": [
+        1930,
+        1179
+      ],
+      "qualification": "Historical representative-path seed 42 was recovered by comparison with the received raster and restored. Monte Carlo seed 3000 and all published parameters are preserved; the reconstructed renderer has minor raster geometry differences, with the same data, four panels and palette."
+    },
+    {
+      "figure": "hft2-ML0_2.png",
+      "reference": "data/processed/manuscript_authoring/img/hft2-ML0_2.png",
+      "computed": "outputs/img/publication/hft2/generated/ML0.2.png",
+      "reference_sha256": "ac308614dd666422d84372c06c08348820671eb278926389f1283e0a97fb8ffa",
+      "computed_sha256": "ac308614dd666422d84372c06c08348820671eb278926389f1283e0a97fb8ffa",
+      "pixels_identical": true,
+      "reference_size": [
+        1600,
+        1280
+      ],
+      "replay_size": [
+        1600,
+        1280
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft2-ML0_5.png",
+      "reference": "data/processed/manuscript_authoring/img/hft2-ML0_5.png",
+      "computed": "outputs/img/publication/hft2/generated/ML0.5.png",
+      "reference_sha256": "75b74eb9457e5a8a1bba79acb6b7a9a27e9b2c84cfb295940840e9a3856bd5e8",
+      "computed_sha256": "75b74eb9457e5a8a1bba79acb6b7a9a27e9b2c84cfb295940840e9a3856bd5e8",
+      "pixels_identical": true,
+      "reference_size": [
+        1600,
+        1280
+      ],
+      "replay_size": [
+        1600,
+        1280
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft2-ML0_8.png",
+      "reference": "data/processed/manuscript_authoring/img/hft2-ML0_8.png",
+      "computed": "outputs/img/publication/hft2/generated/ML0.8.png",
+      "reference_sha256": "844246fb080c5d34c936bafd808c38fe0d00e6e409f6e653cf1d3324cce3d6c3",
+      "computed_sha256": "844246fb080c5d34c936bafd808c38fe0d00e6e409f6e653cf1d3324cce3d6c3",
+      "pixels_identical": true,
+      "reference_size": [
+        1600,
+        1280
+      ],
+      "replay_size": [
+        1600,
+        1280
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft2-fgm0_2.png",
+      "reference": "data/processed/manuscript_authoring/img/hft2-fgm0_2.png",
+      "computed": "outputs/img/publication/hft2/generated/fgm0.2.png",
+      "reference_sha256": "cc11b3437a05b594f1aa178e282153a71edc7031b5e9fb4be2101b4d3dd7c0c7",
+      "computed_sha256": "cc11b3437a05b594f1aa178e282153a71edc7031b5e9fb4be2101b4d3dd7c0c7",
+      "pixels_identical": true,
+      "reference_size": [
+        1600,
+        1280
+      ],
+      "replay_size": [
+        1600,
+        1280
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft2-fgm0_5.png",
+      "reference": "data/processed/manuscript_authoring/img/hft2-fgm0_5.png",
+      "computed": "outputs/img/publication/hft2/generated/fgm0.5.png",
+      "reference_sha256": "8a27e454540485ce11f192639a866c893c9b1b296e8c108e46761a34f6b92766",
+      "computed_sha256": "8a27e454540485ce11f192639a866c893c9b1b296e8c108e46761a34f6b92766",
+      "pixels_identical": true,
+      "reference_size": [
+        1600,
+        1280
+      ],
+      "replay_size": [
+        1600,
+        1280
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft2-fgm0_8.png",
+      "reference": "data/processed/manuscript_authoring/img/hft2-fgm0_8.png",
+      "computed": "outputs/img/publication/hft2/generated/fgm0.8.png",
+      "reference_sha256": "e06d918ce80f7732a175dd9cc5507020be6d90fba5e4114f00a0afd6293be6c5",
+      "computed_sha256": "e06d918ce80f7732a175dd9cc5507020be6d90fba5e4114f00a0afd6293be6c5",
+      "pixels_identical": true,
+      "reference_size": [
+        1600,
+        1280
+      ],
+      "replay_size": [
+        1600,
+        1280
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft2-hjb_simulation.png",
+      "reference": "data/processed/manuscript_authoring/img/hft2-hjb_simulation.png",
+      "computed": "outputs/img/publication/hft2/2/hjb_simulation.png",
+      "reference_sha256": "2bb40818cf078c27e056bbe5fec148ebe988e8fa1ddeafe3c545a0cf5aed8c75",
+      "computed_sha256": "2bb40818cf078c27e056bbe5fec148ebe988e8fa1ddeafe3c545a0cf5aed8c75",
+      "pixels_identical": true,
+      "reference_size": [
+        2774,
+        2180
+      ],
+      "replay_size": [
+        2774,
+        2180
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft2-hjb_surfaces.png",
+      "reference": "data/processed/manuscript_authoring/img/hft2-hjb_surfaces.png",
+      "computed": "outputs/img/publication/hft2/2/hjb_surfaces.png",
+      "reference_sha256": "725fdcc55b2f34b4b69969521c9abc66de7630d241b1b83886ae7181a70ea344",
+      "computed_sha256": "725fdcc55b2f34b4b69969521c9abc66de7630d241b1b83886ae7181a70ea344",
+      "pixels_identical": true,
+      "reference_size": [
+        2628,
+        2180
+      ],
+      "replay_size": [
+        2628,
+        2180
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft2-img_4.png",
+      "reference": "data/processed/manuscript_authoring/img/hft2-img_4.png",
+      "computed": "outputs/img/publication/hft2/generated/img_4.png",
+      "reference_sha256": "5ae2e4090b94dd5a5fadb1a8d554c4e8bde04ba022611d5bd099fa75bada4a5f",
+      "computed_sha256": "7caf87ab507147323661afa9985f2194bc4aa40bfd16f27578fabf61befcee3d",
+      "pixels_identical": false,
+      "reference_size": [
+        702,
+        552
+      ],
+      "replay_size": [
+        702,
+        550
+      ],
+      "qualification": "Original convergence random stream is unavailable. Replay uses seed 123, the historical grid sizes and variance diagnostic, with the same one-panel log-log layout and blue/orange palette."
+    },
+    {
+      "figure": "hft2-img_5.png",
+      "reference": "data/processed/manuscript_authoring/img/hft2-img_5.png",
+      "computed": "outputs/img/publication/hft2/generated/img_5.png",
+      "reference_sha256": "9b61743c42b5e5ff9089e44dbdbab006e39e82d5149a3d140a371cb80555dd7b",
+      "computed_sha256": "ec68c98de56c781f7858cb7188d6ece7f596486f79c59fc30efd9b0593291183",
+      "pixels_identical": false,
+      "reference_size": [
+        702,
+        552
+      ],
+      "replay_size": [
+        702,
+        550
+      ],
+      "qualification": "Original convergence random stream is unavailable. Replay uses seed 123, historical sample sizes and covariance diagnostic, with the same one-panel log-log layout and blue/orange palette."
+    },
+    {
+      "figure": "hft2-iterative0_2.png",
+      "reference": "data/processed/manuscript_authoring/img/hft2-iterative0_2.png",
+      "computed": "outputs/img/publication/hft2/generated/iterative0.2.png",
+      "reference_sha256": "663609a3d79bc5bbe6d7ec46423f9f545dc2dc351916052b19c6cb55649bf034",
+      "computed_sha256": "663609a3d79bc5bbe6d7ec46423f9f545dc2dc351916052b19c6cb55649bf034",
+      "pixels_identical": true,
+      "reference_size": [
+        1600,
+        1280
+      ],
+      "replay_size": [
+        1600,
+        1280
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft2-iterative0_5.png",
+      "reference": "data/processed/manuscript_authoring/img/hft2-iterative0_5.png",
+      "computed": "outputs/img/publication/hft2/generated/iterative0.5.png",
+      "reference_sha256": "8f993a57ad0516a4a591e94ce349c77c508d3e33f24d0a70ecf0f75975b25368",
+      "computed_sha256": "8f993a57ad0516a4a591e94ce349c77c508d3e33f24d0a70ecf0f75975b25368",
+      "pixels_identical": true,
+      "reference_size": [
+        1600,
+        1280
+      ],
+      "replay_size": [
+        1600,
+        1280
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft2-iterative0_8.png",
+      "reference": "data/processed/manuscript_authoring/img/hft2-iterative0_8.png",
+      "computed": "outputs/img/publication/hft2/generated/iterative0.8.png",
+      "reference_sha256": "33687dbdefe6f6467dd3f409d0cc29977a058cf196502b0dd61c729499f8a456",
+      "computed_sha256": "33687dbdefe6f6467dd3f409d0cc29977a058cf196502b0dd61c729499f8a456",
+      "pixels_identical": true,
+      "reference_size": [
+        1600,
+        1280
+      ],
+      "replay_size": [
+        1600,
+        1280
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft2-volterra0_2.png",
+      "reference": "data/processed/manuscript_authoring/img/hft2-volterra0_2.png",
+      "computed": "outputs/img/publication/hft2/generated/volterra0.2.png",
+      "reference_sha256": "fd7a35bea5192f2d9f4388b4c8b0d76d1eb3f29e2c6a29f2817d5b54014bfd8c",
+      "computed_sha256": "fd7a35bea5192f2d9f4388b4c8b0d76d1eb3f29e2c6a29f2817d5b54014bfd8c",
+      "pixels_identical": true,
+      "reference_size": [
+        1600,
+        1920
+      ],
+      "replay_size": [
+        1600,
+        1920
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft2-volterra0_5.png",
+      "reference": "data/processed/manuscript_authoring/img/hft2-volterra0_5.png",
+      "computed": "outputs/img/publication/hft2/generated/volterra0.5.png",
+      "reference_sha256": "32f71986306d9dbeaec7488a3045a3f05e5e02fe0e932d3b2dcac8048c581ad5",
+      "computed_sha256": "32f71986306d9dbeaec7488a3045a3f05e5e02fe0e932d3b2dcac8048c581ad5",
+      "pixels_identical": true,
+      "reference_size": [
+        1600,
+        1920
+      ],
+      "replay_size": [
+        1600,
+        1920
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft2-volterra0_8.png",
+      "reference": "data/processed/manuscript_authoring/img/hft2-volterra0_8.png",
+      "computed": "outputs/img/publication/hft2/generated/volterra0.8.png",
+      "reference_sha256": "1c2b130f0d133ec9b3ced360b66dda77f2f4553a996cce6e5f3ed18e69cc22b7",
+      "computed_sha256": "1c2b130f0d133ec9b3ced360b66dda77f2f4553a996cce6e5f3ed18e69cc22b7",
+      "pixels_identical": true,
+      "reference_size": [
+        1600,
+        1920
+      ],
+      "replay_size": [
+        1600,
+        1920
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft3-market_session_E2.png",
+      "reference": "data/processed/manuscript_authoring/img/hft3-market_session_E2.png",
+      "computed": "outputs/img/publication/hft3/market_session_E2.png",
+      "reference_sha256": "2371b86121ab5c2a5679da663d2d2bcc342e5d39ff428c19a67dcbafe2169143",
+      "computed_sha256": "2371b86121ab5c2a5679da663d2d2bcc342e5d39ff428c19a67dcbafe2169143",
+      "pixels_identical": true,
+      "reference_size": [
+        2160,
+        1440
+      ],
+      "replay_size": [
+        2160,
+        1440
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft3-multiasset_inventory.png",
+      "reference": "data/processed/manuscript_authoring/img/hft3-multiasset_inventory.png",
+      "computed": "outputs/img/publication/hft3/multiasset_inventory.png",
+      "reference_sha256": "ea5d009aefdb82f402d969d5150a7b575ed494f3385f3bccce3ea399b7db813c",
+      "computed_sha256": "ea5d009aefdb82f402d969d5150a7b575ed494f3385f3bccce3ea399b7db813c",
+      "pixels_identical": true,
+      "reference_size": [
+        2160,
+        1980
+      ],
+      "replay_size": [
+        2160,
+        1980
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft3-multiasset_quote_shift.png",
+      "reference": "data/processed/manuscript_authoring/img/hft3-multiasset_quote_shift.png",
+      "computed": "outputs/img/publication/hft3/multiasset_quote_shift.png",
+      "reference_sha256": "ca6b00e94c84cd2105374caf53c804d97969198355932dfc6dc809a7f27f8ff5",
+      "computed_sha256": "ca6b00e94c84cd2105374caf53c804d97969198355932dfc6dc809a7f27f8ff5",
+      "pixels_identical": true,
+      "reference_size": [
+        1620,
+        720
+      ],
+      "replay_size": [
+        1620,
+        720
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft3-multiasset_volatility.png",
+      "reference": "data/processed/manuscript_authoring/img/hft3-multiasset_volatility.png",
+      "computed": "outputs/img/publication/hft3/multiasset_volatility.png",
+      "reference_sha256": "2fc842fae1292dc26780cf403a6dca65dbbc0d541013858fd27a85ae98bb8b04",
+      "computed_sha256": "2fc842fae1292dc26780cf403a6dca65dbbc0d541013858fd27a85ae98bb8b04",
+      "pixels_identical": true,
+      "reference_size": [
+        1980,
+        1260
+      ],
+      "replay_size": [
+        1980,
+        1260
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft3-policy_sensitivity.png",
+      "reference": "data/processed/manuscript_authoring/img/hft3-policy_sensitivity.png",
+      "computed": "outputs/img/publication/hft3/policy_sensitivity.png",
+      "reference_sha256": "20f604049cd3e7d7dea3e02cc1deaee02e16ebbdfd5c3ead5cff2d54f9e3d59a",
+      "computed_sha256": "20f604049cd3e7d7dea3e02cc1deaee02e16ebbdfd5c3ead5cff2d54f9e3d59a",
+      "pixels_identical": true,
+      "reference_size": [
+        1980,
+        720
+      ],
+      "replay_size": [
+        1980,
+        720
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    },
+    {
+      "figure": "hft3-temporal_policy.png",
+      "reference": "data/processed/manuscript_authoring/img/hft3-temporal_policy.png",
+      "computed": "outputs/img/publication/hft3/temporal_policy.png",
+      "reference_sha256": "37e7bce4acddbb548b0b7200840ac974a62f427b0a6286ef47a5caab512f1d23",
+      "computed_sha256": "37e7bce4acddbb548b0b7200840ac974a62f427b0a6286ef47a5caab512f1d23",
+      "pixels_identical": true,
+      "reference_size": [
+        2160,
+        1620
+      ],
+      "replay_size": [
+        2160,
+        1620
+      ],
+      "qualification": "Same numerical run and rendered pixels"
+    }
+  ]
+}

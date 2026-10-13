@@ -1,0 +1,86 @@
+{
+  "comparisons": [
+    {
+      "study": "temporal",
+      "configuration": 4680,
+      "errors_against_finest": {
+        "theta": 0.002872385790016807,
+        "bid": 0.0008223642501450357,
+        "ask": 0.0008223642501450357
+      }
+    },
+    {
+      "study": "temporal",
+      "configuration": 9360,
+      "errors_against_finest": {
+        "theta": 0.0009572833045998763,
+        "bid": 0.0002740216817600505,
+        "ask": 0.00027402168176093866
+      }
+    },
+    {
+      "study": "temporal",
+      "configuration": 18720,
+      "errors_against_finest": {
+        "theta": 0.0,
+        "bid": 0.0,
+        "ask": 0.0
+      }
+    },
+    {
+      "study": "fixed_spacing_domain",
+      "configuration": 4,
+      "errors_against_finest": {
+        "theta": 0.0001309493782111204,
+        "bid": 4.646080593495583e-05,
+        "ask": 4.646080593495583e-05
+      }
+    },
+    {
+      "study": "fixed_spacing_domain",
+      "configuration": 5,
+      "errors_against_finest": {
+        "theta": 1.3835937959782996e-06,
+        "bid": 3.401248660495071e-07,
+        "ask": 3.401248660495071e-07
+      }
+    },
+    {
+      "study": "fixed_spacing_domain",
+      "configuration": 6,
+      "errors_against_finest": {
+        "theta": 0.0,
+        "bid": 0.0,
+        "ask": 0.0
+      }
+    },
+    {
+      "study": "spatial",
+      "configuration": 81,
+      "errors_against_finest": {
+        "theta": 0.0012923144879741777,
+        "bid": 0.001093510690643014,
+        "ask": 0.001093510690643014
+      }
+    },
+    {
+      "study": "spatial",
+      "configuration": 161,
+      "errors_against_finest": {
+        "theta": 0.00032350731214036976,
+        "bid": 0.00024590308760879045,
+        "ask": 0.00024590308760879045
+      }
+    },
+    {
+      "study": "spatial",
+      "configuration": 241,
+      "errors_against_finest": {
+        "theta": 0.0,
+        "bid": 0.0,
+        "ask": 0.0
+      }
+    }
+  ],
+  "scope": "Interior |Y|<=2 SD, t=0/.5, every admissible inventory; differences not exact error bounds"
+}

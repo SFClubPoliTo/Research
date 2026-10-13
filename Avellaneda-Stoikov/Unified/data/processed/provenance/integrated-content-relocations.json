@@ -1,0 +1,220 @@
+{
+  "fragments": [
+    {
+      "source": "hft1.tex",
+      "lines": [
+        8,
+        37
+      ],
+      "destination": "01_common.tex",
+      "sha256_before_editorial_changes": "576e2e7f82a6b1796385dc21d1b4fd45bd332317fe4b5b8f5c2868ca9230593d",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft1.tex",
+      "lines": [
+        37,
+        343
+      ],
+      "destination": "01_common.tex",
+      "sha256_before_editorial_changes": "ffd2ed8f575d9ad449d9fe08ca6440f60ed60343d4aa95acb522ebed67f8ebd5",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft1.tex",
+      "lines": [
+        343,
+        1049
+      ],
+      "destination": "02_markov.tex",
+      "sha256_before_editorial_changes": "c0b4178a5378368c0b263e66a70347355783442a1e5427817a4a632986491a33",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft2.tex",
+      "lines": [
+        37,
+        741
+      ],
+      "destination": "03_memory.tex",
+      "sha256_before_editorial_changes": "bc5fbb84d1fa5bf0a6b7787c9a9a975fd897680ad0bba5b6331b27448c3f8571",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft2.tex",
+      "lines": [
+        741,
+        1383
+      ],
+      "destination": "04_lift.tex",
+      "sha256_before_editorial_changes": "08cebfebf2d0054b09e0390e17c1f92853d1377228bd94c9058d6c3af01c0099",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft3.tex",
+      "lines": [
+        11,
+        37
+      ],
+      "destination": "04_lift.tex",
+      "sha256_before_editorial_changes": "0487ad5fc28d0d7ba0a4b3ff1a2d0a19101b7aad792f89ef1bc370913f76338a",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft3.tex",
+      "lines": [
+        63,
+        121
+      ],
+      "destination": "05_control.tex",
+      "sha256_before_editorial_changes": "06a548bda25b23af1be6d0337f1c1f97511b4a1d4fb79134887ab6e8caad8400",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft2.tex",
+      "lines": [
+        1388,
+        1498
+      ],
+      "destination": "05_control.tex",
+      "sha256_before_editorial_changes": "2167070199197026fe5a59b971309b05a4186dfc0ec347c8750afde91fd4bc4b",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft3.tex",
+      "lines": [
+        121,
+        138
+      ],
+      "destination": "05_control.tex",
+      "sha256_before_editorial_changes": "b646c7763c283dbd82c00096eaf7b5ddf1fff3e2f5d5a75279865cbcc94873d5",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft3.tex",
+      "lines": [
+        296,
+        382
+      ],
+      "destination": "05_control.tex",
+      "sha256_before_editorial_changes": "8f53ffd2a4b4bac69347c5ca0c7fc7eb2bfaddc388b985dd3eccc51d1a5f4e51",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft3.tex",
+      "lines": [
+        412,
+        428
+      ],
+      "destination": "05_control.tex",
+      "sha256_before_editorial_changes": "28c98a1677e314920b378325a2caf0a3c6d681b56bfbb564165b00e1cea63f16",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft1.tex",
+      "lines": [
+        1049,
+        1146
+      ],
+      "destination": "06_numerics.tex",
+      "sha256_before_editorial_changes": "ec3d504ecd30eae2680f0b52d70102e7ed04b5e2e631fce9b8660edfb0223b78",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft3.tex",
+      "lines": [
+        186,
+        275
+      ],
+      "destination": "06_numerics.tex",
+      "sha256_before_editorial_changes": "83f62a61308aad2881c141ce042aadf77f8cbf73dc92d8d3eea17b62d022c723",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft3.tex",
+      "lines": [
+        175,
+        186
+      ],
+      "destination": "06_numerics.tex",
+      "sha256_before_editorial_changes": "062bad3c847467b56b29cf580cc24f043409e0744ff5b65bbba3fafac17b8201",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft1.tex",
+      "lines": [
+        1146,
+        1267
+      ],
+      "destination": "07_results.tex",
+      "sha256_before_editorial_changes": "ee68c8f5b6b66d5019dfa9a17ba716e5126bb38d7a9a45392187f65c503c6ba8",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft2.tex",
+      "lines": [
+        1498,
+        1632
+      ],
+      "destination": "07_results.tex",
+      "sha256_before_editorial_changes": "afde35677aa15a87e5b5ee8b2bad8edb1f32ef95c15ece8616d02d44235682c6",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft3.tex",
+      "lines": [
+        275,
+        296
+      ],
+      "destination": "07_results.tex",
+      "sha256_before_editorial_changes": "0b3e5e39e1998e877d7e8dc0c71004b205fbcf1f53d80dd69a80fc4b00559323",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft3.tex",
+      "lines": [
+        382,
+        412
+      ],
+      "destination": "07_results.tex",
+      "sha256_before_editorial_changes": "adbcbc4857ba49286b6ffb39f0cb9bf3d0c7e13091db77b2f7f67f78972cdea5",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "current_results.tex",
+      "lines": [
+        4,
+        23
+      ],
+      "destination": "07_results.tex",
+      "sha256_before_editorial_changes": "4d270003f48fadacc3bbe805c334385b6266c62231f0418351f417f55f72b9d1",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft3.tex",
+      "lines": [
+        138,
+        175
+      ],
+      "destination": "08_corrections.tex",
+      "sha256_before_editorial_changes": "2afbcbfb29924e7281a0dd348fab1344fe00583f0d02e741e1a39ddcc67c6cf4",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    },
+    {
+      "source": "hft3.tex",
+      "lines": [
+        37,
+        63
+      ],
+      "destination": "08_corrections.tex",
+      "sha256_before_editorial_changes": "261132e7704f8aea76be328a94722770e447e1811529de42e1f42eb33ae85f2a",
+      "treatment": "retained and reorganized; chapter headings demoted, repeated miniabstracts removed, narrative and claims qualified"
+    }
+  ],
+  "removed_repetition": [
+    "three source-specific roadmap/introduction wrappers",
+    "miniabstracts repeating subsequent exposition",
+    "historical closing paragraphs replaced by common interpretation and limitations; source copies remain in the review archive"
+  ],
+  "policy": "no mathematical display, figure/table label or numerical table intentionally dropped; completeness checked separately in pass 3"
+}

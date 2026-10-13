@@ -1,0 +1,15 @@
+* text=auto
+*.py text eol=lf
+*.cpp text eol=lf
+*.hpp text eol=lf
+*.md text eol=lf
+*.png binary
+*.pdf binary
+*.npz binary
+*.zip binary
+*.ipynb text eol=lf
+# Preserve received source bytes and authored TEX, including historical spacing.
+data/raw/source_freezes/** -text -whitespace
+data/processed/manuscript_authoring/** -text -whitespace
+outputs/report_unificato/**/*.tex -text -whitespace
+outputs/report_paper/**/*.tex -text -whitespace

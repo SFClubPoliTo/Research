@@ -1,0 +1,164 @@
+[
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft1/img/1/py1.png",
+    "sha256": "a1f2c37589e760ebd4a097f483e2c66fd15c1f93c46ea6ea56d3635a2b4cfd3f",
+    "target": "img/hft1-py1.png",
+    "article": "hft1"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft1/img/1/py2.png",
+    "sha256": "29375a4047d8635c38b3d74fdb673a3c6e28540896dea116d5a06ed25058f9f0",
+    "target": "img/hft1-py2.png",
+    "article": "hft1"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft1/img/1/Corr.png",
+    "sha256": "a6526c2688dabac5607cb2212ec47ad32ecf65c571be5ecb59eab5f548d12bac",
+    "target": "img/hft1-Corr.png",
+    "article": "hft1"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft1/img/1/py3.png",
+    "sha256": "d209bb880eac60734fcac9d0bd8335d0e2ec7d7a23b331f7d0c8fcdae795850b",
+    "target": "img/hft1-py3.png",
+    "article": "hft1"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/revisionato/2/fgm0.5.png",
+    "sha256": "8a27e454540485ce11f192639a866c893c9b1b296e8c108e46761a34f6b92766",
+    "target": "img/hft2-fgm0_5.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/revisionato/2/fgm0.2.png",
+    "sha256": "cc11b3437a05b594f1aa178e282153a71edc7031b5e9fb4be2101b4d3dd7c0c7",
+    "target": "img/hft2-fgm0_2.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/revisionato/2/fgm0.8.png",
+    "sha256": "e06d918ce80f7732a175dd9cc5507020be6d90fba5e4114f00a0afd6293be6c5",
+    "target": "img/hft2-fgm0_8.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/2/img_4.png",
+    "sha256": "5ae2e4090b94dd5a5fadb1a8d554c4e8bde04ba022611d5bd099fa75bada4a5f",
+    "target": "img/hft2-img_4.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/2/img_5.png",
+    "sha256": "9b61743c42b5e5ff9089e44dbdbab006e39e82d5149a3d140a371cb80555dd7b",
+    "target": "img/hft2-img_5.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/revisionato/2/iterative0.5.png",
+    "sha256": "8f993a57ad0516a4a591e94ce349c77c508d3e33f24d0a70ecf0f75975b25368",
+    "target": "img/hft2-iterative0_5.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/revisionato/2/volterra0.5.png",
+    "sha256": "32f71986306d9dbeaec7488a3045a3f05e5e02fe0e932d3b2dcac8048c581ad5",
+    "target": "img/hft2-volterra0_5.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/revisionato/2/iterative0.2.png",
+    "sha256": "663609a3d79bc5bbe6d7ec46423f9f545dc2dc351916052b19c6cb55649bf034",
+    "target": "img/hft2-iterative0_2.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/revisionato/2/volterra0.2.png",
+    "sha256": "fd7a35bea5192f2d9f4388b4c8b0d76d1eb3f29e2c6a29f2817d5b54014bfd8c",
+    "target": "img/hft2-volterra0_2.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/revisionato/2/volterra0.8.png",
+    "sha256": "1c2b130f0d133ec9b3ced360b66dda77f2f4553a996cce6e5f3ed18e69cc22b7",
+    "target": "img/hft2-volterra0_8.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/revisionato/2/iterative0.8.png",
+    "sha256": "33687dbdefe6f6467dd3f409d0cc29977a058cf196502b0dd61c729499f8a456",
+    "target": "img/hft2-iterative0_8.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/revisionato/2/ML0.5.png",
+    "sha256": "75b74eb9457e5a8a1bba79acb6b7a9a27e9b2c84cfb295940840e9a3856bd5e8",
+    "target": "img/hft2-ML0_5.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/revisionato/2/ML0.2.png",
+    "sha256": "ac308614dd666422d84372c06c08348820671eb278926389f1283e0a97fb8ffa",
+    "target": "img/hft2-ML0_2.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/revisionato/2/ML0.2.png",
+    "sha256": "ac308614dd666422d84372c06c08348820671eb278926389f1283e0a97fb8ffa",
+    "target": "img/hft2-ML0_2.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/revisionato/2/ML0.8.png",
+    "sha256": "844246fb080c5d34c936bafd808c38fe0d00e6e409f6e653cf1d3324cce3d6c3",
+    "target": "img/hft2-ML0_8.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/2/hjb_surfaces.png",
+    "sha256": "725fdcc55b2f34b4b69969521c9abc66de7630d241b1b83886ae7181a70ea344",
+    "target": "img/hft2-hjb_surfaces.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft2/img/2/hjb_simulation.png",
+    "sha256": "2bb40818cf078c27e056bbe5fec148ebe988e8fa1ddeafe3c545a0cf5aed8c75",
+    "target": "img/hft2-hjb_simulation.png",
+    "article": "hft2"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft3/img/temporal_policy.png",
+    "sha256": "37e7bce4acddbb548b0b7200840ac974a62f427b0a6286ef47a5caab512f1d23",
+    "target": "img/hft3-temporal_policy.png",
+    "article": "hft3"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft3/img/policy_sensitivity.png",
+    "sha256": "20f604049cd3e7d7dea3e02cc1deaee02e16ebbdfd5c3ead5cff2d54f9e3d59a",
+    "target": "img/hft3-policy_sensitivity.png",
+    "article": "hft3"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft3/img/market_session_E2.png",
+    "sha256": "2371b86121ab5c2a5679da663d2d2bcc342e5d39ff428c19a67dcbafe2169143",
+    "target": "img/hft3-market_session_E2.png",
+    "article": "hft3"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft3/img/multiasset_volatility.png",
+    "sha256": "2fc842fae1292dc26780cf403a6dca65dbbc0d541013858fd27a85ae98bb8b04",
+    "target": "img/hft3-multiasset_volatility.png",
+    "article": "hft3"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft3/img/multiasset_quote_shift.png",
+    "sha256": "ca6b00e94c84cd2105374caf53c804d97969198355932dfc6dc809a7f27f8ff5",
+    "target": "img/hft3-multiasset_quote_shift.png",
+    "article": "hft3"
+  },
+  {
+    "source": "data/raw/source_freezes/manuscripts/hft3/img/multiasset_inventory.png",
+    "sha256": "ea5d009aefdb82f402d969d5150a7b575ed494f3385f3bccce3ea399b7db813c",
+    "target": "img/hft3-multiasset_inventory.png",
+    "article": "hft3"
+  }
+]

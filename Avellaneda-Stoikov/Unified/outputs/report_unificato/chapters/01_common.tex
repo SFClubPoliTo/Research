@@ -1,0 +1,360 @@
+\chapter{The Inventory Problem and the Information State}
+\label{ch:common}
+Market making poses one economic question throughout this study: how should executable bid and ask quotes trade spread revenue against inventory risk and terminal liquidation? We change the price and volatility state while keeping cash--inventory accounting explicit. The organizing distinction is the information needed to predict continuation risk, rather than the order in which the source manuscripts were written~\cite{hft1,hft2}.
+
+\section{The predictive-state hierarchy}
+ABM and GBM are Markovian price specifications. A correlated diffusion remains Markovian when its full price/inventory state is retained. Fractional and general Volterra drivers introduce memory; except in special kernels or the Brownian case, their current scalar value is insufficient for a recursive prediction. A finite exponential lift then constructs a \emph{new finite-dimensional Markovian model} that approximates the memory kernel. Compressing that lift into a scalar OU surrogate is a further approximation, not the same operation as lifting.
+
+\begin{table}[htbp]\centering\small
+\begin{tabularx}{\textwidth}{@{}p{.24\textwidth}p{.26\textwidth}X@{}}\toprule
+Representation & Predictive state & What is gained or lost\\\midrule
+ABM / GBM & Current price and inventory & Recursive diffusion benchmark; GBM reservation formula is local\\
+Correlated diffusion & Price and inventory vectors & Cross-asset inventory risk; no volatility memory\\
+Fractional / Volterra driver & Generally its relevant past or infinite state & Memory and causal kernels; no scalar Markov closure in general\\
+Finite exponential lift & All OU factors and inventories & Finite Markov recursion; kernel approximation remains\\
+Scalar OU surrogate & Aggregate volatility and inventory & Small HJB grid; full factor drift/diffusion need not match\\
+Embedded / covariance proxy & Scalar policy evaluated on the lift & Cheap policy reuse; full residual and utility require separate checks\\\bottomrule
+\end{tabularx}
+\caption{The hierarchy used to connect the models. Markovianity refers to the retained state, not to a label attached to a historical experiment.}
+\label{tab:model-hierarchy}
+\end{table}
+
+The mathematical development moves from the shared execution problem to diffusion models, then to non-Markovian memory, finite lifting and the full/reduced HJBs. One numerical-methods chapter explains simulation, positivity, export and the C++ operator. One results chapter then compares \emph{within} each experiment: the historical diffusion benchmark, three finite-lift configurations, a positive baseline and a two-asset covariance proxy. Their different terminal costs, path counts and solver conventions prevent a pooled performance ranking.
+
+The principal intersection is covariance: it determines the classical portfolio-risk penalty, the memory driver's law, the OU innovation covariance and the full operator's mixed derivatives. These are different covariance objects. Keeping them distinct explains why an inventory hedge can lower accumulated price risk while worsening a full-state residual or failing to improve sample utility.
+\section{Economic setting and notation}
+
+This paper studies the interface between market making and market microstructure through the lens of two time scales. At the daily scale, an asset price can be idealized as a continuous-time process (e.g., a Brownian-motion-like mid-price), and the market maker's problem resembles dynamic risk management with the objective of harvesting the bid--ask spread while controlling inventory exposure. At the sub-second scale, the same environment becomes intrinsically discrete and rule-driven: prices live on a tick grid, orders arrive asynchronously, and the limit order book mechanics and trading frictions shape both the observed price formation and the feasibility of any quoting strategy. The core message is that market making cannot be fully understood at only one resolution: a smooth diffusion view is useful for tractability and control, while a microstructural view is essential for interpreting what the mid-price represents and for implementing strategies under real trading constraints.
+
+Within this perspective, market making can be summarized as an algorithmic decision rule that continuously updates bid and ask quotes as a function of a state vector. Conceptually, the market maker forms a (possibly personal) estimate of value and quotes around it, posting a bid below and an ask above, then adapts these quotes as the state changes, most importantly as the mid-price moves and inventory accumulates. The economic role of this activity is liquidity provision: by standing ready to trade on both sides, the market maker supplies immediacy to other market participants who value execution without delay.
+
+Historically, the intuition of a two-sided quote originated in floor-based settings with designated dealers (often specialists) who were central to trading in a given name. Modern electronic markets replace this institutional structure with competitive, automated quoting in data-center environments, where many agents simultaneously post and cancel orders at high frequency. This evolution motivates the academic progression from classical inventory-based dealer models, built around utility maximization and Hamilton--Jacobi--Bellman (HJB) equations, to electronic-market approximations that yield implementable quoting formulas and accommodate realistic constraints such as inventory bounds, risk limits, adverse selection, and multi-asset interactions.
+
+Against this background, the Avellaneda--Stoikov paradigm provides a canonical benchmark: it formalizes the idea that the market maker effectively buys low and sells high, but on compressed horizons (seconds or minutes rather than days), and it makes explicit how optimal spreads and skew depend on inventory risk and order arrival dynamics. The goal of this paper is to apply this inventory-based logic across alternative stochastic specifications for the underlying state variables (different mid-price dynamics and a covariance-aware multivariate inventory state), while keeping the economic mechanism invariant: the market maker controls quotes to balance spread capture against inventory and execution risk under microstructural frictions.
+
+\subsection{Notation}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+$S_t$ & Mid-price / reference price \\
+$q_t$ & Inventory (number of shares/contracts) \\
+$X_t$ & Cash account \\
+$W_t$ & Total wealth / overall P\&L \\
+$\delta_t^{bid}, \delta_t^{ask}$ & Distance from the mid-price for bid/ask quotes \\
+$p_t^{bid}, p_t^{ask}$ & Quoted prices (bid/ask) \\
+$\lambda^{bid}(\delta), \lambda^{ask}(\delta)$ & Arrival intensities of market orders hitting the bid/ask quotes \\
+$N_t^{bid}, N_t^{ask}$ & Counting processes of fills at the bid/ask \\
+$\sigma$ & Volatility / instantaneous scale \\
+$\gamma$ & Risk aversion (CARA / exponential utility) \\
+$T$ & Policy horizon \\
+$\Delta t$ & Simulation time step \\
+\bottomrule
+\end{tabularx}
+
+With this notation fixed, the first substantive chapter turns to the institutional and microstructural environment in which these variables acquire meaning. The goal is to move from the abstract state variables used later in the stochastic-control model to the concrete LOB mechanics, order types, and HFT risks that motivate the Avellaneda--Stoikov benchmark.
+\section{Market Microstructure and High-Frequency Trading: LOB Foundations, Taxonomy, and Risks}
+\label{hft1-ch:microstructure_hft}
+
+
+\subsection{LOB Mechanics}
+Modern electronic equity and crypto venues are typically organized as continuous double auctions implemented through a limit order book (LOB). At any time $t$, the book aggregates standing intentions to buy and sell. The best available buy price is the \emph{best bid} $p_t^{bid}$ and the best available sell price is the \emph{best ask} $p_t^{ask}$. The \emph{bid--ask spread} is
+\[
+\mathrm{spr}_t = p_t^{ask}-p_t^{bid},
+\]
+and a standard reference price is the \emph{mid-price}
+\[
+S_t=\frac{p_t^{ask}+p_t^{bid}}{2}.
+\]
+In practice, $S_t$ is an informational proxy rather than a traded price: executions occur at discrete prices on the book, while $S_t$ is a convenient state variable used to define quote distances $\delta_t^{bid},\delta_t^{ask}$ and to mark-to-market total wealth $W_t$ in reduced-form models.
+
+A central microstructural friction is price discreteness. Exchanges impose a \emph{tick size} $\tau>0$, meaning that admissible prices lie on a grid (multiples of $\tau$). Tick size interacts with quoting and execution probability: for a given $S_t$, a one-tick change in $p_t^{bid}$ or $p_t^{ask}$ may cause a discontinuous jump in competitiveness and thus in expected fills.
+
+The depth of the book describes how many shares/contracts are available at each price level. If $D_t^{bid}(p)$ denotes cumulative buy depth at prices $\ge p$ and $D_t^{ask}(p)$ cumulative sell depth at prices $\le p$, then the slope of these curves around the top of book summarizes local liquidity. Depth matters because it shapes the impact of market orders, the stability of the top quotes, and the typical waiting time for a new limit order to be executed.
+
+Finally, most venues implement price-time priority. Orders at better prices execute first. Among orders at the same price, earlier arrivals have priority. This induces queueing: a market maker who posts at the best bid or ask typically joins a queue, and the probability of being filled depends not only on the level of $p_t^{bid}$ or $p_t^{ask}$ but also on queue position. These mechanics are key for realistic implementation, even when the analytical model abstracts them into a reduced-form \emph{arrival intensity} $\lambda^{bid}(\delta)$ and $\lambda^{ask}(\delta)$ that depends only on the distance $\delta$ from $S_t$. Standard treatments of these concepts can be found in classical market microstructure references such as \textcite{OHara1995}, \textcite{Harris2003}, and \textcite{Hasbrouck2007}.
+
+\subsection{Orders and Order Flow}
+LOB dynamics are driven by the interaction of different order types. A limit order specifies a side (buy/sell), a price, and a quantity, and provides liquidity by adding depth to the book. A market order consumes liquidity by executing immediately against the standing best quote(s), walking the book if its size exceeds the available top-of-book depth.
+
+A key empirical feature is that books are highly dynamic because orders are frequently cancelled or modified. Cancellations are essential for market making: when $S_t$ moves or $q_t$ changes, a market maker typically cancels stale quotes and reposts new ones. From a modeling perspective, cancellations generate a high-frequency churn that affects queue position and realized execution rates. In reduced-form models, their net effect is often captured through effective \emph{fill processes} $N_t^{bid}$ and $N_t^{ask}$ with intensities $\lambda^{bid}(\cdot)$ and $\lambda^{ask}(\cdot)$.
+
+Executions can also be partial. When a market order hits a limit order of size larger than the incoming quantity, only a portion is executed and the remaining quantity stays in the book, preserving price-time priority at that level. Conversely, if a market order size exceeds top depth, it consumes multiple levels and produces immediate changes in $p_t^{bid}$ and $p_t^{ask}$, which in turn shift $S_t$.
+
+Latency is another structural element. There is always a non-zero delay between observing the state of the book and having a cancel/replace action acknowledged by the exchange. During this window, an HFT market maker is exposed to adverse price movements and unexpected executions at quotes that were intended to be updated. In practice, latency and message processing limits shape optimal quoting, but in baseline Avellaneda--Stoikov-type models they are typically abstracted away so that quotes can be treated as continuously adjustable. The resulting model should thus be interpreted as an idealized benchmark rather than a full description of the LOB.
+
+These ingredients motivate the modeling choice adopted later: rather than simulating the entire queue and message flow, we represent executions by counting processes $N_t^{bid},N_t^{ask}$ whose conditional intensities $\lambda^{bid}(\delta)$ and $\lambda^{ask}(\delta)$ depend on how far the quotes are from the reference mid-price $S_t$. This captures the first-order trade-off faced by a liquidity provider: tighter $\delta_t^{bid},\delta_t^{ask}$ increase expected fills and spread capture, but also increase exposure to inventory risk through $q_t$ and to execution risk through random fill timing.
+
+\subsection{Empirical Stylized Facts and Reduced-Form Book Models}
+Empirical work on limit order books documents robust regularities across assets and venues. One such regularity is order book imbalance: when buy-side depth near the top of book exceeds sell-side depth (or vice versa), short-term price moves tend to be biased toward the thinner side. Imbalance provides a microstructural signal that can be used to tilt quoting or control inventory, although incorporating it explicitly requires either book data or a structural model for depth dynamics.
+
+A second feature is resilience: after liquidity is consumed by aggressive orders, the book tends to replenish over time through new limit orders and cancellations. Resilience determines how quickly spreads revert and how persistent the impact of temporary shocks is. For market makers, low resilience increases the risk of being caught with inventory $q_t$ during sustained adverse moves in $S_t$, while high resilience improves the ability to mean-revert $q_t$ through subsequent fills.
+
+A third feature is clustering in order flow. Trades and order submissions are not independent in time; instead, they arrive in bursts. This motivates models beyond homogeneous Poisson processes, such as self-exciting point processes, which can reproduce clustered arrivals and endogenous fluctuations in execution intensity. However, these richer specifications complicate both analysis and calibration.
+
+Tick size discreteness creates additional effects. When $\tau$ is large relative to typical short-term volatility $\sigma_t$, the top of book may be relatively stable and market makers can earn the spread more reliably. When $\tau$ is small, competition tightens spreads and queueing becomes more relevant. In both cases, tick constraints imply that the mapping from a continuous reference $S_t$ to admissible quotes is quantized, which can be important when interpreting theoretical optimal $\delta_t^{bid},\delta_t^{ask}$ in implementation.
+
+Comprehensive surveys of empirical LOB properties and modeling approaches are provided in \textcite{GouldEtAl2013}. In the present work, we intentionally adopt a reduced-form execution model for comparability across mid-price specifications: the execution mechanism (counting processes $N_t^{bid},N_t^{ask}$ with intensities $\lambda^{bid}(\cdot),\lambda^{ask}(\cdot)$) is held fixed while the mid-price dynamics are varied under a common finite-horizon design. This choice isolates the effect of the price model on inventory-based control. Imbalance, resilience, order-flow clustering, queue position, and latency are discussed as economically relevant LOB mechanisms, but they are not state variables in the benchmark simulator and they are natural extensions beyond the baseline model.
+
+\subsection{High-Frequency Trading: Operational Definitions and Key Metrics}
+High-frequency trading (HFT) refers to algorithmic strategies that operate on short horizons, where the interaction between trading decisions and market microstructure becomes first-order. In this context, the \emph{policy horizon} $T$ is not only a modeling choice but an operational constraint: strategies are designed to make decisions and manage risk over seconds, milliseconds, or even microseconds, and their profitability depends on how quickly they can adapt to changing order flow and movements in the reference price $S_t$.
+
+As seen in the previous section, a central metric is latency, broadly defined as the end-to-end delay between (i) observing a market state and (ii) having an action (e.g., a new quote, a cancel/replace, or a hedge) acknowledged and made effective by the venue. Latency can be decomposed into data latency, decision latency, and execution latency. In market making, latency directly impacts the ability to maintain intended quote distances $\delta_t^{bid},\delta_t^{ask}$ and inventory targets for $q_t$, and it creates exposure to fills at stale quotes, thereby affecting the realized dynamics of $N_t^{bid}$ and $N_t^{ask}$.
+
+Turnover measures how frequently capital is recycled. At the strategy level, it is commonly proxied by traded volume relative to a notional base, and at the position level it is related to the rate at which $q_t$ mean-reverts. High turnover is not automatically desirable: it may increase gross spread capture, but it can also amplify transaction costs, queue losses, and exposure to toxic flow.
+
+Because HFT operates at the micro scale, practitioners rely on micro-signals and liquidity indicators that summarize the state of the book and recent order flow. Typical examples include the spread $\mathrm{spr}_t$ and top-of-book depth, imbalance, recent trade signs and intensities, short-term realized volatility, and measures of flow persistence. These features are used either to tilt quoting (in market making), to time entry/exit (in arbitrage or stat-arb), or to control urgency and slippage (in execution). In this paper, we keep the execution model reduced-form and let liquidity conditions primarily enter through the parameters governing $\lambda^{bid}(\delta),\lambda^{ask}(\delta)$ and through the volatility scale $\sigma$.
+
+\subsection{Classes of Strategies}
+HFT is best viewed as a family of strategies rather than a single paradigm. The common thread is fast reaction to market conditions, but objectives and risk exposures differ substantially across classes.
+
+\paragraph{Market making (core of this work).}
+A market maker supplies liquidity by posting bid and ask quotes and earns the spread conditional on being filled. The defining risk is inventory: if buys and sells do not balance, the market maker accumulates an inventory $q_t$ that is exposed to movements in $S_t$. In reduced-form models, the strategy controls the trade-off between execution probability and risk by adjusting quote distances $\delta_t^{bid},\delta_t^{ask}$ from the reference mid-price $S_t$. The present work treats market making as a controlled quoting problem, comparing a naive symmetric policy to an inventory-aware policy derived from the Avellaneda--Stoikov principle.
+
+\paragraph{Statistical arbitrage and cross-venue trading (operational context).}
+Statistical arbitrage encompasses strategies that exploit temporary mispricings across related instruments (pairs or baskets) or across venues. In a cross-venue setting, the strategy may buy on one venue and sell on another to capture price differentials, subject to latency, fees, and execution risk. In a related-instruments setting, the strategy may trade a spread or mean-reverting residual, requiring careful control of model risk and regime changes. These strategies share important infrastructure with market making (low-latency execution, queue management, and robust risk controls) but their alpha mechanism is typically driven by relative value rather than spread capture.
+
+\paragraph{Execution and optimal execution (comparison baseline).}
+Execution algorithms aim to trade a given quantity while minimizing cost and risk, rather than to provide liquidity continuously. The objective is typically a functional of expected slippage, volatility risk, and market impact, leading to policies that schedule participation rates or adaptively vary urgency over time. Classical frameworks formalize this problem using stochastic control and dynamic programming (see \textcite{CarteaJaimungalPenalva2015}). Execution provides a useful contrast to market making: in market making the trader chooses quotes to be hit, whereas in execution the trader chooses aggressiveness to achieve a target quantity, often paying the spread instead of earning it.
+
+\subsection{Risks and Constraints}
+Although HFT strategies can be framed as optimization problems, real-world performance is shaped by risks and constraints that may not be fully captured by baseline models. For market making, these risks motivate the inventory-aware structure studied later.
+
+\paragraph{Inventory risk.}
+Inventory risk is the exposure of the dealer's position to price movements. In the Avellaneda--Stoikov setting, inventory enters the objective through marked-to-market wealth $W_t$ and is controlled via quote skew: the market maker shifts $\delta_t^{bid}$ and $\delta_t^{ask}$ to encourage trades that reduce $q_t$. Inventory limits (hard bounds) and risk budgets (soft penalties) are standard constraints in practice.
+
+\paragraph{Adverse selection and toxicity.}
+Adverse selection occurs when incoming market orders are informational: the market maker sells just before $S_t$ rises or buys just before $S_t$ falls. This is often described as toxic flow, because it turns apparent spread revenue into losses. In reduced-form models, adverse selection can be approximated by state-dependent intensities $\lambda^{bid}(\cdot),\lambda^{ask}(\cdot)$ or by coupling executions to future changes in $S_t$, but fully modeling it typically requires richer microstructure inputs. In the simulations below, adverse selection and toxicity are not modeled explicitly, but they remain risk channels that the benchmark abstracts away.
+
+\paragraph{Queue risk.}
+When quotes are placed at competitive prices, fills depend on queue position at $p_t^{bid}$ and $p_t^{ask}$. Frequent cancellations and reposting may improve alignment with $S_t$ but can worsen priority. Thus, there is a trade-off between staying ``fresh'' and maintaining queue position. Queue risk is particularly important in low-volatility regimes where many market makers crowd the top of book and marginal priority determines realized fill rates for $N_t^{bid}$ and $N_t^{ask}$.
+
+\paragraph{Latency and implementation risk.}
+Latency creates a gap between intended and realized control. During delays, the strategy may be executed at stale quotes, miss hedges, or experience rapid changes in $q_t$. Additional implementation constraints include exchange message limits, minimum resting times, order throttles, and fees/rebates structures that can materially alter optimal quoting behavior.
+
+\paragraph{Regime shifts and model risk.}
+HFT strategies are sensitive to regime changes in volatility, liquidity, and order flow. A regime shift can invalidate parameters that were stable in calm periods (e.g., the effective intensity scale in $\lambda^{bid}(\cdot),\lambda^{ask}(\cdot)$ or the volatility level $\sigma$), causing abrupt changes in fill rates and inventory dynamics.
+
+\subsection{Bridge to Avellaneda--Stoikov}
+The discussion above provides the minimum context needed to motivate the Avellaneda--Stoikov benchmark. The LOB supplies the two-sided quoting mechanism through $p_t^{bid},p_t^{ask}$ around a reference $S_t$, order flow and cancellations motivate a reduced-form execution model in terms of fill processes $N_t^{bid},N_t^{ask}$ and intensities $\lambda^{bid}(\cdot),\lambda^{ask}(\cdot)$ and HFT metrics and risks clarify why inventory-aware control of $q_t$ and robustness across regimes are central. With this foundation, we now introduce Avellaneda--Stoikov as a tractable stochastic control formulation of market making and use it as the baseline engine for the simulation-based comparisons developed in the remainder of the work.
+
+\section{High-Frequency Trading in a Limit Order Book: Core Ideas Behind Avellaneda--Stoikov}
+\label{hft1-sec:hft_lob_core_ideas}
+
+
+\subsection{Problem statement: how does a market maker create a bid--ask?}
+The central question is: \emph{how can a market maker (MM) generate bid and ask quotes in a limit order book?} The MM provides liquidity by continuously posting a two-sided market, aiming to profit from spread capture while controlling the risks induced by random price fluctuations and random execution timing.
+
+Two main sources of uncertainty drive the problem. First, there is inventory risk, stemming from the stochastic nature of the reference (mid) price process: if the MM accumulates inventory $q_t$, the marked-to-market value of that inventory fluctuates randomly with $S_t$. Second, there is transaction risk, due to the randomness in both the number of market orders and their arrival times: executions occur at random instants, and the MM cannot perfectly control when (and how often) its quotes are hit. The goal is therefore to choose a quoting policy that maximizes the MM's objective, formulated as utility maximization.
+
+\subsection{Symmetric and Inventory-Sensitive Quoting}
+A convenient way to organize the discussion is to contrast two approaches.
+
+The first approach is a naive symmetric strategy. The MM posts a bid and an ask that are symmetric around the mid-price and do not depend on inventory. In other words, the distances from the mid-price are fixed (or exogenously time-dependent) and ignore the state variable $q_t$. This policy can capture spread revenue, but it does not actively control inventory risk: any inventory stabilization occurs only indirectly (e.g., through reduced fill rates when quoting wider).
+
+The second approach is an inventory-based strategy: the MM calibrates its bid-ask quotes to the current inventory so as to push $q_t$ back toward $0$ by the end of the horizon. The key conceptual workflow is a two-step procedure. In Step~1, one computes an indifference price (or reservation price) that depends on inventory. In Step~2, one constructs bid and ask quotes around that inventory-dependent reference and calibrates their aggressiveness using the book/execution mechanism, typically summarized by arrival intensities.
+
+\subsection{Minimal building blocks: price dynamics, order arrivals, and order sizes}
+Even in a reduced-form model, the market-making problem requires three minimal blocks.
+
+\paragraph{Mid-price dynamics.}
+The reference price $S_t$ must be modeled, together with its volatility structure. Classical specifications use Brownian/It\^o diffusions, while richer specifications use Volterra-type dynamics or rough volatility drivers. Changing the dynamics of $S_t$ changes optimal quoting because it changes the distribution of future price moves and therefore the risk of holding inventory.
+
+\paragraph{Order arrival mechanism.}
+Executions are modeled via point processes (often Poisson in the baseline). A common reduced-form assumption is that the arrival intensity of market orders hitting the MM quotes depends on the quote distance from the mid-price. In notation consistent with the rest of the manuscript, one often writes effective intensities
+\[
+\lambda^{bid}(\delta), \qquad \lambda^{ask}(\delta),
+\]
+where $\delta$ represents the distance of the quote from $S_t$ (e.g., $\delta_t^{bid}$ or $\delta_t^{ask}$). The fill events are then summarized by counting processes $N_t^{bid}$ and $N_t^{ask}$.
+
+\paragraph{Order size specification.}
+One must specify the size of executions. In many baseline treatments, execution size is simplified to one unit per fill, which yields an inventory jump of $\pm 1$ at each execution. More general frameworks treat order sizes as random marks (marked point processes), which is more realistic but also more complex.
+
+A practical remark is that under rough volatility or Volterra-type models, the volatility forecast over the relevant horizon $\sigma_t$ is no longer well-described by a constant (or even Markovian) but it varies over time. This changes how aggressively the MM must move quotes in response to inventory: when short-horizon volatility is clustered and persistent, inventory control often requires more state-dependent and regime-sensitive adjustments.
+
+\subsection{A baseline mid-price model and CARA utility: why closed forms appear}
+To illustrate how the indifference-price logic arises, consider a baseline specification where the mid-price follows an arithmetic Brownian motion with constant volatility. Specifically, assume that, for $u\ge t$,
+\[
+dS_u = \sigma\, dW_u,
+\qquad S_t=s,
+\]
+where $W$ is a one-dimensional Brownian motion and $\sigma$ is constant. The modeling implication is that we impose no structure on drift or autocorrelation beyond this diffusion assumption. In particular, there is no attempt to encode predictability in $S_t$.
+
+The objective is to maximize the exponential utility of terminal P\&L at a finite horizon $T$, i.e., a CARA (constant absolute risk aversion) preference with risk-aversion parameter $\gamma>0$. Exponential utility also connects naturally to convex risk measures and provides a clean framework for defining indifference prices.
+
+As a first step, consider a frozen-inventory thought experiment in which the inventory is held fixed at level $q$ between $t$ and $T$. The associated value is
+\[
+v(x,s,q,t)
+=
+\mathbb{E}_t\!\left[-\exp\!\left(-\gamma\bigl(x+qS_T\bigr)\right)\right],
+\]
+where $x$ denotes initial wealth at time $t$, $s$ is the current mid-price $S_t$, and $q$ is the number of shares held. The parameter $\gamma$ quantifies risk aversion: increasing $\gamma$ makes the agent more risk averse (larger penalty for variance), while decreasing $\gamma$ moves the agent closer to risk neutrality.
+
+Under arithmetic Brownian motion,
+\[
+S_T = s + \sigma\bigl(W_T-W_t\bigr),
+\]
+and conditioning on $\mathcal{F}_t$ yields
+\[
+\mathbb{E}_t[S_T]=s,
+\qquad
+\mathrm{Var}_t(S_T)=\sigma^2(T-t).
+\]
+Define terminal wealth
+\[
+Y:=x+qS_T.
+\]
+Then
+\[
+\mathbb{E}_t[Y]=x+qs,
+\qquad
+\mathrm{Var}_t(Y)=q^2\sigma^2(T-t).
+\]
+Using the standard Gaussian moment generating identity, if $Y\sim N(m,v)$ then 
+\begin{align*}
+    \mathbb{E}(e^{aY})=\exp(am+\tfrac12a^2v)
+\end{align*}
+with $a=-\gamma$, one obtains
+\[
+\mathbb{E}_t\!\left[-e^{-\gamma Y}\right]
+=
+-\exp\!\left(
+-\gamma\,\mathbb{E}_t[Y]
++\frac12\gamma^2\,\mathrm{Var}_t(Y)
+\right)
+=
+-\exp\!\left(
+-\gamma(x+qs)
++\frac12\gamma^2 q^2\sigma^2(T-t)
+\right).
+\]
+Equivalently, by splitting exponentials,
+\[
+v(x,s,q,t)
+=
+-\exp(-\gamma x)\,
+\exp(-\gamma q s)\,
+\exp\!\left(\frac{\gamma^2 q^2 \sigma^2 (T-t)}{2}\right).
+\]
+This factorization is particularly clean because the terminal wealth is Gaussian under ABM and the exponential utility interacts well with Gaussian mgfs. If instead $S_t$ followed GBM, such a neat factorization generally does not appear.
+
+This ``closed-form friendliness'' is a direct consequence of the CARA/exponential specification $U(w)=-e^{-\gamma w}$: under normality (or more generally whenever the relevant moment generating function exists in a tractable form) computations simplify substantially. In Black--Scholes, for instance, $S_t$ is lognormal and expectations of the form $\mathbb{E}\bigl[-e^{-\gamma q S_T}\bigr]$ can be interpreted via Laplace-transform-type objects. For rough or otherwise more complex models, closed forms are typically lost and one must either (i) formulate and solve the associated Hamilton--Jacobi--Bellman (HJB) equation when the control is continuous, (ii) rely on numerical methods/simulation to approximate the value function, or (iii) modify the objective (e.g., mean--variance criteria or utilities on transformed prices such as log-prices).
+
+Importantly, in more complex, non-Gaussian diffusion models, closed forms are typically lost but the qualitative dependence between optimal bid--ask placement and inventory remains. What changes is the computation: in Gaussian settings one obtains closed forms and ``clean'' separability, while in more realistic settings the inventory correction typically becomes a function of the full state (e.g., $s,q,t,\text{volatility},\text{other states}$) because both risk and the future distribution of $S_t$ depend on those factors. Operationally, the optimality conditions may be expressed in terms of partial derivatives of the value function, which are difficult to obtain in high-dimensional HJB/PDE problems and therefore motivate numerical schemes.
+
+\subsection{Reservation prices via indifference: finite horizon}
+The key quantity in inventory-based quoting is the \emph{reservation price} (indifference price): the price that makes the agent indifferent between keeping the current portfolio and switching to a portfolio with one more (or one fewer) share.
+
+Formally, define the reservation bid price $r^b(s,q,t)$ and reservation ask price $r^a(s,q,t)$ as the solutions to
+\[
+v\bigl(x-r^b(s,q,t),\,s,\,q+1,\,t\bigr)=v(x,s,q,t),
+\qquad
+v\bigl(x+r^a(s,q,t),\,s,\,q-1,\,t\bigr)=v(x,s,q,t).
+\]
+Under the ABM--CARA frozen-inventory expression above, these conditions yield
+\[
+r^b(s,q,t)
+=
+s+(-1-2q)\,\frac{\gamma\sigma^2(T-t)}{2},
+\qquad
+r^a(s,q,t)
+=
+s+(1-2q)\,\frac{\gamma\sigma^2(T-t)}{2}.
+\]
+A convenient reference is the ``center'' reservation level (the midpoint between reservation bid and ask),
+\[
+r(s,q,t)
+=
+\frac12\bigl(r^a(s,q,t)+r^b(s,q,t)\bigr)
+=
+s-\,\gamma q\sigma^2(T-t).
+\]
+This expression highlights the inventory effect: if the agent is long stock ($q>0$), then $r(s,q,t)$ lies below the mid-price, meaning the agent is willing to sell at a lower price to reduce inventory. If the agent is short ($q<0$), then $r(s,q,t)$ lies above the mid-price, meaning the agent is willing to buy back at a higher price to close the short position.
+
+In this paper, the reservation-price construction is kept in its finite-horizon form. This is sufficient for the ABM and GBM simulation benchmarks and keeps the terminal-wealth criterion consistent across the single-asset models.
+
+The reservation-price step above provides the first half of the Avellaneda--Stoikov logic. The second half connects reservation prices to actual bid-ask quotes by incorporating execution probabilities through $\lambda^{bid}(\cdot)$ and $\lambda^{ask}(\cdot)$, i.e., by choosing quote distances that trade off fill rates against inventory and price risk. This connection is developed in the subsequent Avellaneda--Stoikov section.
+
+\subsection{Market Making as a Liquidity Provision Problem}
+A market maker provides immediacy by standing ready to buy and sell. If the dealer posts a bid below the current reference price and an ask above it, profits arise when both sides are hit over time and the spread is captured. However, the execution of the two sides is random. If the dealer buys repeatedly without selling, inventory builds up; if the price then falls, marked-to-market wealth deteriorates. Inventory control is therefore central to market making, especially on short horizons where positions can grow quickly relative to the dealer's risk budget.
+
+Historically, two-sided quoting was associated with designated specialists or dealers on centralized exchanges. In modern electronic markets, the same economic function is carried out by many competing agents that post and cancel orders at high frequency. This institutional evolution is why reduced-form models of quoting, execution intensities, and inventory risk remain valuable: they transform a complex market mechanism into a control problem with clear state variables and interpretable parameters.
+
+The following state-dynamics discussion converts this economic intuition into the formal Avellaneda--Stoikov framework. We move from the qualitative description of two-sided liquidity provision to explicit state dynamics, fill intensities, and a finite-horizon utility objective that can be solved through dynamic programming.
+
+\section{The Avellaneda--Stoikov Framework}
+
+
+\subsection{State Dynamics}
+The state of the MM is fully characterized by the triad $(S_t, q_t, X_t)$, representing respectively the reference mid-price, the current inventory (number of shares/contracts), and the cash account. The dealer provides liquidity by posting quotes at distances $\delta_t^{bid}$ and $\delta_t^{ask}$ from the mid-price
+\[
+p_t^{bid}=S_t-\delta_t^{bid}, \qquad p_t^{ask}=S_t+\delta_t^{ask},
+\]
+with $\delta_t^{bid},\delta_t^{ask}\ge 0$.
+
+It is crucial to distinguish the continuous nature of the price from the discrete nature of the dealer's accounting. Assuming unit trade sizes, the executions are modeled via the counting point processes $N_t^{bid}$ and $N_t^{ask}$. Consequently, inventory and cash are jump processes that evolve only when an order is filled
+\begin{align*}
+    &dq_t=dN_t^{bid}-dN_t^{ask},\\
+    &dX_t=(S_t+\delta_t^{ask})\,dN_t^{ask}-(S_t-\delta_t^{bid})\,dN_t^{bid}.
+\end{align*}
+Economically, when a market seller hits the bid ($dN_t^{bid}=1$), the dealer buys one share (increasing $q_t$) and pays the bid price (decreasing $X_t$). Conversely, a fill at the ask ($dN_t^{ask}=1$) reduces inventory and increases cash.
+
+The continuous performance of the strategy is measured by the total wealth at any time $t$
+\[
+W_t=X_t+q_tS_t.
+\]
+This equation encapsulates the core of the market making problem. While the accumulated cash $X_t$ is insulated from price movements, the portfolio value $q_tS_t$ is continuously exposed to the stochastic fluctuations of $S_t$. The terminal objective evaluated at the policy horizon $T$ is based on 
+\[
+W_T=X_T+q_TS_T,
+\]
+driving the need for an optimal control policy that balances the spread capture in $X_t$ against the inventory risk inherent in $q_tS_t$.
+
+\subsection{Arrival Intensities}
+To close the specification of the state dynamics, we must define the behavior of the counting processes $N_t^{bid}$ and $N_t^{ask}$. The dealer does not have direct control over when an execution occurs, but they control the probability of an execution by choosing the quotation distances $\delta_t^{bid}$ and $\delta_t^{ask}$.
+
+Let $\lambda(\delta)$ denote the arrival rate (intensity) of filled limit orders at a distance $\delta$ from the mid-price. Following the specific framework proposed by Avellaneda and Stoikov, we assume that the arrival of executions depends on three main market components:
+\begin{enumerate}
+    \item The overall constant frequency of market orders (liquidity-taking orders), denoted by $\Lambda$;
+    \item The distribution of the volume size $Q$ of these market orders, which is empirically shown to follow a power law density $f^Q(x) \propto x^{-1-\alpha}$;
+    \item The temporary market impact $\Delta p$ caused by a large market order.
+\end{enumerate}
+If a market order creates a temporary price impact $\Delta p$, the dealer's limit order posted at a distance $\delta$ will be executed only if the impact is large enough to reach the quote, i.e., if $\Delta p>\delta$. Therefore, the execution intensity is proportional to the probability of this event.
+
+Following the finding that the price impact of an order of size $Q$ is best described by a logarithmic function 
+\[
+\Delta p \propto \ln{(Q)} 
+\]
+we can derive the exact functional form for the arrival intensity as follows
+\begin{align*}
+    \lambda(\delta)&=\Lambda \mathbb{P}(\Delta p>\delta)=\\
+    &=\Lambda \mathbb{P}(\ln{(Q)}>K\delta)=\\
+    &=\Lambda \mathbb{P}(Q>e^{K\delta})=\\
+    &=\Lambda \int_{e^{K\delta}}^{+\infty}x^{-1-\alpha}dx= Ae^{-k\delta},
+\end{align*}
+where the constants are redefined as $A = \Lambda /\alpha$ and $k=\alpha K$.
+
+This result provides us with the exponential intensities for the bid and ask sides
+\[
+\lambda^{ask}(\delta)=Ae^{-k\delta}, \qquad \lambda^{bid}(\delta)=Ae^{-k\delta}.
+\]
+In this reduced-form representation, the parameter $A$ retains the interpretation of the base market activity (the arrival rate at the mid-price), while $k$ controls execution sensitivity to quote aggressiveness. A larger $k$ means that the execution intensity decays more rapidly as the dealer moves quotes away from the mid-price. This dynamic establishes the core trade-off of the market making problem: quoting further away secures a larger margin per trade but exponentially dampens the execution probability.
+
+\subsection{Objective Function}
+Having established the dynamics of the state variables and the microstructural mechanics of order executions, we now formalize the dealer's objective. The market maker seeks to maximize the expected utility of their terminal wealth at a fixed horizon $T$ (e.g., the end of the daily trading session). Let 
+\[
+W_T = X_T + q_TS_T
+\]
+denote the marked-to-market wealth at the terminal time $T$. To rigorously capture the dealer's aversion to inventory risk, the optimization is cast within an expected utility framework using a Constant Absolute Risk Aversion (CARA) utility function
+\[
+u(W_T) = -e^{-\gamma W_T} 
+\]
+where $\gamma>0$ is the absolute risk aversion coefficient. The choice of the exponential utility is not merely mathematically convenient, it economically reflects the dealer's penalization of wealth variance. Since the cash account is riskless, the variance of the terminal wealth is entirely driven by the inventory position $q_T$ exposed to the price volatility $\sigma$.
+
+The market maker's problem consists of finding the optimal predictable quoting policies (the controls), $\delta_t^{bid}$ and $\delta_t^{ask}$, that maximize the expected terminal utility conditional on the state at time $t$. We define the value function $u(t,S_t ,q_t, X_t)$ as
+\begin{align*}
+    u(t,s,q,x)&=\max_{\{\delta_t^{bid},\delta_t^{ask}\}_{t\in[0,T]}} \mathbb{E}\left[-\exp\!\left(-\gamma W_T\right)|S_t=s,q_t=q,X_t=x\right]=\\
+    &=\max_{\{\delta_t^{bid},\delta_t^{ask}\}_{t\in[0,T]}} \mathbb{E}_t\left[-\exp\!\left(-\gamma (X_T+q_TS_T)\right)\right].
+\end{align*}
+This formulation represents a classic finite-horizon stochastic optimal control problem. Exponential utility is convenient because it interacts well with Gaussian benchmark models and yields interpretable reservation-price formulas \cite{AvellanedaStoikov2008}, \cite{GueantLehalleFernandezTapia2013}.
+
+Having formally defined the stochastic control problem and demonstrated the wealth-independence of the quoting strategy, the next step is to derive the optimal controls $\delta_t^{bid}$ and $\delta_t^{ask}$. This requires solving the dynamic programming problem through its associated Hamilton-Jacobi-Bellman (HJB) equation, which we establish in Chapter~\ref{ch:markov}.
+
+The execution and utility conventions established here stay fixed when possible. The next chapter changes the diffusion specification and inventory dimension; later chapters change the volatility information state. A result for one of these models does not automatically transfer to another.

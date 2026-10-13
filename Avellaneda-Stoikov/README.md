@@ -13,6 +13,7 @@ Research materials on market making, with a focus on simulation-based explanatio
 
 | Article | Topic | Publication | Materials |
 | --- | --- | --- | --- |
+| [Unified study](./Unified/) | Shared Markovian/rough-state models, inventory control and full-HJB diagnostics | Working drafts; supporting code available | Flat src, shared data/outputs and audited Overleaf figure replay. |
 | [Article 1: Market Making Simulation](./Article-1/) | Optimal quoting, inventory risk, cash dynamics, and PnL simulation | Published | Companion notebook and reproducibility notes. |
 | [Article 2: Rough Volatility and HJB](./Article-2-Rough-Volatility-HJB/) | Rough volatility, Volterra memory, Markovian lifting, reduced HJB, and flat-close inventory control | June 26, 2026 | Python scripts, article figures, generated outputs, and reproducibility notes. |
 
@@ -24,6 +25,12 @@ Avellaneda-Stoikov/
 |-- Article-1/
 |   |-- README.md
 |   `-- codice_articoloSF.ipynb
+|-- Unified/
+|   |-- README.md
+|   |-- requirements.txt
+|   |-- src/              # flat operational sources
+|   |-- data/
+|   `-- outputs/
 `-- Article-2-Rough-Volatility-HJB/
     |-- README.md
     |-- requirements.txt

@@ -1,0 +1,45 @@
+{
+  "results": [
+    {
+      "environment": "E1",
+      "paths": 300,
+      "steps": 3900,
+      "seed": 42,
+      "innovation_covariance_reconstruction_error": 4.336808689942018e-19,
+      "minimum_covariance_eigenvalue": -5.251043470068069e-20,
+      "accounting_error": 1.2756462552943049e-13,
+      "mean_pnl": [
+        5.44528676718884,
+        7.723948124513642
+      ],
+      "mean_abs_preclose_inventory": [
+        2.433333333333333,
+        0.45
+      ],
+      "mean_paired_pnl_difference": 2.2786613573248005,
+      "paired_standard_error": 0.21498590137393514
+    },
+    {
+      "environment": "E2",
+      "paths": 300,
+      "steps": 3900,
+      "seed": 42,
+      "innovation_covariance_reconstruction_error": 4.336808689942018e-19,
+      "minimum_covariance_eigenvalue": -5.251043470068069e-20,
+      "accounting_error": 1.2756462552943049e-13,
+      "mean_pnl": [
+        4.791703916005394,
+        7.607425419786941
+      ],
+      "mean_abs_preclose_inventory": [
+        2.6133333333333333,
+        0.4266666666666667
+      ],
+      "mean_paired_pnl_difference": 2.8157215037815466,
+      "paired_standard_error": 0.23967623587731107
+    }
+  ],
+  "out_of_domain_lookup_count": 0,
+  "status": "Illustrative baseline application; time-step convergence and independent residual not certified; no P3 or latency comparison",
+  "policy": "Linear theta interpolation in t/Y, q discrete; gains then bounded Hamiltonian; state clamped at domain edge with count"
+}

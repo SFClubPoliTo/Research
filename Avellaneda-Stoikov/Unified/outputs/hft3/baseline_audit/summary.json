@@ -1,0 +1,42 @@
+{
+  "source_sha256": "b54a2e31bdedda96ad6a24a7a64649dcc48b2682a62c944f672f3227b32964ac",
+  "seed": 42,
+  "samples": 180,
+  "hurst": 0.2,
+  "q_max": 6,
+  "time_indices": [
+    0,
+    195,
+    388
+  ],
+  "lift_rates": [
+    3.0,
+    6.803799465798163,
+    15.430562390265125,
+    34.99548404928368,
+    79.36741855995483,
+    179.99999999999997
+  ],
+  "lift_weights": [
+    0.4507500037740584,
+    0.25409409006331074,
+    0.14323639725905563,
+    0.08074436321853068,
+    0.045516728403707636,
+    0.025658417281336828
+  ],
+  "var_y": 0.0776117878004893,
+  "reduced_kappa": 1.35,
+  "reduced_diffusion_variance": 0.20955182706132114,
+  "full_aggregate_instantaneous_variance": 1.0,
+  "full_residual_rms": 138562.57854127398,
+  "reduced_residual_rms": 113726.58131994029,
+  "compression_defect_rms": 38015.31996558947,
+  "drift_defect_rms": 163.52522112809922,
+  "diffusion_defect_rms": 38067.55378832461,
+  "theta_min": -60.0,
+  "theta_max": 15.0,
+  "theta_at_lower_clip": 6514,
+  "theta_at_upper_clip": 159144,
+  "qualification": "Legacy HFT2 explicit solver; forward time difference, legacy spatial differences and linear interpolation of jets. Bounded Hamiltonian [.02,4], not legacy unbounded Hamiltonian. Diagnostic only; no residual convergence or policy improvement established."
+}

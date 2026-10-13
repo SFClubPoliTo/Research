@@ -1,0 +1,10 @@
+{
+  "method": "paired percentile bootstrap, fixed synthetic run; conditional sampling uncertainty only",
+  "resamples": 10000,
+  "seed": 20261013,
+  "ce_difference": -0.0708428298483188,
+  "ce_difference_95_interval": [
+    -0.39863203572280004,
+    0.28827197764081847
+  ]
+}

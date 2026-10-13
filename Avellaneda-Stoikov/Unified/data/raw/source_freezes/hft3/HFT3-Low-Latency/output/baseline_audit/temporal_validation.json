@@ -1,0 +1,66 @@
+{
+  "rows": 772317,
+  "terminal_error": 5.329070518200751e-15,
+  "comparison": "6 SD / 241 nodes, same 9360 time steps; |Y| <= 2 SD; all saved times and allowed q/sides; linear spatial interpolation",
+  "metrics": [
+    {
+      "domain_sd": 4,
+      "points": 81,
+      "max_theta_difference": 0.0006550636255795439,
+      "max_quote_difference": 0.0008170365237669744
+    },
+    {
+      "domain_sd": 4,
+      "points": 161,
+      "max_theta_difference": 0.0001387397361796161,
+      "max_quote_difference": 5.038299218895759e-05
+    },
+    {
+      "domain_sd": 4,
+      "points": 241,
+      "max_theta_difference": 0.00037141689460629124,
+      "max_quote_difference": 0.0002441556091618592
+    },
+    {
+      "domain_sd": 5,
+      "points": 81,
+      "max_theta_difference": 0.001163550156364046,
+      "max_quote_difference": 0.0009536161780157211
+    },
+    {
+      "domain_sd": 5,
+      "points": 161,
+      "max_theta_difference": 0.0001936383941898434,
+      "max_quote_difference": 0.0005273953130008439
+    },
+    {
+      "domain_sd": 5,
+      "points": 241,
+      "max_theta_difference": 0.00013036924104969927,
+      "max_quote_difference": 0.00036050901787833267
+    },
+    {
+      "domain_sd": 6,
+      "points": 81,
+      "max_theta_difference": 0.0016168362509785261,
+      "max_quote_difference": 0.001145317299181426
+    },
+    {
+      "domain_sd": 6,
+      "points": 161,
+      "max_theta_difference": 0.00040450068844810616,
+      "max_quote_difference": 0.0005321809559360562
+    },
+    {
+      "domain_sd": 6,
+      "points": 241,
+      "max_theta_difference": 0.0,
+      "max_quote_difference": 0.0
+    }
+  ],
+  "limitations": [
+    "Not exact error bounds",
+    "Temporal refinement and independent residual validation remain open",
+    "No trading simulations or runtime advantage measured"
+  ]
+}

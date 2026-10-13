@@ -1,0 +1,68 @@
+\chapter{Structured Corrections and Remaining Validation}\label{ch:corrections}
+The comparative evidence identifies a specific gap: separate scalar policies omit full-state dynamics and cross-risk, while a simple covariance hedge does not repair the complete equation. A fitted correction would therefore need derivative-aware residual recomputation, preservation constraints and economic checks. The following construction describes that research method; it supplies no fitted P3 result.
+\section{Correction Families and Preservation Constraints}
+
+
+Consider a finite family $\Phi_1,\ldots,\Phi_K$ and $C=\sum_k c_k\Phi_k$. A candidate offline fit minimizes a weighted residual objective on training points, subject to declared admissibility constraints. A separate evaluation set is required: reducing the fitted residual on the same points used to choose the coefficients would provide weak evidence of approximation quality.
+
+One useful structural condition is $\Phi_k(T,q,z)=0$, which preserves the prescribed terminal value exactly. This is distinct from preserving a statistical moment. Inventory monotonicity, signs of quote offsets and coefficient positivity are possible constraints, but they must follow the chosen control problem rather than a formal analogy with a cone in another domain.
+
+Moment preservation also requires a precise object. Correcting a value function without changing the exogenous factor dynamics leaves the factor covariance unchanged automatically. Such a check is necessary for implementation integrity but is not evidence that the policy preserves liquidation risk. A nontrivial economic constraint would concern quantities affected by the policy, such as a selected terminal inventory statistic, evaluated under a common simulation design.
+
+The implemented interface represents a value and its time, gradient, Hessian and neighboring-inventory values. It supports composition and addition of corrections. The coefficient optimizer and the data-driven dictionary remain research tasks. Before optimizing them, localization must be included in the derivative calculation.
+
+\section{Localized Iterative HJB Correction}
+
+
+Let a gate $\chi\in[0,1]$ activate a correction in selected regions. Define
+\[
+ \theta_{j+1}=\theta_j+\chi_j C_{j+1},\qquad
+ R_{j+1}=\mathcal H_F[\theta_{j+1}].
+\]
+For the product $F=\chi C$, spatial derivatives satisfy
+\[
+ \nabla F=C\nabla\chi+\chi\nabla C,
+\]
+\[
+ \nabla^2F=C\nabla^2\chi+\chi\nabla^2C
+ +\nabla\chi\nabla C^\top+\nabla C\nabla\chi^\top.
+\]
+Dropping the last two terms would change the full residual exactly where the gate transitions. The same product rule applies to time derivatives, and the gate must be evaluated at neighboring inventories for the arrival terms.
+
+The first gate implementation uses the quintic transition
+\[
+ s(x)=10x^3-15x^4+6x^5,\qquad 0<x<1,
+\]
+extended by zero and one outside this interval. Its first two derivatives vanish at the endpoints, so the extended gate is $C^2$. A state-coordinate transformation used as its argument must itself supply the necessary derivatives.
+
+A step may be accepted when the evaluated residual norm decreases by a prescribed factor and all constraints remain satisfied. Successful acceptance is not the same as stopping. Termination needs an absolute tolerance, a maximum cycle count, stagnation detection or an explicit cost budget. Zero initial residual and zero cost increment require separate handling. No contraction theorem or fitted iterative cycle is claimed by the current implementation.
+\section{Source-Unverified Architectural Motivation}
+
+
+The operational design follows the sequence: choose a background approximation, evaluate its full defect, decompose that defect, construct admissible corrections, localize them and recompute the complete nonlinear residual. This sequence is adopted as an algorithmic proposal. It is not supported here by a transfer of a fluid-mechanics theorem to a financial control problem.
+
+\begin{center}\small
+\begin{tabularx}{\textwidth}{@{}p{0.37\textwidth}X@{}}
+\toprule
+Construction described in the brief & Proposed correction object \\
+\midrule
+Background field & Embedded scalar baseline $\widetilde\theta_0$ \\
+Momentum residual & Full certainty-equivalent HJB defect $R_F$ \\
+Stress representation & Decomposition into unresolved state directions \\
+Covariance/wave families & Dictionary $\Phi_k$ of offline corrections \\
+Positive-cone representation & Coefficients subject to justified admissibility constraints \\
+Moment-restoring perturbations & Explicit preservation diagnostics for selected quantities \\
+Cutoffs and localized support & Smooth correction gate $\chi$ \\
+New nonlinear errors & Full residual recomputation after each stage \\
+Complete correction cycle & Measured acceptance, rejection and stopping rules \\
+\bottomrule
+\end{tabularx}\end{center}
+
+The exact document named in the integration brief has not yet been identified in the available project sources. Consequently, this table describes the requested research mapping rather than a verified account of a particular proof. Source verification must attach a page or section to each claimed construction and explain why its financial counterpart is well defined. Incompressibility, stress-tensor physics, blow-up statements and quantitative Navier--Stokes estimates are not imported.
+
+Even if the source establishes a residual-improvement theorem in its own setting, an HJB correction needs separate assumptions, estimates and numerical evidence. In this project, improvement is initially an empirical acceptance criterion. The financial equation has been specified in Chapter~\ref{ch:control}; the independent-reference and convergence requirements below remain open.
+
+\section{Validation boundaries shared by all model classes}
+The study is synthetic and does not model queue position, adverse selection, endogenous order flow, market impact, partial fills or exchange latency. The diffusion experiments use no explicit fee/rebate model; the liquidation experiments use only the declared terminal cost. GBM quoting uses a local monetary-variance approximation. The finite factor system does not establish an exact fractional limit, and the scalar surrogate need not match its local generator.
+
+The operator identities and C++ comparisons validate the checked arithmetic. Derivative/interpolation convergence, coupled simulation-step refinement and an independently converged reduced full-state reference remain necessary before fitting corrections. No correction coefficients or preservation statistic under a fitted policy have been delivered. No latency frontier or trading-venue gain has been measured. Source manuscripts and reference PDFs remain separately preserved because exact source/PDF correspondence is not certified.

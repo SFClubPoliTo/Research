@@ -1,0 +1,5 @@
+{
+  "exit_code": 0,
+  "stdout": "PASS 3000 multiasset jet comparisons; max error=1.6697754290362354e-13\n",
+  "stderr": ""
+}

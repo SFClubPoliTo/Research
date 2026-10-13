@@ -1,0 +1,76 @@
+{
+  "status": "local reviewed research delivery; publication metadata pending",
+  "date": "2026-10-13",
+  "layout": [
+    "Drive",
+    "Github-Branch",
+    "Overleaf",
+    "Revisione",
+    "Utilities-Progetto"
+  ],
+  "runtime_directories": [
+    "src",
+    "data",
+    "outputs"
+  ],
+  "original_files_unchanged": 1697,
+  "received_sources_preserved": [
+    "Article1.tex",
+    "Article2.tex"
+  ],
+  "source_blocks_mapped": 553,
+  "deliveries": [
+    {
+      "edition": "unificato",
+      "pages": 93,
+      "pdf_sha256": "7c0cf2f07b65fdf6a14b1148d081155b26333d1f8e887673416cf54b79479205",
+      "zip_files": 36,
+      "zip_sha256": "262a490d97b3721cb30fcd559da5b830f7cdb8620dfd70b6c83221240b000f4e",
+      "review_pages": 8,
+      "review_sha256": "0444fdd04f8573f1c65408bbc53310a2a5e8f621a06c6bc6cda3b26995d2694c",
+      "revised_pair": "source and PDF byte-identical to final reviewed Articolo pair, sharing project dependencies",
+      "all_latest_pages_visually_inspected": true,
+      "standalone_normalized_text_identical": true
+    },
+    {
+      "edition": "paper",
+      "pages": 7,
+      "pdf_sha256": "c76199044327c8adcc6eef63ea777c74e2cf7acec303496fb796f8c93b0f2f5c",
+      "zip_files": 7,
+      "zip_sha256": "4b4218152e5cc328d1059e46a98ae9f1f54b0a76f61ba2dbe0aa341fdf4907b4",
+      "review_pages": 2,
+      "review_sha256": "ae554d60f4ab250ef97404db1fb29be9a35f1f9617f241fbffe43bd080a5a575",
+      "revised_pair": "source and PDF byte-identical to final reviewed Articolo pair, sharing project dependencies",
+      "all_latest_pages_visually_inspected": true,
+      "standalone_normalized_text_identical": true
+    }
+  ],
+  "graph": {
+    "nodes": 501,
+    "edges": 857,
+    "communities": 42,
+    "raw_edges": 895,
+    "dangling_endpoints": 0,
+    "semantic_telemetry": "unavailable"
+  },
+  "qa": {
+    "rendered_and_inspected_pages": 110,
+    "counts": {
+      "unificato": 93,
+      "paper": 7,
+      "review_unificato": 8,
+      "review_paper": 2
+    },
+    "overflow": 0,
+    "sparse_pages": "Some source chapter transitions, conclusion and whole-page scientific floats remain sparse; no clipping or overlap observed"
+  },
+  "limits": [
+    "source TEX and historical reference PDF identity not certified",
+    "independent full-HJB reference and derivative/interpolation/simulation convergence open",
+    "covariance proxy is not fitted P3",
+    "NS exact source unverified",
+    "no exchange latency advantage measured",
+    "new report authors/date/specific GitHub publication URL pending"
+  ],
+  "remote_changes": false
+}

@@ -1,0 +1,11 @@
+{
+  "old_math_displays": 249,
+  "retained_math_displays": 249,
+  "missing_math_displays": [],
+  "old_labels": 20,
+  "missing_labels": [],
+  "template_geometry": "identical source lines for both editions",
+  "cpp": "section, not chapter",
+  "numerical_changes": "none; original table data retained; paper cross-model summaries checked against existing replay summaries",
+  "scope": "literal preservation of original displayed mathematics and labels, not proof of every historical result"
+}

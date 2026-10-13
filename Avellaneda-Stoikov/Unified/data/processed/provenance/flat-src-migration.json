@@ -1,0 +1,117 @@
+[
+  {
+    "old": "src/build_reports.py",
+    "new": "src/build_reports.py",
+    "original_sha256": "05412fec66798f1a85d833d3f770e731eab31443e594a19332e4e92fecc17b41"
+  },
+  {
+    "old": "src/generate_workflow_notebooks.py",
+    "new": "src/generate_workflow_notebooks.py",
+    "original_sha256": "424b7cec94fa4684c3945510f68b6cbfeaeba9d93535bc3e3be441d3712e845c"
+  },
+  {
+    "old": "src/layout.py",
+    "new": "src/layout.py",
+    "original_sha256": "b9b3dd47069a014d0d8e475e393bc42ca8edc1d795028926307a0d3c42ee7731"
+  },
+  {
+    "old": "src/main.py",
+    "new": "src/main.py",
+    "original_sha256": "ffd6173ed6e2ed93c5034a887123156c6652d9a055c812731c37cf5ae12574b6"
+  },
+  {
+    "old": "src/package_reports.py",
+    "new": "src/package_reports.py",
+    "original_sha256": "dcd82f26d33709f9ff269ad66e5baa103a829e3ecb7466908a082ee6058e44bd"
+  },
+  {
+    "old": "src/summarize_validation.py",
+    "new": "src/summarize_validation.py",
+    "original_sha256": "9cf4944a1f66727add3ed95b22d6c4a1fff7d5e790103c68a64942b6c031ea0e"
+  },
+  {
+    "old": "src/hft1/batched.py",
+    "new": "src/hft1_batched.py",
+    "original_sha256": "37e9d2c2271630e4f5e9edcd729e761d59f5f2ebabce4170b2637c8e9aff6dc3"
+  },
+  {
+    "old": "src/hft1/run_classic.py",
+    "new": "src/hft1_run_classic.py",
+    "original_sha256": "a20bbbd4256baea436c218941b16df321bc1802323691ab8536f266ddd22eea7"
+  },
+  {
+    "old": "src/hft1/_gen_notebook.py",
+    "new": "src/hft1_generate_notebook.py",
+    "original_sha256": "b628201be9de9e8cf0d9e900fc194c27623124d18d7e9b678efc31644290c8bc"
+  },
+  {
+    "old": "src/hft2/dashboard_base.py",
+    "new": "src/hft2_dashboard_base.py",
+    "original_sha256": "156f120ba292e1dc97cd22dca4856ce103efb4e670045b47503d75984da36a49"
+  },
+  {
+    "old": "src/hft2/generate_article_figures.py",
+    "new": "src/hft2_generate_article_figures.py",
+    "original_sha256": "6b6faabfaa56b274e2515c2a3a60cdf24103135acbb00ce25514d9a89ead11e5"
+  },
+  {
+    "old": "src/hft2/interactive_fbm_dashboard.py",
+    "new": "src/hft2_interactive_fbm_dashboard.py",
+    "original_sha256": "4c8c09194a1959c2727243f85373689455fc99113ca43ca2da17355c2b60aaa5"
+  },
+  {
+    "old": "src/hft2/interactive_lift_dashboard.py",
+    "new": "src/hft2_interactive_lift_dashboard.py",
+    "original_sha256": "fe9d585c7d2e8cdd941c9bec7f31ac5bfd8e6830e85a9135ffcaee9f2b2202b6"
+  },
+  {
+    "old": "src/hft2/interactive_volterra_dashboard.py",
+    "new": "src/hft2_interactive_volterra_dashboard.py",
+    "original_sha256": "45211b53dc9179e9163b10923e06ab3deb025d0f3bdf5a1d519424cdab6d2467"
+  },
+  {
+    "old": "src/hft2/rough_processes.py",
+    "new": "src/hft2_rough_processes.py",
+    "original_sha256": "1876b61bf90d8acbc5f213cd75309593ec7847a3003e4e13b9be28f8b04225ba"
+  },
+  {
+    "old": "src/hft2/solve_rough_hjb.py",
+    "new": "src/hft2_solve_rough_hjb.py",
+    "original_sha256": "50658ec927bbb153f98e57abced6874ac364d88d3fb3f0ae8b564348cb3ba0c4"
+  },
+  {
+    "old": "src/hft3/audit_hft2.py",
+    "new": "src/hft3_audit_hft2.py",
+    "original_sha256": "19cbcf5d168fdf2733751831fe162ac18ae986d0d788734582eb5833b45f3406"
+  },
+  {
+    "old": "src/hft3/multiasset_model.py",
+    "new": "src/hft3_multiasset_model.py",
+    "original_sha256": "30502ad89cb2862cb73b61c376e8197c9d36c05d56ad6a6951cb3db5e1de914f"
+  },
+  {
+    "old": "src/hft3/policy.py",
+    "new": "src/hft3_policy.py",
+    "original_sha256": "590ef905849725c75001d15170011a1b365c0133226174154d196d2f3f2b7add"
+  },
+  {
+    "old": "src/hft3/residual_audit.py",
+    "new": "src/hft3_residual_audit.py",
+    "original_sha256": "8c92972c1b431f56a829cb0f00d4fa7cf495732e02b559547ce5bb70dd49b9dd"
+  },
+  {
+    "old": "src/hft3/simulate_market.py",
+    "new": "src/hft3_simulate_market.py",
+    "original_sha256": "531f34fedcb1290ca0f3be3c452307e7dac4508f171c2196efb11fd5fdd9e044"
+  },
+  {
+    "old": "src/hft3/simulate_multiasset.py",
+    "new": "src/hft3_simulate_multiasset.py",
+    "original_sha256": "f8e0e1f7e357cb543a35e1b5e420b898bdb7c98eb7c017669765f2dd3f1d8079"
+  },
+  {
+    "old": "src/hft3/temporal_policy.py",
+    "new": "src/hft3_temporal_policy.py",
+    "original_sha256": "96863f41511df3c3c2631883b264a426a12d3e921da204d39a102f3eb097f911"
+  }
+]
