@@ -1,0 +1,37 @@
+{
+  "model": "Heston",
+  "parameter_names": [
+    "v0",
+    "kappa",
+    "theta",
+    "sigma",
+    "rho"
+  ],
+  "parameters": {
+    "v0": 0.06518675842091533,
+    "kappa": 2.927926818514929,
+    "theta": 0.0727931970320091,
+    "sigma": 0.6519270457585352,
+    "rho": -0.12956444633417658
+  },
+  "objective": 4.4161400751975034e-05,
+  "global_objective": 4.417165332024027e-05,
+  "warm_start_used": false,
+  "global_search_used": true,
+  "success": true,
+  "message": "Optimization terminated successfully",
+  "evaluations": 8,
+  "iterations": 1,
+  "elapsed_seconds": 8.833674699999392,
+  "initialization_source": null,
+  "date": "2026-09-02",
+  "strategy": "CC",
+  "source_surface": "data\\processed\\audit_inputs\\outputs\\sampling\\2026-09-02\\sample_CC_64.csv",
+  "profile": "full",
+  "seed": 8,
+  "n_points": 64,
+  "saved_at_utc": "2026-10-24T13:59:32.932299+00:00",
+  "audit_date": "2026-10-24",
+  "dividend_yield": 0.004,
+  "source_calibration": "data/processed/team8/calibration_q040_20261024/CC/2026-09-02/heston.json"
+}

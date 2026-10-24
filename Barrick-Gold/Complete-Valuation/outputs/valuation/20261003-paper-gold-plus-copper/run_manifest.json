@@ -2,11 +2,11 @@
   "status": "CONDITIONAL_OPERATING_VALUE_PROXY_NOT_CORPORATE_FAIR_VALUE",
   "market_snapshot": "2026-09-02T20:00:00Z",
   "generated_at_utc": "2026-10-03T18:42:28.250914+00:00",
-  "copper_calibration_dir": "C:\\Users\\salvm\\Desktop\\SF\\Research projects\\Barrick gold\\VERSIONE PAPER\\Github-Branch\\code\\data\\processed\\copper\\snapshot_20260902",
+  "copper_calibration_dir": "<contributor-home>\\Desktop\\SF\\Research projects\\Barrick gold\\VERSIONE PAPER\\Github-Branch\\code\\data\\processed\\copper\\snapshot_20260902",
   "calibration_manifest_sha256": "499412B2042AF3738BC8D899CAB766B7BA763C0742E1695F2334AFA39397A539",
   "copper_operating_config_sha256": "C6B320504368EE1852FFA03EEDBB569D42D4D544B0D73FC0B8A5558DF97E7827",
   "gold_experiment_config_sha256": "97E3426F70EB417AE81ED16E7C1B94EC16794A6A747140EDBD26AAFDF43E85CA",
-  "gold_experiment_config": "C:\\Users\\salvm\\Desktop\\SF\\Research projects\\Barrick gold\\VERSIONE PAPER\\Github-Branch\\code\\config\\paper_audited_20260907.json",
+  "gold_experiment_config": "<contributor-home>\\Desktop\\SF\\Research projects\\Barrick gold\\VERSIONE PAPER\\Github-Branch\\code\\config\\paper_audited_20260907.json",
   "gold_base_config_sha256": "B02E65CDA27CAB995E330547D25CFBF498F3184463377D30EEC68EBD09585F32",
   "gold_common_input_hashes": {
     "operating_production_koz": "B4F99BFC78C99D819257F05A7CC1F5B12AC84A03FF8C8180DF03E3CB5EB02EE4",

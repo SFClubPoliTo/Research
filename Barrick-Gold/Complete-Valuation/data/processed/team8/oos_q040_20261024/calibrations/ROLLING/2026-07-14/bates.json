@@ -1,0 +1,40 @@
+{
+  "model": "Bates",
+  "parameter_names": [
+    "v0",
+    "kappa",
+    "theta",
+    "sigma",
+    "rho",
+    "lambd",
+    "mu_J",
+    "sigma_J"
+  ],
+  "parameters": {
+    "v0": 0.06428423772586281,
+    "kappa": 5.9344267851865125,
+    "theta": 0.0670668653698817,
+    "sigma": 0.891095157097542,
+    "rho": -0.396627993576552,
+    "lambd": 0.0,
+    "mu_J": 0.0,
+    "sigma_J": 0.1
+  },
+  "objective": 2.0841912192482214e-05,
+  "global_objective": 2.8972113827977514e-05,
+  "warm_start_used": false,
+  "global_search_used": true,
+  "success": true,
+  "message": "Retained nested Heston candidate",
+  "evaluations": 0,
+  "iterations": 0,
+  "elapsed_seconds": 36.415809099999024,
+  "initialization_source": null,
+  "date": "2026-07-14",
+  "strategy": "ROLLING",
+  "source_surface": "data\\processed\\team8\\oos_q040_20261024\\calibration_sets\\2026-07-14\\calibration_surface.csv",
+  "profile": "full",
+  "seed": 8,
+  "n_points": 64,
+  "saved_at_utc": "2026-10-24T15:54:26.535772+00:00"
+}

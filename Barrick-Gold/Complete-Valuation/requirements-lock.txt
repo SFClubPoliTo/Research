@@ -1,0 +1,8 @@
+# Exact versions used to rebuild the 24 October 2026 evidence (Python 3.12.10).
+# requirements.txt keeps the supported ranges; install this file to reproduce bit for bit.
+numpy==2.5.3
+pandas==3.0.6
+scipy==1.18.1
+matplotlib==3.11.2
+Pillow==12.3.0
+pytest==9.1.1

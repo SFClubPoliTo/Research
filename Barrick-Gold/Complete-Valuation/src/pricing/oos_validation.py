@@ -60,7 +60,7 @@ outputs/oos/
 img/diagnostics_ibkr/
     online_welch_goyal_cumulative.png
     oos_table_rows.tex
-    oos_article_numbers.tex
+    oos_run_counts.tex
 
 Optional fixed-parameter robustness:
     add --fixed-origin YYYY-MM-DD
@@ -112,6 +112,13 @@ from BnS import BnS
 from Heston import Heston
 from Bates import Bates
 from BatesHawkesExact import BatesHawkesExact
+from gld_carry import GLD_EXPENSE_RATIO, forward_equivalent_surface
+
+# Continuous carry applied to every loaded surface (GLD sponsor fee).
+DIVIDEND_YIELD = GLD_EXPENSE_RATIO
+# Warm starts were historically given to Hawkes only; off by default so that
+# all four models are calibrated under the same search policy.
+HAWKES_WARM_START = False
 
 
 MODEL_KEYS = ("bs", "heston", "bates", "hawkes")
@@ -321,7 +328,7 @@ def load_surface(ref: SurfaceRef, min_dte: int = 75) -> pd.DataFrame:
     if df.empty:
         raise ValueError(f"No valid DTE>={min_dte} observations remain.")
 
-    return df
+    return forward_equivalent_surface(df, DIVIDEND_YIELD)
 
 
 def surface_stats(frame: pd.DataFrame) -> dict[str, Any]:
@@ -459,7 +466,12 @@ def invoke_calibration(
         str(int(seed)),
         "--output-root",
         str(calibration_root),
+        "--dividend-yield",
+        str(DIVIDEND_YIELD),
     ]
+    # By default every model is fitted from its own global search at every
+    # origin, so no model receives a warm-start advantage in the comparison.
+    cmd.append("--hawkes-warm-start" if HAWKES_WARM_START else "--no-hawkes-warm-start")
 
     if force:
         cmd.append("--force")
@@ -540,6 +552,11 @@ def _group_indices(frame: pd.DataFrame) -> list[np.ndarray]:
     return groups
 
 
+# Pricing exceptions are kept as NaN (they leave the common support) but are
+# counted and written to the run manifest instead of being dropped silently.
+PRICING_FAILURES: list[dict[str, Any]] = []
+
+
 def model_prices(
     model: str,
     target: pd.DataFrame,
@@ -563,7 +580,8 @@ def model_prices(
                     sigma,
                     0.0,
                 )
-            except Exception:
+            except Exception as exc:
+                PRICING_FAILURES.append({"model": model, "rows": 1, "error": repr(exc)})
                 out[i] = np.nan
         return out
 
@@ -641,7 +659,8 @@ def model_prices(
                 values = values.reshape(-1)
             out[idx] = values
 
-        except Exception:
+        except Exception as exc:
+            PRICING_FAILURES.append({"model": model, "rows": int(len(idx)), "error": repr(exc)})
             out[idx] = np.nan
 
     return out
@@ -779,6 +798,11 @@ def score_pair(
         )
     )
     work["common_model_support"] = common_model
+    market_ok = np.isfinite(work["market_iv"].to_numpy(dtype=float))
+    excluded = {
+        model: int(np.sum(market_ok & ~np.isfinite(work[f"{model}_iv"].to_numpy(dtype=float))))
+        for model in MODEL_KEYS
+    }
 
     common_persistence = (
         common_model
@@ -818,6 +842,8 @@ def score_pair(
                     "persistence_n": 0,
                     "persistence_mse_iv": np.nan,
                     "model_mse_on_persistence_support_iv": np.nan,
+                    "rows_excluded_by_this_model": excluded[model],
+                    "rows_excluded_from_common_support": int(np.sum(market_ok & ~common_model)),
                 }
             )
 
@@ -1110,7 +1136,7 @@ def write_latex_outputs(
         f"\\newcommand{{\\OOSForecastOrigins}}{{{origins}}}\n"
         f"\\newcommand{{\\OOSCommonTargetObservations}}{{{common_n}}}\n"
     )
-    (img_dir / "oos_article_numbers.tex").write_text(
+    (img_dir / "oos_run_counts.tex").write_text(
         macros,
         encoding="utf-8",
     )
@@ -1538,6 +1564,17 @@ def main() -> None:
     )
     parser.add_argument("--seed", type=int, default=8)
     parser.add_argument(
+        "--dividend-yield",
+        type=float,
+        default=GLD_EXPENSE_RATIO,
+        help="Continuous carry of GLD (sponsor fee); 0 reproduces the legacy runs.",
+    )
+    parser.add_argument(
+        "--hawkes-warm-start",
+        action="store_true",
+        help="Legacy behaviour: warm-start Hawkes only from earlier origins.",
+    )
+    parser.add_argument(
         "--force-calibration",
         action="store_true",
     )
@@ -1571,6 +1608,9 @@ def main() -> None:
     )
 
     args = parser.parse_args()
+    global DIVIDEND_YIELD, HAWKES_WARM_START
+    DIVIDEND_YIELD = float(args.dividend_yield)
+    HAWKES_WARM_START = bool(args.hawkes_warm_start)
 
     repo_root = Path(args.repo_root).resolve()
     sparse_dir = (repo_root / args.sparse_dir).resolve()
@@ -1751,6 +1791,14 @@ def main() -> None:
         ),
         "forecast_rows": int(len(forecasts)),
         "date_metric_rows": int(len(date_metrics)),
+        "hawkes_warm_start": bool(HAWKES_WARM_START),
+        "dividend_yield": float(DIVIDEND_YIELD),
+        "dividend_yield_method": "forward identity C(S,K;q)=exp(-qT)C(S,K*exp(qT);0) applied when surfaces are loaded",
+        "pricing_failures": {
+            model: int(sum(f["rows"] for f in PRICING_FAILURES if f["model"] == model))
+            for model in MODEL_KEYS
+        },
+        "pricing_failure_examples": PRICING_FAILURES[:20],
     }
     json_write(
         output_root / "rolling" / "run_manifest.json",

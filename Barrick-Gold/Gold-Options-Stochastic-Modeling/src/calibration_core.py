@@ -4,6 +4,40 @@ from dataclasses import asdict, dataclass
 from time import perf_counter
 
 import numpy as np
+from scipy.optimize import minimize, OptimizeResult
+
+
+def warm_local_fit(objective, initial_guess, bounds, args, *, ftol, maxiter=100):
+    """Try a feasible previous-origin point; None requests the global fallback.
+
+    Dates belong to the caller. Accept only a converged, feasible local fit
+    that does not worsen the starting loss on the CURRENT surface.
+    """
+    if initial_guess is None:
+        return None
+    x = np.asarray(initial_guess, dtype=float)
+    limits = np.asarray(bounds, dtype=float)
+    if (x.shape != (len(bounds),) or not np.isfinite(x).all()
+            or np.any(x < limits[:, 0]) or np.any(x > limits[:, 1])
+            or 2*x[1]*x[2] < x[3]**2):
+        return None
+    initial_loss = float(objective(x, *args))
+    if not np.isfinite(initial_loss) or initial_loss >= 1e8:
+        return None
+    result = minimize(objective, x0=x.copy(), args=args, method='SLSQP',
+        bounds=bounds, constraints=({'type':'ineq', 'fun':lambda y:2*y[1]*y[2]-y[3]**2},),
+        options={'ftol':ftol, 'maxiter':maxiter, 'disp':False})
+    y = np.asarray(result.x)
+    feasible = (np.isfinite(y).all() and np.all(y >= limits[:,0])
+                and np.all(y <= limits[:,1]) and 2*y[1]*y[2] >= y[3]**2)
+    value = float(objective(y, *args)) if feasible else np.inf
+    if not result.success or not np.isfinite(value) or value > initial_loss:
+        return None
+    result.fun = value
+    result.message = 'Previous-origin local fit: '+str(result.message)
+    start = OptimizeResult(x=x.copy(), fun=initial_loss, success=False,
+                           message='Previous-origin initial point; no global search')
+    return result, start
 
 REQUIRED_MARKET_COLUMNS = ("K", "T", "rate", "price", "vega")
 
@@ -124,12 +158,14 @@ class CalibrationReport:
     parameter_names: tuple
     values: tuple
     objective: float
-    global_objective: float
+    global_objective: float | None
     success: bool
     message: str
     evaluations: int
     iterations: int
     elapsed_seconds: float
+    warm_start_used: bool = False
+    global_search_used: bool = True
 
     @property
     def x(self):
@@ -145,7 +181,8 @@ class CalibrationReport:
         return payload
 
     @classmethod
-    def from_optimizer(cls, model, parameter_names, local_result, global_result, started_at):
+    def from_optimizer(cls, model, parameter_names, local_result, global_result, started_at,
+                       *, warm_start_used=False, global_search_used=True):
         # A successful local termination must not replace a better global fit.
         if np.isfinite(global_result.fun) and (not np.isfinite(local_result.fun) or global_result.fun < local_result.fun):
             local_result = global_result
@@ -154,10 +191,12 @@ class CalibrationReport:
             parameter_names=tuple(parameter_names),
             values=tuple(float(v) for v in local_result.x),
             objective=float(local_result.fun),
-            global_objective=float(global_result.fun),
+            global_objective=float(global_result.fun) if global_search_used else None,
             success=bool(local_result.success),
             message=str(local_result.message),
             evaluations=int(getattr(local_result, "nfev", 0)),
             iterations=int(getattr(local_result, "nit", 0)),
             elapsed_seconds=float(perf_counter() - started_at),
+            warm_start_used=warm_start_used,
+            global_search_used=global_search_used,
         )

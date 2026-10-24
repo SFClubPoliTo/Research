@@ -60,7 +60,7 @@
 \newcommand{\ShortTitle}{OPERATING-VALUE SENSITIVITY — BARRICK MINING CORPORATION}
 \newcommand{\PaperSubtitle}{Option-implied gold and copper laws in a controlled operating experiment}
 \newcommand{\PreparedDate}{07/09/2026}
-\newcommand{\RevisedDate}{07/10/2026}
+\newcommand{\RevisedDate}{24/10/2026}
 \newcommand{\PaperID}{Working Paper}
 \newcommand{\JELCodes}{G12; G13; G31; C32; C53; C61; C63}
 
@@ -75,12 +75,12 @@
 \newcommand{\TeamSeven}{Davide D'Amico; Pietro Weisz}
 \newcommand{\TeamEight}{Salvatore Gabriele Messina; Alessandro Coco}
 
-% Abstract intentionally excludes numerical results. Detailed calibration,
-% model-comparison statistics and valuation percentiles belong in Results.
+% Numbers in the abstract and body come from sections/generated/results_20261024.tex,
+% written by src/build_report_fragments.py from outputs/paper_audit_20261024.
+\input{sections/generated/results_20261024}
 \newcommand{\PaperAbstract}{%
-This study audits the sensitivity of an unreconciled Barrick operating-value proxy to alternative option-implied commodity-price laws. Eight student teams connect probability, econometrics, simulation, operating forecasts and a common discounted-margin mapping. Black--Scholes, Heston, Bates and Bates--Hawkes are fitted to a common GLD surface. A calibration audit retains feasible nested candidates; historical gold out-of-sample scores remain a separate, frozen experiment. A new copper extension uses American options on matched COMEX futures, historical snapshots and both rolling and fixed-origin repricing tests. Three producing copper mines enter on Barrick's attributable sales basis. Production, unit costs and discount-rate shocks are controlled across paired gold-only and gold-plus-copper simulations. The copper contribution is reported primarily over five years without terminal continuation; its fixed-volume operating scenario does not forecast mine expansion. Aggregate operating proxies do not assert a net-debt, ownership or diluted-share bridge. Option-implied coefficients transferred to an artificial scenario law and combined with WACC do not constitute a measure change, corporate pricing or a physical forecast. Persistence benchmarks, numerical sensitivity and terminal conventions constrain interpretation of model rankings. The contribution is a reproducible research experiment with explicit limits on accounting, probability measure, exercise conventions, extrapolation and statistical inference. Results are neither fair values nor price targets, investment recommendations or evidence of market mispricing.%
+We ask how much the choice of gold-price model matters for a discounted operating-margin proxy of Barrick when production, costs and discount-rate shocks are held fixed. Black--Scholes, Heston, Bates and Bates--Hawkes are calibrated to 64 GLD calls of 2 September 2026, with the trust's 0.40\% sponsor fee treated as carry, and drive daily gold paths from the spot price at the valuation time. Only cash flows after the valuation date are counted. Across 8,192 paths the median proxy lies between USD~\ValMedianLow{} and \ValMedianHigh{}~bn for all four models, a spread no larger than the numerical sensitivity of a single model (USD~\NumericalMedianLow--\NumericalMedianHigh~bn across path counts and seeds). The terminal value accounts for about \TerminalShare\% of the mean. In 30 rolling repricing tests Bates--Hawkes has the lowest error, but no model beats the persistence of the implied-volatility surface. Three producing copper mines add about USD~\CuDeltaLow--\CuDeltaHigh~bn of explicit flows to 2030. The proxy has no equity bridge; it is a controlled research sensitivity, not a fair value, target price or investment recommendation.%
 }
-
 % ---------- Hyperlinks ----------
 \hypersetup{
   colorlinks=true,
@@ -279,18 +279,18 @@ This study audits the sensitivity of an unreconciled Barrick operating-value pro
   \JELCodes\par
   \vspace{3pt}
   \textbf{Discoveries}\par\vspace{2pt}
-  Calibrated engines share one\par
-  unreconciled operating contract.\par\vspace{3pt}
+  Median proxy under each gold law,\par
+  common operating contract.\par\vspace{3pt}
   {\setlength{\tabcolsep}{0pt}\renewcommand{\arraystretch}{1.18}%
   \begin{tabular}{@{}p{59pt}p{47pt}r@{}}
-  Black--Scholes & \textcolor{brand!55}{\rule{40.00pt}{4pt}} & 60.10\\
-  Heston & \textcolor{brand!65}{\rule{39.78pt}{4pt}} & 59.77\\
-  Bates--Poisson & \textcolor{brand!75}{\rule{39.35pt}{4pt}} & 59.12\\
-  Bates--Hawkes & \textcolor{brand}{\rule{39.82pt}{4pt}} & 59.82
+  Black--Scholes & \textcolor{brand!55}{\rule{\BarBS pt}{4pt}} & \ValBSMedian\\
+  Heston & \textcolor{brand!65}{\rule{\BarH pt}{4pt}} & \ValHMedian\\
+  Bates--Poisson & \textcolor{brand!75}{\rule{\BarB pt}{4pt}} & \ValBMedian\\
+  Bates--Hawkes & \textcolor{brand}{\rule{\BarW pt}{4pt}} & \ValWMedian
   \end{tabular}}\par\vspace{3pt}
-  Signed-terminal proxy; USD billion.\par
-  Sensitivity only; not company value\par
-  or a physical probability forecast.\par
+  USD billion; signed terminal value.\par
+  Monte Carlo range of one model:\par
+  \NumericalMedianLow--\NumericalMedianHigh. Not company value.\par
   }
 \end{minipage}%
 \hfill

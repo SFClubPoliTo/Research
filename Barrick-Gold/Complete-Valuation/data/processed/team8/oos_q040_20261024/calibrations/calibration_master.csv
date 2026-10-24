@@ -1,0 +1,121 @@
+date,strategy,model,success,objective,elapsed_seconds,n_points,profile,seed,result_file
+2026-07-09,ROLLING,Bates,True,9.650797152921054e-06,33.14216699999815,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-09\bates.json
+2026-07-09,ROLLING,Black-Scholes,True,0.00019025878607884672,0.05007650000334252,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-09\black_scholes.json
+2026-07-09,ROLLING,Full Bates-Hawkes,True,9.272434434405246e-06,841.3203685000044,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-09\full_bates_hawkes.json
+2026-07-09,ROLLING,Heston,True,2.431245321564701e-05,15.576196499998332,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-09\heston.json
+2026-07-10,ROLLING,Bates,True,3.1574826730624693e-05,27.781557199996314,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-10\bates.json
+2026-07-10,ROLLING,Black-Scholes,True,0.0003071048476469997,0.02510860000620596,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-10\black_scholes.json
+2026-07-10,ROLLING,Full Bates-Hawkes,True,2.2607083798267437e-05,737.8019579999964,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-10\full_bates_hawkes.json
+2026-07-10,ROLLING,Heston,True,3.9570776852559686e-05,15.264672000004794,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-10\heston.json
+2026-07-13,ROLLING,Bates,True,1.7728951003894744e-05,29.16556569999375,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-13\bates.json
+2026-07-13,ROLLING,Black-Scholes,True,0.0002235407156407424,0.026897500007180497,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-13\black_scholes.json
+2026-07-13,ROLLING,Full Bates-Hawkes,True,1.7561644420222012e-05,667.9051120000076,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-13\full_bates_hawkes.json
+2026-07-13,ROLLING,Heston,True,3.5992111433296635e-05,14.1995093000005,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-13\heston.json
+2026-07-14,ROLLING,Bates,True,2.0841912192482214e-05,36.415809099999024,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-14\bates.json
+2026-07-14,ROLLING,Black-Scholes,True,0.0002413877692121789,0.030902500002412125,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-14\black_scholes.json
+2026-07-14,ROLLING,Full Bates-Hawkes,True,1.2444267943713119e-05,767.6499866999948,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-14\full_bates_hawkes.json
+2026-07-14,ROLLING,Heston,True,2.0841912192482214e-05,15.270235599993612,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-14\heston.json
+2026-07-15,ROLLING,Bates,True,1.4673162668796398e-05,28.455820300005144,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-15\bates.json
+2026-07-15,ROLLING,Black-Scholes,True,0.00022818519773533863,0.029633099999045953,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-15\black_scholes.json
+2026-07-15,ROLLING,Full Bates-Hawkes,True,1.466495250979932e-05,556.8719542000035,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-15\full_bates_hawkes.json
+2026-07-15,ROLLING,Heston,True,3.139548787938771e-05,16.033854399996926,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-15\heston.json
+2026-07-16,ROLLING,Bates,True,1.7160327933242236e-05,34.56960309999704,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-16\bates.json
+2026-07-16,ROLLING,Black-Scholes,True,0.0003024737407130762,0.18684799999755342,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-16\black_scholes.json
+2026-07-16,ROLLING,Full Bates-Hawkes,True,1.676261710191808e-05,973.9650977999991,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-16\full_bates_hawkes.json
+2026-07-16,ROLLING,Heston,True,3.4281397640728476e-05,15.59487369999988,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-16\heston.json
+2026-07-17,ROLLING,Bates,True,2.5150524262337662e-05,30.410026199999265,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-17\bates.json
+2026-07-17,ROLLING,Black-Scholes,True,0.00044871028342958986,0.03524690000631381,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-17\black_scholes.json
+2026-07-17,ROLLING,Full Bates-Hawkes,True,2.0556774618094177e-05,703.1907214000094,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-17\full_bates_hawkes.json
+2026-07-17,ROLLING,Heston,True,4.211163613632981e-05,14.383152199996402,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-17\heston.json
+2026-07-20,ROLLING,Bates,True,1.4735162309832499e-05,34.38058290000481,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-20\bates.json
+2026-07-20,ROLLING,Black-Scholes,True,0.0004909452868813791,0.02459390000149142,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-20\black_scholes.json
+2026-07-20,ROLLING,Full Bates-Hawkes,True,9.769474929269564e-06,868.3578609000106,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-20\full_bates_hawkes.json
+2026-07-20,ROLLING,Heston,True,5.902907838857032e-05,13.92091580000124,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-20\heston.json
+2026-07-21,ROLLING,Bates,True,8.862160863541821e-06,29.97649519999686,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-21\bates.json
+2026-07-21,ROLLING,Black-Scholes,True,0.00038110503092828567,0.03307080001104623,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-21\black_scholes.json
+2026-07-21,ROLLING,Full Bates-Hawkes,True,8.044913920904355e-06,578.8651487000025,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-21\full_bates_hawkes.json
+2026-07-21,ROLLING,Heston,True,5.635119221908973e-05,12.234193700001924,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-21\heston.json
+2026-07-22,ROLLING,Bates,True,1.1761036677724271e-05,31.043991400001687,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-22\bates.json
+2026-07-22,ROLLING,Black-Scholes,True,0.00015634232152017118,0.03359019999334123,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-22\black_scholes.json
+2026-07-22,ROLLING,Full Bates-Hawkes,True,9.593964699383061e-06,614.9181587000057,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-22\full_bates_hawkes.json
+2026-07-22,ROLLING,Heston,True,2.5210036052474476e-05,14.584302200004458,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-22\heston.json
+2026-07-23,ROLLING,Bates,True,1.1001208495328527e-05,31.348931600005017,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-23\bates.json
+2026-07-23,ROLLING,Black-Scholes,True,0.00022390152653204822,0.04852200001187157,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-23\black_scholes.json
+2026-07-23,ROLLING,Full Bates-Hawkes,True,9.850952139511764e-06,871.0688209999935,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-23\full_bates_hawkes.json
+2026-07-23,ROLLING,Heston,True,3.6825244713143786e-05,14.025464599995757,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-23\heston.json
+2026-07-24,ROLLING,Bates,True,1.7298004887243147e-05,25.86928720001015,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-24\bates.json
+2026-07-24,ROLLING,Black-Scholes,True,0.00020538986431769738,0.02994829999806825,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-24\black_scholes.json
+2026-07-24,ROLLING,Full Bates-Hawkes,True,1.3622764479839725e-05,778.5134916000097,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-24\full_bates_hawkes.json
+2026-07-24,ROLLING,Heston,True,2.740917880829772e-05,14.176667599997018,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-24\heston.json
+2026-07-27,ROLLING,Bates,True,1.2980844331657275e-05,28.11109240000951,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-27\bates.json
+2026-07-27,ROLLING,Black-Scholes,True,0.00034281924684325933,0.03654590000223834,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-27\black_scholes.json
+2026-07-27,ROLLING,Full Bates-Hawkes,True,8.469734967508294e-06,764.9752508999954,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-27\full_bates_hawkes.json
+2026-07-27,ROLLING,Heston,True,5.302954330838088e-05,14.774285399995279,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-27\heston.json
+2026-07-28,ROLLING,Bates,True,1.624673960413645e-05,32.61841660000209,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-28\bates.json
+2026-07-28,ROLLING,Black-Scholes,True,0.00031486761530798315,0.0387396999867633,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-28\black_scholes.json
+2026-07-28,ROLLING,Full Bates-Hawkes,True,1.2665290461827216e-05,773.2981026999914,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-28\full_bates_hawkes.json
+2026-07-28,ROLLING,Heston,True,3.8042571493927823e-05,11.767108100000769,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-28\heston.json
+2026-07-29,ROLLING,Bates,True,2.7645769219724366e-05,28.84533460000239,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-29\bates.json
+2026-07-29,ROLLING,Black-Scholes,True,0.0003971324199448232,0.030273500000475906,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-29\black_scholes.json
+2026-07-29,ROLLING,Full Bates-Hawkes,True,1.3855266311127307e-05,600.3783633999992,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-29\full_bates_hawkes.json
+2026-07-29,ROLLING,Heston,True,6.66422853995791e-05,11.356574200006435,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-29\heston.json
+2026-07-30,ROLLING,Bates,True,1.0420071140335537e-05,29.081094799999846,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-30\bates.json
+2026-07-30,ROLLING,Black-Scholes,True,0.00023441180435968884,0.16415860000415705,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-30\black_scholes.json
+2026-07-30,ROLLING,Full Bates-Hawkes,True,8.630169310716303e-06,849.5980969999946,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-30\full_bates_hawkes.json
+2026-07-30,ROLLING,Heston,True,2.823458376293748e-05,13.038335500008543,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-30\heston.json
+2026-07-31,ROLLING,Bates,True,1.6826529587079008e-05,25.123500000001513,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-31\bates.json
+2026-07-31,ROLLING,Black-Scholes,True,0.00014650744731736418,0.035417799997958355,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-31\black_scholes.json
+2026-07-31,ROLLING,Full Bates-Hawkes,True,1.1875898482981963e-05,660.8377730000066,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-31\full_bates_hawkes.json
+2026-07-31,ROLLING,Heston,True,2.452724674275323e-05,12.943142899996019,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-07-31\heston.json
+2026-08-03,ROLLING,Bates,True,1.6076004796737423e-05,31.323625500008347,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-03\bates.json
+2026-08-03,ROLLING,Black-Scholes,True,0.00019140363590631487,0.030141399998683482,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-03\black_scholes.json
+2026-08-03,ROLLING,Full Bates-Hawkes,True,9.141324873463718e-06,623.050132999997,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-03\full_bates_hawkes.json
+2026-08-03,ROLLING,Heston,True,2.8508319836946152e-05,10.645262600010028,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-03\heston.json
+2026-08-04,ROLLING,Bates,True,1.4184428370569704e-05,38.76621279999381,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-04\bates.json
+2026-08-04,ROLLING,Black-Scholes,True,0.00024755590164048655,0.03276600000390317,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-04\black_scholes.json
+2026-08-04,ROLLING,Full Bates-Hawkes,True,1.2743462977982207e-05,784.0469115000014,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-04\full_bates_hawkes.json
+2026-08-04,ROLLING,Heston,True,5.158181906866719e-05,10.604932900008862,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-04\heston.json
+2026-08-05,ROLLING,Bates,True,7.257209848427997e-06,35.74289029999636,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-05\bates.json
+2026-08-05,ROLLING,Black-Scholes,True,9.430865818603134e-05,0.031014299995149486,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-05\black_scholes.json
+2026-08-05,ROLLING,Full Bates-Hawkes,True,6.254914415693754e-06,671.0807165000006,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-05\full_bates_hawkes.json
+2026-08-05,ROLLING,Heston,True,3.129798492257539e-05,13.146522400013055,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-05\heston.json
+2026-08-06,ROLLING,Bates,True,1.6247272602318393e-05,21.774677800000063,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-06\bates.json
+2026-08-06,ROLLING,Black-Scholes,True,8.45795545153298e-05,0.15508749999571592,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-06\black_scholes.json
+2026-08-06,ROLLING,Full Bates-Hawkes,True,1.4467805770086615e-05,759.7334353000042,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-06\full_bates_hawkes.json
+2026-08-06,ROLLING,Heston,True,3.0335536450739072e-05,11.090323399999761,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-06\heston.json
+2026-08-12,ROLLING,Bates,True,7.545064249995359e-06,24.286965399995097,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-12\bates.json
+2026-08-12,ROLLING,Black-Scholes,True,8.957463997013261e-05,0.11746039999707136,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-12\black_scholes.json
+2026-08-12,ROLLING,Full Bates-Hawkes,True,7.2961041030695885e-06,411.4750600999978,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-12\full_bates_hawkes.json
+2026-08-12,ROLLING,Heston,True,3.451799220358844e-05,8.466393200011225,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-12\heston.json
+2026-08-17,ROLLING,Bates,True,1.576617405182198e-05,20.26599420000275,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-17\bates.json
+2026-08-17,ROLLING,Black-Scholes,True,0.00019789603268359886,0.026706999997259118,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-17\black_scholes.json
+2026-08-17,ROLLING,Full Bates-Hawkes,True,7.21948732405574e-06,1160.127294799997,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-17\full_bates_hawkes.json
+2026-08-17,ROLLING,Heston,True,5.8027940329910805e-05,8.67475399999239,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-17\heston.json
+2026-08-19,ROLLING,Bates,True,4.387798786629721e-06,26.003169699994032,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-19\bates.json
+2026-08-19,ROLLING,Black-Scholes,True,0.00011719385695213644,0.03332770000270102,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-19\black_scholes.json
+2026-08-19,ROLLING,Full Bates-Hawkes,True,3.3745025389089635e-06,455.81218649999937,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-19\full_bates_hawkes.json
+2026-08-19,ROLLING,Heston,True,2.5090661693805036e-05,9.218229599995539,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-19\heston.json
+2026-08-20,ROLLING,Bates,True,8.080878338543174e-06,29.643044700002065,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-20\bates.json
+2026-08-20,ROLLING,Black-Scholes,True,9.48260011286971e-05,0.026396699991892092,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-20\black_scholes.json
+2026-08-20,ROLLING,Full Bates-Hawkes,True,4.739832497136106e-06,510.0187350999913,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-20\full_bates_hawkes.json
+2026-08-20,ROLLING,Heston,True,2.5013811213836128e-05,10.4365986000048,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-20\heston.json
+2026-08-21,ROLLING,Bates,True,1.3923371334138979e-05,22.428115899994737,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-21\bates.json
+2026-08-21,ROLLING,Black-Scholes,True,0.0001662719210314247,0.0313692999916384,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-21\black_scholes.json
+2026-08-21,ROLLING,Full Bates-Hawkes,True,9.151944785086783e-06,789.6676331999915,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-21\full_bates_hawkes.json
+2026-08-21,ROLLING,Heston,True,2.8333733748615762e-05,10.5096121999959,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-21\heston.json
+2026-08-24,ROLLING,Bates,True,9.202957271721672e-06,20.950333800006774,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-24\bates.json
+2026-08-24,ROLLING,Black-Scholes,True,0.00012439774686835264,0.03529970000090543,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-24\black_scholes.json
+2026-08-24,ROLLING,Full Bates-Hawkes,True,6.144375438999501e-06,622.5908919000067,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-24\full_bates_hawkes.json
+2026-08-24,ROLLING,Heston,True,3.0399633377210697e-05,10.132090400002198,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-24\heston.json
+2026-08-28,ROLLING,Bates,True,3.016593127576557e-05,16.50067439999839,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-28\bates.json
+2026-08-28,ROLLING,Black-Scholes,True,0.00014559043144448904,0.029442799990647472,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-28\black_scholes.json
+2026-08-28,ROLLING,Full Bates-Hawkes,True,1.2279479673242553e-05,621.2487155999988,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-28\full_bates_hawkes.json
+2026-08-28,ROLLING,Heston,True,4.0813738960692655e-05,8.72669660000247,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-28\heston.json
+2026-08-31,ROLLING,Bates,True,4.388482155531672e-05,16.518543700003647,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-31\bates.json
+2026-08-31,ROLLING,Black-Scholes,True,0.00019061892866772102,0.3121166000055382,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-31\black_scholes.json
+2026-08-31,ROLLING,Full Bates-Hawkes,True,9.56816979624321e-06,809.4962558999978,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-31\full_bates_hawkes.json
+2026-08-31,ROLLING,Heston,True,6.72681500701345e-05,9.161085300002014,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-08-31\heston.json
+2026-09-01,ROLLING,Bates,True,4.583064955523406e-05,15.412049299993669,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-09-01\bates.json
+2026-09-01,ROLLING,Black-Scholes,True,0.00023763641185874839,0.03312980000919197,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-09-01\black_scholes.json
+2026-09-01,ROLLING,Full Bates-Hawkes,True,6.203592672356518e-06,705.2468986000022,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-09-01\full_bates_hawkes.json
+2026-09-01,ROLLING,Heston,True,6.175060050863526e-05,8.595825700002024,64,full,8,data\processed\team8\oos_q040_20261024\calibrations\ROLLING\2026-09-01\heston.json

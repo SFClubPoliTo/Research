@@ -1,3 +1,4 @@
+import argparse
 import subprocess
 import sys
 from pathlib import Path
@@ -19,11 +20,22 @@ SCRIPTS = [
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Run the full empirical pipeline.")
+    parser.add_argument(
+        "--offline",
+        action="store_true",
+        help="Do not download from Yahoo Finance; use the frozen data/raw/yahoo_raw_download.csv.",
+    )
+    args = parser.parse_args()
+
     src_dir = Path(__file__).resolve().parent
 
     for script in SCRIPTS:
         print(f"\n>>> Running {script}")
-        subprocess.run([sys.executable, str(src_dir / script)], check=True)
+        cmd = [sys.executable, str(src_dir / script)]
+        if script == "01_data_download.py" and args.offline:
+            cmd.append("--offline")
+        subprocess.run(cmd, check=True)
 
 
 if __name__ == "__main__":

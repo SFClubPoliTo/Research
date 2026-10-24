@@ -13,3 +13,20 @@ test-temp-parent/
 .env
 utilities/
 tests/
+# Licensed row-level IB/OPRA option quotes (contract ids, bid/ask, quote times)
+# stay local; public aggregates, manifests and hashes remain tracked.
+data/raw/team8_freeze/data/processed/full_surfaces/GLD_*.csv
+data/raw/team8_freeze/data/processed/sparse_historical_surfaces/GLD_*.csv
+data/processed/audit_inputs/outputs/calibrations/**/calibration_surface.csv
+data/processed/audit_inputs/outputs/oos/rolling/option_forecasts.csv
+data/processed/audit_inputs/outputs/sampling/**/full_eligible_surface.csv
+data/processed/audit_inputs/outputs/sampling/**/sample_*.csv
+data/processed/copper/calibration_20260902_spaced/copper_calibration_surface.csv
+data/processed/copper/calibration_20260902_spaced/copper_model_residuals.csv
+data/processed/copper/calibration_20260902_spaced/quote_and_american_audit.csv
+data/processed/copper/calibration_20260902_spaced/reserved_strikes.csv
+data/processed/copper/calibration_20260902_spaced/training_strikes.csv
+data/processed/team8/calibration_q040_20261024/**/calibration_surface.csv
+data/processed/team8/oos_q040_20261024/calibration_sets/
+data/processed/team8/oos_q040_20261024/calibrations/**/calibration_surface.csv
+data/processed/team8/oos_q040_20261024/rolling/option_forecasts.csv

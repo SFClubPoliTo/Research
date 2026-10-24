@@ -16,9 +16,7 @@ def fit_arima_grid(series: pd.Series, p_max: int = P_MAX, q_max: int = Q_MAX, d:
 
     for p in range(p_max + 1):
         for q in range(q_max + 1):
-            if p == 0 and q == 0:
-                continue
-
+            # ARIMA(0,1,0) with drift (random walk) is a legitimate candidate.
             try:
                 with warnings.catch_warnings():
                     warnings.simplefilter("ignore")
@@ -42,7 +40,10 @@ def fit_arima_grid(series: pd.Series, p_max: int = P_MAX, q_max: int = Q_MAX, d:
     if not rows:
         raise RuntimeError("No ARIMA model could be estimated.")
 
-    return pd.DataFrame(rows).sort_values(["AIC", "BIC"]).reset_index(drop=True)
+    grid = pd.DataFrame(rows)
+    # Exact Gaussian MLE uses the full sample for every order, so AIC/BIC are comparable.
+    assert grid["nobs"].nunique() == 1, "ARIMA candidates must share a common sample"
+    return grid.sort_values(["AIC", "BIC"]).reset_index(drop=True)
 
 
 def build_latex_arima_table(df: pd.DataFrame) -> str:
@@ -62,9 +63,11 @@ def build_latex_arima_table(df: pd.DataFrame) -> str:
         "\\begin{minipage}{0.9\\textwidth}\n"
         "\\footnotesize\n"
         "\\textit{Notes}: The table reports selected ARIMA($p,1,q$) specifications for daily log prices "
-        "of GLD and SLV. A single unit difference is imposed to reflect the near-unit-root behaviour "
-        "of log-price levels documented by the AR(1) benchmark. Selection is performed over a grid with "
-        "$p,q \\in \\{0,1,2,3\\}$ using AIC and BIC.\n"
+        "of GLD and SLV. A single unit difference is imposed because ADF tests do not reject a unit root "
+        "in log-price levels while KPSS tests reject level and trend stationarity (see the unit-root table). "
+        "Selection is performed over a grid with $p,q \\in \\{0,1,2,3\\}$, including ARIMA(0,1,0) with drift "
+        "(a random walk), using AIC and BIC; every candidate is estimated by exact Gaussian maximum likelihood "
+        "on the same observations.\n"
         "\\end{minipage}\n"
         "\\end{table}\n"
     )

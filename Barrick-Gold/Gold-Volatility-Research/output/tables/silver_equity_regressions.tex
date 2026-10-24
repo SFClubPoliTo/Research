@@ -7,13 +7,13 @@
  & (1) & (2) \\
 \midrule
 $r^{usd}_t$ &  & -1.6229*** \\
- &  & (0.0860) \\
+ &  & (0.1079) \\
 $\Delta y^{10Y}_t$ &  & -0.0201*** \\
- &  & (0.0062) \\
+ &  & (0.0068) \\
 $r^{equity}_t$ & 0.3543*** & 0.2625*** \\
- & (0.0408) & (0.0424) \\
-Constant &  &  \\
- &  &  \\
+ & (0.0432) & (0.0474) \\
+Constant & 0.0000 & 0.0001 \\
+ & (0.0003) & (0.0003) \\
 Observations & 4694 & 4694 \\
 $R^2$ & 0.049 & 0.205 \\
 Adjusted $R^2$ & 0.049 & 0.205 \\
@@ -23,7 +23,7 @@ Adjusted $R^2$ & 0.049 & 0.205 \\
 \vspace{0.2cm}
 \begin{minipage}{0.9\textwidth}
 \footnotesize
-\textit{Notes}: Daily data. Heteroskedasticity--robust (HC1) standard errors in parentheses.\\
-$^*$ $p<0.10$, $^{**}$ $p<0.05$, $^{***}$ $p<0.01$.
+\textit{Notes}: Daily data. Newey--West heteroskedasticity- and autocorrelation-consistent (HAC) standard errors in parentheses (Bartlett kernel, 9 lags).\\
+$^*$ $p<0.10$, $^{**}$ $p<0.05$, $^{***}$ $p<0.01$. Stars refer to unadjusted $p$-values. After a Holm adjustment across the 12 distinct slope tests reported in the six regression tables, every slope coefficient significant at the 5\% level in this table remains so.
 \end{minipage}
 \end{table}

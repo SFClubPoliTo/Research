@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "quantity": "gold spot XAUUSD midpoint",
+  "unit": "USD/troy oz",
+  "value": 4391.32,
+  "observation": "close of the hourly midpoint bar starting 2026-09-02T19:00:00Z, i.e. at 2026-09-02T20:00:00Z",
+  "synchronous_with": {
+    "valuation_as_of_utc": "2026-09-02T20:00:00Z",
+    "gld_close_usd_per_share": 402.78,
+    "implied_gld_ounces_per_share": 0.091722
+  },
+  "provider": "IB API (readonly), contract XAUUSD CMDTY SMART",
+  "local_source": {
+    "file": "data/raw/ib_local/physical_history_20261005/gold_hourly_chunks/2026.csv",
+    "sha256": "ac699c0e250d1ec6f2513652b307db45518881b3c9f2f8f47ec569d8a9b20246",
+    "redistributed": false
+  },
+  "replaces": "Barrick Q2 2026 average realized price USD 4,417/oz, which predates the valuation date by two months and is a quarterly average rather than a spot level",
+  "recorded_at": "2026-10-24"
+}

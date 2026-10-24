@@ -3,21 +3,113 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from arch import arch_model
+from statsmodels.stats.diagnostic import acorr_ljungbox
 
 from config import DATA_PROCESSED_DIR, OUTPUT_DIR
 from utils import save_csv, save_figure, write_text_file
 
-def fit_garch_11(series: pd.Series):
+LJUNG_BOX_LAGS = [10, 20]
+
+GARCH_SPECS = [
+    ("GARCH(1,1)-N", 0, "normal"),
+    ("GARCH(1,1)-t", 0, "t"),
+    ("GJR-GARCH(1,1,1)-t", 1, "t"),
+]
+
+
+def fit_garch_11(series: pd.Series, o: int = 0, dist: str = "normal"):
     model = arch_model(
         series,
         mean="constant",
         vol="GARCH",
         p=1,
+        o=o,
         q=1,
-        dist="normal"
+        dist=dist,
+        rescale=False,
     )
     result = model.fit(update_freq=50, disp="off")
     return result
+
+
+def garch_comparison_row(res, asset: str, model_name: str) -> dict:
+    """Parameters, persistence, fit, and Ljung-Box diagnostics on standardized residuals."""
+    params = res.params
+    alpha = params["alpha[1]"]
+    beta = params["beta[1]"]
+    gamma = params.get("gamma[1]", 0.0)
+    # With symmetric innovations, P(eps < 0) = 1/2, so persistence = alpha + gamma/2 + beta.
+    persistence = alpha + 0.5 * gamma + beta
+
+    row = {
+        "asset": asset,
+        "model": model_name,
+        "mu": params["mu"],
+        "omega": params["omega"],
+        "alpha": alpha,
+        "gamma": params.get("gamma[1]", np.nan),
+        "se_gamma": res.std_err.get("gamma[1]", np.nan),
+        "beta": beta,
+        "nu": params.get("nu", np.nan),
+        "persistence": persistence,
+        "loglikelihood": res.loglikelihood,
+        "aic": res.aic,
+        "bic": res.bic,
+        "nobs": int(res.nobs),
+    }
+
+    std_resid = pd.Series(res.std_resid).dropna()
+    lb = acorr_ljungbox(std_resid, lags=LJUNG_BOX_LAGS, return_df=True)
+    lb_sq = acorr_ljungbox(std_resid ** 2, lags=LJUNG_BOX_LAGS, return_df=True)
+    for lag in LJUNG_BOX_LAGS:
+        row[f"lb_z_Q{lag}"] = lb.loc[lag, "lb_stat"]
+        row[f"lb_z_pvalue{lag}"] = lb.loc[lag, "lb_pvalue"]
+        row[f"lb_z2_Q{lag}"] = lb_sq.loc[lag, "lb_stat"]
+        row[f"lb_z2_pvalue{lag}"] = lb_sq.loc[lag, "lb_pvalue"]
+    return row
+
+
+def build_latex_garch_comparison_table(df: pd.DataFrame) -> str:
+    def fmt(x, digits=3):
+        return f"{x:.{digits}f}" if pd.notna(x) else "--"
+
+    latex = (
+        "\\begin{table}[H]\n"
+        "\\centering\n"
+        "\\caption{GARCH(1,1), Student-$t$ GARCH(1,1), and GJR-GARCH(1,1,1)-$t$ estimates "
+        "with residual diagnostics for gold and silver daily returns}\n"
+        "\\label{tab:garch-comparison}\n"
+        "\\resizebox{\\textwidth}{!}{%\n"
+        "\\begin{tabular}{llccccccccc}\n"
+        "\\toprule\n"
+        "Asset & Model & $\\hat{\\alpha}$ & $\\hat{\\gamma}$ & $\\hat{\\beta}$ & $\\hat{\\nu}$ & "
+        "Persistence & Log-lik. & BIC & LB$_{10}(z)$ $p$ & LB$_{10}(z^2)$ $p$ \\\\\n"
+        "\\midrule\n"
+    )
+    for _, row in df.iterrows():
+        latex += (
+            f"{row['asset']} & {row['model']} & {fmt(row['alpha'], 4)} & {fmt(row['gamma'], 4)} & "
+            f"{fmt(row['beta'], 4)} & {fmt(row['nu'], 2)} & {fmt(row['persistence'], 4)} & "
+            f"{fmt(row['loglikelihood'], 1)} & {fmt(row['bic'], 1)} & "
+            f"{fmt(row['lb_z_pvalue10'])} & {fmt(row['lb_z2_pvalue10'])} \\\\\n"
+        )
+    latex += (
+        "\\bottomrule\n"
+        "\\end{tabular}%\n"
+        "}\n"
+        "\\vspace{0.2cm}\n"
+        "\\begin{minipage}{0.9\\textwidth}\n"
+        "\\footnotesize\n"
+        "\\textit{Notes}: Returns in percentage points, constant mean. $\\hat{\\gamma}$ is the GJR "
+        "leverage coefficient on negative shocks and $\\hat{\\nu}$ the Student-$t$ degrees of freedom. "
+        "Persistence is $\\hat{\\alpha}+\\hat{\\gamma}/2+\\hat{\\beta}$. LB$_{10}(z)$ and LB$_{10}(z^2)$ "
+        "report Ljung--Box $p$-values at 10 lags for standardized residuals and squared standardized "
+        "residuals (lag-20 statistics are in the CSV output). The conditional-volatility figures and "
+        "variance forecasts are based on the Gaussian GARCH(1,1) specification.\n"
+        "\\end{minipage}\n"
+        "\\end{table}\n"
+    )
+    return latex
 
 
 def garch_params_summary(res, name: str):
@@ -154,6 +246,22 @@ def main():
     ]])
 
     write_text_file(latex_table, "garch_params.tex", subdir="tables")
+
+    # Fat-tailed and asymmetric alternatives with residual diagnostics.
+    comparison_rows = []
+    for asset, series in [("Gold", ret_gold), ("Silver", ret_silver)]:
+        for model_name, o, dist in GARCH_SPECS:
+            res = fit_garch_11(series, o=o, dist=dist)
+            comparison_rows.append(garch_comparison_row(res, asset, model_name))
+    comparison_df = pd.DataFrame(comparison_rows)
+    save_csv(comparison_df, "garch_model_comparison.csv", index=False)
+    write_text_file(
+        build_latex_garch_comparison_table(comparison_df),
+        "garch_model_comparison.tex",
+        subdir="tables",
+    )
+    print("\nGARCH model comparison:")
+    print(comparison_df)
 
     cond_vol_gold = res_gold.conditional_volatility
     cond_vol_silver = res_silver.conditional_volatility

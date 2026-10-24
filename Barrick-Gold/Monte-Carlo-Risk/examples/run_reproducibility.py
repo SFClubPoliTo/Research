@@ -122,14 +122,17 @@ def plot_call_convergence() -> dict[str, float]:
 def compare_asian_pricing() -> dict[str, float]:
     s0, strike, rate, volatility, maturity, n_steps = 100.0, 100.0, 0.04, 0.22, 1.0, 32
     mc_price, mc_se = price_asian_call_mc(s0, strike, rate, volatility, maturity, n_steps, 4_096, seed=7)
-    qmc_price, qmc_se = price_asian_call_qmc(s0, strike, rate, volatility, maturity, n_steps, n_paths_power=12, seed=7)
+    # Equal cost: 16 independent scrambled Sobol replications x 2^8 points = 4,096 paths.
+    qmc_price, qmc_se = price_asian_call_qmc(
+        s0, strike, rate, volatility, maturity, n_steps, n_paths_power=8, n_replications=16, seed=7
+    )
 
     fig, ax = plt.subplots(figsize=(5.8, 4.4))
-    labels = ["MC", "Sobol QMC"]
+    labels = ["MC (4,096 paths)", "Randomized Sobol QMC\n(16 x 256 paths)"]
     prices = [mc_price, qmc_price]
     errors = [1.96 * mc_se, 1.96 * qmc_se]
     ax.bar(labels, prices, yerr=errors, capsize=4, color=["#4C78A8", "#F58518"])
-    ax.set_title("Asian Call Pricing Comparison")
+    ax.set_title("Asian Call Pricing Comparison (95% CI, equal cost)")
     ax.set_ylabel("price")
     fig.tight_layout()
     fig.savefig(FIGURES / "asian_call_mc_vs_qmc.png", dpi=300, bbox_inches="tight")
@@ -159,7 +162,8 @@ def run_variance_reduction() -> dict[str, float]:
     importance = importance_sampling_normal_shift(digital_payoff, n_paths=30_000, shift=1.0, seed=12)
     return {
         "antithetic_call_estimate": anti.estimate,
-        "antithetic_variance_ratio": anti.variance_reduced / anti.variance_plain,
+        # N pairs cost 2N payoff evaluations: compare Var(pair mean)/N with Var(Y)/(2N).
+        "antithetic_variance_ratio_equal_cost": 2.0 * anti.variance_reduced / anti.variance_plain,
         "importance_plain_estimate": importance.estimate_plain,
         "importance_shifted_estimate": importance.estimate_importance,
         "importance_variance_ratio": importance.variance_importance / importance.variance_plain,
@@ -167,6 +171,7 @@ def run_variance_reduction() -> dict[str, float]:
 
 
 def run_return_risk_examples() -> dict[str, float]:
+    initial_value = 100.0
     returns, moments = simulate_gaussian_mixture_returns(20_000, seed=21)
     shifted_returns = 0.65 * returns + 0.35 * np.random.default_rng(22).normal(0.0002, 0.014, size=returns.size)
     terminal = simulate_terminal_wealth(
@@ -174,15 +179,27 @@ def run_return_risk_examples() -> dict[str, float]:
         shifted_returns,
         weights=np.array([0.55, 0.45]),
         dependence=0.45,
-        initial_value=100.0,
+        initial_value=initial_value,
         n_paths=2_000,
         n_days=252,
         seed=23,
     )
 
+    pnl = terminal - initial_value
+    # value_at_risk/conditional_value_at_risk return lower-tail P&L levels; losses are their negatives.
+    var_loss = -value_at_risk(pnl, alpha=0.05)
+    cvar_loss = -conditional_value_at_risk(pnl, alpha=0.05)
+
     fig, ax = plt.subplots(figsize=(6.6, 4.4))
     ax.hist(terminal, bins=45, edgecolor="black", alpha=0.82)
-    ax.axvline(np.percentile(terminal, 5), color="red", linestyle="--", linewidth=1.2, label="5% quantile")
+    ax.axvline(
+        np.quantile(terminal, 0.05),
+        color="red",
+        linestyle="--",
+        linewidth=1.2,
+        label=f"5% wealth quantile (VaR 95% loss = {var_loss:.1f})",
+    )
+    ax.axvline(initial_value, color="black", linestyle=":", linewidth=1.0, label="initial wealth")
     ax.set_title("Terminal Wealth Distribution")
     ax.set_xlabel("terminal value")
     ax.set_ylabel("frequency")
@@ -196,9 +213,13 @@ def run_return_risk_examples() -> dict[str, float]:
         "mixture_variance": moments["variance"],
         "mixture_skewness": moments["skewness"],
         "mixture_excess_kurtosis": moments["excess_kurtosis"],
-        "terminal_wealth_var_5": value_at_risk(terminal, alpha=0.05),
-        "terminal_wealth_cvar_5": conditional_value_at_risk(terminal, alpha=0.05),
-        "terminal_wealth_loss_probability": float((terminal < 100.0).mean()),
+        "terminal_wealth_quantile_5": float(np.quantile(terminal, 0.05)),
+        "terminal_wealth_mean_below_quantile_5": float(terminal[terminal <= np.quantile(terminal, 0.05)].mean()),
+        "portfolio_var_95_loss": var_loss,
+        "portfolio_cvar_95_loss": cvar_loss,
+        "portfolio_var_95_loss_pct_initial": var_loss / initial_value,
+        "portfolio_cvar_95_loss_pct_initial": cvar_loss / initial_value,
+        "terminal_wealth_loss_probability": float((terminal < initial_value).mean()),
     }
 
 

@@ -1,0 +1,17 @@
+model,policy,median_bn
+black_scholes,Signed perpetuity,56.317516670542766
+black_scholes,Explicit flows only,10.746338556171693
+black_scholes,Positive-floor perpetuity,56.317516670542766
+black_scholes,"Explicit flows, risk-free discounting",11.80678260981768
+heston,Signed perpetuity,57.616416912534945
+heston,Explicit flows only,10.901240852216779
+heston,Positive-floor perpetuity,57.616416912534945
+heston,"Explicit flows, risk-free discounting",11.979507676597215
+bates_poisson,Signed perpetuity,59.47890287706917
+bates_poisson,Explicit flows only,11.079926784336235
+bates_poisson,Positive-floor perpetuity,59.47890287706917
+bates_poisson,"Explicit flows, risk-free discounting",12.186429504282234
+full_bates_hawkes,Signed perpetuity,57.259595855493046
+full_bates_hawkes,Explicit flows only,10.897924036186511
+full_bates_hawkes,Positive-floor perpetuity,57.259595855493046
+full_bates_hawkes,"Explicit flows, risk-free discounting",11.968635689723316

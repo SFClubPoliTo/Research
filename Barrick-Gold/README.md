@@ -40,16 +40,28 @@ Barrick-Gold/
 
 The [unified report](./Complete-Valuation/outputs/report_unificato/Articolo.pdf) and
 [Paper](./Complete-Valuation/outputs/report_paper/Articolo.pdf) use the same code,
-dated inputs and publication images. Each report directory includes its LaTeX
-source and a standalone Overleaf archive. The [project README](./Complete-Valuation/)
+dated inputs, publication images and one generated file of results, so the two
+editions cannot quote different numbers. Each report directory includes its LaTeX
+source; `src/tools/package_report.py` builds a standalone Overleaf archive locally. The [project README](./Complete-Valuation/)
 distinguishes completed numerical experiments from the remaining physical-price
 validation and corporate cash-flow reconciliation; the folder name does not
 certify a completed company valuation.
 
 - Each project README identifies the runnable entry points and outputs.
-- Licensed/provider-controlled row-level option data are excluded; public code, hashes, manifests and aggregate evidence remain auditable.
+- Licensed/provider-controlled row-level option data (IB contract ids, bid/ask, quote times) are kept local and listed in `.gitignore`; public code, hashes, manifests and aggregate evidence remain auditable. They were removed from the tracked tree on 24 October 2026; earlier commits still contain them.
 - Historical runs are retained for provenance but are not current unless selected by an authoritative pointer.
 - All outputs are educational research sensitivities, not investment recommendations or price targets.
+
+## Corrections of 24 October 2026
+
+An external audit (23 October 2026) led to corrections across the programme. Each affected project README has a "Corrections (24 October 2026)" section; regenerated outputs may differ from the article PDFs published earlier on the club website.
+
+- Article 3: QMC standard error from independent scrambled replications, antithetic gain at equal cost, VaR/CVaR as losses.
+- Article 4: runnable R script with documented inputs and dependencies, production-weighted costs, consistent validation, price, cost and production uncertainty in the EBITDA simulation. The input data are not public.
+- Article 5: a genuine three-stage DCF, explicit Gordon floor, common random numbers.
+- Article 6: compensated jumps, correct multi-jump dispersion, Heston and Fourier pricing checks.
+- Article 7: correct fractional differencing, white noise in model selection, GPH tests, unit-root tests, Student-t/GJR GARCH, HAC errors, offline replay.
+- Article 8 and Complete Valuation: GLD carry, dated valuation clock, corrected path engines, equal OOS search policy, aligned report editions.
 
 ## Citation
 

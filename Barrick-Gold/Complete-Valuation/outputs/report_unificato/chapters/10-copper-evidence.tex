@@ -4,7 +4,7 @@
 
 The original gold-only module omits copper. The separate extension adds the
 three producing copper mines in Table~\ref{tab:copper-operating-perimeter};
-the frozen gold operating vector and price/WACC draws remain identical in
+the fixed gold operating vector and price/WACC draws remain identical in
 the paired comparison. Copper mine statistics are already attributable:
 ownership is recorded for interpretation and never multiplied again
 \cite{barrick-mine-stats-2026}.
@@ -35,8 +35,9 @@ metric and can differ from the mine-weighted value reconstructed from rounded
 inputs. A consolidated-to-attributable cash/debt bridge therefore also applies
 to the copper extension.
 
-Sales and unit CoS are held at these Q2 levels for 20 quarters as a declared
-scenario, not as fitted mine forecasts or guidance. The quarter's reported
+Sales and unit CoS are held at these Q2 levels for every quarter valued, from
+the 2026Q3 stub after 2 September to 2030Q4, as a declared scenario, not as
+fitted mine forecasts or guidance. The quarter's reported
 capex and depreciation are retained as source facts; they are not separately
 deducted or added in the CoS-margin experiment. Expansion schedules, Reko Diq,
 reserves and closure liabilities require another operating/cash-flow model.
@@ -72,8 +73,8 @@ No quotes are generated to meet the threshold. This fit uses all eligible
 sampled quotes, rather than gold's fixed CC64 sample.
 
 Each origin uses only its own options and an as-of Treasury curve; its
-structural parameters are frozen while variance/intensity is projected to
-the next admitted date. Target matching futures and dated rates condition
+structural parameters are held fixed while variance/intensity is projected to
+the next accepted date. Target matching futures and dated rates condition
 scoring. Common target support, origin-mean IV and persistence inside the
 origin surface's convex hull are reported explicitly. This is conditional
 IV-surface validation, not a physical price forecast. The current catalogue
@@ -86,18 +87,16 @@ Copper paths follow log-linear observed forward anchors at \emph{future
 delivery dates}, holding the final level flat beyond support. Independence
 is the base gold/copper scenario; terminal Gaussian-score dependence
 $\pm0.5$ uses whole-path permutations preserving marginal distributions and
-is not an estimated Brownian correlation. The primary comparison is five
-years without terminal value; signed perpetuity is a separate sensitivity.
-The comparison retains the inherited 20-quarter simulation grid, whose gold
-vector starts with Q1--Q2 actuals although the option snapshot is 2 September.
-It does not roll the operating calendar forward to exclude elapsed quarters.
-That calendar reconciliation is required for a dated prospective DCF.
-Neither conditional forwards nor IV tests validate physical five-year copper
-prices, future mine sales, costs or corporate equity value.
+is not an estimated Brownian correlation. The primary comparison values
+explicit flows to 2030 without terminal value; signed perpetuity is a separate
+sensitivity. Gold and copper share the dated clock of
+Chapter~\ref{ch:unified-experiment}: only flows after the 2 September 2026
+valuation time are valued, the Q1--Q2 2026 actuals are excluded, and the
+quarter containing the valuation date contributes its remaining \StubDays{}
+days. Copper paths use the same corrected daily engines as gold. The
+2 September copper Bates fit has zero jump intensity, so that engine reduces to
+Heston. Neither conditional forwards nor IV tests validate physical copper
+prices to 2030, future mine sales, costs or corporate equity value.
 
 \IfFileExists{chapters/generated/copper-results.tex}{%
-\input{chapters/generated/copper-results}}{%
-\gapbox{Historical copper acquisition and temporal validation are in progress.
-The first static valuation is not temporally validated. Admit final coverage,
-actual origin--target scores and the new paired valuation only from completed,
-hash-verified local runs.}}
+\input{chapters/generated/copper-results}}{}

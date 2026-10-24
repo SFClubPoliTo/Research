@@ -7,7 +7,7 @@ import numpy as np
 from scipy.optimize import differential_evolution, minimize, OptimizeResult
 
 from Heston import Heston
-from calibration_core import CalibrationReport, OptionSurface, feller_feasible_population
+from calibration_core import CalibrationReport, OptionSurface, feller_feasible_population, warm_local_fit
 from fourier_pricing import adaptive_cos_call_prices, carr_madan_call
 
 
@@ -149,10 +149,24 @@ class Bates(Heston):
         disp=False,
         return_report=False,
         heston_seed=None,
+        initial_guess=None,
     ):
         started_at = perf_counter()
         surface = OptionSurface.from_frame(df_market)
         args = (surface, S0, q, pricing, cos_N)
+        warm = warm_local_fit(Bates.bates_objective, initial_guess, Bates.BOUNDS,
+                              args, ftol=1e-6)
+        if warm is not None:
+            local_result, start = warm
+            if heston_seed is not None:
+                nested = np.r_[np.asarray(heston_seed, dtype=float), 0., 0., .1]
+                loss = Bates.bates_objective(nested, *args)
+                if np.isfinite(loss) and loss < local_result.fun:
+                    local_result = OptimizeResult(x=nested, fun=loss, success=True,
+                        message='Retained current-origin nested Heston over warm local fit')
+            report = CalibrationReport.from_optimizer('Bates', Bates.PARAMETER_NAMES,
+                local_result, start, started_at, warm_start_used=True, global_search_used=False)
+            return report if return_report else report.x
         init = feller_feasible_population(Bates.BOUNDS, popsize, seed)
         global_result = differential_evolution(
             Bates.bates_objective,

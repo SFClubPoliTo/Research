@@ -1,0 +1,20 @@
+{
+  "model": "Black-Scholes",
+  "parameter_names": [
+    "sigma"
+  ],
+  "parameters": {
+    "sigma": 0.254638014289322
+  },
+  "objective": 0.0004909452868813791,
+  "success": true,
+  "message": "Solution found.",
+  "elapsed_seconds": 0.02459390000149142,
+  "date": "2026-07-20",
+  "strategy": "ROLLING",
+  "source_surface": "C:\\Users\\andre\\Desktop\\sf\\Research\\Barrick-Gold\\Complete-Valuation\\data\\processed\\team8\\oos_q040_20261024\\calibration_sets\\2026-07-20\\calibration_surface.csv",
+  "profile": "full",
+  "seed": 8,
+  "n_points": 64,
+  "saved_at_utc": "2026-10-24T14:35:43.281531+00:00"
+}

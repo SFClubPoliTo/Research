@@ -1,0 +1,22 @@
+{
+  "rows": 64,
+  "spot": 371.9,
+  "expiries": 11,
+  "unique_strikes": 64,
+  "min_T": 0.2299794661190965,
+  "max_T": 1.897330595482546,
+  "min_dte": 84.0,
+  "max_dte": 693.0,
+  "official_min_dte": 75,
+  "min_K": 298.57166329430135,
+  "max_K": 447.2227545470142,
+  "curve_dates": [
+    "2026-07-24"
+  ],
+  "rate_curve_models": [],
+  "nss_fit": {},
+  "min_iv": 0.223573092406895,
+  "max_iv": 0.3034485082072206,
+  "dividend_yield": 0.004,
+  "dividend_yield_dropped_rows": 0
+}

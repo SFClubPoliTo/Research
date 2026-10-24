@@ -1,11 +1,5 @@
 \chapter{Barrick Mining Corporation and Valuation Perimeter}
-\chapterstatus{Legal identity and listing continuity are verified from Barrick's
-official releases. The gold operating perimeter, variable definitions, units,
-data window and forecast frequency follow the Team~4 source study
-\cite{team4}; ownership shares, accounting treatment and 2025 structural events
-are documented in Barrick's 2025 Annual Report \cite{barrick-ar-2025}.
-A separate copper extension is identified explicitly. The financial perimeter
-and equity bridge remain controlled inputs requiring reconciliation.}
+\label{ch:company}
 
 \section{Corporate identity and the choice of case study}
 \label{sec:company-identity}
@@ -32,7 +26,7 @@ Barrick is a gold and copper exploration, development and mining company
 \cite{barrick-about-2026}. Its original Team~4 operating layer is narrower:
 eight gold mines, excluding copper and the remaining gold assets \cite{team4}.
 Section~\ref{sec:copper-extension} adds Lumwana, Zald\'ivar and Jabal Sayid as
-an explicit copper scenario, without rewriting the frozen gold experiment.
+an explicit copper scenario, without rewriting the fixed gold experiment.
 Neither perimeter represents every corporate asset or a reconciled claim on
 the whole company. The case connects commodity prices, production and costs
 to component margin and a conditional DCF, bringing the team's valuation
@@ -43,23 +37,23 @@ interests into its stochastic modelling framework.
 
 % Sources: Team 4 Sections 1.1.2--1.1.3, 2 and 3.1; Annual Report 2025,
 % MD&A mine tables and Note 2; 2026Q1--Q2 mine statistics in Chapter 10.
-A valuation must freeze, by asset and date, the ownership and reporting basis,
+A valuation must fix, by asset and date, the ownership and reporting basis,
 status and currency. These determine which volumes, costs, taxes, royalties,
 cash flows, debt claims and shares enter its numerator and denominator.
 Table~\ref{tab:company-operating-perimeter} records the gold perimeter.
 
-\paragraph{Admitted assets.}
+\paragraph{Included assets.}
 Bulyanhulu, Carlin, Cortez, Kibali, Loulo--Gounkoto, North Mara, Pueblo Viejo
 and Turquoise Ridge form the base of the gold operating computations,
-including Chapter~10's production-weighted cost master chain. The source
+including Chapter~\ref{ch:operations}'s production-weighted cost master chain. The source
 excluded copper and smaller gold operations \cite{team4}; this modelling
 choice does not demonstrate that copper is economically negligible.
 The eight mines produced 622 and 711 thousand attributable ounces in 2026Q1
 and 2026Q2 against company gold totals 719 and 796 thousand ounces
-(Chapter~10): 86.5\% and 89.3\% of attributable gold production. These are
+(Chapter~\ref{ch:operations}): 86.5\% and 89.3\% of attributable gold production. These are
 gold-volume coverage ratios, not corporate-revenue or value coverage.
 
-The frozen executable gold vector uses company totals of 719 and 796 koz,
+The fixed executable gold vector uses company totals of 719 and 796 koz,
 and company-wide CoS of USD~1,922 and 1,993/oz, for its first two quarters.
 From 2026Q3 it uses the eight-mine Team~4 forecast. Its first two actual
 quarters therefore have a broader asset scope than its forecast perimeter.
@@ -130,16 +124,20 @@ are removed mine by mine: Carlin contributes 28 quarters, North Mara 25 from
 2019Q4. A common starting year therefore does not imply identical effective
 samples for every driver. The 2026Q1--Q2 mine statistics replace the first
 two forecast quarters as actuals; forecasts from 2026Q3 remain as originally
-estimated (Chapter~10).
+estimated (Chapter~\ref{ch:operations}). On the dated valuation clock those
+actuals precede the 2 September 2026 valuation time: they serve as level
+checks and are not valued (Chapter~\ref{ch:unified-experiment}).
 
 \section{Operating quantities supplied by the source programme}
 \label{sec:company-operating-quantities}
 
 % Sources: Team 4 Sections 1.1.3, 2.2--2.4, 3.1--3.2 and 4.1;
 % Annual Report 2025, Production Costs and mine tables.
-Production and CoS are forecast separately, mine by mine, on 20 quarters
-from 2026Q1 to 2030Q4. Annual quantities sum four quarters. The price comes
-from Team~8 in Chapter~9; Team~4's standalone demonstrator is excluded.
+Production and CoS are forecast separately, mine by mine, over the source
+horizon 2026Q1--2030Q4. Annual quantities sum four quarters. The valuation
+uses only the remaining \StubDays{} days of 2026Q3 after 2 September and the
+18 quarters that follow. The price comes from Team~8 in
+Chapter~\ref{ch:calibration}; Team~4's standalone demonstrator is excluded.
 
 \paragraph{Production.}
 Quarterly production of mine $i$ is built from three physical drivers,
@@ -158,7 +156,7 @@ is from grams, not tonnes as stated in its text. Ore uses
 SARIMA$(1,0,1)(1,0,0)_4$, grade AR(1) without seasonal terms, and recovery
 uniform historical bounds widened by $\pm1\%$, truncated to $[0.50,1.00]$.
 Production bands are 80\% Goodman product-variance intervals under
-independence (Chapter~10).
+independence (Chapter~\ref{ch:operations}).
 
 \paragraph{Costs.}
 CoS is USD per attributable ounce sold, excluding closure or care-and-
@@ -187,7 +185,7 @@ EBIT: G\&A, exploration, project expenditure and other items are absent.
 CoS is per ounce \emph{sold}, while the identity multiplies ounces
 \emph{produced}. Forecast royalties are fixed per ounce, although Barrick
 attributes about USD~55/oz of the 2025 CoS increase to higher royalties from
-higher realised gold prices \cite{barrick-ar-2025}. Chapter~11 must reconcile
+higher realised gold prices \cite{barrick-ar-2025}. Chapter~\ref{ch:dcf} must reconcile
 these mismatches before the proxy becomes accounting cash flow.
 
 \begin{table}[H]
@@ -204,18 +202,20 @@ these mismatches before the proxy becomes accounting cash flow.
 Perimeter & Eight gold mines, attributable; copper and other gold assets
 absent from source module. & Separate copper extension; other assets,
 per-share basis and North America IPO. \\
-Frequency and horizon & Quarterly estimation 2019--2025; 20 quarters to
-2030Q4; annual sums; Q1--Q2 2026 actuals. & No mine-life model supports a
+Frequency and horizon & Quarterly estimation 2019--2025; forecasts to
+2030Q4; annual sums; Q1--Q2 2026 actuals used as level checks only; valued
+flows run from 2 September 2026 to 2030Q4. & No mine-life model supports a
 terminal assumption beyond 2030. \\
 Production & $O$ in t, $G$ in g/t, $R$ decimal, output oz; seasonal ore,
 AR(1) grade, uniform recovery; 80\% Goodman bands. & Produced versus sold;
-only point forecasts enter frozen valuation. \\
+only point forecasts enter the fixed valuation. \\
 Costs & USD/oz CoS includes depreciation and royalties; log ARIMA$(3,1,0)$
 with drift, $\beta$ scaling, Q4 2025 anchors; 95\% bands. & D\&A, royalties,
 taxes, capex, G\&A, exploration and exceptional anchors; no AISC model. \\
 Commodity price & Source only: GBM at USD~4,677/oz on 2 April 2026 using GLD
-per-expiry volatility; excluded here. & Team~8 shapes at Q2 realised gold
-USD~4,417/oz; no GLD-level conversion; realised basis, hedging and measures. \\
+per-expiry volatility; excluded here. & Team~8 engines ($q=0.40\%$) started
+from the XAUUSD spot of USD~4,391.32/oz at the valuation time; no GLD-level
+conversion; realised basis, hedging and measures. \\
 Operating output & After-depreciation component margin, called EBITDA in
 source. & EBIT, taxes, working capital and capex bridge. \\
 Dependence & Ore--grade $r\approx-0.45$, ore--recovery $r\approx-0.17$;
@@ -241,7 +241,8 @@ full subsidiary balances and exclude Kibali's; claims must be restated
 consistently with attributable flows, including corporate-level claims,
 not multiplied mechanically by one aggregate ownership fraction.
 
-The 1,675.51 million diluted-share proxy remains unreconciled (Chapter~11).
+No per-share value is reported: the diluted-share count remains unreconciled
+(Chapter~\ref{ch:dcf}).
 Shares claim the whole company, whereas the gold baseline and gold-plus-
 copper extension cover defined subsets. Per-share division allocates a
 perimeter proxy; it does not yield full-company equity fair value. The copper
@@ -262,15 +263,17 @@ minority-stake IPO expected by year end \cite{barrick-ipo-2026,barrick-q2-releas
 The latter also announces Newmont's consent, an early contribution of excluded
 properties to Nevada Gold Mines and a USD~1.95 billion top-up payment. Those
 events require their own asset, timing and cash-bridge reconciliation; they
-do not authorise a silent change to the frozen eight-mine forecast vector.
+do not authorise a silent change to the fixed eight-mine forecast vector.
 The 2026Q2 operating release predates the 2 September market snapshot, but its
 reporting-period end, publication date and October retrieval remain distinct.
 
-\gapbox{Freeze date, currency and scale; restate debt, cash, other claims and
-non-operating assets consistently with attributable flows, without deducting
-the same partners' interests twice; reconcile diluted shares; verify North
-America IPO status at the valuation date and resulting look-through ownership;
-document the security and corporate-action policy of the market comparison.}
+The financial perimeter and equity bridge therefore remain open. Closing them
+requires a fixed valuation date, currency and scale; debt, cash, other claims
+and non-operating assets restated consistently with attributable flows,
+without deducting the same partners' interests twice; reconciled diluted
+shares; the North America IPO status at the valuation date and the resulting
+look-through ownership; and a documented security and corporate-action policy
+for the market comparison.
 
 \section{Risk boundary and permitted use}
 \label{sec:company-risk-boundary}
@@ -292,13 +295,14 @@ inventory fair-value increment on reconsolidation, versus cash costs
 USD~1,448/oz. Its 2026 CoS guidance USD~2,860--3,140/oz still includes higher
 purchase-price-allocation depreciation \cite{barrick-ar-2025}. Projecting
 that anchor carries an exceptional effect forward; it needs a separate
-normalisation check. This edit does not silently alter the frozen vector.
+normalisation check. The forecast vector is not altered here.
 
 Reserve life is outside the model. Grade is stationary over five years under
 feed-blending arguments; depletion, closure, high-grading, throttling and
 care and maintenance are not endogenous \cite{team4}. Neither that model
 nor flat extension of observed copper forwards supplies mine-life evidence
-for perpetuity. The copper comparison uses a finite five-year primary
-horizon and separate terminal sensitivities. Until accounting, structural
-and measure bridges are admitted, the document defines a research contract
+for perpetuity. The copper comparison values explicit flows to 2030 on the
+dated clock, without terminal value, as its primary case and treats terminal
+closure as a separate sensitivity. Until accounting, structural
+and measure bridges are accepted, the document defines a research contract
 and its failure conditions, not a final target value.

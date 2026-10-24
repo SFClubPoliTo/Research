@@ -1,27 +1,22 @@
 \chapter{Unified Barrick Valuation Experiment and Validation}
-\chapterstatus{Unified version of the former valuation and validation
-chapters. It reports one controlled comparison of four gold-price engines
-under a common operating and DCF contract, then evaluates engineering,
-numerical, accounting and external validity. Chapter~9 remains the sole home
-of option calibration, residual geometry and out-of-sample forecasting, so
-those results are referenced rather than repeated here.}
+\label{ch:unified-experiment}
+
+This chapter reports one controlled comparison of four gold-price engines
+under a common operating and DCF contract, then evaluates its engineering,
+numerical, accounting and external validity. Chapter~9 remains the home of
+option calibration, residual geometry and out-of-sample repricing; those
+results are referenced rather than repeated here.
 
 \section{End-to-end experiment contract}
 
-The numerical experiment in this chapter is the frozen gold baseline:
-company-wide actuals for 2026Q1--Q2 followed by the eight-mine forecast,
-with the scope break disclosed in Chapter~10.
-Section~\ref{sec:copper-extension} reports a separate extension
-with three attributable copper operations, its own temporal validation
-and a paired finite-horizon comparison. Gold-only per-share examples below
-are not updated by adding a copper increment to their quantiles. The
-extension first aggregates gold and copper on each path and reports
-aggregate operating-value proxies without a reconciled equity bridge.
+The numerical experiment values the eight-mine gold forecast of Chapter~10
+from the valuation time onwards. Section~\ref{sec:copper-extension} reports a
+separate extension with three attributable copper operations and a paired
+comparison of explicit flows.
 
-Chapter~11 defined the accounting, discounting and closure rules that must hold
-before operating scenarios can become enterprise value, equity value and a
-per-share quantity. The integrated experiment is therefore a sequence of typed
-transformations rather than one black box:
+Chapter~11 defined the accounting, discounting and closure rules. The
+integrated experiment is a sequence of typed transformations rather than one
+black box:
 \begin{align}
 \mathcal P_{opt}^{\mathbb Q}
 &\longrightarrow
@@ -30,19 +25,18 @@ transformations rather than one black box:
 &\xrightarrow{\;\mathcal A_{scenario}\;}
 \{P_{t,j}^{Au,(m)}\},\\
 &\xrightarrow{\;\mathcal A_{operations}\;}
-\{Rev_{y,j}^{(m)},\text{component margin}_{y,j}^{(m)}\},\\
+\{Rev_{q,j}^{(m)},\text{component margin}_{q,j}^{(m)}\},\\
 &\xrightarrow{\;\mathcal A_{accounting}\;}
-\{NOPAT_{y,j}^{(m)},FCFF_{y,j}^{proxy,(m)}\},\\
+\{NOPAT_{q,j}^{(m)},FCFF_{q,j}^{proxy,(m)}\},\\
 &\xrightarrow{\;\mathcal A_{DCF}\;}
-\{EV_j^{(m)},EqV_j^{(m)},V_{ps,j}^{(m)}\},
+\{V_{op,j}^{(m)}\},
 \qquad j\in\{BS,H,BP,BH\}.
 \end{align}
-Each arrow has its own date, unit, measure and validation rule. Team 8 governs
-the option-implied gold-price engines already developed and tested in
-Chapter~9; Team~4 supplies the operating methodology and forecasts, refreshed
-with Barrick actuals for 2026Q1--Q2; the unified DCF governs cash-flow
-construction, discounting and the equity bridge; Team~3 supplies simulation
-diagnostics. No source article alone authorises the last arrow.
+Each arrow has its own date, unit, measure and validation rule. Team~8 governs
+the option-implied gold-price engines of Chapter~9; Team~4 supplies the
+operating forecasts; the unified DCF governs cash-flow construction and
+discounting; Team~3 supplies simulation diagnostics. The last step stops at
+an operating proxy: no equity bridge is applied.
 
 \begin{table}[H]
 \centering
@@ -55,13 +49,13 @@ diagnostics. No source article alone authorises the last arrow.
 \toprule
 Stage & Source authority & Required contract & Stop condition \\
 \midrule
-Option scenarios & Teams 8 and 6 & Versioned snapshot, rate dates, parameter
+Option scenarios & Teams 8 and 6 & Dated snapshot, rate dates, carry, parameter
 objects, \(\mathbb Q\), time grid and seed. & A calibration or predictive
 claim is inconsistent with Chapter~9. \\
-Gold bridge & Team 8; unified adapter & Conditional transfer of
-GLD/\(\mathbb Q\) distributional shape to gold USD/oz from one starting
-level. & A GLD-level conversion, physical forecast or \(\mathbb Q\)-to-
-\(\mathbb P\) transformation is implied rather than declared. \\
+Gold bridge & Team 8; unified adapter & Option-implied distributional shape
+applied to gold USD/oz from the spot at the valuation time. & A physical
+forecast or \(\mathbb Q\)-to-\(\mathbb P\) transformation is implied rather
+than declared. \\
 Operations & Team 4 & Production and cost units, ownership, frequency,
 dependence and accounting definition. & CoS/AISC/D\&A/capex treatment or input
 perimeter is ambiguous. \\
@@ -69,160 +63,179 @@ FCFF and closure & Team 5 & Taxes, reinvestment, WACC, horizon and terminal
 policy. & Accounting identities, \(w>g\) or finite-resource closure fail. \\
 Equity and per share & Team 5 plus corporate inputs & Net debt, minorities,
 other claims, non-operating assets, diluted shares and matching listing. &
-Bridge items do not reconcile to one dated filing and security. \\
-Reporting & Teams 3 and 5; unified pipeline & Replay, quantiles, sensitivity
-and hash-linked CSV/JSON/figure bundle. & A table and figure do not derive from
-the same accepted run. \\
+Not applied: bridge items are not reconciled to one dated filing. \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \section{Controlled design: one changing layer}
 
-The experiment isolates the price-engine effect. It evaluates the four Team 8
-engines named in Chapter~9 while holding production, unit costs, taxes, WACC,
-terminal policy and equity inputs constant. Their stochastic laws and fit
-diagnostics are not restated here. The relevant experimental fact is simpler:
-only the gold-price scenario generator changes across the four branches.
-
-The 20-quarter operating contract uses Barrick actual production and Cost of
-Sales in 2026Q1--Q2, followed by Team~4 forecasts from 2026Q3. The actual and
-forecast segments are labelled separately rather than presented as one
-homogeneous source. Tax, growth, ROIC, stochastic WACC, terminal-growth and
-equity-bridge inputs are common, and the same WACC shock array is reused in all
-branches. Consequently, differences among the four output distributions can
-be attributed to the gold-price engine within this common contract. They
-cannot be attributed to mine plans, extraction uncertainty or cost inflation,
-because those layers do not vary.
-
-The exact editable values, their annual paths and their terminal-value effect
-are disclosed once in Section~\ref{sec:executable-valuation-assumptions}, with
-generated CSV/JSON sidecars. They are not repeated here: this chapter uses the
-dashboard as the common downstream contract and focuses only on what changes
-when the Chapter~9 gold engine changes.
+Only the gold-price scenario generator changes across the four branches.
+Production, unit costs, taxes, WACC shocks and terminal policy are common.
+Differences among the four output distributions can therefore be attributed
+to the gold-price engine within this contract. They cannot be attributed to
+mine plans, extraction uncertainty or cost inflation, because those layers do
+not vary. The editable values and their terminal-value effect are disclosed
+once in Section~\ref{sec:executable-valuation-assumptions}.
 
 The earlier Team~4 NSS, IV, GBM and stochastic EBITDA chain was a standalone
-demonstrator. It is not imported into this experiment. Team~4 contributes only
-the operating decomposition and forecast continuation; Team~8 alone generates
-the current price paths. The current U.S. Treasury NSS term structure is a separate,
-newly fitted Team~8/unified input and is therefore retained.
+demonstrator and is not imported. Team~4 contributes only the operating
+decomposition and forecasts; Team~8 alone generates the price paths. The
+Treasury NSS term structure of 2 September 2026 is a separate, newly fitted
+input.
+
+\section{Valuation clock}
+
+The valuation time is the 2 September 2026 close (20:00~UTC), and only flows
+after it are valued. Barrick's Q1--Q2 2026 actuals are excluded: they have
+been realised and belong to the balance sheet, not to future cash flows. The
+quarter containing the valuation date contributes its remaining \StubDays{} of
+92 days, under the registered assumption of uniform production and unit cost
+within the quarter. Eighteen quarters follow, to 31 December 2030
+(\HorizonYears{} years). Revenue uses the average simulated daily gold price
+over each quarter's remaining interval; each flow is discounted from the
+midpoint of that interval; the first-year WACC is $w_0$. The terminal value
+is set at 31 December 2030 on the last four quarters.
 
 \section{Measure, dates and simulation design}
 
-Option calibration identifies a risk-neutral law useful for market-implied
-scenario analysis. It does not identify physical drift or a causal forecast of
-realised gold. The adapter is therefore labelled a \emph{conditional transfer
-of GLD/\(\mathbb Q\) distributional shape to gold USD/oz}. Each engine
-restarts at USD~4,417/oz, Barrick's Q2 2026 average realised price used only
-as a common level anchor. The procedure neither
-converts GLD share levels into physical gold nor estimates a
-\(\mathbb Q\)-to-\(\mathbb P\) map.
+Option calibration identifies a risk-neutral law. The scenario drift is the
+integral-preserving forward curve of the Treasury fit. Read as a physical
+expectation, this assumes no gold risk premium, a common assumption for an
+asset with near-zero market beta that is not estimated here. The
+option-implied volatility shape is carried over as a stated conditional
+assumption, not a validated physical law. Expected flows are discounted at
+WACC, as in an ordinary DCF; the explicit flows are also discounted at the
+risk-free curve for comparison (Table~\ref{tab:unified-terminal}).
 
-\paragraph{The operating law is not a measure change.}
-For both gold and copper, denote the operating scenario law by $\mathcal R$.
-It combines transferred option-implied coefficients, imposed commodity mean
-schedules and an independent assumed WACC law. It is neither an estimated
-physical law $\mathbb P$ nor the original traded-instrument pricing law
-$\mathbb Q$. No Radon--Nikodym density or physical market-price-of-risk
-specification is estimated. For a fixed-delivery futures price, the
-deterministic-rate option convention uses zero drift; copper's
-cross-delivery curve slope instead imposes a scenario mean and must not be
-identified with that future's time drift. WACC shocks are not short-rate shocks.
+A genuine measure transformation may change variance drift, jump intensity
+and mark distribution as well as price drift; Section~\ref{sec:physical-measure-bridge}
+documents the cross-measure link and the separate physical forecasting
+evidence. For copper, the cross-delivery futures curve imposes a scenario mean
+and must not be identified with the time drift of a fixed-delivery future.
 
-In the jump simulators the compensator is
-$\lambda(\mathbb E[e^J]-1)$ under the simulated mark law, with the left-step
-intensity in Hawkes. A genuine measure transformation may change variance
-drift, jump intensity and mark distribution as well as price drift; none is
-identified by replacing a drift coefficient alone. Ordinary physical DCF
-needs expected cash flows and a compatible risk-adjusted discount contract.
-Pricing under $\mathbb Q$ needs the corresponding numeraire/pricing kernel
-and treatment of non-spanned corporate risks. Q-shaped paths plus assumed
-WACC can mix incompatible risk adjustments; substituting a risk-free rate
-alone would not reconcile this corporate claim. The executable experiment
-therefore admits only the conditional law $\mathcal R$ and rejects physical
-or corporate risk-neutral interpretations. Unit-mean and nonzero-jump
-compensation checks validate its numerical implementation, not its economics.
+All dates are synchronous: the gold spot anchor (USD~4,391.32/oz, XAUUSD at
+20:00~UTC), the GLD surface, the Treasury curve and the valuation time share 2
+September 2026. GLD carries the 0.40\% sponsor fee as a continuous yield.
 
-The date vector remains visible: the anchor quarter ends 30 June 2026, the
-Treasury curve, Barrick close and current Team~8 surface are dated 2 September. The current surface is used for recalibration. The
-remaining asynchrony restricts
-the output to a conditional model comparison.
+The engines are simulated on a daily grid with 8,192 paths and one base seed
+(20260902) for all four; WACC uses its own seed and is generated once. Variance
+follows a full-truncation Euler scheme with an unclipped state; the Hawkes
+intensity decays exactly between days and the jump compensator uses the same
+exact integral. Monte Carlo call prices at one and three years lie within
+about two batch standard errors of the COS prices for every model.
 
-The numerical design uses 8,192 paths, 260 fine steps and 13 fine steps per
-quarter over 20 quarters. All price engines use base seed 20260902; WACC uses
-seed 20260902 and is generated once. The model-specific stream construction is
-documented in Chapter~9. At the corporate layer, the important control is that
-the same accepted operating arrays and WACC paths enter all branches.
+\section{Results}
 
-\section{Executable method and result bundle}
-
-% Generated fragments are admitted only from the authoritative final pointer.
-\IfFileExists{chapters/generated/current-valuation-method.tex}{%
-  \input{chapters/generated/current-valuation-method}%
-}{%
-  \gapbox{The accepted multi-model method fragment is unavailable. No
-  substitute method claim is supplied editorially.}%
-}
-
-For \(M\) admitted paths from model \(j\), the empirical per-share
-distribution and quantiles are
+For \(M\) paths from model \(j\), the empirical distribution and quantiles of
+the operating proxy are
 \begin{equation}
 \widehat F_j(x)=\frac{1}{M}\sum_{m=1}^{M}
-\mathbf 1\!\left\{V_{ps,j}^{(m)}\leq x\right\},
+\mathbf 1\!\left\{V_{op,j}^{(m)}\leq x\right\},
 \qquad
 \widehat Q_{u,j}=\inf\{x:\widehat F_j(x)\geq u\}.
 \end{equation}
-The table and figure below derive from the same versioned result bundle.
 
-\IfFileExists{chapters/generated/current-valuation-multimodel-quantiles.tex}{%
-  \input{chapters/generated/current-valuation-multimodel-quantiles}%
-}{%
-  \gapbox{The four-model quantile table is unavailable. No values are supplied
-  editorially.}%
-}
+\begin{table}[H]
+\centering
+\caption{Operating proxy under the four gold-price laws, USD billion (signed terminal value).}
+\label{tab:unified-quantiles}
+\small
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Gold engine & P10 & Median & P90 & Mean & Negative \\
+\midrule
+Black--Scholes/GBM & \ValBSPTen & \ValBSMedian & \ValBSPNinety & \ValBSMean & \ValBSNegative\% \\
+Heston & \ValHPTen & \ValHMedian & \ValHPNinety & \ValHMean & \ValHNegative\% \\
+Bates--Poisson & \ValBPTen & \ValBMedian & \ValBPNinety & \ValBMean & \ValBNegative\% \\
+Full Bates--Hawkes & \ValWPTen & \ValWMedian & \ValWPNinety & \ValWMean & \ValWNegative\% \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\IfFileExists{../img/publication/3cf9768be1456f94_multimodel_value_distribution_comparison.png}{%
-  \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.98\textwidth]{../img/publication/3cf9768be1456f94_multimodel_value_distribution_comparison.png}
-    \caption{Kernel-density comparison of conditional Barrick value per share
-    under the four Chapter~9 gold-price engines. Production, unit cost, DCF,
-    WACC and equity inputs are common; the vertical line is the USD 44.13
-    completed \texttt{B} close on 2 September 2026.}
-    \label{fig:multimodel-value-distribution-comparison}
-  \end{figure}
-}{%
-  \gapbox{The accepted four-model density comparison is unavailable until it
-  is copied from the authoritative result manifest.}%
-}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{\FigFigValPrimary}
+  \caption{Full Bates--Hawkes operating proxy on the dated clock, 8,192 paths.
+  Display limits are the 0.5th--99.5th percentiles. This is not a confidence
+  interval or a physical probability law.}
+  \label{fig:unified-primary}
+\end{figure}
 
-The medians are USD~35.87 for Black--Scholes/GBM, USD~35.67 for Heston,
-USD~35.84 for Bates--Poisson and USD~35.14 for Full Bates--Hawkes. The
-USD~44.13 close lies between the 58.08th and 59.24th model percentiles;
-40.76--41.92\% of simulated values exceed it. Every branch places the observed
-close above its conditional median but inside a broad distribution, not
-establishing market mispricing.
+Medians range from USD~\ValMedianLow{} to \ValMedianHigh~billion across the
+four engines. Negative values are not forecasts of a negative limited-liability
+share price: they expose the unconstrained operating mapping.
 
-P10 spans USD~3.13--3.71 and P90 USD~101.43--104.72. At more extreme quantiles,
-P01 spans USD~-1.05 to USD~-0.34 and P99 USD~199.56--218.36. Negative proxy
-quantiles are not forecasts of a negative limited-liability share price:
-they expose the unreconciled corporate mapping. Fixed operations and DCF
-compress median differences while preserving tail sensitivity.
+\begin{table}[H]
+\centering
+\caption{Median proxy, USD billion, under the terminal conventions and with risk-free discounting of the explicit flows.}
+\label{tab:unified-terminal}
+\small
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Gold engine & Signed perpetuity & Explicit, WACC & Explicit, risk-free \\
+\midrule
+Black--Scholes/GBM & \ValBSMedian & \ValBSExplicit & \ValBSExplicitRiskFree \\
+Heston & \ValHMedian & \ValHExplicit & \ValHExplicitRiskFree \\
+Bates--Poisson & \ValBMedian & \ValBExplicit & \ValBExplicitRiskFree \\
+Full Bates--Hawkes & \ValWMedian & \ValWExplicit & \ValWExplicitRiskFree \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The terminal value carries about \TerminalShare\% of the mean; the explicit
+flows to 2030 are worth USD~\ValExplicitLow--\ValExplicitHigh~billion.
+Discounting the explicit flows at the risk-free curve instead of WACC raises
+them by about one billion.
+
+\section{Numerical robustness}
+
+Doubling the paths to 16,384 or changing the seed moves single-model medians
+across USD~\NumericalMedianLow--\NumericalMedianHigh~billion; for Bates--Hawkes
+alone the range is \NumericalHawkesLow--\NumericalHawkesHigh. This numerical
+range is as wide as the spread between the four models, so the medians do not
+rank the models. Monte Carlo error and economic dispersion are distinct: the
+first concerns whether an estimator has converged, the second the spread
+induced by the assumed stochastic and corporate inputs.
+
+\section{What the corrections changed}
+
+Table~\ref{tab:unified-attribution} adds the corrections of 24 October 2026 one
+at a time to the medians published on 7 September. The dated clock removes the
+first-half 2026 margin that was previously discounted as a future flow and
+ends the explicit horizon at 2030; between the two editions the explicit flows
+fall from about USD~13 to 11~billion. The spot anchor and the GLD carry each
+move the medians by less than the numerical range.
+
+\begin{table}[H]
+\centering
+\caption{Median proxy, USD billion, as each correction is added.}
+\label{tab:unified-attribution}
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Step & BS/GBM & Heston & Bates & Bates--Hawkes \\
+\midrule
+7 September Paper & \AttLegacyBS & \AttLegacyH & \AttLegacyB & \AttLegacyW \\
++ dated clock, path average, mid-period, corrected engines & \AttClockBS & \AttClockH & \AttClockB & \AttClockW \\
++ spot anchor at the valuation time & \AttAnchorBS & \AttAnchorH & \AttAnchorB & \AttAnchorW \\
++ GLD carry $q=0.40\%$ & \AttCarryBS & \AttCarryH & \AttCarryB & \AttCarryW \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.80\textwidth]{\FigFigCorrectionAttribution}
+  \caption{Median proxy of each engine as the corrections are added.}
+  \label{fig:unified-attribution}
+\end{figure}
 
 \section{Layered validation}
 
-Validation is not one score. Source parity, implementation tests, current-data
+Validation is not one score. Source parity, implementation tests, data
 integrity, calibration, prediction, simulation stability and corporate
-reconciliation answer different questions. The option-specific calibration
-and chronological evidence is evaluated in Chapter~9. This section tests the
-new information created by integration.
-
-\IfFileExists{chapters/generated/current-valuation-diagnostics.tex}{%
-  \input{chapters/generated/current-valuation-diagnostics}%
-}{%
-  \gapbox{The accepted diagnostic fragment is unavailable. No output may be
-  promoted without deterministic replay, identity tests and manifest checks.}%
-}
+reconciliation answer different questions.
 
 \begin{table}[H]
 \centering
@@ -235,96 +248,58 @@ new information created by integration.
 \toprule
 Layer & Accepted evidence & Still open & Allowed conclusion \\
 \midrule
-Source integrity & Frozen hashes and admitted parity outputs for the eight
-team modules. & Historical runtimes, licences and excluded assets recorded in
-their source audits. & The admitted files are stable inputs, not independently
-re-estimated facts. \\
-Implementation & Team 8 and LSE boundary tests; unified complete and focused
-suites; legacy/refactor equality in one runtime. & Full independent formula
-review and all historical-market replay. & The tested contracts are
-implemented within their declared tolerance. \\
-Experiment identity & Same separated operating contract, unified DCF inputs and WACC paths in
-all branches; monotone quantiles and pathwise bridge identities. & Stochastic
-production/cost propagation and filing reconciliation. & Differences among
-branches isolate price-engine sensitivity under the common contract. \\
-Accounting & FCFF, discounting and per-share identities are executable. &
-Actual debt, cash, minorities, other claims, share count and finite-mine
-closure. & Outputs are conditional proxies rather than validated fair values. \\
-External validity & Dates, units and \(\mathbb Q\)-scenario semantics are
-serialized. & GLD-to-gold basis, \(\mathbb Q\)-to-\(\mathbb P\) bridge and
-synchronous inputs. & The experiment is reproducible but not a physical gold
-forecast. \\
+Source integrity & Hashes and parity outputs for the eight team modules. &
+Historical runtimes, licences and excluded assets recorded in their source
+audits. & The files used are stable inputs, not independently re-estimated
+facts. \\
+Implementation & Offline test suite; path engines checked against COS prices;
+nested calibration candidates retained. & Full independent formula review and
+all historical-market replay. & The tested contracts are implemented within
+their tolerance. \\
+Experiment identity & Same operating contract, DCF inputs and WACC paths in all
+branches. & Stochastic production and cost propagation; filing reconciliation.
+& Differences among branches isolate price-engine sensitivity. \\
+Accounting & Discounting identities are executable. & Debt, cash, minorities,
+other claims, share count and finite-mine closure. & Outputs are operating
+proxies, not fair values. \\
+External validity & Dates, units, carry and measure semantics are recorded. &
+Physical gold-price law, realised selling prices and risk premia. & The
+experiment is reproducible but not a physical gold forecast. \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\section{Numerical and simulation robustness}
-
-The numerical gate covers analytical-pricer limits upstream, path-
-discretisation bias, path-count convergence, seed stability, finite outputs,
-quarterly aggregation and pathwise accounting identities. Monte Carlo error
-and economic dispersion are distinct: the first concerns whether the numerical
-estimator has converged; the second is the spread induced by the assumed
-stochastic and corporate inputs.
-
-The current refresh regression tests verify the snapshot contract and path
-adapter; the versioned output preserves common operating and WACC input hashes.
-Historical full-suite and 47-image audit counts describe the August bundle,
-not a fresh validation of every September figure. Quantile ordering and the
-pathwise corporate identities are separate from economic model validity.
-
-These gates make the four distributions comparable computational outputs.
-They do not validate the economic adapters through which GLD option scenarios
-become gold revenue and then Barrick equity.
-
 \section{Accounting and economic validation}
 
-The current experiment keeps one operating vector deterministic after the
-explicit actual/forecast handoff. That design supports attribution but
-suppresses production and cost uncertainty. The unified DCF is likewise a common research contract, not a
-filing-reconciled model. Debt, cash, minority interests, non-operating assets
-and other claims remain zero placeholders, while 1,675.51 million diluted
-shares are not reconciled to a common filing date. Equality of enterprise and
-equity value in the run is therefore an input consequence, not a conclusion
-about Barrick's balance sheet.
+The operating vectors stay deterministic, which supports attribution but
+suppresses production and cost uncertainty. The unified DCF is a common
+research contract, not a filing-reconciled model: debt, cash, minority
+interests, non-operating assets and other claims are not reconciled, so no
+equity value or value per share is reported. The forecast also covers only the
+eight-mine subset rather than all of Barrick's gold production.
 
 Economic validation must additionally reconcile revenue to volumes and
 realised prices; operating margin to EBIT; NOPAT, reinvestment and FCFF by path
-and year; positive discount factors; admissible terminal denominators; and the
-EV-to-equity adjustments described in Chapter~11. Sensitivities must use native
-units and follow directions implied by the equations. No option-pricing fit can
-substitute for these controls.
+and quarter; and the adjustments from enterprise to equity value described in
+Chapter~11. No option-pricing fit can substitute for these controls.
 
 \section{External validity and information limits}
 
 GLD option values, the GLD share price, physical gold in USD/oz, Barrick's
 realised selling price and mine-level cash flow are distinct objects. The run
-transfers the shape of a GLD/\(\mathbb Q\) distribution to paths restarted at
-the USD~4,417/oz Barrick realised-price anchor without a validated
-physical-measure map. The
-asynchronous dates listed above remain a limitation after every software test
-passes.
-
-The information set also excludes timestamped macroeconomic and geopolitical
-news. Such events may enter indirectly through prices, implied volatility and
-jumps, but the current filtration cannot identify their causal contribution.
-An NLP or machine-learning extension is therefore a genuine future research
-question requiring leakage controls and chronological evaluation, not an
-unfinished step of the present valuation.
+applies an option-implied distributional shape to gold paths that start at the
+spot price, without a validated physical-measure map. The information set also
+excludes timestamped macroeconomic and geopolitical news; such events may
+enter indirectly through prices, implied volatility and jumps, but their
+causal contribution cannot be identified here.
 
 \section{What the integrated experiment establishes}
 
-The combined result is intentionally bounded. The project has completed the
-planned integration of the Team~8 price layer, separated Team~4/Barrick
-operating layer and unified stochastic DCF contract. Under one common set of operating and corporate
-assumptions, all four price engines place the USD 44.13 close above their
-conditional medians while retaining substantial probability mass above it.
-The close remains inside every broad distribution, so the common direction is
-a scenario result rather than evidence of mispricing.
-
-The experiment also identifies where model form matters: price-engine choice
-changes tail geometry more than the median under this common downstream
-contract. What remains open is not the act of integration itself, but the
-economic validation of its commodity, measure, operating, accounting and
-terminal-closure interfaces. The unnumbered conclusion that follows separates
-those limitations from the next genuinely new research programme.
+Under one set of operating and corporate assumptions, the four gold-price
+engines give medians within the Monte Carlo range of any one of them, while the
+perpetuity after 2030 carries most of the value. The choice among these
+option-implied laws therefore matters less for this proxy than the numerical
+precision of the simulation and, above all, the terminal assumptions. What
+remains open is the economic validation of the commodity, measure, operating,
+accounting and terminal-closure interfaces, summarised in the conclusion that
+follows.

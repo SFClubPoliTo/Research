@@ -312,8 +312,9 @@ def _gph_d(values: pd.Series) -> float:
     frequencies = 2.0 * np.pi * np.arange(1, m + 1) / n
     regressor = -2.0 * np.log(2.0 * np.sin(frequencies / 2.0))
     response = np.log(np.maximum(spectrum[1 : m + 1], 1e-18))
-    estimate = float(np.polyfit(regressor, response, 1)[0])
-    return float(np.clip(estimate, 0.0, 0.49))
+    # Reported unclipped: an estimate above 0.5 indicates non-stationary long
+    # memory and must not be shown as the stationary boundary value.
+    return float(np.polyfit(regressor, response, 1)[0])
 
 
 def _fractional_difference(series: pd.Series, d: float, threshold: float = 1e-5) -> pd.Series:

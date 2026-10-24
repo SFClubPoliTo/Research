@@ -92,32 +92,33 @@ Q_t^{phys}=\mathrm{Ore}_t\,\mathrm{Grade}_t\,\mathrm{Recovery}_t/31.1035,
 \end{equation}
 with ore modelled as $SARIMA(1,0,1)(1,0,0)_4$, grade as a non-seasonal AR(1), and recovery sampled uniformly from historical extrema widened by one percentage point and truncated to $[0.50,1.00]$. Team 4 additionally applies a 0.91 empirical realization factor, not a unit conversion; its transfer across mines remains unvalidated. The valuation retains the frozen Team 4 vectors, not the Goodman distributions; production bands are 80\% and cost bands 95\%, while product-variance formulas require explicit dependence assumptions.
 
+\subsection{Path simulation}
+All four engines are simulated on a daily grid from the valuation time with full-truncation Euler variance \citep{lord2010}: the variance state is carried unclipped and only $\max(v,0)$ enters drift and diffusion. For Bates--Hawkes the intensity decays exactly between days, the number of jumps in a day is Poisson with the exact integral of that decay, and the drift is compensated by the same integral, so each step is a martingale given its starting state. Monte Carlo call prices at one and three years agree with the COS prices within about two batch standard errors for every model (8 independent batches of 16,384 paths).
+
 \subsection{Valuation mapping}
-Team 5 makes growth internally consistent with reinvestment through
+Team 5 makes growth consistent with reinvestment through
 \begin{equation}
-b_t=\frac{g_t}{ROIC_t},\qquad
-F_t^{proxy}=M_t^{AT}-\max(M_t^{AT},0)b_t,
+b_k=\frac{g_k}{ROIC_k},\qquad
+F_j^{proxy}=M_j^{AT}-\max(M_j^{AT},0)\,b_{k(j)},
 \label{eq:reinvestment}
 \end{equation}
-where $M_t^{AT}$ is the after-tax component margin. Over the five explicit years, $g_t$ declines linearly from 8.50\% to 2.50\%, $ROIC_t$ from 14.50\% to 10.50\%, and the implied reinvestment rate from 58.62\% to 23.81\%.
+where $M_j^{AT}$ is the after-tax component margin of quarter $j$ and $k(j)$ the year since valuation in which its flow falls. Over the five rate years $g_k$ declines linearly from 8.50\% to 2.50\%, $ROIC_k$ from 14.50\% to 10.50\%, and the reinvestment rate from 58.62\% to 23.81\%.
 
-The common discount-rate process is mean reverting,
+The common discount rate is mean reverting by year since valuation,
 \begin{equation}
-w_{t+1}=\bar w+(w_t-\bar w)e^{-\kappa_w}+\sigma_w^*\varepsilon_{t+1},
+w_{k+1}=\bar w+(w_k-\bar w)e^{-\kappa_w}+\sigma_w^*\varepsilon_{k+1},
 \label{eq:wacc_process}
 \end{equation}
-with $w_0=9.10\%$, $\bar w=8.30\%$, $\kappa_w=0.45$ and annual volatility 0.90\%. It is clipped to $[g_\infty+1.00\%,25.00\%]=[3.50\%,25.00\%]$; every gold engine receives the same 8,192-path shock array.
+with $w_0=9.10\%$ applying to the first year, $\bar w=8.30\%$, $\kappa_w=0.45$ and annual volatility 0.90\%. It is clipped to $[g_\infty+1.00\%,25.00\%]=[3.50\%,25.00\%]$; every gold engine receives the same shock array. The discount factor $D(t)$ compounds $1+w_k$ over the elapsed part of each year.
 
-For simulated path $i$, the common operating contract and discount rates define the operating proxy,
+For path $i$, with flow times $t_j$ at the midpoint of each quarter's remaining interval and horizon $H$ at 31 December 2030,
 \begin{equation}
-V_{op}^{(i)}=\sum_{t=1}^{T}\frac{F_t^{proxy,(i)}}{\prod_{s=1}^{t}(1+WACC_s^{(i)})}
-+\frac{TV_T^{(i)}}{\prod_{s=1}^{T}(1+WACC_s^{(i)})}.
+V_{op}^{(i)}=\sum_{j}F_j^{proxy,(i)}D^{(i)}(t_j)+TV_H^{(i)}D^{(i)}(H).
 \label{eq:stochvalue}
 \end{equation}
-The terminal block uses $g_\infty=2.50\%$, $ROIC_\infty=10.50\%$ and therefore $b_\infty=23.81\%$:
+The terminal block uses $g_\infty=2.50\%$, $ROIC_\infty=10.50\%$ and therefore $b_\infty=23.81\%$, applied to the after-tax margin $M_H^{AT}$ of the last four quarters:
 \begin{equation}
-TV_T^{(i)}=\frac{M_T^{AT,(i)}(1+g_\infty)(1-g_\infty/ROIC_\infty)}{WACC_T^{(i)}-g_\infty},
+TV_H^{(i)}=\frac{M_H^{AT,(i)}(1+g_\infty)(1-g_\infty/ROIC_\infty)}{w_H^{(i)}-g_\infty}.
 \label{eq:terminal_value}
 \end{equation}
-The WACC floor ensures a positive spread. A signed terminal removes the legacy zero floor; $TV=0$ gives a five-year-only sensitivity.
-Neither closure is a reserve-calibrated mine life or an optimal abandonment rule. No equity/share bridge is inferred.
+The rate floor keeps the spread positive. The signed terminal keeps negative final margins; $TV=0$ gives an explicit-flows sensitivity. Neither closure is a reserve-calibrated mine life or an optimal abandonment rule. No equity or share bridge is inferred.

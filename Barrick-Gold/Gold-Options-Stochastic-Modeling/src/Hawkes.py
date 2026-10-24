@@ -216,7 +216,7 @@ class ExactHawkesCalibration:
 
         def clip_full_seed(values):
             x = np.asarray(values, dtype=float).copy()
-            if x.shape != (11,):
+            if x.shape != (11,) or not np.isfinite(x).all():
                 raise ValueError("hawkes_seed must contain 11 Full Bates-Hawkes parameters")
             for i, (lo, hi) in enumerate(full_bounds):
                 eps = 1e-8 * max(1.0, abs(lo), abs(hi))
@@ -280,10 +280,14 @@ class ExactHawkesCalibration:
                 local_minimize(warm, warm_local_maxiter),
                 local_minimize(bates_like, warm_local_maxiter),
             ]
-            best = retain_candidates(candidates, [warm, bates_like])
-            best["warm_start_used"] = True
-            best["global_search_used"] = False
-            return best
+            if any(r.success and np.isfinite(r.fun) and r.fun < 1e8
+                   and cls.objective_heston(r.x, surface, S0, q, n_steps, local_cos_N) < 1e8
+                   for r in candidates):
+                best = retain_candidates(candidates, [warm, bates_like])
+                best["warm_start_used"] = True
+                best["global_search_used"] = False
+                return best
+            # Neither local optimizer converged: continue with global search.
 
         # Original robust path: global search over Hawkes block + two local fits.
         def conditional_objective(hawkes_params):

@@ -17,7 +17,7 @@
   },
   "runtime_manifest": {
     "path": "UNIFICATO/Github-Branch/parity/manifests/team-7-runtime.json",
-    "sha256": "A5E744C5C7CA65073EA3AE050914D0AE3878E158AC9FA43180A2DAE5C1649AB3"
+    "sha256": "865C294846E49DE56663F83380E6318F1608B59805699808EFF18ED6551FC91F"
   },
   "inputs_manifest": {
     "path": "UNIFICATO/Github-Branch/parity/manifests/team-7-inputs.json",

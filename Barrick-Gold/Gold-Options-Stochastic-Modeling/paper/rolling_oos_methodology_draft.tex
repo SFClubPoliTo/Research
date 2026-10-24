@@ -2,255 +2,257 @@
 % Suggested packages in the main preamble:
 % \usepackage{amsmath,amssymb,booktabs}
 %
-% This section is intentionally self-contained and can be inserted directly
-% into the empirical-validation part of the paper.
+% Rewritten on 24 October 2026 so that the text describes exactly what
+% src/oos_validation.py and src/calibrate_surface.py do (see the README
+% section "Corrections (24 October 2026)").  The previous version described a
+% weekly design with 35 transitions, 140 forecasts, a normalized ex-ante grid
+% and "no variable dated after t"; none of these matched the code.
+%
+% ---------------------------------------------------------------------------
+% NUMBER HOOK FOR THE CORRECTED RUN (q = 0.40%, 30 origins, no warm starts).
+% ../img/diagnostics_ibkr/oos_article_numbers.tex is written by
+% Complete-Valuation/src/build_report_fragments.py from the corrected run
+% (data/processed/team8/oos_q040_20261024): counts, R^2 against persistence,
+% Diebold--Mariano statistics (Newey--West, 3 lags) and dates beating
+% persistence.  oos_validation.py writes only oos_run_counts.tex and
+% oos_table_rows.tex, so re-running it cannot overwrite this hook.
+% The placeholders below appear only if the generated file is missing.
+% ---------------------------------------------------------------------------
+\IfFileExists{../img/diagnostics_ibkr/oos_article_numbers.tex}{%
+  \input{../img/diagnostics_ibkr/oos_article_numbers.tex}}{}
+\providecommand{\OOSPending}{\textbf{[pending corrected run]}}
+\providecommand{\OOSHookCheck}{\textbf{[check: generated OOS numbers missing]} }
+\providecommand{\OOSForecastOrigins}{\OOSPending}
+\providecommand{\OOSCommonTargetObservations}{\OOSPending}
+\providecommand{\OOSPersistenceTargetObservations}{\OOSPending}
+\providecommand{\OOSRTwoPersistBS}{\OOSPending}
+\providecommand{\OOSRTwoPersistH}{\OOSPending}
+\providecommand{\OOSRTwoPersistB}{\OOSPending}
+\providecommand{\OOSRTwoPersistW}{\OOSPending}
+\providecommand{\OOSDMPersistBS}{\OOSPending}
+\providecommand{\OOSDMPersistH}{\OOSPending}
+\providecommand{\OOSDMPersistB}{\OOSPending}
+\providecommand{\OOSDMPersistW}{\OOSPending}
+\providecommand{\OOSHawkesDatesBeatPersist}{\OOSPending}
 
-\section{Rolling one-step-ahead out-of-sample validation}
+\section{Rolling next-dense-date conditional repricing test}
 \label{sec:rolling_oos}
 
-The predictive comparison is implemented as a strictly chronological
-one-step-ahead exercise.  Let $\mathcal{S}_t$ denote the option-implied
-volatility surface observed at date $t$.  For each model $m$, the parameter
-vector $\widehat{\boldsymbol{\theta}}_{m,t}$ is estimated using only information
-available at $t$:
+\subsection{What the exercise is, and what it is not}
+\label{subsec:oos_nature}
+
+The temporal validation re-prices the option cross-section observed on a
+\emph{target} date with model parameters estimated on an earlier
+\emph{origin} date.  Structural parameters and latent states come only from the
+origin.  The target date's own spot price and its own no-look-ahead Treasury
+curve, however, are used as conditioning variables when the target contracts
+are priced, and the target quotes are then used for scoring.  The exercise is
+therefore a \emph{conditional repricing test} of the stability of the
+calibrated risk-neutral surface, given the realised underlying price and
+rates; it is not an ex-ante forecast of the target surface, because variables
+dated at the target enter the evaluation.  It isolates the temporal stability
+of each pricing model from the separate problem of forecasting GLD.
+
+\subsection{Admitted dates, origins and targets}
+\label{subsec:oos_dates}
+
+A date is admitted to the dense rolling exercise only if, after restricting to
+calls with at least 75 calendar days to expiry, it contains at least 64 unique
+valid observations and at least three expiries.  Sparse dates are excluded;
+no synthetic or interpolated quotes are added.  Over 6 July--2 September 2026
+this rule admits 31 dense dates, from 9 July to 2 September 2026.
+
+Each admitted date $t_i$ ($i=1,\dots,30$) is an origin, and its target is the
+\emph{next available admitted dense date} $t_{i+1}$, not the next calendar day
+and not a weekly bucket.  The gap between origin and target is between one
+and six calendar days (one day for most pairs, three across weekends, up to
+six where intermediate dates fail the density rule).  The design yields 30
+origin--target pairs per model; the last admitted date is a target only.
+
+\subsection{Origin calibration}
+\label{subsec:oos_calibration}
+
+At every origin the four models (Black--Scholes, Heston, Bates and the exact
+affine Bates--Hawkes) are calibrated to the same fixed $8\times 8$
+Chebyshev--Chebyshev (CC) sample of 64 \emph{actual} quotes drawn from the
+origin surface.  The objective is the mean squared price error divided by the
+squared Black--Scholes vega.  Discounting uses the most recent Treasury curve
+dated no later than the origin, fitted with a Nelson--Siegel--Svensson curve.
+
+GLD carries a sponsor fee that accrues against net asset value, so its forward
+is $S e^{(r-q)T}$ with $q = 0.40\%$.  Because every call price used here is
+homogeneous of degree one in $(S,K)$, the carry is applied exactly at the data
+layer through the forward identity
 \begin{equation}
-    \widehat{\boldsymbol{\theta}}_{m,t}
-    =
-    \arg\min_{\boldsymbol{\theta}_m}
-    \mathcal{L}
-    \left(
-        \mathcal{S}_t;
-        \boldsymbol{\theta}_m
-    \right).
+    C(S,K,T;r,q) = e^{-qT}\,C\!\left(S, K e^{qT}, T; r, 0\right),
 \end{equation}
-The calibrated model is then used to produce a forecast of the normalized
-implied-volatility surface at the next observation date,
+that is, strikes and prices are rescaled by $e^{qT}$ and implied volatility
+and vega are recomputed on the rescaled contracts.  The same transformation is
+applied to every surface loaded by the rolling exercise, so calibration,
+pricing and implied volatilities are all $q$-consistent.
+
+The calibration search policy is the following, for every origin.
+\begin{itemize}
+    \item Black--Scholes: bounded scalar minimisation.
+    \item Heston and Bates: a differential-evolution global search followed by
+    local refinement, at every origin.  Bates is in addition compared with the
+    nested current-origin Heston fit (zero jumps), and the lower loss is
+    retained.
+    \item Bates--Hawkes: a differential-evolution search over the jump and
+    Hawkes block with the diffusion parameters held at the current-origin
+    Bates values, followed by full SLSQP refinements from that point and from
+    the Bates-like zero-excitation point; the exact nested Bates candidate is
+    retained if it is better.
+\end{itemize}
+No model receives a warm start from an earlier origin: prior-origin starts are
+opt-in (\texttt{--warm-start}) and off in the corrected run, where Heston and
+Bates were recalibrated cold after an earlier pass had warm-started them.  The
+legacy run instead warm-started Bates--Hawkes only.  Each result records
+whether a warm start was used and its source (\texttt{warm\_start\_used},
+\texttt{initialization\_source} or \texttt{warm\_start\_source}).
+
+\subsection{State projection and target pricing}
+\label{subsec:oos_projection}
+
+Structural parameters are frozen at the origin.  Only the latent states are
+moved to the target date along their risk-neutral mean dynamics over the gap
+$\Delta = (t_{i+1}-t_i)/365.25$:
 \begin{equation}
-    \widehat{\mathcal{S}}^{(m)}_{t+1|t}
-    =
-    f_m
-    \left(
-        \widehat{\boldsymbol{\theta}}_{m,t},
-        \mathcal{I}_t
-    \right),
+    v_{t_{i+1}} = \theta + (v_{t_i}-\theta)e^{-\kappa\Delta},
+    \qquad
+    \lambda_{t_{i+1}} = \lambda_\infty + (\lambda_{t_i}-\lambda_\infty)
+    e^{-(\beta-\alpha)\Delta},
+    \quad
+    \lambda_\infty = \frac{\beta\bar{\lambda}}{\beta-\alpha}.
 \end{equation}
-where $\mathcal{I}_t$ is the information set observable at $t$.  No variable
-dated after $t$ is used either in the calibration or in the construction of the
-forecast.
+Every valid call of the \emph{full} target surface (not only 64 nodes) is
+then priced with the target spot and target rates, by COS inversion with 192
+terms (128 for Bates--Hawkes), and converted to Black--Scholes implied
+volatility.  A pricing exception leaves that contract outside the common
+support; it is counted per model in the run manifest rather than dropped
+silently.
 
-Once $\mathcal{S}_{t+1}$ is observed, the forecast error is computed and the
-procedure rolls forward.  The realized surface at $t+1$ can therefore be used
-to recalibrate the model for the subsequent forecast, but it cannot affect the
-already produced $t\rightarrow t+1$ prediction.  Schematically,
-\begin{equation}
-    \mathcal{S}_t
-    \longrightarrow
-    \widehat{\boldsymbol{\theta}}_{m,t}
-    \longrightarrow
-    \widehat{\mathcal{S}}^{(m)}_{t+1|t}
-    \longrightarrow
-    \mathcal{S}_{t+1}
-    \longrightarrow
-    \widehat{\boldsymbol{\theta}}_{m,t+1}.
-\end{equation}
-Consequently, with $N$ observed weekly surfaces, the experiment produces
-$N-1$ genuine out-of-sample forecasts for each competing model.
-
-\subsection{Weekly sampling frequency}
-\label{subsec:weekly_frequency}
-
-In principle, the same design can be implemented at the daily frequency:
-each trading-day surface $\mathcal{S}_t$ can be used to recalibrate the models
-and forecast the surface observed on the following trading day.  A daily
-implementation is statistically attractive because it maximizes the number of
-one-step-ahead observations and more closely mimics a continuously updated
-production system.
-
-The empirical analysis nevertheless adopts a weekly frequency.  This choice is
-primarily computational.  Black--Scholes calibration is inexpensive, whereas
-the repeated constrained calibration of Heston, Bates, and especially the full
-Bates--Hawkes specification is substantially more demanding.  Moving from a
-weekly to a daily design would require approximately five times as many
-chronological recalibrations over the same calendar interval, in addition to
-the repeated construction, filtering, interpolation, and pricing of each
-option surface.  The weekly design therefore preserves the essential
-out-of-sample structure while keeping the full four-model comparison
-computationally tractable.
-
-The sampling rule selects the last available option surface in each
-Friday-ending week.  For the frozen data window used in this study,
-January 2, 2026 through September 2, 2026, this convention identifies 36
-weekly buckets and hence 35 one-week-ahead forecast transitions per model.
-The final observation belongs to the Friday-ending week of September 4 and is
-therefore a partial week when the dataset is frozen on September 2.  If only
-fully completed Friday-ending weeks are retained, the sample through
-August 28, 2026 contains 35 weekly surfaces.
-
-Thus, using all 36 available weekly buckets, the four-model exercise contains
-\begin{equation}
-    35 \times 4 = 140
-\end{equation}
-model-specific out-of-sample forecast origins, before accounting for the
-multiple normalized strike--maturity nodes evaluated at each origin.
-
-\subsection{Common normalized surface}
-\label{subsec:normalized_surface}
-
-Directly comparing raw option contracts across dates is problematic because
-strikes and expirations change through time.  Forecast accuracy is therefore
-evaluated on a fixed normalized grid defined in moneyness and time to maturity.
-For node $j$,
-\begin{equation}
-    x_j =
-    \left(
-        \frac{K_j}{S_t},
-        T_j
-    \right),
-\end{equation}
-where $K_j/S_t$ is moneyness and $T_j$ is maturity expressed in years.
-Observed implied volatilities are interpolated onto this ex-ante grid using only
-the cross-section available on the corresponding observation date.  The same
-grid is then used for all models and all forecast dates.
-
-This normalization separates predictive performance from mechanical changes in
-the list of traded strikes and expirations and permits node-by-node comparison
-of the realized and forecast implied-volatility surfaces.
-
-\subsection{Risk-free term structure and no-look-ahead convention}
-\label{subsec:oos_rates}
-
-The risk-free term structure is supplied from a separate daily U.S. Treasury
-dataset.  At each forecast origin $t$, the procedure selects the most recent
-Treasury curve whose observation date is no later than $t$:
-\begin{equation}
-    d_t^{r}
-    =
-    \max
-    \left\{
-        d :
-        d \leq t,\;
-        d \in \mathcal{D}^{r}
-    \right\}.
-\end{equation}
-Therefore, a Treasury observation published after the forecast origin can never
-enter the calibration or forecast.  Rates for option maturities between quoted
-Treasury tenors are obtained by interpolation of the contemporaneously
-available term structure.  The same no-look-ahead rate curve is used across all
-competing models at a given forecast origin.
-
-\subsection{Benchmarks}
+\subsection{Benchmarks and supports}
 \label{subsec:oos_benchmarks}
 
-Model forecasts are compared with two simple benchmarks.  The first is an
-expanding prevailing-mean forecast.  For each normalized surface node $j$, the
-benchmark at time $t$ is
-\begin{equation}
-    \widehat{\sigma}^{\,\mathrm{Mean}}_{j,t+1|t}
-    =
-    \frac{1}{N_{j,t}}
-    \sum_{\tau \leq t}
-    \sigma_{j,\tau},
-\end{equation}
-where only observations available through $t$ are included.  The benchmark
-therefore evolves through time and does not use the full-sample mean.
+Two benchmarks are scored on the same target contracts.
+\begin{itemize}
+    \item \emph{Origin mean}: the cross-sectional mean implied volatility of
+    the origin surface, a single number applied to every target contract.
+    \item \emph{Persistence}: the origin implied volatilities of the full
+    origin surface, linearly interpolated in normalised
+    (maturity, log-moneyness) coordinates and evaluated at the target
+    contracts (log-moneyness relative to the target spot), strictly inside the
+    convex hull of the origin points, with no extrapolation.
+\end{itemize}
+The two benchmarks do not use the same information as the models.  The
+persistence benchmark interpolates the whole origin surface, on average about
+150 quotes per date (from roughly 70 to over 600 in the legacy run), whereas
+each model is calibrated on the 64 CC nodes only.  Persistence also uses the
+target spot to locate target contracts in moneyness.
 
-The second benchmark is a random-walk forecast,
-\begin{equation}
-    \widehat{\sigma}^{\,\mathrm{RW}}_{j,t+1|t}
-    =
-    \sigma_{j,t},
-\end{equation}
-which assumes that the most recently observed normalized implied-volatility
-surface remains unchanged over the next forecast interval.  This is a useful
-and demanding benchmark for persistent volatility surfaces.
+The \emph{common model support} of a pair is the set of target contracts with
+a finite market implied volatility and finite implied volatilities under all
+four models; the \emph{persistence support} is its subset inside the origin
+convex hull.  In the legacy run the common support contains 4{,}667 target
+observations over the 30 pairs, and the persistence support 4{,}026 of them;
+comparisons with persistence are computed on the persistence support only.
 
-\subsection{Out-of-sample loss and predictive comparison}
+\subsection{Losses and out-of-sample $R^2$}
 \label{subsec:oos_metrics}
 
-For model $m$, node $j$, and target date $t+1$, define the forecast error
+For pair $t$ and contract $j$ the error is
+$e^{(m)}_{j,t} = \sigma^{\mathrm{mkt}}_{j,t} - \widehat{\sigma}^{(m)}_{j,t}$,
+and the date-level loss is
+$\mathrm{MSE}^{(m)}_t = n_t^{-1}\sum_{j} \left(e^{(m)}_{j,t}\right)^2$ over the
+relevant support.  Mean absolute error and root mean squared error are
+reported as equal-weight averages of the date-level values.  The headline
+out-of-sample coefficient of determination is \emph{equal-date}, so that the
+four dates with about 600 target quotes do not dominate the 26 dates with
+fewer than 160:
 \begin{equation}
-    e^{(m)}_{j,t+1}
-    =
-    \sigma_{j,t+1}
-    -
-    \widehat{\sigma}^{(m)}_{j,t+1|t}.
-\end{equation}
-The main loss measures are mean absolute error and root mean squared error,
-computed exclusively from forecasts made before the corresponding target
-surface was observed.
-
-Relative predictive performance is summarized through the out-of-sample
-coefficient of determination,
-\begin{equation}
-    R^2_{\mathrm{OOS},m}
+    R^2_{\mathrm{OOS},m\mid b}
     =
     1 -
-    \frac{
-        \sum_{t,j}
-        \left(
-            \sigma_{j,t+1}
-            -
-            \widehat{\sigma}^{(m)}_{j,t+1|t}
-        \right)^2
-    }{
-        \sum_{t,j}
-        \left(
-            \sigma_{j,t+1}
-            -
-            \widehat{\sigma}^{(\mathrm{bench})}_{j,t+1|t}
-        \right)^2
-    }.
+    \frac{\sum_{t} \mathrm{MSE}^{(m)}_t}{\sum_{t} \mathrm{MSE}^{(b)}_t},
 \end{equation}
-A positive $R^2_{\mathrm{OOS}}$ indicates that the model improves upon the
-chosen benchmark on the common out-of-sample observations, while a negative
-value indicates that the benchmark generates lower squared forecast error.
+where $b$ is the origin-mean benchmark (on the common model support) or the
+persistence benchmark (with both losses on the persistence support).  The code
+also reports the pooled, observation-weighted version.  A positive value means
+that the model has lower loss than the benchmark.
 
-In addition to aggregate losses, cumulative loss differentials can be reported:
-\begin{equation}
-    CL^{(m,b)}_T
-    =
-    \sum_{t \leq T}
-    \left(
-        L^{(b)}_t
-        -
-        L^{(m)}_t
-    \right),
-\end{equation}
-where $b$ denotes the comparator.  An increasing cumulative differential
-therefore indicates periods in which the named stochastic model systematically
-outperforms the benchmark.
+\subsection{Inference}
+\label{subsec:oos_inference}
 
-\subsection{Relation to the frozen-parameter robustness exercise}
-\label{subsec:frozen_robustness}
+Predictive accuracy relative to persistence is assessed with a
+Diebold--Mariano test on the date-level loss differential
+$d_t = \mathrm{MSE}^{(m)}_t - \mathrm{MSE}^{(\mathrm{persist})}_t$.  The
+long-run variance of $\bar d$ is estimated with a Newey--West (Bartlett)
+kernel with $L=\lfloor 4(T/100)^{2/9}\rfloor$ lags ($L=3$ for $T=30$), and the
+statistic $\bar d/\sqrt{\widehat{\mathrm{LRV}}/T}$ is referred to a standard
+normal distribution; with only 30 dates the Harvey--Leybourne--Newbold
+small-sample correction and Student-$t_{T-1}$ critical values are reported
+alongside; they are computed by Complete-Valuation/src/build\_dated\_paper\_audit.py (stage \texttt{oos}).
 
-The rolling exercise should be distinguished from a frozen-parameter holdout
-test.  In the rolling design, every new observed surface becomes part of the
-information set and the models are recalibrated before the next forecast.  This
-is intended to mimic the operation of a model that is regularly updated in
-practice.  A frozen-parameter experiment instead estimates the model at a
-single historical cutoff and retains those parameters throughout a subsequent
-holdout interval.  The latter asks whether one calibration remains structurally
-stable over a long horizon, whereas the rolling exercise asks which model
-delivers the best repeated real-time one-step-ahead forecasts.
+\subsection{Results of the legacy run and status of the corrected run}
+\label{subsec:oos_results}
 
-The rolling weekly validation is therefore treated as the primary predictive
-test, while a longer frozen-parameter holdout can be retained as a separate
-robustness and parameter-stability exercise.
+The legacy run of September 2026 used $q=0$ and gave Bates--Hawkes alone a
+warm start from earlier origins.  On 30 pairs and 4{,}667 common target
+observations (4{,}026 on the persistence support) \textbf{no model beat
+persistence}.  The equal-date $R^2_{\mathrm{OOS}}$ against persistence was
+$-268.5\%$ for Black--Scholes, $-27.2\%$ for Heston, $-12.9\%$ for Bates and
+$-3.7\%$ for Bates--Hawkes; against the origin mean it was $-2.6\%$, $66.1\%$,
+$73.0\%$ and $75.8\%$.  Bates--Hawkes had a lower loss than persistence on 14
+of the 30 dates.  Applying the Diebold--Mariano test above to the legacy
+date-level losses (the legacy \texttt{date\_metrics.csv} in
+\texttt{outputs/paper\_audit\_inputs\_20260907/}) gives $5.30$ for Black--Scholes, $2.79$ for Heston, $2.16$ for Bates and $0.68$
+for Bates--Hawkes (positive: persistence more accurate; HLN-corrected $4.68$,
+$2.46$, $1.91$, $0.60$).  Persistence is significantly more accurate than
+Black--Scholes and Heston at the 5\% level, and than Bates under the normal
+reference only; the Bates--Hawkes difference is not significant.  The legacy
+exercise therefore supports, at best, that Bates--Hawkes is statistically
+indistinguishable from the persistence benchmark, which itself uses more
+origin information than the models.  An exploratory paired block bootstrap of
+the Bates--Hawkes minus Bates daily MSE is stored in
+\texttt{oos\_uncertainty.json} of the September audit
+(\texttt{outputs/paper\_audit\_20260907/}).
 
-\subsection{Data-availability caveat for retrospective IBKR reconstruction}
+\OOSHookCheck The corrected run ($q = 0.40\%$, the calibration policy above, pricing
+failures counted) covers \OOSForecastOrigins{} origins and
+\OOSCommonTargetObservations{} common target observations
+(\OOSPersistenceTargetObservations{} on the persistence support).  Its
+equal-date $R^2_{\mathrm{OOS}}$ against persistence is \OOSRTwoPersistBS{}
+(Black--Scholes), \OOSRTwoPersistH{} (Heston), \OOSRTwoPersistB{} (Bates) and
+\OOSRTwoPersistW{} (Bates--Hawkes), with Diebold--Mariano statistics
+\OOSDMPersistBS{}, \OOSDMPersistH{}, \OOSDMPersistB{} and \OOSDMPersistW{};
+Bates--Hawkes beats persistence on \OOSHawkesDatesBeatPersist{} dates.  The
+table rows are produced by the code in
+\texttt{../img/diagnostics\_ibkr/oos\_table\_rows.tex}.
+
+\subsection{Calibration fragility}
+\label{subsec:oos_fragility}
+
+The single-date calibrations behind these comparisons are fragile, and the
+parameters should not be read as precise estimates.  On the 2 September 2026
+CC sample with $q=0.40\%$ the Feller condition $2\kappa\theta \ge \xi^2$,
+imposed as a hard constraint, binds at the optimum for Bates and
+Bates--Hawkes (gap of order $10^{-8}$) and is within 0.3\% of binding for
+Heston; relaxing it lowers the Heston loss by about 68\%.  The mean-reversion
+speed is weakly identified: re-optimising the other Heston parameters at fixed
+$\kappa$ keeps the loss within 3\% of the optimum for $\kappa\in[2,4]$.  The
+jump and Hawkes parameters are not individually identified from 64 calls;
+only their combined effect on the smile is.
+
+\subsection{Other modes and data-availability caveat}
 \label{subsec:ibkr_caveat}
 
-A retrospective option-surface study must also respect the historical-data
-coverage of the data vendor.  Interactive Brokers does not provide historical
-data for expired option contracts.  Consequently, a complete January--September
-2026 option universe cannot necessarily be reconstructed retrospectively in
-September from IBKR alone, because many short-dated contracts traded earlier in
-the year have already expired.  Historical bars for contracts that remain
-active can still be used when available, but such a backfill is mechanically
-tilted toward longer-dated options.
+\texttt{oos\_validation.py} also offers a fixed-origin stress mode in which
+structural parameters are frozen at one origin and only the states are
+projected over each target gap; it is not part of the results above.
 
-For this reason, historical IBKR backfills should be accompanied by a
-date-by-date coverage audit.  Going forward, the preferred procedure is to save
-each complete weekly option-chain snapshot locally when it is observed.  This
-creates a permanent sequence of point-in-time surfaces and avoids survivorship
-bias caused by the later disappearance of expired contracts.
+Interactive Brokers does not provide historical data for expired option
+contracts, so a retrospective reconstruction is mechanically tilted towards
+longer-dated options.  Coverage is therefore audited date by date
+(\texttt{audit\_market\_data.py}) and dates that fail the density rule,
+including sparse reconstructed dates, are excluded from this exercise.

@@ -1,0 +1,24 @@
+\begin{table}[H]
+\centering
+\caption{GARCH(1,1), Student-$t$ GARCH(1,1), and GJR-GARCH(1,1,1)-$t$ estimates with residual diagnostics for gold and silver daily returns}
+\label{tab:garch-comparison}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llccccccccc}
+\toprule
+Asset & Model & $\hat{\alpha}$ & $\hat{\gamma}$ & $\hat{\beta}$ & $\hat{\nu}$ & Persistence & Log-lik. & BIC & LB$_{10}(z)$ $p$ & LB$_{10}(z^2)$ $p$ \\
+\midrule
+Gold & GARCH(1,1)-N & 0.0514 & -- & 0.9380 & -- & 0.9895 & -6698.9 & 13431.7 & 0.968 & 0.835 \\
+Gold & GARCH(1,1)-t & 0.0403 & -- & 0.9537 & 5.21 & 0.9939 & -6535.3 & 13112.8 & 0.973 & 0.068 \\
+Gold & GJR-GARCH(1,1,1)-t & 0.0564 & -0.0295 & 0.9539 & 5.20 & 0.9956 & -6529.2 & 13109.1 & 0.950 & 0.001 \\
+Silver & GARCH(1,1)-N & 0.0550 & -- & 0.9372 & -- & 0.9922 & -9357.8 & 18749.4 & 0.227 & 0.045 \\
+Silver & GARCH(1,1)-t & 0.0351 & -- & 0.9619 & 4.41 & 0.9970 & -9149.5 & 18341.3 & 0.223 & 0.000 \\
+Silver & GJR-GARCH(1,1,1)-t & 0.0498 & -0.0251 & 0.9610 & 4.43 & 0.9982 & -9144.2 & 18339.1 & 0.161 & 0.000 \\
+\bottomrule
+\end{tabular}%
+}
+\vspace{0.2cm}
+\begin{minipage}{0.9\textwidth}
+\footnotesize
+\textit{Notes}: Returns in percentage points, constant mean. $\hat{\gamma}$ is the GJR leverage coefficient on negative shocks and $\hat{\nu}$ the Student-$t$ degrees of freedom. Persistence is $\hat{\alpha}+\hat{\gamma}/2+\hat{\beta}$. LB$_{10}(z)$ and LB$_{10}(z^2)$ report Ljung--Box $p$-values at 10 lags for standardized residuals and squared standardized residuals (lag-20 statistics are in the CSV output). The conditional-volatility figures and variance forecasts are based on the Gaussian GARCH(1,1) specification.
+\end{minipage}
+\end{table}

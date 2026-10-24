@@ -38,10 +38,20 @@ Inputs expected from the Team 8 repository:
     data/processed/full_surfaces/GLD_<DATE>_eligible_adaptive_surface.csv
     outputs/sampling/<DATE>/sample_CC_64.csv
     outputs/calibrations/CC/<DATE>/
+        calibration_surface.csv
         black_scholes.json
         heston.json
         bates.json
         full_bates_hawkes.json
+
+GLD carry (24 Oct 2026 correction): the sponsor fee q = 0.40% is applied
+exactly through C(S,K;q) = exp(-qT) C(S, K exp(qT); 0) (``gld_carry``), the
+same forward-equivalent surface used by ``calibrate_surface.py``.  Prices and
+price errors are reported in USD for the quoted contracts; implied
+volatilities are the q-consistent ones.  Simulated paths use drift r - q and
+the corrected engines of Complete-Valuation ``gold_paths.py`` (full
+truncation with an unclipped variance state, exact Hawkes intensity integral
+per step, N(n mu_J, n sigma_J^2) jump sizes).
 
 Example:
     python src/make_missing_ibkr_figures.py --date 2026-09-02
@@ -69,6 +79,7 @@ from BnS import BnS
 from Heston import Heston
 from Bates import Bates
 from BatesHawkesExact import BatesHawkesExact
+from gld_carry import APPLIED_COLUMN, GLD_EXPENSE_RATIO, forward_equivalent_surface
 
 
 IV_CMAP = "viridis"
@@ -199,6 +210,23 @@ def get_param(payload: dict[str, Any], *names: str, default: float | None = None
     raise KeyError(f"None of {names} found in parameters keys {list(params.keys())}")
 
 
+def _dividend_yield(frame: pd.DataFrame) -> float:
+    """Carry already applied to a forward-equivalent surface (0 if none)."""
+    if APPLIED_COLUMN not in frame.columns:
+        return 0.0
+    values = pd.to_numeric(frame[APPLIED_COLUMN], errors="coerce").unique()
+    if len(values) != 1 or not np.isfinite(values[0]):
+        raise ValueError(f"Inconsistent {APPLIED_COLUMN} values: {values}")
+    return float(values[0])
+
+
+def _quoted_strikes(frame: pd.DataFrame) -> pd.DataFrame:
+    """Plot exchange strikes; implied volatilities stay q-consistent."""
+    if "K_quoted" in frame.columns:
+        return frame.assign(K=frame["K_quoted"])
+    return frame
+
+
 def _pct_colorbar(cbar) -> None:
     cbar.ax.yaxis.set_major_formatter(
         FuncFormatter(lambda x, pos: f"{100.0 * x:.0f}")
@@ -252,8 +280,18 @@ def validate_current_calibration_sample(
             "CURRENT adaptive CC sample before generating article figures."
         )
 
+    frozen_raw = pd.read_csv(frozen_path)
+    frozen_q = _dividend_yield(frozen_raw)
+    sample_q = _dividend_yield(sample)
+    if not np.isclose(frozen_q, sample_q, rtol=0.0, atol=1e-12):
+        raise RuntimeError(
+            f"Calibration surface was built with dividend yield {frozen_q}, "
+            f"but figures were requested with {sample_q}. Recalibrate with "
+            "calibrate_surface.py --dividend-yield or pass the matching value."
+        )
+
     current = _sample_signature(sample)
-    frozen = _sample_signature(pd.read_csv(frozen_path))
+    frozen = _sample_signature(frozen_raw)
 
     if current.shape != frozen.shape or not np.allclose(
         current.to_numpy(dtype=float),
@@ -272,10 +310,13 @@ def clean_generated_diagnostics(out_dir: Path) -> int:
     """Remove stale diagnostics so no old-data PNG survives this run."""
     removed = 0
 
-    # This folder is dedicated to generated diagnostics.
-    for path in out_dir.glob("*.png"):
-        path.unlink()
-        removed += 1
+    # Only figures produced by this script; OOS figures in the same folder
+    # (e.g. online_welch_goyal_cumulative.png) belong to oos_validation.py.
+    for name in TARGET_NON_OOS_PNGS:
+        path = out_dir / name
+        if path.is_file():
+            path.unlink()
+            removed += 1
 
     for pattern in (
         "article_numbers.tex",
@@ -593,128 +634,99 @@ def plot_return_normality(gld_path: Path, out: Path) -> dict[str, float]:
     }
 
 
-def _vector_full_trunc_cir(v, kappa, theta, xi, dt, z):
-    v_pos = np.maximum(v, 0.0)
-    vn = v + kappa * (theta - v_pos) * dt + xi * np.sqrt(v_pos) * np.sqrt(dt) * z
-    return np.maximum(vn, 0.0)
+# Path engines mirror Complete-Valuation src/barrick_unified/gold_paths.py:
+# full truncation (Lord, Koekkoek and van Dijk, 2010) with the stored variance
+# state left unclipped and only max(v, 0) entering drift and diffusion; the
+# Hawkes intensity decays exactly between steps and the step jump count is
+# Poisson with the exact integrated intensity, which also compensates the
+# drift; n jumps have log size N(n mu_J, n sigma_J^2).  Random numbers are drawn
+# in the same order as gold_paths, so equal seeds give equal paths.  ``drift``
+# is r - q.  Arrays are (n_steps + 1, n_paths).
 
 
-def simulate_black_scholes(spot, sigma, rate, years, n_steps, n_paths, seed):
+def _jump_log(rng, counts, mu_j, sigma_j):
+    return counts * mu_j + np.sqrt(counts) * sigma_j * rng.standard_normal(counts.shape[0])
+
+
+def _sv_paths(spot, v0, kappa, theta, xi, rho, drift, years, n_steps, n_paths, seed, jump_step=None):
+    """Shared Euler loop; ``jump_step(rng, t) -> (jump_log, compensator)``."""
+    if not -1.0 <= rho <= 1.0:
+        raise ValueError("rho must lie in [-1, 1]")
     rng = np.random.default_rng(seed)
     dt = years / n_steps
-    s = np.empty((n_steps + 1, n_paths), dtype=float)
-    s[0] = spot
-    for t in range(n_steps):
-        z = rng.standard_normal(n_paths)
-        s[t + 1] = s[t] * np.exp((rate - 0.5 * sigma**2) * dt + sigma * np.sqrt(dt) * z)
-    return {"S": s}
-
-
-def simulate_heston(spot, v0, kappa, theta, xi, rho, rate, years, n_steps, n_paths, seed):
-    rng = np.random.default_rng(seed)
-    dt = years / n_steps
-    s = np.empty((n_steps + 1, n_paths), dtype=float)
+    root_dt = np.sqrt(dt)
+    log_s = np.zeros((n_steps + 1, n_paths), dtype=float)
     v = np.empty((n_steps + 1, n_paths), dtype=float)
-    s[0] = spot
-    v[0] = max(v0, 1e-8)
-
+    v[0] = v0
     for t in range(n_steps):
-        z1 = rng.standard_normal(n_paths)
-        z2 = rng.standard_normal(n_paths)
-        zv = z1
-        zs = rho * z1 + np.sqrt(max(1.0 - rho**2, 0.0)) * z2
+        z_s = rng.standard_normal(n_paths)
+        z_v = rho * z_s + np.sqrt(max(0.0, 1.0 - rho * rho)) * rng.standard_normal(n_paths)
+        v_pos = np.maximum(v[t], 0.0)
+        jumps, compensator = (0.0, 0.0) if jump_step is None else jump_step(rng, t)
+        log_s[t + 1] = (
+            log_s[t]
+            + (drift - 0.5 * v_pos) * dt
+            - compensator
+            + np.sqrt(v_pos) * root_dt * z_s
+            + jumps
+        )
+        # Full truncation: the stored state may become negative.
+        v[t + 1] = v[t] + kappa * (theta - v_pos) * dt + xi * np.sqrt(v_pos) * root_dt * z_v
+    return spot * np.exp(log_s), v
 
-        v[t + 1] = _vector_full_trunc_cir(v[t], kappa, theta, xi, dt, zv)
-        vt = np.maximum(v[t], 0.0)
-        s[t + 1] = s[t] * np.exp((rate - 0.5 * vt) * dt + np.sqrt(vt * dt) * zs)
 
+def simulate_black_scholes(spot, sigma, drift, years, n_steps, n_paths, seed):
+    rng = np.random.default_rng(seed)
+    dt = years / n_steps
+    shocks = rng.standard_normal((n_paths, n_steps))
+    increments = (drift - 0.5 * sigma * sigma) * dt + sigma * np.sqrt(dt) * shocks
+    log_s = np.concatenate([np.zeros((n_paths, 1)), np.cumsum(increments, axis=1)], axis=1)
+    return {"S": (spot * np.exp(log_s)).T}
+
+
+def simulate_heston(spot, v0, kappa, theta, xi, rho, drift, years, n_steps, n_paths, seed):
+    s, v = _sv_paths(spot, v0, kappa, theta, xi, rho, drift, years, n_steps, n_paths, seed)
     return {"S": s, "V": v}
 
 
-def simulate_bates(spot, v0, kappa, theta, xi, rho, lambd, mu_j, sigma_j, rate, years, n_steps, n_paths, seed):
-    rng = np.random.default_rng(seed)
+def simulate_bates(spot, v0, kappa, theta, xi, rho, lambd, mu_j, sigma_j, drift, years, n_steps, n_paths, seed):
+    if lambd < 0 or sigma_j < 0:
+        raise ValueError("jump intensity and dispersion must be non-negative")
     dt = years / n_steps
-    s = np.empty((n_steps + 1, n_paths), dtype=float)
-    v = np.empty((n_steps + 1, n_paths), dtype=float)
-    n_cum = np.empty((n_steps + 1, n_paths), dtype=float)
-    lam_path = np.empty((n_steps + 1, n_paths), dtype=float)
+    mean_jump = np.exp(mu_j + 0.5 * sigma_j**2) - 1.0
+    n_cum = np.zeros((n_steps + 1, n_paths), dtype=float)
 
-    s[0] = spot
-    v[0] = max(v0, 1e-8)
-    n_cum[0] = 0.0
-    lam_path[:] = lambd
+    def jump_step(rng, t):
+        counts = rng.poisson(lambd * dt, n_paths)
+        n_cum[t + 1] = n_cum[t] + counts
+        return _jump_log(rng, counts, mu_j, sigma_j), lambd * mean_jump * dt
 
-    # Risk-neutral compensator for multiplicative lognormal jumps
-    k_jump = np.exp(mu_j + 0.5 * sigma_j**2) - 1.0
-
-    for t in range(n_steps):
-        z1 = rng.standard_normal(n_paths)
-        z2 = rng.standard_normal(n_paths)
-        zv = z1
-        zs = rho * z1 + np.sqrt(max(1.0 - rho**2, 0.0)) * z2
-
-        v[t + 1] = _vector_full_trunc_cir(v[t], kappa, theta, xi, dt, zv)
-        vt = np.maximum(v[t], 0.0)
-
-        n = rng.poisson(lam=lambd * dt, size=n_paths)
-        jump_log = np.where(
-            n > 0,
-            n * mu_j + np.sqrt(np.maximum(n, 0.0)) * sigma_j * rng.standard_normal(n_paths),
-            0.0,
-        )
-
-        drift = (rate - lambd * k_jump - 0.5 * vt) * dt
-        diff = np.sqrt(vt * dt) * zs
-        s[t + 1] = s[t] * np.exp(drift + diff + jump_log)
-
-        n_cum[t + 1] = n_cum[t] + n
-
-    return {"S": s, "V": v, "N": n_cum, "Lambda": lam_path}
+    s, v = _sv_paths(spot, v0, kappa, theta, xi, rho, drift, years, n_steps, n_paths, seed, jump_step)
+    lam = np.full((n_steps + 1, n_paths), float(lambd))
+    return {"S": s, "V": v, "N": n_cum, "Lambda": lam}
 
 
 def simulate_bates_hawkes(spot, v0, kappa, theta, xi, rho,
-                          lambda0, lambda_bar, branching_ratio, beta,
-                          mu_j, sigma_j, rate, years, n_steps, n_paths, seed):
-    rng = np.random.default_rng(seed)
+                          lambda0, lambda_bar, alpha, beta,
+                          mu_j, sigma_j, drift, years, n_steps, n_paths, seed):
+    if beta <= 0 or alpha < 0 or sigma_j < 0 or not alpha < beta:
+        raise ValueError("invalid or non-stationary Hawkes parameters")
     dt = years / n_steps
-    alpha = branching_ratio * beta
-
-    s = np.empty((n_steps + 1, n_paths), dtype=float)
-    v = np.empty((n_steps + 1, n_paths), dtype=float)
+    mean_jump = np.exp(mu_j + 0.5 * sigma_j**2) - 1.0
+    decay = np.exp(-beta * dt)
     lam = np.empty((n_steps + 1, n_paths), dtype=float)
-    n_cum = np.empty((n_steps + 1, n_paths), dtype=float)
+    lam[0] = max(lambda0, 0.0)
+    n_cum = np.zeros((n_steps + 1, n_paths), dtype=float)
 
-    s[0] = spot
-    v[0] = max(v0, 1e-8)
-    lam[0] = max(lambda0, 1e-10)
-    n_cum[0] = 0.0
+    def jump_step(rng, t):
+        # Exact integral of the deterministic decay over the step.
+        integrated = lambda_bar * dt + (lam[t] - lambda_bar) * (1.0 - decay) / beta
+        counts = rng.poisson(integrated)
+        lam[t + 1] = lambda_bar + (lam[t] - lambda_bar) * decay + alpha * counts
+        n_cum[t + 1] = n_cum[t] + counts
+        return _jump_log(rng, counts, mu_j, sigma_j), integrated * mean_jump
 
-    base_comp = np.exp(mu_j + 0.5 * sigma_j**2) - 1.0
-
-    for t in range(n_steps):
-        z1 = rng.standard_normal(n_paths)
-        z2 = rng.standard_normal(n_paths)
-        zv = z1
-        zs = rho * z1 + np.sqrt(max(1.0 - rho**2, 0.0)) * z2
-
-        v[t + 1] = _vector_full_trunc_cir(v[t], kappa, theta, xi, dt, zv)
-        vt = np.maximum(v[t], 0.0)
-
-        lam_curr = np.maximum(lam[t], 1e-10)
-        n = rng.poisson(lam=lam_curr * dt, size=n_paths)
-        jump_log = np.where(
-            n > 0,
-            n * mu_j + np.sqrt(np.maximum(n, 0.0)) * sigma_j * rng.standard_normal(n_paths),
-            0.0,
-        )
-
-        drift = (rate - lam_curr * base_comp - 0.5 * vt) * dt
-        diff = np.sqrt(vt * dt) * zs
-        s[t + 1] = s[t] * np.exp(drift + diff + jump_log)
-
-        lam[t + 1] = np.maximum(lam[t] + beta * (lambda_bar - lam[t]) * dt + alpha * n, 1e-10)
-        n_cum[t + 1] = n_cum[t] + n
-
+    s, v = _sv_paths(spot, v0, kappa, theta, xi, rho, drift, years, n_steps, n_paths, seed, jump_step)
     return {"S": s, "V": v, "N": n_cum, "Lambda": lam}
 
 
@@ -854,6 +866,14 @@ def compute_model_diagnostics(
     if "moneyness" not in base.columns:
         base["moneyness"] = pd.to_numeric(base["K"], errors="coerce") / float(spot)
 
+    # Prices are computed on the forward-equivalent (q = 0) contracts; USD
+    # prices of the quoted contracts follow from C(S,K;q) = e^{-qT} C(S,K e^{qT};0).
+    carry = np.exp(
+        -_dividend_yield(base) * pd.to_numeric(base["T"], errors="coerce").to_numpy(float)
+    )
+    quoted_column = "price_quoted" if "price_quoted" in base.columns else "price"
+    market_price_usd = pd.to_numeric(base[quoted_column], errors="coerce").to_numpy(float)
+
     results: dict[str, pd.DataFrame] = {}
 
     for model_name in ["Black-Scholes", "Heston", "Bates", "Bates-Hawkes"]:
@@ -896,9 +916,9 @@ def compute_model_diagnostics(
         frame["model_iv"] = model_iv
         # Paper convention: market IV minus model IV.
         frame["iv_residual"] = frame["market_iv"] - frame["model_iv"]
-        frame["price_residual"] = (
-            pd.to_numeric(frame["price"], errors="coerce") - frame["model_price"]
-        )
+        frame["market_price_usd"] = market_price_usd
+        frame["model_price_usd"] = carry * model_price
+        frame["price_residual"] = frame["market_price_usd"] - frame["model_price_usd"]
         results[model_name] = frame
 
     return results
@@ -909,8 +929,8 @@ def model_error_summary(
 ) -> pd.DataFrame:
     rows = []
     for model_name, frame in diagnostics.items():
-        market_price = pd.to_numeric(frame["price"], errors="coerce").to_numpy(float)
-        model_price = pd.to_numeric(frame["model_price"], errors="coerce").to_numpy(float)
+        market_price = pd.to_numeric(frame["market_price_usd"], errors="coerce").to_numpy(float)
+        model_price = pd.to_numeric(frame["model_price_usd"], errors="coerce").to_numpy(float)
         market_iv = pd.to_numeric(frame["market_iv"], errors="coerce").to_numpy(float)
         model_iv = pd.to_numeric(frame["model_iv"], errors="coerce").to_numpy(float)
 
@@ -1049,6 +1069,7 @@ def plot_smile_slices(
     cos_N: int = 192,
 ) -> None:
     maturities = _representative_maturities(sample, max_slices=max_slices)
+    q = _dividend_yield(sample)
     n = len(maturities)
     if n == 0:
         raise RuntimeError(f"No maturity slices available for {model_name}.")
@@ -1100,8 +1121,10 @@ def plot_smile_slices(
         )
 
         market_iv = _market_iv_column(group, spot)
-        x_market = group["K"].to_numpy(float) / float(spot)
-        x_grid = k_grid / float(spot)
+        # Forward-equivalent strikes K e^{qT} back to quoted moneyness.
+        carry = np.exp(-q * T)
+        x_market = carry * group["K"].to_numpy(float) / float(spot)
+        x_grid = carry * k_grid / float(spot)
 
         ax.scatter(
             x_market,
@@ -1204,6 +1227,7 @@ def plot_hawkes_exact_vs_proxy(
     hw = payloads["bates_hawkes"]
 
     sigma = get_param(bs, "sigma")
+    q = _dividend_yield(sample)  # quoted strikes below, so price with q directly
     lambda0 = get_param(hw, "lambda0")
     lambda_bar = get_param(hw, "lambda_bar")
     branching = get_param(hw, "branching_ratio")
@@ -1230,7 +1254,7 @@ def plot_hawkes_exact_vs_proxy(
         mu_j,
         sigma_j,
         r,
-        0.0,
+        q,
         N=192,
     )
 
@@ -1247,7 +1271,7 @@ def plot_hawkes_exact_vs_proxy(
         mu_j,
         sigma_j,
         r,
-        0.0,
+        q,
         N=192,
     )
 
@@ -1282,7 +1306,7 @@ def plot_hawkes_exact_vs_proxy(
             mu_j,
             sigma_j,
             r,
-            0.0,
+            q,
             N=160,
         )
         atm_prices.append(float(np.asarray(p).ravel()[0]))
@@ -1307,9 +1331,9 @@ def plot_bates_hawkes_vs_bates(
     bates = diagnostics["Bates"].copy()
     hawkes = diagnostics["Bates-Hawkes"].copy()
 
-    market = pd.to_numeric(bates["price"], errors="coerce").to_numpy(float)
-    b_price = pd.to_numeric(bates["model_price"], errors="coerce").to_numpy(float)
-    h_price = pd.to_numeric(hawkes["model_price"], errors="coerce").to_numpy(float)
+    market = pd.to_numeric(bates["market_price_usd"], errors="coerce").to_numpy(float)
+    b_price = pd.to_numeric(bates["model_price_usd"], errors="coerce").to_numpy(float)
+    h_price = pd.to_numeric(hawkes["model_price_usd"], errors="coerce").to_numpy(float)
 
     fig, axes = plt.subplots(1, 2, figsize=(12.0, 5.0))
 
@@ -1422,6 +1446,7 @@ def write_article_numbers_tex(
     payloads: dict[str, dict[str, Any]],
     error_summary: pd.DataFrame,
     path_summary_df: pd.DataFrame,
+    dividend_yield: float = 0.0,
 ) -> None:
     """Write LaTeX macros so the article can ingest frozen numerical outputs."""
     errors = error_summary.set_index("model").to_dict(orient="index")
@@ -1447,6 +1472,7 @@ def write_article_numbers_tex(
         return _fmt(paths.get(model, {}).get(field, np.nan), digits)
 
     macros = {
+        "DividendYieldPct": _fmt(100.0 * dividend_yield, 2),
         "ReturnN": str(int(normality_stats.get("n", 0))),
         "ReturnSkew": _fmt(normality_stats.get("skewness"), 4),
         "ReturnExKurt": _fmt(normality_stats.get("excess_kurtosis"), 4),
@@ -1650,11 +1676,15 @@ def plot_volatility_states(time_grid, sims: dict[str, dict[str, np.ndarray]], ou
         v = sims[k]["V"]
         for i in range(min(n_show, v.shape[1])):
             ax.plot(time_grid, v[:, i], alpha=0.95)
+        ax.axhline(0.0, color="black", linewidth=0.8)
         ax.set_title(title)
         ax.set_xlabel("Years")
         ax.grid(True, alpha=0.25)
     axes[0].set_ylabel("Variance state")
-    fig.suptitle("Stochastic-volatility paths on a common scale")
+    fig.suptitle(
+        "Stochastic-volatility paths on a common scale "
+        "(full truncation: stored state unclipped, max(v, 0) drives the dynamics)"
+    )
     fig.tight_layout()
     save_png(fig, out, dpi=220, bbox_inches="tight")
     plt.close(fig)
@@ -1714,6 +1744,8 @@ def build_simulations(sample_cc: pd.DataFrame, model_payloads: dict[str, dict[st
                       years: float, n_steps: int, n_paths: int, seed: int) -> tuple[np.ndarray, dict[str, dict[str, np.ndarray]], pd.DataFrame]:
     spot = infer_spot(sample_cc)
     rate = infer_constant_rate(sample_cc)
+    dividend_yield = _dividend_yield(sample_cc)
+    drift = rate - dividend_yield
     time_grid = np.linspace(0.0, years, n_steps + 1)
 
     bs = model_payloads["black_scholes"]
@@ -1747,21 +1779,23 @@ def build_simulations(sample_cc: pd.DataFrame, model_payloads: dict[str, dict[st
     hw_lambda_bar = get_param(hawkes, "lambda_bar")
     hw_branch = get_param(hawkes, "branching_ratio")
     hw_beta = get_param(hawkes, "beta")
+    hw_alpha = get_param(hawkes, "alpha", default=hw_branch * hw_beta)
     hw_mu_j = get_param(hawkes, "mu_J")
     hw_sigma_j = get_param(hawkes, "sigma_J")
 
     sims = {
-        "Black-Scholes": simulate_black_scholes(spot, sigma_bs, rate, years, n_steps, n_paths, seed + 10),
-        "Heston": simulate_heston(spot, h_v0, h_kappa, h_theta, h_xi, h_rho, rate, years, n_steps, n_paths, seed + 20),
-        "Bates": simulate_bates(spot, b_v0, b_kappa, b_theta, b_xi, b_rho, b_lambd, b_mu_j, b_sigma_j, rate, years, n_steps, n_paths, seed + 30),
+        "Black-Scholes": simulate_black_scholes(spot, sigma_bs, drift, years, n_steps, n_paths, seed + 10),
+        "Heston": simulate_heston(spot, h_v0, h_kappa, h_theta, h_xi, h_rho, drift, years, n_steps, n_paths, seed + 20),
+        "Bates": simulate_bates(spot, b_v0, b_kappa, b_theta, b_xi, b_rho, b_lambd, b_mu_j, b_sigma_j, drift, years, n_steps, n_paths, seed + 30),
         "Bates-Hawkes": simulate_bates_hawkes(spot, hw_v0, hw_kappa, hw_theta, hw_xi, hw_rho,
-                                              hw_lambda0, hw_lambda_bar, hw_branch, hw_beta,
-                                              hw_mu_j, hw_sigma_j, rate, years, n_steps, n_paths, seed + 40),
+                                              hw_lambda0, hw_lambda_bar, hw_alpha, hw_beta,
+                                              hw_mu_j, hw_sigma_j, drift, years, n_steps, n_paths, seed + 40),
     }
 
     rows = []
     for name, sim in sims.items():
-        row = {"model": name, "spot0": spot, "rate": rate, "years": years, "n_steps": n_steps, "n_paths": n_paths}
+        row = {"model": name, "spot0": spot, "rate": rate, "dividend_yield": dividend_yield,
+               "drift": drift, "years": years, "n_steps": n_steps, "n_paths": n_paths}
         row.update(path_summary(sim))
         rows.append(row)
     summary_df = pd.DataFrame(rows)
@@ -1780,6 +1814,12 @@ def main():
     parser.add_argument("--seed", type=int, default=8)
     parser.add_argument("--min-dte", type=int, default=75)
     parser.add_argument("--out-dir", default="img/diagnostics_ibkr")
+    parser.add_argument(
+        "--dividend-yield",
+        type=float,
+        default=GLD_EXPENSE_RATIO,
+        help="GLD sponsor fee as continuous carry; must match the calibration surface.",
+    )
     args = parser.parse_args()
 
     repo = Path(args.repo_root).resolve()
@@ -1806,8 +1846,9 @@ def main():
     if not calib_dir.exists():
         raise FileNotFoundError(calib_dir)
 
-    full_surface = load_surface(full_surface_path)
-    sample_cc = load_surface(sample_path)
+    # q-consistent forward-equivalent surfaces, exactly as in calibrate_surface.py.
+    full_surface = forward_equivalent_surface(load_surface(full_surface_path), args.dividend_yield)
+    sample_cc = forward_equivalent_surface(load_surface(sample_path), args.dividend_yield)
 
     if args.min_dte < 1:
         raise ValueError("--min-dte must be at least 1 day.")
@@ -1853,7 +1894,13 @@ def main():
         cos_N=192,
     )
     error_summary = model_error_summary(model_diagnostics)
-    error_summary.to_csv(out_dir / "model_error_summary.csv", index=False)
+    error_summary.to_csv(out_dir / "model_error_summary.csv", index=False, lineterminator="\n")
+
+    # Heston, Bates and Bates-Hawkes are nested, so their calibration losses
+    # must be ordered; a violation means a non-optimal fit was retained.
+    losses = [float(model_payloads[k].get("objective", np.nan)) for k in ("heston", "bates", "bates_hawkes")]
+    if not (losses[0] >= losses[1] >= losses[2]):
+        print(f"[WARN] nested losses not ordered (Heston >= Bates >= Bates-Hawkes): {losses}")
     for model_name, frame in model_diagnostics.items():
         slug = model_name.lower().replace("-", "_").replace(" ", "_")
         frame.to_csv(out_dir / f"diagnostics_{slug}.csv", index=False)
@@ -1869,16 +1916,37 @@ def main():
             f"Original error: {exc}"
         ) from exc
 
+    def rel(path: Path) -> str:
+        try:
+            return Path(path).resolve().relative_to(repo).as_posix()
+        except ValueError:
+            return str(path)
+
     manifest = {
         "date": date,
         "strategy": strategy,
-        "repo_root": str(repo),
-        "market_surface_path": str(full_surface_path),
+        "repo_root": ".",
+        "market_surface_path": rel(full_surface_path),
         "market_surface_kind": surface_kind,
         "ibkr_acquisition": "adaptive_all_expiries_moneyness_strike_grid",
-        "sample_path": str(sample_path),
-        "calibration_dir": str(calib_dir),
-        "out_dir": str(out_dir),
+        "sample_path": rel(sample_path),
+        "calibration_dir": rel(calib_dir),
+        "calibration_provenance": {
+            key: {
+                field: payload[field]
+                for field in ("source_calibration", "audit_date", "dividend_yield", "objective")
+                if field in payload
+            }
+            for key, payload in model_payloads.items()
+        },
+        "out_dir": rel(out_dir),
+        "dividend_yield": float(args.dividend_yield),
+        "dividend_yield_method": "forward identity C(S,K;q)=exp(-qT)C(S,K*exp(qT);0)",
+        "price_units": "USD for the quoted contracts",
+        "path_engine": (
+            "mirror of Complete-Valuation gold_paths.py: full truncation, unclipped "
+            "variance state, exact Hawkes intensity integral, drift r - q"
+        ),
         "rate_curve_model": "Nelson-Siegel-Svensson",
         "rate_fit_target": "continuous_rate",
         "official_min_dte": int(args.min_dte),
@@ -1888,8 +1956,12 @@ def main():
 
     # Static / descriptive figures
     plot_treasury_curve(rates_path, pd.Timestamp(date), out_dir / "usd_treasury_curve.png")
-    plot_sampling_comparison(full_surface, sample_cc, out_dir / "sampling_comparison.png")
-    plot_surface_3d(full_surface, sample_cc, out_dir / "volatility_surface_3d.png")
+    plot_sampling_comparison(
+        _quoted_strikes(full_surface), _quoted_strikes(sample_cc), out_dir / "sampling_comparison.png"
+    )
+    plot_surface_3d(
+        _quoted_strikes(full_surface), _quoted_strikes(sample_cc), out_dir / "volatility_surface_3d.png"
+    )
     normality_stats = plot_return_normality(gld_path, out_dir / "gld_return_normality.png")
 
     # Calibration/slicing diagnostics restored from the previous article.
@@ -1985,7 +2057,7 @@ def main():
     plot_bates_jump_states(time_grid, sims["Bates"], out_dir / "bates_poisson_jump_paths.png")
 
     # Useful metadata for the later LaTeX update
-    summary_df.to_csv(out_dir / "terminal_path_stats.csv", index=False)
+    summary_df.to_csv(out_dir / "terminal_path_stats.csv", index=False, lineterminator="\n")
     write_article_percentiles_tex(
         out_dir / "article_percentiles.tex",
         sims,
@@ -1996,9 +2068,14 @@ def main():
         payloads=model_payloads,
         error_summary=error_summary,
         path_summary_df=summary_df,
+        dividend_yield=float(args.dividend_yield),
     )
-    (out_dir / "normality_stats.json").write_text(json.dumps(normality_stats, indent=2), encoding="utf-8")
-    (out_dir / "figure_manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    (out_dir / "normality_stats.json").write_text(
+        json.dumps(normality_stats, indent=2), encoding="utf-8", newline="\n"
+    )
+    (out_dir / "figure_manifest.json").write_text(
+        json.dumps(manifest, indent=2), encoding="utf-8", newline="\n"
+    )
 
     assert_complete_non_oos_set(out_dir)
 

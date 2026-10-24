@@ -2,12 +2,14 @@
 
 \subsubsection{Current terminal distribution and latent-state diagnostics}
 
-The current Team~8 diagnostic simulation uses the 2 September calibration,
-4,096 paths, 260 steps and the GLD level 402.78 USD/share. Its constant
-annual rate is 4.0770\%, as recorded in the diagnostic table. This standalone
-state-law illustration differs from the corporate adapter, which restarts at
-Barrick's realised-price anchor and uses integral-preserving NSS forward rates
-and 8,192 paths. Neither the levels nor the path percentiles are interchangeable.
+The current Team~8 diagnostic simulation uses the 2 September calibration
+with $q=0.40\%$, regenerated on 24 October 2026 with the corrected path
+engines: 4,096 paths, 260 weekly steps over five years and the GLD level
+402.78 USD/share. Its constant annual rate is 4.0770\%, so the drift is
+$r-q=3.6770\%$. This standalone state-law illustration differs from the
+corporate adapter, which starts from the XAUUSD spot of USD~4,391.32/oz at the
+valuation time and uses daily steps, integral-preserving NSS forward rates and
+8,192 paths. Neither the levels nor the path percentiles are interchangeable.
 
 \begin{table}[H]
 \centering
@@ -17,24 +19,28 @@ and 8,192 paths. Neither the levels nor the path percentiles are interchangeable
 \toprule
 Model & Mean & Std & P05 & P50 & P95 & Return skew & Ex. kurt. & Mean jumps \\
 \midrule
-GBM / BS & 490.549 & 289.852 & 160.071 & 423.839 & 1036.482 & 1.743 & 5.708 & 0.000 \\
-Heston & 495.256 & 308.314 & 164.068 & 421.222 & 1087.352 & 2.133 & 9.293 & 0.000 \\
-Bates & 496.912 & 310.039 & 161.053 & 421.499 & 1098.107 & 2.069 & 7.779 & 1.259 \\
-Full Bates--Hawkes & 494.830 & 300.874 & 164.799 & 425.021 & 1063.213 & 1.901 & 6.477 & 5.206 \\
+GBM / BS & 481.438 & 302.612 & 155.071 & 406.941 & 1065.891 & 1.963 & 6.821 & 0.000 \\
+Heston & 483.698 & 316.776 & 143.485 & 415.373 & 1047.567 & 2.419 & 11.587 & 0.000 \\
+Bates & 483.676 & 301.643 & 138.647 & 414.135 & 1042.365 & 1.912 & 6.684 & 8.619 \\
+Full Bates--Hawkes & 487.072 & 442.287 & 140.206 & 404.316 & 1043.533 & 15.209 & 470.483 & 8.346 \\
 \bottomrule
 \end{tabular}
 \caption{Terminal GLD price and simple-return diagnostics regenerated from the
-current Team 8 calibration: 4,096 five-year paths, 260 steps and a fixed seed. The jump
-models mainly alter tail shape and event counts; these levels are not Barrick
+current Team 8 calibration ($q=0.40\%$): 4,096 five-year paths, 260 weekly
+steps and a fixed seed (Article~8 \texttt{terminal\_path\_stats.csv}). The
+jump models mainly alter tail shape and event counts. Full Bates--Hawkes has
+a much fatter right tail: excess return kurtosis 470 and a maximum simple
+return of about 4,007\%, driven by a few clustered jump paths, while its
+P05--P95 range is close to the other models. These levels are not Barrick
 values and are not inputs to the later 8,192-path corporate comparison.}
 \label{tab:t8-terminal-path-stats}
 \end{table}
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.94\textwidth]{../img/publication/71a73206e69bf734_terminal_return_percentiles.png}
+    \includegraphics[width=0.94\textwidth]{../img/publication/14370a1fa55e1d67_terminal_return_percentiles.png}
     \caption{All integer percentiles 0--100 of five-year simple GLD returns in
-    the current Team 8 simulation. The symmetric-log scale retains the
+    the current Team 8 simulation ($q=0.40\%$, corrected engines). The symmetric-log scale retains the
     central distribution while exposing extreme endpoints; the full integer
     percentile tables remain in the source article rather than being repeated
     in the thesis.}
@@ -43,21 +49,24 @@ values and are not inputs to the later 8,192-path corporate comparison.}
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.98\textwidth]{../img/publication/7b3ba1b4f37e8920_volatility_state_paths.png}
-    \caption{Representative annualized stochastic-volatility paths under
-    Heston, Bates and Full Bates--Hawkes on a common scale. The plot verifies
-    that all three richer engines carry a simulated variance state; the jump
-    mechanism does not replace stochastic variance.}
+    \includegraphics[width=0.98\textwidth]{../img/publication/fbaa0a114c49c80a_volatility_state_paths.png}
+    \caption{Representative variance-state paths under Heston, Bates and Full
+    Bates--Hawkes on a common scale ($q=0.40\%$ calibration). Under full
+    truncation the stored state is unclipped and can dip slightly below zero;
+    only $\max(v,0)$ drives the dynamics. The plot verifies that all three
+    richer engines carry a simulated variance state; the jump mechanism does
+    not replace stochastic variance.}
     \label{fig:t8-volatility-state-paths}
 \end{figure}
 
 \begin{figure}[p]
     \centering
-    \includegraphics[width=0.68\textwidth]{../img/publication/6bcd3ce9516c61e5_bates_poisson_jump_paths.png}
+    \includegraphics[width=0.68\textwidth]{../img/publication/3365b35f410bfed1_bates_poisson_jump_paths.png}
 
     \vspace{3mm}
-    \includegraphics[width=0.68\textwidth]{../img/publication/7c81ef63dcb2d5ac_hawkes_jump_paths.png}
-    \caption{Representative jump-state diagnostics. Top: Bates retains a
+    \includegraphics[width=0.68\textwidth]{../img/publication/e5bf0d6a1e149452_hawkes_jump_paths.png}
+    \caption{Representative jump-state diagnostics regenerated from the
+    $q=0.40\%$ calibration with the exact Hawkes intensity integral. Top: Bates retains a
     constant Poisson intensity while cumulative counts evolve independently.
     Bottom: Full Bates--Hawkes intensity rises after arrivals and decays toward
     its baseline, generating clustered event counts. These path displays

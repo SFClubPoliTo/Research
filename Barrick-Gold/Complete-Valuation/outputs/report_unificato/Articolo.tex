@@ -98,23 +98,13 @@
   \end{tcolorbox}
 }
 
-\newcommand{\chapterstatus}[1]{%
-  \begin{tcolorbox}[colback=sflightblue,colframe=sfblue,boxrule=0.5pt,arc=1mm,left=3mm,right=3mm]
-  \small\textbf{Working-draft status.} #1
-  \end{tcolorbox}
-}
-\newcommand{\sourceassetnote}{%
-  \begin{tcolorbox}[colback=white,colframe=black!35,boxrule=0.35pt,arc=1mm,left=3mm,right=3mm]
-  \small\textbf{Asset gate.} Only figures and result tables accepted by the provenance ledger are rendered. Legacy duplicates, raw-data views and unverified outputs remain omitted; selected frozen or regenerated assets are identified in their captions.
-  \end{tcolorbox}
-}
+% Internal editorial status notes are not printed in the reader-facing text.
+\newcommand{\chapterstatus}[1]{}
 \newcommand{\gapbox}[1]{%
   \begin{tcolorbox}[colback=sfgapbg,colframe=sfgap,boxrule=0.6pt,arc=1mm,left=3mm,right=3mm,title={Open evidence gap}]
   \small #1
   \end{tcolorbox}
 }
-\newcommand{\sourcecitation}[1]{\textsuperscript{\textcolor{black!55}{[source audit]}}}
-\newcommand{\sourceref}[1]{\textit{source item}}
 
 \makeatletter
 \newenvironment{references}{%
@@ -164,52 +154,45 @@
 \textbf{Team 8} & Salvatore Gabriele Messina; Alessandro Coco
 \end{tabular}
 }
-\date{TBD --- \textbf{Draft: Not ready for publication}}
+\date{24 October 2026}
 
 \newcommand{\abstracttext}{%
-This study constructs and audits a stochastic valuation architecture for
+% The generated results are input locally here because the title page is set
+% before Chapter 00 defines them globally.
+\begingroup\input{chapters/generated/results_20261024}%
+This study builds and audits a stochastic valuation architecture for
 Barrick Mining Corporation within Starting Finance Club PoliTo Research. Eight
 teams contribute probability, econometrics, Monte Carlo, historical gold
-dynamics, stochastic volatility and jumps, option calibration, purpose-built
-mine forecasts and discounted cash flow. Unification assigns each variable to
-one source authority and links the layers through explicit date, unit, measure
-and accounting contracts. Its central design choice is separation: Black--Scholes/
-GBM, Heston, Bates--Poisson and Full Bates--Hawkes are four Team 8 engines for
-the \emph{gold-price layer} in the frozen baseline. A separate extension fits
-the same model families to copper options and adds three attributable copper
-mines. The price models do not model production or costs.
-Barrick's Q1--Q2 2026 actual production and Cost of Sales form the
-current stub; Team~4 forecasts begin at Q3 and remain explicitly labelled.
-The unified tax, growth, ROIC, stochastic WACC, terminal-value and
-equity-bridge adaptation is common. Team~4's legacy NSS, IV, GBM and
-illustrative stochastic EBITDA artifacts are excluded. In their place, the
-current Team~8 build fits an independent Nelson--Siegel--Svensson curve to
-14 U.S. Treasury tenors dated 2 September 2026. Its 2.0608 basis-point RMSE
-is measured against a continuously compounded par-yield proxy, not a
-bootstrapped zero curve. The same curve supplies option-maturity rates and
-integral-preserving quarterly forward rates. The dense GLD surface contains
-605 eligible calls across 12 expiries and 146 strikes; a fixed Chebyshev sample
-selects 64 actual contracts across eight expiries and 20 strikes.
-Heston has the lowest current in-sample IV RMSE, 49.4881 basis points, against
-97.2107 for Black--Scholes, 54.6273 for Bates--Poisson and 52.9714 for
-Full Bates--Hawkes. The latter is the primary structural scenario because it
-has the lowest date-equal rolling OOS IV RMSE, 65.0507 basis points across
-30 forecast origins and 4,667 common forecasts. No model beats interpolated
-IV-surface persistence. Its current branching ratio is 0.5569, below unity;
-this snapshot does not establish parameter stability across regimes.
-The accepted comparison uses 8,192 paths over 20 quarters and one common WACC shock array. These are artificial scenarios with option-implied shape, restarted at Barrick's Q2 average realised-price anchor of USD~4,417/oz. They do not implement a validated GLD-to-gold basis or a $\mathbb Q$-to-$\mathbb P$ mapping. Physical commodity forecasts, their out-of-sample validation and the operating cash-flow bridge remain prerequisites for a corporate DCF. The market snapshot is 2 September; the anchor quarter ends 30 June.
-Persistent costs grant no additional technology-driven reductions, making
-the assumption prudential relative to otherwise identical efficiency scenarios,
-not a mathematical lower bound on value.
-Component margin and FCFF remain proxies; debt, cash, minorities,
-non-operating assets and other equity adjustments are zero placeholders, and
-the 1,675.51 million-share input is unreconciled. The 86-bar Barrick window and
-August market-context diagnostics are historical, not current calibration evidence. Timestamped
-news and an NLP/ML
-filtration for geopolitical and macroeconomic shocks remain absent.
-Accordingly, the reported distributions are controlled research sensitivities,
-not physical forecasts, confidence intervals, fair values, targets or
-investment advice.}
+dynamics, stochastic volatility and jumps, option calibration, mine-level
+operating forecasts and discounted cash flow; unification assigns each variable
+to one source authority and links the layers through explicit date, unit,
+measure and accounting contracts. The central question is how much the choice
+of gold-price model matters for a discounted operating-margin proxy of Barrick
+when production, costs and discount-rate shocks are held fixed.
+Black--Scholes/GBM, Heston, Bates--Poisson and Full Bates--Hawkes are
+calibrated, with nested refinements, to 64 GLD calls of 2 September 2026
+selected by a Chebyshev design from 605 eligible quotes, with the trust's
+0.40\% sponsor fee treated as carry. Each richer model fits at least as well as
+the model it contains (IV RMSE \CalBSIVRMSE, \CalHIVRMSE, \CalBIVRMSE{} and
+\CalWIVRMSE~bp); calibration fit does not establish predictive or economic
+superiority. The engines drive daily gold paths from the XAUUSD spot of
+USD~4,391.32/oz at the valuation time on a dated clock: Barrick's Q1--Q2 2026
+actuals are excluded and only flows after 2 September 2026, to 31 December
+2030, are valued. Across 8,192 paths the median proxy lies between
+USD~\ValMedianLow{} and \ValMedianHigh~bn for all four models, a spread no
+larger than the numerical sensitivity of a single model
+(USD~\NumericalMedianLow--\NumericalMedianHigh~bn across path counts and
+seeds); the terminal value carries about \TerminalShare\% of the mean. In
+\OosDates{} equal-search rolling repricing tests Full Bates--Hawkes has the
+lowest error, \OosWRMSE~bp, but no model beats the persistence of the
+implied-volatility surface. Three producing copper mines add about
+USD~\CuDeltaLow--\CuDeltaHigh~bn of explicit flows to 2030. The price laws are
+risk-neutral: no GLD-to-gold basis or $\mathbb Q$-to-$\mathbb P$ mapping is
+validated, and mine-level operating uncertainty is not propagated. The proxy
+has no equity bridge, so no per-share value or market comparison is reported.
+The distributions are controlled research sensitivities, not physical
+forecasts, confidence intervals, fair values, targets or investment
+advice.\endgroup}
 
 \makeatletter
 \renewcommand{\maketitle}{%
@@ -241,14 +224,14 @@ investment advice.}
 
 \hypersetup{
   pdftitle={Stochastic Framework for Barrick Mining Corporation Valuation},
-  pdfsubject={LSE-refreshed conditional multi-model valuation with explicit evidence gaps},
+  pdfsubject={Conditional multi-model valuation of Barrick Mining Corporation},
   pdfauthor={Starting Finance Club PoliTo --- Research Area}
 }
 
 \begin{document}
 
 \hypersetup{pageanchor=false}
-\includepdf[pages=1,fitpaper=true,pagecommand={\thispagestyle{empty}\begin{picture}(0,0)\put(225,-240){\makebox(0,0){\colorbox{white}{\textbf{Draft: Not ready for publication --- TBD}}}}\end{picture}}]{Copertina_research.pdf}
+\includepdf[pages=1,fitpaper=true,pagecommand={\thispagestyle{empty}}]{Copertina_research.pdf}
 \clearpage
 \maketitle
 
@@ -380,6 +363,177 @@ Bonn Econ Discussion Papers 15/2001, Theorem~1,
 Sokol, A. and Hansen, N.~R. (2015), \emph{Exponential martingales and changes of
 measure for counting processes}, Stochastic Analysis and Applications 33(5),
 823--843, \href{https://doi.org/10.1080/07362994.2015.1040890}{doi:10.1080/07362994.2015.1040890}.
+
+\bibitem{team7-code}
+D.~D'Amico and P.~Weisz, \emph{Gold, Monetary Regimes, and Volatility Dynamics: From the Gold Standard to Econometric Evidence and Foundations for Heston-Type Models}, supplementary code and reproducibility package, version 1.0.0, Starting Finance Club PoliTo Research, 19 June 2026, \url{https://github.com/StartingFinanceClubPoliTo/Research}.
+
+\bibitem{MessinaSoriano2026}
+S.~G. Messina and N.~Soriano, \emph{High-Frequency Market Making under Avellaneda--Stoikov: Rough Volatility and End-of-Day Inventory Control}, Starting Finance Club PoliTo Research, 2026.
+
+\bibitem{Akaike1974}
+H.~Akaike, A new look at the statistical model identification, \emph{IEEE Transactions on Automatic Control} 19(6), 716--723, 1974.
+
+\bibitem{Applebaum2009}
+D.~Applebaum, \emph{L\'evy Processes and Stochastic Calculus}, 2nd edition, Cambridge University Press, 2009.
+
+\bibitem{barrick-ar-2024}
+Barrick Gold Corporation, \emph{Annual Report 2024}, including the Management's Discussion and Analysis and the definitions of non-GAAP performance measures, 2025.
+
+\bibitem{Bates1996}
+D.~S. Bates, Jumps and stochastic volatility: exchange rate processes implicit in Deutsche Mark options, \emph{Review of Financial Studies} 9(1), 69--107, 1996.
+
+\bibitem{BaurLucey2010}
+D.~G. Baur and B.~M. Lucey, Is gold a hedge or a safe haven? An analysis of stocks, bonds and gold, \emph{Financial Review} 45(2), 217--229, 2010.
+
+\bibitem{BlackScholes1973}
+F.~Black and M.~Scholes, The pricing of options and corporate liabilities, \emph{Journal of Political Economy} 81(3), 637--654, 1973.
+
+\bibitem{Blume1975}
+M.~E. Blume, Betas and their regression tendencies, \emph{Journal of Finance} 30(3), 785--795, 1975.
+
+\bibitem{Bollerslev1986}
+T.~Bollerslev, Generalized autoregressive conditional heteroskedasticity, \emph{Journal of Econometrics} 31(3), 307--327, 1986.
+
+\bibitem{BordoKydland1995}
+M.~D. Bordo and F.~E. Kydland, The gold standard as a rule: an essay in exploration, \emph{Explorations in Economic History} 32(4), 423--464, 1995 (circulated as a Federal Reserve Bank of Cleveland working paper in 1992).
+
+\bibitem{BordoRockoff1996}
+M.~D. Bordo and H.~Rockoff, The gold standard as a ``good housekeeping seal of approval'', \emph{Journal of Economic History} 56(2), 389--428, 1996.
+
+\bibitem{BoxJenkins1970}
+G.~E.~P. Box and G.~M. Jenkins, \emph{Time Series Analysis: Forecasting and Control}, Holden-Day, San Francisco, 1970.
+
+\bibitem{BoxMuller1958}
+G.~E.~P. Box and M.~E. Muller, A note on the generation of random normal deviates, \emph{Annals of Mathematical Statistics} 29(2), 610--611, 1958.
+
+\bibitem{BoydVandenberghe2004}
+S.~Boyd and L.~Vandenberghe, \emph{Convex Optimization}, Cambridge University Press, 2004.
+
+\bibitem{CampbellThompson2008}
+J.~Y. Campbell and S.~B. Thompson, Predicting excess stock returns out of sample: can anything beat the historical average?, \emph{Review of Financial Studies} 21(4), 1509--1531, 2008.
+
+\bibitem{CarrMadan1999}
+P.~Carr and D.~B. Madan, Option valuation using the fast Fourier transform, \emph{Journal of Computational Finance} 2(4), 61--73, 1999.
+
+\bibitem{CoxIngersollRoss1985}
+J.~C. Cox, J.~E. Ingersoll and S.~A. Ross, A theory of the term structure of interest rates, \emph{Econometrica} 53(2), 385--407, 1985.
+
+\bibitem{DuffiePanSingleton2000}
+D.~Duffie, J.~Pan and K.~Singleton, Transform analysis and asset pricing for affine jump-diffusions, \emph{Econometrica} 68(6), 1343--1376, 2000.
+
+\bibitem{Eichengreen1996}
+B.~Eichengreen, \emph{Globalizing Capital: A History of the International Monetary System}, Princeton University Press, 1996.
+
+\bibitem{EichengreenHausmannPanizza2003}
+B.~Eichengreen, R.~Hausmann and U.~Panizza, Currency mismatches, debt intolerance and original sin: why they are not the same and why it matters, NBER Working Paper 10036, National Bureau of Economic Research, 2003.
+
+\bibitem{Engle1982}
+R.~F. Engle, Autoregressive conditional heteroscedasticity with estimates of the variance of United Kingdom inflation, \emph{Econometrica} 50(4), 987--1007, 1982.
+
+\bibitem{Engle2002}
+R.~F. Engle, Dynamic conditional correlation: a simple class of multivariate generalized autoregressive conditional heteroskedasticity models, \emph{Journal of Business \& Economic Statistics} 20(3), 339--350, 2002.
+
+\bibitem{ErbHarvey2013}
+C.~B. Erb and C.~R. Harvey, The golden dilemma, \emph{Financial Analysts Journal} 69(4), 10--42, 2013.
+
+\bibitem{FangOosterlee2008}
+F.~Fang and C.~W. Oosterlee, A novel pricing method for European options based on Fourier-cosine series expansions, \emph{SIAM Journal on Scientific Computing} 31(2), 826--848, 2008.
+
+\bibitem{GewekePorterHudak1983}
+J.~Geweke and S.~Porter-Hudak, The estimation and application of long memory time series models, \emph{Journal of Time Series Analysis} 4(4), 221--238, 1983.
+
+\bibitem{GilPelaez1951}
+J.~Gil-Pelaez, Note on the inversion theorem, \emph{Biometrika} 38(3--4), 481--482, 1951.
+
+\bibitem{Glasserman2004}
+P.~Glasserman, \emph{Monte Carlo Methods in Financial Engineering}, Springer, New York, 2004.
+
+\bibitem{Goodman1960}
+L.~A. Goodman, On the exact variance of products, \emph{Journal of the American Statistical Association} 55(292), 708--713, 1960.
+
+\bibitem{GrangerJoyeux1980}
+C.~W.~J. Granger and R.~Joyeux, An introduction to long-memory time series models and fractional differencing, \emph{Journal of Time Series Analysis} 1(1), 15--29, 1980.
+
+\bibitem{Hair2019}
+J.~F. Hair, W.~C. Black, B.~J. Babin and R.~E. Anderson, \emph{Multivariate Data Analysis}, 8th edition, Cengage Learning, 2019.
+
+\bibitem{Hawkes1971}
+A.~G. Hawkes, Spectra of some self-exciting and mutually exciting point processes, \emph{Biometrika} 58(1), 83--90, 1971.
+
+\bibitem{Heston1993}
+S.~L. Heston, A closed-form solution for options with stochastic volatility with applications to bond and currency options, \emph{Review of Financial Studies} 6(2), 327--343, 1993.
+
+\bibitem{Hosking1981}
+J.~R.~M. Hosking, Fractional differencing, \emph{Biometrika} 68(1), 165--176, 1981.
+
+\bibitem{Kraft1988}
+D.~Kraft, \emph{A Software Package for Sequential Quadratic Programming}, Report DFVLR-FB 88-28, Deutsche Forschungs- und Versuchsanstalt f\"ur Luft- und Raumfahrt, Cologne, 1988.
+
+\bibitem{LjungBox1978}
+G.~M. Ljung and G.~E.~P. Box, On a measure of lack of fit in time series models, \emph{Biometrika} 65(2), 297--303, 1978.
+
+\bibitem{LordKoekkoekVanDijk2010}
+R.~Lord, R.~Koekkoek and D.~van Dijk, A comparison of biased simulation schemes for stochastic volatility models, \emph{Quantitative Finance} 10(2), 177--194, 2010.
+
+\bibitem{Lukacs1970}
+E.~Lukacs, \emph{Characteristic Functions}, 2nd edition, Griffin, London, 1970.
+
+\bibitem{MatsumotoNishimura1998}
+M.~Matsumoto and T.~Nishimura, Mersenne twister: a 623-dimensionally equidistributed uniform pseudo-random number generator, \emph{ACM Transactions on Modeling and Computer Simulation} 8(1), 3--30, 1998.
+
+\bibitem{Merton1973}
+R.~C. Merton, Theory of rational option pricing, \emph{Bell Journal of Economics and Management Science} 4(1), 141--183, 1973.
+
+\bibitem{Merton1976}
+R.~C. Merton, Option pricing when underlying stock returns are discontinuous, \emph{Journal of Financial Economics} 3(1--2), 125--144, 1976.
+
+\bibitem{Mishkin2019}
+F.~S. Mishkin, \emph{The Economics of Money, Banking, and Financial Markets}, 12th edition, Pearson, 2019.
+
+\bibitem{NeweyWest1987}
+W.~K. Newey and K.~D. West, A simple, positive semi-definite, heteroskedasticity and autocorrelation consistent covariance matrix, \emph{Econometrica} 55(3), 703--708, 1987.
+
+\bibitem{NocedalWright2006}
+J.~Nocedal and S.~J. Wright, \emph{Numerical Optimization}, 2nd edition, Springer, New York, 2006.
+
+\bibitem{ObstfeldTaylor2004}
+M.~Obstfeld and A.~M. Taylor, \emph{Global Capital Markets: Integration, Crisis, and Growth}, Cambridge University Press, 2004.
+
+\bibitem{Ogata1981}
+Y.~Ogata, On Lewis' simulation method for point processes, \emph{IEEE Transactions on Information Theory} 27(1), 23--31, 1981.
+
+\bibitem{PoonGranger2003}
+S.-H. Poon and C.~W.~J. Granger, Forecasting volatility in financial markets: a review, \emph{Journal of Economic Literature} 41(2), 478--539, 2003.
+
+\bibitem{Sato1999}
+K.~Sato, \emph{L\'evy Processes and Infinitely Divisible Distributions}, Cambridge University Press, 1999.
+
+\bibitem{Schwarz1978}
+G.~Schwarz, Estimating the dimension of a model, \emph{Annals of Statistics} 6(2), 461--464, 1978.
+
+\bibitem{ShapiroWilk1965}
+S.~S. Shapiro and M.~B. Wilk, An analysis of variance test for normality (complete samples), \emph{Biometrika} 52(3--4), 591--611, 1965.
+
+\bibitem{Sobol1967}
+I.~M. Sobol', On the distribution of points in a cube and the approximate evaluation of integrals, \emph{USSR Computational Mathematics and Mathematical Physics} 7(4), 86--112, 1967.
+
+\bibitem{SoutoArias2023}
+L.~A. Souto Arias, P.~Cirillo and C.~W. Oosterlee, A new self-exciting jump-diffusion process for option pricing, arXiv:2205.13321, 2023.
+
+\bibitem{Triffin1960}
+R.~Triffin, \emph{Gold and the Dollar Crisis: The Future of Convertibility}, Yale University Press, New Haven, 1960.
+
+\bibitem{Tsay2010}
+R.~S. Tsay, \emph{Analysis of Financial Time Series}, 3rd edition, Wiley, Hoboken, 2010.
+
+\bibitem{WelchGoyal2008}
+I.~Welch and A.~Goyal, A comprehensive look at the empirical performance of equity premium prediction, \emph{Review of Financial Studies} 21(4), 1455--1508, 2008.
+
+\bibitem{White1980}
+H.~White, A heteroskedasticity-consistent covariance matrix estimator and a direct test for heteroskedasticity, \emph{Econometrica} 48(4), 817--838, 1980.
+
+\bibitem{Wooldridge2020}
+J.~M. Wooldridge, \emph{Introductory Econometrics: A Modern Approach}, 7th edition, Cengage Learning, Boston, 2020.
 
 \end{references}
 

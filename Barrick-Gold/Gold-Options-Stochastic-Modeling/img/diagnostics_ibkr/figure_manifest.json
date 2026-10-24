@@ -7,7 +7,37 @@
   "ibkr_acquisition": "adaptive_all_expiries_moneyness_strike_grid",
   "sample_path": "outputs/sampling/2026-09-02/sample_CC_64.csv",
   "calibration_dir": "outputs/calibrations/CC/2026-09-02",
+  "calibration_provenance": {
+    "black_scholes": {
+      "source_calibration": "data/processed/team8/calibration_q040_20261024/CC/2026-09-02/black_scholes.json",
+      "audit_date": "2026-10-24",
+      "dividend_yield": 0.004,
+      "objective": 0.0001526367806818936
+    },
+    "heston": {
+      "source_calibration": "data/processed/team8/calibration_q040_20261024/CC/2026-09-02/heston.json",
+      "audit_date": "2026-10-24",
+      "dividend_yield": 0.004,
+      "objective": 4.4161400751975034e-05
+    },
+    "bates": {
+      "source_calibration": "data/processed/team8/calibration_q040_20261024/CC/2026-09-02/bates.json",
+      "audit_date": "2026-10-24",
+      "dividend_yield": 0.004,
+      "objective": 4.081478995402077e-05
+    },
+    "bates_hawkes": {
+      "source_calibration": "data/processed/team8/calibration_q040_20261024/CC/2026-09-02/full_bates_hawkes.json",
+      "audit_date": "2026-10-24",
+      "dividend_yield": 0.004,
+      "objective": 2.685231911790534e-05
+    }
+  },
   "out_dir": "img/diagnostics_ibkr",
+  "dividend_yield": 0.004,
+  "dividend_yield_method": "forward identity C(S,K;q)=exp(-qT)C(S,K*exp(qT);0)",
+  "price_units": "USD for the quoted contracts",
+  "path_engine": "mirror of Complete-Valuation gold_paths.py: full truncation, unclipped variance state, exact Hawkes intensity integral, drift r - q",
   "rate_curve_model": "Nelson-Siegel-Svensson",
   "rate_fit_target": "continuous_rate",
   "official_min_dte": 75,

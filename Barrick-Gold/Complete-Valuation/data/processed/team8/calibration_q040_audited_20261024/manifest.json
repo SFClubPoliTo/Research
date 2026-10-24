@@ -1,0 +1,10 @@
+{
+  "date": "2026-09-02",
+  "strategy": "CC",
+  "n_calibration": 64,
+  "spot": 402.78,
+  "dividend_yield": 0.004,
+  "source_dir": "data/processed/team8/calibration_q040_20261024/CC/2026-09-02",
+  "audit_date": "2026-10-24",
+  "nesting": "Heston within Bates within Bates-Hawkes; nested candidates always retained"
+}

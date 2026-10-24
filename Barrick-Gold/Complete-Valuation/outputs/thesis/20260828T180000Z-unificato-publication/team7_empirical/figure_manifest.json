@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "status": "CURRENT_LSE_EMPIRICAL_FIGURES",
-  "input_path": "C:/Users/salvm/Desktop/SF/Research projects/Barrick gold/UNIFICATO/Github-Branch/data/raw/lse_local/20260827T173500Z-codefig-v11-lse/empirical_figure_inputs.json",
+  "input_path": "<contributor-home>/Desktop/SF/Research projects/Barrick gold/UNIFICATO/Github-Branch/data/raw/lse_local/20260827T173500Z-codefig-v11-lse/empirical_figure_inputs.json",
   "input_sha256": "3B0E37DB06E71F325911F31200296A80ACD7AB7B16380143CF177986BE498DD8",
   "sample": {
     "start": "2021-01-05",

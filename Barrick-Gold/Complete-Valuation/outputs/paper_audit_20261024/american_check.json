@@ -1,0 +1,9 @@
+{
+  "contracts": 64,
+  "tree_steps": 800,
+  "dividend_yield": 0.004,
+  "max_premium_usd": 2.2751578399038408e-10,
+  "mean_premium_usd": 8.822498287486269e-12,
+  "max_premium_over_price": 1.9744492232090953e-12,
+  "scope": "CRR at observed IV; not a stochastic-volatility American tree"
+}

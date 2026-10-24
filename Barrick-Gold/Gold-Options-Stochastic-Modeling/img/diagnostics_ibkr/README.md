@@ -47,3 +47,7 @@ Hawkes, simulation, and out-of-sample figures:
 - `paths_heston_5.png`
 - `terminal_return_percentiles.png`
 - `volatility_state_paths.png`
+
+## Status (24 October 2026)
+
+`make_missing_ibkr_figures.py` regenerated the calibration and simulation assets from the corrected 2 September 2026 calibration (q = 0.40%, nested refinements). `oos_article_numbers.tex`, `oos_table_rows.tex` and `online_welch_goyal_cumulative.png` come from the corrected rolling run of 24 October 2026 (q = 0.40%, same search policy for every model), written by `../Complete-Valuation/src/build_report_fragments.py`. The variance-state figure shows the unclipped full-truncation state, which can dip below zero; only max(v, 0) drives the dynamics.

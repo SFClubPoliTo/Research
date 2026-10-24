@@ -3,7 +3,7 @@
 Growth, reinvestment, WACC and terminal closure are shared across gold engines. Table~\ref{tab:dcf_inputs} summarizes the corporate assumptions.
 
 \subsection{Growth, ROIC and reinvestment}
-Growth and ROIC converge linearly to their stable levels over five years. Reinvestment follows $b_t=g_t/ROIC_t$, linking growth to the capital required to sustain it (Figure~\ref{fig:dcf_driver_schedule}).
+Growth and ROIC converge linearly to their stable levels over the five rate years since valuation. Reinvestment follows $b_t=g_t/ROIC_t$, linking growth to the capital required to sustain it (Figure~\ref{fig:dcf_driver_schedule}).
 
 \noindent\begin{minipage}{\columnwidth}
 {\centering
@@ -21,7 +21,7 @@ Growth and ROIC converge linearly to their stable levels over five years. Reinve
 \end{minipage}\par
 
 \subsection{Common stochastic WACC}
-WACC follows the bounded mean-reverting process in Equation~(17), with inputs in Table~\ref{tab:dcf_inputs}. Its annual innovation scale is $\sigma_w^*=\sigma_w\sqrt{(1-e^{-2\kappa_w})/(2\kappa_w)}=0.7308$ percentage points before clipping. All engines reuse 8,192 annual shock paths (Figure~\ref{fig:wacc_assumptions}).
+WACC follows the bounded mean-reverting process in Equation~\eqref{eq:wacc_process}, with inputs in Table~\ref{tab:dcf_inputs}; $w_0$ applies to the first year after valuation. Its annual innovation scale is $\sigma_w^*=\sigma_w\sqrt{(1-e^{-2\kappa_w})/(2\kappa_w)}=0.7308$ percentage points before clipping. All engines reuse the same 8,192 shock paths (Figure~\ref{fig:wacc_assumptions}).
 
 \noindent\begin{minipage}{\columnwidth}
 {\centering
@@ -32,7 +32,7 @@ WACC follows the bounded mean-reverting process in Equation~(17), with inputs in
 \end{minipage}\par
 
 \subsection{Terminal closure and sensitivity}
-The terminal block uses $g_\infty=2.50\%$, $ROIC_\infty=10.50\%$ and terminal reinvestment of 23.81\%. At the current median terminal WACC of 8.384\%, the normalized terminal multiple is 13.27$\times$ final after-tax margin. The spread floor enforces $WACC_T>g_\infty$. No simulated rate reaches either clipping bound in the base run.
+The terminal block uses $g_\infty=2.50\%$, $ROIC_\infty=10.50\%$ and terminal reinvestment of 23.81\%. At the median terminal WACC of \TerminalWACC\%, the terminal multiple is \TerminalMultiple$\times$ the final after-tax margin. The spread floor enforces $w_H>g_\infty$; \WACCClippedShare\% of simulated rates reach a clipping bound.
 
 \noindent\begin{minipage}{\columnwidth}
 {\centering
@@ -44,8 +44,8 @@ The terminal block uses $g_\infty=2.50\%$, $ROIC_\infty=10.50\%$ and terminal re
 
 \noindent\begin{minipage}{\columnwidth}
 {\centering
-  \includegraphics[width=0.90\linewidth]{../img/publication/938fcc0ee9ab77b8_fig_terminal_share.png}
-  \captionof*{figure}{\textbf{Figure~\ref{fig:terminal_value_mechanics} (continued).} Median proxy under three terminal conventions. Five-year-only values are about USD 13 billion versus about USD 60 billion with perpetuity. Zero terminal is a truncation scenario, not an estimated reserve life.}
+  \includegraphics[width=0.90\linewidth]{\FigFigTerminalShare}
+  \captionof*{figure}{\textbf{Figure~\ref{fig:terminal_value_mechanics} (continued).} Median proxy under the terminal conventions and with risk-free discounting of the explicit flows. Explicit flows to 2030 are worth about USD~11 billion against about USD~57--59 billion with a perpetuity. Zero terminal is a truncation scenario, not an estimated reserve life.}
 \par}
 \end{minipage}\par
 
@@ -70,8 +70,7 @@ Terminal reinvestment & 23.81\% \\
 \end{table}
 
 \begin{methodbox}[Interpretation]
-These are methodological assumptions, not filing-calibrated Barrick estimates. Terminal closure dominates the reported operating proxy. The legacy positive terminal increases the mean by USD 1.14--1.49 billion relative to signed closure.
+These are methodological assumptions, not filing-calibrated Barrick estimates. Terminal closure dominates the reported operating proxy: it accounts for about \TerminalShare\% of the mean. The former positive floor on the final margin is no longer used; it leaves medians unchanged.
 \end{methodbox}
 
-% Expansion p5 - 2026-09-06
-The quarterly bridge multiplies simulated gold price less unit Cost of Sales, both in USD per ounce, by production in thousand ounces, then divides by 1,000 to obtain component margin in USD millions. Four quarterly margins are summed before annual taxes, reinvestment and discounting. This proxy is not reported EBIT or FCFF: production must be reconciled with sales and inventory, and depreciation, capital expenditure and working capital must enter without double counting. Fixed operating vectors exclude mine-level shocks and price-cost dependence.
+The quarterly bridge multiplies the average simulated gold price less unit Cost of Sales, both in USD per ounce, by production in thousand ounces, then divides by 1,000 to obtain component margin in USD millions. Each quarter is taxed, charged its reinvestment and discounted at its own date. This proxy is not reported EBIT or FCFF: production must be reconciled with sales and inventory, and depreciation, capital expenditure and working capital must enter without double counting. Fixed operating vectors exclude mine-level shocks and price-cost dependence.

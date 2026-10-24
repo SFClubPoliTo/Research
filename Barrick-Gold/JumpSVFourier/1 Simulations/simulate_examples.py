@@ -41,9 +41,12 @@ def simulate_jump_paths(rng: np.random.Generator) -> tuple[np.ndarray, np.ndarra
         + volatility * np.sqrt(dt) * gaussian_shocks
     )
 
+    # Merton compensator: kappa = E[e^J] - 1, so both paths have the same expected return.
+    kappa = np.exp(jump_mean + 0.5 * jump_std**2) - 1.0
     jump_counts = rng.poisson(jump_intensity * dt, size=steps)
-    jump_sizes = rng.normal(jump_mean, jump_std, size=steps) * jump_counts
-    jump_log_returns = diffusion_log_returns + jump_sizes
+    # Sum of n i.i.d. N(mu_J, sigma_J^2) jumps: mean n * mu_J, std sqrt(n) * sigma_J.
+    jump_sizes = jump_mean * jump_counts + jump_std * np.sqrt(jump_counts) * rng.normal(size=steps)
+    jump_log_returns = diffusion_log_returns - jump_intensity * kappa * dt + jump_sizes
 
     diffusion_path = spot * np.exp(np.r_[0.0, np.cumsum(diffusion_log_returns)])
     jump_path = spot * np.exp(np.r_[0.0, np.cumsum(jump_log_returns)])

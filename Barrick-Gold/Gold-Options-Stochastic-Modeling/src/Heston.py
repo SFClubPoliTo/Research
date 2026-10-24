@@ -4,7 +4,7 @@ from time import perf_counter
 import numpy as np
 from scipy.optimize import differential_evolution, minimize
 
-from calibration_core import CalibrationReport, OptionSurface, feller_feasible_population
+from calibration_core import CalibrationReport, OptionSurface, feller_feasible_population, warm_local_fit
 from fourier_pricing import adaptive_cos_call_prices, carr_madan_call
 
 
@@ -124,10 +124,17 @@ class Heston:
         cos_N=256,
         disp=False,
         return_report=False,
+        initial_guess=None,
     ):
         started_at = perf_counter()
         surface = OptionSurface.from_frame(df_market)
         args = (surface, S0, q, pricing, cos_N)
+        warm = warm_local_fit(Heston.heston_objective, initial_guess, Heston.BOUNDS,
+                              args, ftol=1e-7)
+        if warm is not None:
+            report = CalibrationReport.from_optimizer('Heston', Heston.PARAMETER_NAMES,
+                *warm, started_at, warm_start_used=True, global_search_used=False)
+            return report if return_report else report.x
         init = feller_feasible_population(Heston.BOUNDS, popsize, seed)
         global_result = differential_evolution(
             Heston.heston_objective,

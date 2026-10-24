@@ -1,18 +1,18 @@
 \begin{table}[H]
   \centering
-  \caption{GPH estimates of the long-memory parameter $d$ for absolute returns of gold and silver}
+  \caption{GPH estimates of the fractional differencing parameter $d$ for absolute returns of gold and silver}
   \label{tab:arfima-gph}
-  \begin{tabular}{lccc}
+  \begin{tabular}{lcccccc}
     \toprule
-    Asset & $\hat{d}$ & s.e.($\hat{d}$) & $t$-stat \\
+    Asset & $m$ & $\hat{d}$ & s.e.($\hat{d}$) & $t$($d=0$) & $t$($d=0.5$) & $t$($d=1$) \\
     \midrule
-    Gold & 0.576 & 0.090 & 6.39 \\
-    Silver & 0.552 & 0.080 & 6.91 \\
+    Gold & 68 & 0.576 & 0.090 & 6.39 (0.000) & 0.84 (0.399) & -4.70 (0.000) \\
+    Silver & 68 & 0.552 & 0.080 & 6.91 (0.000) & 0.65 (0.515) & -5.60 (0.000) \\
     \bottomrule
   \end{tabular}
   \vspace{0.2cm}
   \begin{minipage}{0.9\textwidth}
   \footnotesize
-  \textit{Notes}: The table reports Geweke--Porter--Hudak semiparametric estimates   of the fractional differencing parameter $d$ for the series of absolute daily log returns   on GLD and SLV (in percentage points). Values of $0 < \hat{d} < 0.5$ indicate   covariance-stationary long-memory behaviour.
+  \textit{Notes}: The table reports Geweke--Porter--Hudak log-periodogram estimates of the fractional differencing parameter $d$ for the series of absolute daily log returns on GLD and SLV (in percentage points), using the first $m = \lfloor T^{0.5} \rfloor$ Fourier frequencies. Columns $t$($d=d_0$) report $(\hat{d}-d_0)/\mathrm{s.e.}(\hat{d})$ with two-sided normal $p$-values in parentheses. Values $0 < d < 0.5$ correspond to covariance-stationary long memory and $0.5 \le d < 1$ to non-stationary but mean-reverting long memory. Both point estimates exceed 0.5, i.e. they lie in the non-stationary, mean-reverting range, which is consistent with fractionally differencing the series before further modelling. At the 5\% level, $d=0$ is rejected for both assets; $d=0.5$ is not rejected for either asset; $d=1$ is rejected for both assets. This is a semiparametric fractional-differencing analysis; no parametric ARFIMA model is estimated.
   \end{minipage}
 \end{table}

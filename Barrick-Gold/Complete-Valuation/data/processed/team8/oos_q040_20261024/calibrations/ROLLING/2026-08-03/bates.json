@@ -1,0 +1,40 @@
+{
+  "model": "Bates",
+  "parameter_names": [
+    "v0",
+    "kappa",
+    "theta",
+    "sigma",
+    "rho",
+    "lambd",
+    "mu_J",
+    "sigma_J"
+  ],
+  "parameters": {
+    "v0": 0.025987579908531726,
+    "kappa": 5.598007441753117,
+    "theta": 0.0301911282706524,
+    "sigma": 0.18606441792116465,
+    "rho": 0.48980009714661893,
+    "lambd": 0.6798824637397057,
+    "mu_J": -0.10343511125302512,
+    "sigma_J": 0.20456699329565034
+  },
+  "objective": 1.6076004796737423e-05,
+  "global_objective": 1.9342187730733833e-05,
+  "warm_start_used": false,
+  "global_search_used": true,
+  "success": true,
+  "message": "Optimization terminated successfully",
+  "evaluations": 19,
+  "iterations": 2,
+  "elapsed_seconds": 31.323625500008347,
+  "initialization_source": null,
+  "date": "2026-08-03",
+  "strategy": "ROLLING",
+  "source_surface": "data\\processed\\team8\\oos_q040_20261024\\calibration_sets\\2026-08-03\\calibration_surface.csv",
+  "profile": "full",
+  "seed": 8,
+  "n_points": 64,
+  "saved_at_utc": "2026-10-24T15:59:15.786826+00:00"
+}

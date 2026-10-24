@@ -5,6 +5,16 @@ import numpy as np
 from scipy.integrate import quad
 
 
+def _upper_limit(charfunc, start=100.0, tolerance=1e-10, cap=1e5):
+    """Extend the Fourier integration range until the characteristic
+    function has decayed; a fixed bound of 100 truncates short-dated,
+    low-volatility integrands (errors up to USD 0.5 on a USD 1 call)."""
+    upper = start
+    while upper < cap and abs(charfunc(upper)) > tolerance:
+        upper *= 2.0
+    return upper
+
+
 def carr_madan_call(charfunc, spot, strike, maturity, rate, dividend_yield=0.0):
     if maturity <= 0.0:
         return float(max(spot - strike, 0.0))
@@ -17,7 +27,7 @@ def carr_madan_call(charfunc, spot, strike, maturity, rate, dividend_yield=0.0):
         return np.real(numerator / denominator)
 
     integral, _ = quad(
-        integrand, 0.0, 100.0, limit=200, epsabs=1e-4, epsrel=1e-4
+        integrand, 0.0, _upper_limit(charfunc), limit=2000, epsabs=1e-6, epsrel=1e-6
     )
     price = (
         spot * np.exp(-dividend_yield * maturity)
@@ -41,11 +51,12 @@ def gil_pelaez_call_put(charfunc, spot, strike, maturity, rate, dividend_yield=0
         numerator = np.exp(-1j * u * log_strike) * charfunc(u - 1j)
         return np.real(numerator / (1j * u * forward_cf))
 
+    upper = _upper_limit(charfunc)
     p2 = 0.5 + quad(
-        integrand_p2, 0.0, 100.0, limit=200, epsabs=1e-4, epsrel=1e-4
+        integrand_p2, 0.0, upper, limit=2000, epsabs=1e-6, epsrel=1e-6
     )[0] / np.pi
     p1 = 0.5 + quad(
-        integrand_p1, 0.0, 100.0, limit=200, epsabs=1e-4, epsrel=1e-4
+        integrand_p1, 0.0, upper, limit=2000, epsabs=1e-6, epsrel=1e-6
     )[0] / np.pi
 
     discounted_spot = spot * np.exp(-dividend_yield * maturity)

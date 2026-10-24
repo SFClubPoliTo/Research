@@ -1,0 +1,5 @@
+model,label,vega_scaled_mse,iv_rmse_bp,dividend_yield
+black_scholes,Black-Scholes,0.0001526367806818936,131.58431162702496,0.004
+heston,Heston,4.4161400751975034e-05,68.14569897962264,0.004
+bates_poisson,Bates-Poisson,4.081478995402077e-05,65.23593351831767,0.004
+full_bates_hawkes,Bates-Hawkes,2.685231911790534e-05,52.8302783015564,0.004

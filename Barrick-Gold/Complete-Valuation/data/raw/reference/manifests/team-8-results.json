@@ -13,7 +13,7 @@
   },
   "runtime_manifest": {
     "path": "parity/manifests/team-8-runtime.json",
-    "sha256": "FFB0502642973BAB587AC4B36701D44F36FB9403494D255D9C5FFD1097DAE666"
+    "sha256": "BE50033235AB14AFB2F2F94CA701B538D474EC8558C85D3B24EFB45279D87E26"
   },
   "inputs_manifest": {
     "path": "parity/manifests/team-8-inputs.json",

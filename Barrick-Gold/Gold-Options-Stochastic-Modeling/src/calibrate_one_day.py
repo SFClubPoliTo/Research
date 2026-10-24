@@ -72,7 +72,7 @@ def report_payload(report):
             k: float(v) for k, v in report.params.items()
         },
         "objective": float(report.objective),
-        "global_objective": float(report.global_objective),
+        "global_objective": report.global_objective,
         "success": bool(report.success),
         "message": str(report.message),
         "evaluations": int(report.evaluations),

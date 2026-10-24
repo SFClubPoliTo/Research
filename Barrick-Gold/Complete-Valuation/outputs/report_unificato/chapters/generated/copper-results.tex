@@ -66,21 +66,21 @@ In the rolling test, no model improves on observed-surface persistence on its co
 \begin{table}[H]
 \centering
 \small
-\caption{Paired five-year operating-value proxies, USD billion, no terminal value, independent gold/copper scenarios and 8,192 common paths. Monte Carlo SE concerns only the mean increment.}
+\caption{Paired means of explicit flows to 2030 on the dated clock, USD billion, no terminal value, independent gold/copper scenarios and 8,192 common paths. Monte Carlo SE (USD million) concerns only the mean increment.}
 \label{tab:copper-paired-value}
 \begin{tabularx}{\textwidth}{@{}Xrrrr@{}}
 \toprule
 Model & Gold only & Gold + copper & Increment & MC SE \\
 \midrule
-Black--76 & 14.857 & 17.484 & 2.627 & 0.023 \\
-Heston & 14.847 & 17.465 & 2.618 & 0.039 \\
-Bates--Poisson & 14.746 & 17.409 & 2.663 & 0.040 \\
-Bates--Hawkes & 14.776 & 17.417 & 2.641 & 0.037 \\
+Black--76 & \CuBSGold & \CuBSCombined & \CuBSDelta & \CuBSSE \\
+Heston & \CuHGold & \CuHCombined & \CuHDelta & \CuHSE \\
+Bates--Poisson & \CuBGold & \CuBCombined & \CuBDelta & \CuBSE \\
+Bates--Hawkes & \CuWGold & \CuWCombined & \CuWDelta & \CuWSE \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-The valuation uses a full eligible 2 September copper fit with that date's Treasury curve. Its parameters are used only in the final scenario, not retroactively in historical origins. The gold baseline remains frozen, including its company-actual/eight-mine-forecast scope break. Parameter uncertainty, operating-plan uncertainty and the unreconciled corporate cash-flow bridge are outside the Monte Carlo SE. A temporal IV test does not validate those missing economic quantities.
+The valuation uses a full eligible 2 September copper fit with that date's Treasury curve. Its parameters are used only in the final scenario, not retroactively in historical origins. The paired runs use the same dated clock, corrected daily engines and WACC paths as the gold experiment of Chapter~\ref{ch:unified-experiment}; only flows after 2 September 2026 are valued. Copper Bates fits zero jump intensity and so reduces to Heston. Parameter uncertainty, operating-plan uncertainty and the unreconciled corporate cash-flow bridge are outside the Monte Carlo SE. A temporal IV test does not validate those missing economic quantities.
 
 \begin{figure}[H]
 \centering

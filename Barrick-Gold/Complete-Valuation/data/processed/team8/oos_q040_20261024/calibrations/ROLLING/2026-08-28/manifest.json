@@ -1,0 +1,27 @@
+{
+  "date": "2026-08-28",
+  "strategy": "ROLLING",
+  "source_surface": "data\\processed\\team8\\oos_q040_20261024\\calibration_sets\\2026-08-28\\calibration_surface.csv",
+  "source_surface_sha256": "67632e9bc0d6db1918946eb1cb0d7f411510fbddf5b3ab3539ce979f5ad9727e",
+  "frozen_calibration_surface": "data\\processed\\team8\\oos_q040_20261024\\calibrations\\ROLLING\\2026-08-28\\calibration_surface.csv",
+  "n_calibration": 64,
+  "official_min_dte": 75,
+  "spot": 408.89,
+  "curve_dates": [
+    "2026-08-28"
+  ],
+  "rate_curve_models": [],
+  "nss_fit": {},
+  "profile": "full",
+  "seed": 8,
+  "objective": "mean squared price error divided by Vega^2",
+  "dividend_yield": 0.004,
+  "dividend_yield_method": "forward identity C(S,K;q)=exp(-qT)C(S,K*exp(qT);0)",
+  "requested_models": [
+    "heston",
+    "bates"
+  ],
+  "prior_origin_warm_start_enabled": false,
+  "hawkes_warm_max_bates_ratio": 1.05,
+  "created_or_updated_at_utc": "2026-10-24T15:16:55.250652+00:00"
+}

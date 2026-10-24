@@ -56,6 +56,17 @@ The script writes figures to `img/` and CSV summaries to `output/`.
 
 All model inputs are synthetic and defined in the `ModelParams` dataclass. The random seed is fixed by default, so the figures and tables can be regenerated exactly unless assumptions are changed.
 
+## 🛠️ Corrections (24 October 2026)
+
+An audit found four modelling issues in `src/generate_three_stage_dcf.py`. Regenerated outputs therefore **differ from the numbers printed in the published article PDF**.
+
+- **Three stages** (lines 82-95): growth and ROIC used to interpolate linearly across all 7 years, and `high_years` only changed the horizon length. Now stage 1 keeps `high_growth`/`roic_high` constant for `high_years` (3); stage 2 fades linearly to `stable_growth`/`roic_stable` over `transition_years` (4), reaching the stable values in year 7; stage 3 is the Gordon terminal value. The growth path is now 8.5%, 8.5%, 8.5%, 7.0%, 5.5%, 4.0%, 2.5%. Operating margins still follow their original linear trend.
+- **Gordon spread floor** (lines 62, 143-153): the 1% floor on WACC - g is now an explicit parameter (`min_terminal_spread`). Draws that hit it are flagged, counted in `floored_spread_count`/`floored_spread_share` (base summary) and `floored_spread_count` (scenario summary), and the script raises a warning. With the current assumptions no draw hits the floor (0 in all scenarios).
+- **Terminal value share** (lines 199-204): it was used as a sensitivity driver even though EV is its denominator. It is removed from `sensitivity.csv` (that table now has 5 drivers instead of 6) and stays only as an output statistic.
+- **Common random numbers** (lines 284-286): Conservative and Expansion used seeds 100 and 300. All scenarios now share seed 42, so they use identical draws (same `n_sim` and horizon, so the draw order also matches). `scenario_summary.csv` adds `mean_diff_vs_base` and `se_diff_vs_base` (paired differences).
+- Key numbers, before -> after: base mean EV 1978.85 -> 2041.01, median 1837.25 -> 1892.59, P5-P95 1069.7-3382.7 -> 1091.6-3510.7, terminal value share 72.8% -> 74.8%. Conservative mean 1260.37 -> 1274.85, Expansion mean 2855.13 -> 3000.98. Paired differences against Base: -766.2 (SE 1.8) and +960.0 (SE 2.0).
+- `requirements.txt` now pins the versions used to regenerate the outputs (Python 3.12.10).
+
 ## 📚 Citation
 
 Vesco, F., Pietra, L. and Moussaif, B., *Three-Stage DCF with Simulated Data: supporting code*, Starting Finance Club PoliTo Research, GitHub repository, publication PDF at https://sfclubpolito.it/pdf-viewer.html?file=Pubblicazioni%2FThree-Stage%20DCF%20with%20Simulated%20Data.pdf&lang=it, published 30/05/2026, accessed 01/06/2026.

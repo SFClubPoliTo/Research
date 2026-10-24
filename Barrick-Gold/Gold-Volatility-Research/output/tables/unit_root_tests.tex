@@ -1,0 +1,22 @@
+\begin{table}[H]
+\centering
+\caption{Unit-root (ADF) and stationarity (KPSS) tests for gold and silver, 2006--2024}
+\label{tab:unit-root-tests}
+\begin{tabular}{llcccc}
+\toprule
+Series & Deterministic & ADF & $p$-value & KPSS & $p$-value \\
+\midrule
+Gold log price & constant & -1.311 & 0.624 & 6.692 & $<0.01$ \\
+Gold log price & constant + trend & -2.052 & 0.573 & 1.050 & $<0.01$ \\
+Silver log price & constant & -2.239 & 0.192 & 1.245 & $<0.01$ \\
+Silver log price & constant + trend & -2.346 & 0.409 & 0.872 & $<0.01$ \\
+Gold return & constant & -68.682 & 0.000 & 0.097 & $>0.10$ \\
+Silver return & constant & -68.078 & 0.000 & 0.050 & $>0.10$ \\
+\bottomrule
+\end{tabular}
+\vspace{0.2cm}
+\begin{minipage}{0.9\textwidth}
+\footnotesize
+\textit{Notes}: Augmented Dickey--Fuller test (null: unit root; lag length chosen by AIC) and KPSS test (null: level or trend stationarity; automatic bandwidth) computed with statsmodels. Log prices are tested with a constant and with a constant plus linear trend; daily log returns with a constant. KPSS $p$-values are interpolated from tabulated critical values and are bounded between 0.01 and 0.10.
+\end{minipage}
+\end{table}

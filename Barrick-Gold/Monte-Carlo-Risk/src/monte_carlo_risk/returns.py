@@ -54,14 +54,14 @@ def empirical_inverse_cdf(uniform_values: np.ndarray, sample: np.ndarray) -> np.
 
 
 def value_at_risk(returns: np.ndarray, alpha: float = 0.05) -> float:
-    """Return the lower-tail empirical Value-at-Risk at level alpha."""
+    """Return the empirical alpha-quantile of returns or P&L (VaR as a positive loss is minus this)."""
     if not 0.0 < alpha < 1.0:
         raise ValueError("alpha must be between 0 and 1")
     return float(np.quantile(np.asarray(returns, dtype=float), alpha))
 
 
 def conditional_value_at_risk(returns: np.ndarray, alpha: float = 0.05) -> float:
-    """Return the average return conditional on being below VaR_alpha."""
+    """Return the mean return or P&L at or below the alpha-quantile (CVaR as a positive loss is minus this)."""
     returns = np.asarray(returns, dtype=float)
     var = value_at_risk(returns, alpha)
     return float(returns[returns <= var].mean())

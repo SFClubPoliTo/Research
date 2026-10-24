@@ -1,16 +1,16 @@
 {
   "edition": "unificato",
-  "archive_sha256": "eeb92fb90e553fefd1088141f2396a47089cdd462d60e6fbdfb475d72b573291",
-  "file_count": 82,
-  "shared_images": 50,
+  "archive_sha256": "f88101091d9d65ef94faa0f0e05c21d7ce81f9ed558504864b19a140ead810ce",
+  "file_count": 81,
+  "shared_images": 52,
   "files": [
     {
       "path": "Articolo.pdf",
-      "sha256": "6dc8b13714cf170de249beb8c6d80696c7c363fedb8d5cdb30995e5be6a9e069"
+      "sha256": "efda787b4f5d90235d7308585ff3972208756b70c81831f8c56b2fa470baea06"
     },
     {
       "path": "Articolo.tex",
-      "sha256": "99a9ff464f0d81d98981e0130676b0a3682f4d1ef2f9ece8f229b8cbb2df91e5"
+      "sha256": "bfa13e224b15b9a5891336073b9501e379d4dae5883b9e9899e76c4ce4b111f3"
     },
     {
       "path": "Copertina_research.pdf",
@@ -18,91 +18,91 @@
     },
     {
       "path": "chapters/00-discoveries-at-a-glance.tex",
-      "sha256": "e81e84ae41fad458093d3e870094e39fa6dccf69b849063eee5526cfb377946f"
+      "sha256": "3643ba7bb184b8017632313bd8d867bd4d975f5e2a2893d6a450e17da9b3d33d"
     },
     {
       "path": "chapters/01-introduction.tex",
-      "sha256": "3e45a14e57467c0daf1f8ae384837b59a9a6fd861702363441e65a32cdad2fa0"
+      "sha256": "7805d356747fa8a53b30c068f07e156068307d1be96e10f94f71b077076b95c0"
     },
     {
       "path": "chapters/02-gold-regimes-debasement.tex",
-      "sha256": "0a736792e527eeeccd1ae8e7c92ba6c36be848380f4f7d2506be97fbc7aef012"
+      "sha256": "46af91efd79fbd82884f356353dc3272fcf06e991c85cc02237a423c7d2e54a2"
     },
     {
       "path": "chapters/03-company-perimeter.tex",
-      "sha256": "f739c1a17ebcb38a7dbd4b21fae5afb548a7f71f6b9fb589b7d827f3780ed8ba"
+      "sha256": "76eda217cee97e235296412c50505b901c8f1808ae4fab82d26a609874b5ef35"
     },
     {
       "path": "chapters/03-current-lse-diagnostics.tex",
-      "sha256": "a3f003e11417d5d0c8c977cf1479828e905382cb3401ef0fdb1c1311444a3b06"
+      "sha256": "4f8a8b7f1c0a580d4c82eb7f28257eb437e928ee7abab5613e4719f4313ff6c6"
     },
     {
       "path": "chapters/03-data-and-design.tex",
-      "sha256": "57af26dce215dd99d8ee0fd562a6ebcadc129cf0420aa1062b2a45ad7de344f9"
+      "sha256": "df4d265f2b8b1f80a67b6ebbed4fc132a767b9a294088b89a1f7be2e082cc5f9"
     },
     {
       "path": "chapters/03-team-study-synthesis.tex",
-      "sha256": "81b7bb3974756a9be6c700ff5d858684477f671956c6a7f583886d01ec24ad80"
+      "sha256": "b62bdccfcc610bf36e8ac21305bc0133823ab41d5ba2a1ee82840b5778e17ff7"
     },
     {
       "path": "chapters/04-probability-and-pricing.tex",
-      "sha256": "c8d632f48114118c0045e61155639deacf64ab22c354cde3ce90b97761031749"
+      "sha256": "171a3989a8a448cff04314f9b25f81d84aabe1c3168719bdb6de08661c03bf25"
     },
     {
       "path": "chapters/05-econometrics-and-time-series.tex",
-      "sha256": "3986e0d960be024f59565af0f125f437a3e4d8cbdba6e4a735b7ce40aaae482b"
+      "sha256": "722794e10440063ca0cc6ed88b58bdd56afdbdb5e8f1de64722c4a656f721a70"
     },
     {
       "path": "chapters/06-monte-carlo.tex",
-      "sha256": "9966f2b1e5f65f50f0b5e20a6f0f3ba6e77d1b4629e94f20b6da12c95d90dc27"
+      "sha256": "24d394a949bc0fa842e63c3fe9e72d27320117e8fcec6beb7a935b278a4e3836"
     },
     {
       "path": "chapters/07-gold-econometrics.tex",
-      "sha256": "ce4bd149635d0a8f02f4bb239c2b2b8ba5b6b1663728c6d8e6fbf4428c3c3f36"
+      "sha256": "e80278de710b193ee9e4c3545d7b091d70d992c9afbea2dd52604e67a482f2a7"
     },
     {
       "path": "chapters/08-volatility-jumps-affine.tex",
-      "sha256": "47e4031de3af6aa89d5a26fea6c011ef453111a7a93e9972fdcde300fd20c99e"
+      "sha256": "6b1b7e83349b8a99d1924a3e7921eb98ce2edbef148cc830293541263691bcc4"
     },
     {
       "path": "chapters/09-current-lse-surface.tex",
-      "sha256": "7931448de9f441f75a22c132755d8e4d7e80ed8023196e5d3cc27cd85d563234"
+      "sha256": "01a4ae568b69ecab8067a4356e86af2ca2bde66c540a558fc852b08d4f049237"
     },
     {
       "path": "chapters/09-option-calibration.tex",
-      "sha256": "14c43624c1e09337ca12d18dfa5e16aef91fa489f45959fbb32ca72511100801"
+      "sha256": "c6f46eae17d2c0fe4621bf0ff17a82ed3113f3c51221340d5d7dbb9f1e4017cb"
     },
     {
       "path": "chapters/09-physical-measure.tex",
-      "sha256": "1feb5b4baeeaf5d89c1e1fe7644d7a94a5bff37fc51592279db234f98ecfc372"
+      "sha256": "a5e676a687e050eb0b0995a7c5c4876c6a9f6966a6529f1da1621609323d0201"
     },
     {
       "path": "chapters/09-team8-calibration-evidence.tex",
-      "sha256": "3269a6c3e4b51cc9d20f16654bdb0063d9ea29fa579536589fb2250003192121"
+      "sha256": "4b6c0822ea080d41618ab007013fd3381bfb4b94942218e34fb2fb0a197be658"
     },
     {
       "path": "chapters/09-team8-simulation-evidence.tex",
-      "sha256": "fdcbaf2933fa89356a7eade68bb8590c2a8bac3bc094e902fba26c332fe349e9"
+      "sha256": "a67ebe5004c083b8932657d9d19fe7d6d9369dc1679cd17d507f8d2756af6a00"
     },
     {
       "path": "chapters/10-copper-evidence.tex",
-      "sha256": "f5e5bcfb2f451279955e62e4bacde2b2851851545679a3cb406337205392f8e8"
+      "sha256": "3f430c519b452f5e57d1fcb9c81cf2078b1bae8fd37f8e35482cdff97c43e741"
     },
     {
       "path": "chapters/10-operations-ebitda.tex",
-      "sha256": "96cd7253fd8a17d6b0dcff4028f0b497990494b5c158ba4ff05de99f6f08a0ad"
+      "sha256": "dc4952924a8db42478cf54218e92b5a9eac8501df754b243a073f4ca99d093e6"
     },
     {
       "path": "chapters/10-team4-operations-evidence.tex",
-      "sha256": "6ef224a80eb15ccaf82b80a8e18ffecb60af6518e55e38a4e9ecb5f6a29397e4"
+      "sha256": "180535b955a8043ba5333afc45dd4a18013b82d9a2c3f71487507d45f91da64e"
     },
     {
       "path": "chapters/11-dcf.tex",
-      "sha256": "b5a6433b64f073fe4f0c523aac8a0c655e3495f81f5d808e152590fc28afe73a"
+      "sha256": "4d068c58a82b65f8b59c2c0f11420ff6027ada79219692e315600c99f6ba1051"
     },
     {
       "path": "chapters/12-unified-experiment.tex",
-      "sha256": "9fb173294347bafeaaed33310ceb1a361fabf7db9cb6fd06f2ca67ae8432c7a5"
+      "sha256": "a320d8175b47631d7e1571c90bf0a1a54f28f73b663ffcfbdf34544d22341cbc"
     },
     {
       "path": "chapters/13-validation.tex",
@@ -110,43 +110,39 @@
     },
     {
       "path": "chapters/14-discussion-conclusion.tex",
-      "sha256": "52f00993d08532f109dc732b6566ded6a6a7df91ee159f4b6f149ed4943e8e54"
+      "sha256": "20555e8e7b2b1dfb9f3884de971f0118652a04834624395c128d72953ac55e42"
     },
     {
       "path": "chapters/generated/copper-results.tex",
-      "sha256": "4712eede52dcea8d91d2228673c06433cad2c32bd3a982455a78d2d0e3e5e6f8"
+      "sha256": "b3d4cb2ff80ff4279bcf4cff5f3761775812f7738905cab56751a53799ca7334"
     },
     {
-      "path": "chapters/generated/current-valuation-diagnostics.tex",
-      "sha256": "f6b0d82fbde287aa6e0a768e167291208c37b5ce22569e93e19e89b4db77a1d4"
+      "path": "chapters/generated/results_20261024.tex",
+      "sha256": "4f2db688f97f544d0fbf7cf47b4e525a420182447e68c27f870dbb786c29be6f"
     },
     {
-      "path": "chapters/generated/current-valuation-method.tex",
-      "sha256": "c2c1055f6389a127b6984af88dba53eb1913144ec2b0a21a1760bd607bc52b61"
-    },
-    {
-      "path": "chapters/generated/current-valuation-multimodel-quantiles.tex",
-      "sha256": "f634d5f31320a47f28e55d07c6b94f61f91475799a7d176728f1e485f7bf8d5e"
-    },
-    {
-      "path": "chapters/generated/current-valuation-summary.tex",
-      "sha256": "9320919c6067a879ddc03cfbe39dccc742088cfed1f20f3a8b5dc99c67be9da6"
-    },
-    {
-      "path": "img/084da512a991b3bb_heston_residual_heatmap.png",
-      "sha256": "084da512a991b3bbfe575fa2566da2c85706331ee55f50d55790d4ceab47c881"
+      "path": "img/0040f9f7c9958cde_bates_hawkes_volatility_smile.png",
+      "sha256": "0040f9f7c9958cde2f0d97ffa40c00345c100065defc2a17489cb8c28efc8fdb"
     },
     {
       "path": "img/0bc50334767c3172_acf_grid_gold_silver.png",
       "sha256": "0bc50334767c3172c01daef7f95d74e9d4c4a7821eafe18925860678747803b2"
     },
     {
+      "path": "img/0e6f7e2f5b6abc45_fig_val_primary.png",
+      "sha256": "0e6f7e2f5b6abc456f5b5a8e5d6fce6f782893e9e19c995333411d823f1e253b"
+    },
+    {
+      "path": "img/14370a1fa55e1d67_terminal_return_percentiles.png",
+      "sha256": "14370a1fa55e1d671f16d9ca74882c97d0608b6dcc90fe1e2d1aa1e64fc4a577"
+    },
+    {
       "path": "img/15e8739a9649573e_rolling_corr_gold_ust10y.png",
       "sha256": "15e8739a9649573e18bc81522f33c1f9bdfd290c99c6d5067fe015c58af54fd5"
     },
     {
-      "path": "img/1b73753c6ec5b836_online_welch_goyal_cumulative.png",
-      "sha256": "1b73753c6ec5b836b1530a0e4990b06f7e614a8103656e76193b71d95d9357af"
+      "path": "img/19d304216f437e9e_oos_r2.png",
+      "sha256": "19d304216f437e9ee57ca38415b58d43a1473e51c6f67605ca5ae44f08ec2d1d"
     },
     {
       "path": "img/1ddc31b9d77b0ab4_team4_process_components_qoq.png",
@@ -165,36 +161,32 @@
       "sha256": "23df2023b1bd378fb988f75b661655217da95be38c69a57e44325c885ae4a0c7"
     },
     {
-      "path": "img/2be275fce48aae5f_black_scholes_residual_heatmap.png",
-      "sha256": "2be275fce48aae5f26fb64622379278bd3cc7ba4fbbc332c12e3008af5a53fdd"
-    },
-    {
       "path": "img/2f2a7cea66301ac9_fig_terminal_multiple.png",
       "sha256": "2f2a7cea66301ac9e0c1ca5b1276ece792b49a539706614b802ffdf1b395e898"
+    },
+    {
+      "path": "img/3365b35f410bfed1_bates_poisson_jump_paths.png",
+      "sha256": "3365b35f410bfed1aa185195c5ac3d9653c92c7cfec1b84dad82c9782eae9540"
     },
     {
       "path": "img/33a47b013cdc5552_hist_normal_silver.png",
       "sha256": "33a47b013cdc5552274fd5ebe02d0c7d4cd8dbf14e4379164599c4550226461a"
     },
     {
+      "path": "img/36af633f72f0ca22_fig_terminal_share.png",
+      "sha256": "36af633f72f0ca22ced79e9fb745af66e9f095ab189f2a7c4ff7b3bad2d1fa9b"
+    },
+    {
+      "path": "img/38343b91b0c0ad53_bates_hawkes_residual_heatmap.png",
+      "sha256": "38343b91b0c0ad538a405141c69e81d7565d28bd328574257a37a26bb52eae58"
+    },
+    {
       "path": "img/3b18a0aa9daae0e4_garch_condvol_silver.png",
       "sha256": "3b18a0aa9daae0e4e6833fc732e643db7f94ba054bd33261317d167f6df21d96"
     },
     {
-      "path": "img/3cf9768be1456f94_multimodel_value_distribution_comparison.png",
-      "sha256": "3cf9768be1456f9427c176d93aa689c9a6259fa6c54208e6cd95a5eb7703dfa1"
-    },
-    {
-      "path": "img/3ec1f54f55966cd6_full_bates_hawkes_value_distribution.png",
-      "sha256": "3ec1f54f55966cd65d197fa5c6acd75da7d394ebb0abc7cadd0a4d1bb9a991fc"
-    },
-    {
       "path": "img/446a86ada886cf6f_rolling_corr_silver_dxy.png",
       "sha256": "446a86ada886cf6f8fbf542d5ff49d4fd9f4a5c8a0b7ff579d6246e7206924eb"
-    },
-    {
-      "path": "img/4e1468e502c7009e_bates_hawkes_residual_heatmap.png",
-      "sha256": "4e1468e502c7009ea9bfd37713a9c06ca72c8bdecb7f41ed7e2fa12642e73404"
     },
     {
       "path": "img/50b961f87c5f443e_team4_mine_production_qoq.png",
@@ -213,52 +205,56 @@
       "sha256": "5a4373ae994c42825b53aff0d6efb659425c62104db639b7d4697d5d907593f6"
     },
     {
-      "path": "img/6bcd3ce9516c61e5_bates_poisson_jump_paths.png",
-      "sha256": "6bcd3ce9516c61e544d2f236239caefcd3be4343b8b4b4d9d4f0cd86cc457be6"
+      "path": "img/612c9067fff153cc_black_scholes_residual_heatmap.png",
+      "sha256": "612c9067fff153cc3b2ee84aa56562e23b5a8f29e28b1bc75fe204ccec34ee24"
     },
     {
       "path": "img/6c5ba226b4a1f62f_sampling_surface_current.png",
       "sha256": "6c5ba226b4a1f62f2a01e13bc1c43b22ee293173552c5d679f27ee9213cb0395"
     },
     {
-      "path": "img/71a73206e69bf734_terminal_return_percentiles.png",
-      "sha256": "71a73206e69bf734800f8d9d6c2cbbd29ea7ea75eab67672c836cd9f5d0ab389"
+      "path": "img/6d67719615b71840_fig_correction_attribution.png",
+      "sha256": "6d67719615b718401fffe5017f25dbde9e3c5aeecfa066333fb3e76446ece68f"
     },
     {
       "path": "img/749384e5a43b524a_rolling_corr_silver_sp500.png",
       "sha256": "749384e5a43b524a665dacf7d5c4e980e2325c8aa96cd53bc9cc137076079c86"
     },
     {
-      "path": "img/7b3ba1b4f37e8920_volatility_state_paths.png",
-      "sha256": "7b3ba1b4f37e892038b65a947f84ac47a28fb75d12d04f1cd783522aacf6103c"
+      "path": "img/7d3e5597f15ab728_oos_rmse.png",
+      "sha256": "7d3e5597f15ab728341cc5581d3a317582f5e6ccb853a54d0bebb93d4d8d5bf6"
     },
     {
-      "path": "img/7c81ef63dcb2d5ac_hawkes_jump_paths.png",
-      "sha256": "7c81ef63dcb2d5ac248e700c08c434a77d8f2b7dbac68440afbfeeff0059d4a1"
+      "path": "img/82ef7fb46d8f7c23_bates_hawkes_vs_bates.png",
+      "sha256": "82ef7fb46d8f7c231eeada6e49a30b8bfbde8262e1b288e8fd15dbced39bc577"
     },
     {
       "path": "img/84abf73b4d15f1bf_online_oos_r2_by_benchmark.png",
       "sha256": "84abf73b4d15f1bf411183a9e1d8df08195c1d58af7c70d7da5b40783f9be7fd"
     },
     {
-      "path": "img/85bb9ad60d5b65c9_arfima_fd_silver.png",
-      "sha256": "85bb9ad60d5b65c915d464fba08c93e79d764192968ff496da309f1b9e90f246"
+      "path": "img/893e0badbf0a67cf_fig_val_multi.png",
+      "sha256": "893e0badbf0a67cf1240d5adb47cda8e9b72d5c0fa2b62c02e121ea9b6c66e3a"
     },
     {
       "path": "img/908c62e76c1ec216_rolling_corr_silver_ust10y.png",
       "sha256": "908c62e76c1ec216ac3f23a3b91e68624308611fe12f3049568525294cd71d85"
     },
     {
+      "path": "img/917f624afe7e339f_bates_residual_heatmap.png",
+      "sha256": "917f624afe7e339ff59afa8c4614db9ce924624763fa6794adee9fb280f1fbfc"
+    },
+    {
       "path": "img/947d32538e7a36b6_acf_abs_returns_gold_silver.png",
       "sha256": "947d32538e7a36b6c45c304d48bd12730c12f07827a921c741c50c7391ab2bcb"
     },
     {
-      "path": "img/96da53622b83c105_hawkes_intensity_comparison.png",
-      "sha256": "96da53622b83c105b024a6445bb9ea746b96d67d7f868179b6ab79fe2965da02"
-    },
-    {
       "path": "img/a27b1fd9ae7d7a38_returns_rollingvol_silver.png",
       "sha256": "a27b1fd9ae7d7a38ffc3688eed93319f03853a22138009977d802abf8ea5b708"
+    },
+    {
+      "path": "img/a47ac9bb3870cd03_arfima_fd_silver.png",
+      "sha256": "a47ac9bb3870cd03f3143c0cbe74c405aa5a78b8c15e133f61c7201c5b208c40"
     },
     {
       "path": "img/a5190673372d95dd_team4_operating_contract.png",
@@ -277,8 +273,8 @@
       "sha256": "b634a7a755db7d7fb174f9295e2c488570310101ca21a422e725e608b560153f"
     },
     {
-      "path": "img/b9bb2527125e8077_bates_hawkes_vs_bates.png",
-      "sha256": "b9bb2527125e80779d1f3925bf9039dd487222af959fd5347cd243e35f7d7c07"
+      "path": "img/ba2dd686e32e5e10_heston_residual_heatmap.png",
+      "sha256": "ba2dd686e32e5e10a45bd1cf7ef23f79e6b25c6722740ad5cffb5f50528fb46e"
     },
     {
       "path": "img/c011553eac7f680d_gld_return_normality.png",
@@ -287,6 +283,10 @@
     {
       "path": "img/c54039731f560057_lse_market_context_20260826.png",
       "sha256": "c54039731f560057bbc627e673d142e96b52938f8e2983c2f164f6d4fd443be2"
+    },
+    {
+      "path": "img/c7008efadfbbd3d6_hawkes_intensity_comparison.png",
+      "sha256": "c7008efadfbbd3d680086415d166965e400ab9c43d96fd1bfe8d77e9756c0e15"
     },
     {
       "path": "img/cac8e0c90c783576_rolling_corr_gold_sp500.png",
@@ -301,12 +301,12 @@
       "sha256": "ce40d43c378d1fa20bcd757aa0e9ed5908ea2af83c5a033ac3b9addf61f82294"
     },
     {
-      "path": "img/d8a6a98d7f5437d7_fig_terminal_share.png",
-      "sha256": "d8a6a98d7f5437d7ab74fcbe90900067f8d4137b638249f25e4b08d035f5cf5e"
+      "path": "img/d8bf920fe2650241_gold_path_stats_by_model.png",
+      "sha256": "d8bf920fe2650241884b328ae83d5856de93914a25b131ba4ed413ef029fc14f"
     },
     {
-      "path": "img/d9049cd97b310144_bates_residual_heatmap.png",
-      "sha256": "d9049cd97b3101447a0004a071dfacff9210e8cad30752db2bfe7d9657d35572"
+      "path": "img/e5bf0d6a1e149452_hawkes_jump_paths.png",
+      "sha256": "e5bf0d6a1e1494526b22a1bc8adc13a3ecf418dcd1f27b796ae55fe39bb9c4a3"
     },
     {
       "path": "img/e670a201ce86a5ec_returns_rollingvol_gold.png",
@@ -317,20 +317,16 @@
       "sha256": "f289761147385bd7507d99ae3a6dcb991ce77bfaa83cc7625e8ec8b4153367cd"
     },
     {
-      "path": "img/f4cfc8e203afcc8e_bates_hawkes_volatility_smile.png",
-      "sha256": "f4cfc8e203afcc8e2c294c2fc7bfce0f24c9917fbe0e0011bdda080f84f1bb4f"
-    },
-    {
       "path": "img/f751012d2636c3b8_usd_treasury_curve.png",
       "sha256": "f751012d2636c3b853985638c0dead0c8fce20e79f8c88af257b14f4cc74da66"
     },
     {
-      "path": "img/fbc4b158413f5755_copper_temporal_oos.png",
-      "sha256": "fbc4b158413f5755dadf2cb4a00308148c6fdc29448df3f9be314991257ca4cc"
+      "path": "img/fbaa0a114c49c80a_volatility_state_paths.png",
+      "sha256": "fbaa0a114c49c80a296020086ce564cb0d51aadfe549877b356a429af310e5cf"
     },
     {
-      "path": "img/fed5bbd9aeec921b_gold_path_bands_four_models.png",
-      "sha256": "fed5bbd9aeec921be1aff8c72962d9ed0a3569e141344581788f3595413e724a"
+      "path": "img/fbc4b158413f5755_copper_temporal_oos.png",
+      "sha256": "fbc4b158413f5755dadf2cb4a00308148c6fdc29448df3f9be314991257ca4cc"
     }
   ]
 }

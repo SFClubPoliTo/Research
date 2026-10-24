@@ -59,10 +59,19 @@ def add_formal_labels(df: pd.DataFrame) -> pd.DataFrame:
     return df.rename(index=FORMAL_NAMES, columns=FORMAL_NAMES)
 
 
+def newey_west_maxlags(nobs: int) -> int:
+    """Newey-West (1994) rule of thumb: floor(4 * (T/100)^(2/9))."""
+    return int(4 * (nobs / 100) ** (2 / 9))
+
+
 def run_ols_formula(formula: str, data: pd.DataFrame):
-    return smf.ols(formula=formula, data=data).fit(cov_type="HC1")
+    model = smf.ols(formula=formula, data=data)
+    maxlags = newey_west_maxlags(int(model.nobs))
+    return model.fit(cov_type="HAC", cov_kwds={"maxlags": maxlags})
 
 
 def run_ols_matrix(y: pd.Series, X: pd.DataFrame):
     X = sm.add_constant(X)
-    return sm.OLS(y, X).fit(cov_type="HC1")
+    model = sm.OLS(y, X)
+    maxlags = newey_west_maxlags(int(model.nobs))
+    return model.fit(cov_type="HAC", cov_kwds={"maxlags": maxlags})

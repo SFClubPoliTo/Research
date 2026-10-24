@@ -68,18 +68,27 @@ def price_asian_call_qmc(
     maturity: float,
     n_steps: int,
     n_paths_power: int,
+    n_replications: int = 16,
     seed: int | None = None,
 ) -> Tuple[float, float]:
-    """Price an arithmetic Asian call using Sobol quasi-Monte Carlo points."""
-    sampler = qmc.Sobol(d=n_steps, scramble=True, seed=seed)
-    uniforms = sampler.random_base2(m=n_paths_power)
-    shocks = norm.ppf(np.clip(uniforms, np.finfo(float).eps, 1.0 - np.finfo(float).eps))
+    """Price an arithmetic Asian call with randomized (scrambled Sobol) quasi-Monte Carlo.
+
+    Uses ``n_replications`` independent scramblings of ``2**n_paths_power`` points each
+    (total cost ``n_replications * 2**n_paths_power`` paths). QMC points are not i.i.d.,
+    so the standard error is computed across the independent replication estimates.
+    """
+    if n_replications < 2:
+        raise ValueError("use at least two replications to estimate the standard error")
     dt = maturity / n_steps
-    increments = (rate - 0.5 * volatility**2) * dt + volatility * np.sqrt(dt) * shocks
-    paths = s0 * np.exp(np.cumsum(increments, axis=1))
-    average = paths.mean(axis=1)
-    discounted = np.exp(-rate * maturity) * np.maximum(average - strike, 0.0)
-    return float(discounted.mean()), float(discounted.std(ddof=1) / np.sqrt(discounted.size))
+    estimates = np.empty(n_replications, dtype=float)
+    for k, rng in enumerate(np.random.default_rng(seed).spawn(n_replications)):
+        uniforms = qmc.Sobol(d=n_steps, scramble=True, rng=rng).random_base2(m=n_paths_power)
+        shocks = norm.ppf(np.clip(uniforms, np.finfo(float).eps, 1.0 - np.finfo(float).eps))
+        increments = (rate - 0.5 * volatility**2) * dt + volatility * np.sqrt(dt) * shocks
+        paths = s0 * np.exp(np.cumsum(increments, axis=1))
+        average = paths.mean(axis=1)
+        estimates[k] = np.exp(-rate * maturity) * np.maximum(average - strike, 0.0).mean()
+    return float(estimates.mean()), float(estimates.std(ddof=1) / np.sqrt(n_replications))
 
 
 def price_up_and_out_call(

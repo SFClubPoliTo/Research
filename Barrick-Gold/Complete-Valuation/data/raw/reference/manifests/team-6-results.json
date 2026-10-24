@@ -27,7 +27,7 @@
   "runtime_hash": "3D84DA60D12FBA193ED2DBA53E2E7CBA0AA652D8D04813D63CDB55E0B2CEFC89",
   "runtime_lock": {
     "path": "UNIFICATO/Github-Branch/parity/runs/team-6/20260814T193022Z-py3125/runtime-lock.txt",
-    "command": "C:/Users/salvm/AppData/Roaming/jupyterlab-desktop/jlab_server/python.exe -m pip --disable-pip-version-check freeze --all",
+    "command": "<contributor-home>/AppData/Roaming/jupyterlab-desktop/jlab_server/python.exe -m pip --disable-pip-version-check freeze --all",
     "bytes": 12930,
     "sha256": "4AB8AC8744334D48FB1B3CFD5C57653F55EADD8470F9EEC8F999C2E501C4BA7A",
     "package_count": 185,
@@ -38,8 +38,8 @@
     "embedded_configuration_source": "D0779EC08609F6A16D87A83252564B57E3F2CC8F0FB023EEFF65C062EA9F9E51"
   },
   "execution": {
-    "command": "C:/Users/salvm/AppData/Roaming/jupyterlab-desktop/jlab_server/python.exe \"1 Simulations/simulate_examples.py\"",
-    "cwd": "C:/Users/salvm/Desktop/SF/Research projects/Barrick gold/UNIFICATO/Github-Branch/parity/runs/team-6/20260814T193022Z-py3125/work",
+    "command": "<contributor-home>/AppData/Roaming/jupyterlab-desktop/jlab_server/python.exe \"1 Simulations/simulate_examples.py\"",
+    "cwd": "<contributor-home>/Desktop/SF/Research projects/Barrick gold/UNIFICATO/Github-Branch/parity/runs/team-6/20260814T193022Z-py3125/work",
     "started_utc": "2026-08-14T19:31:44.3254892Z",
     "completed_utc": "2026-08-14T19:31:45.0850588Z",
     "exit_code": 0,

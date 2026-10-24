@@ -1,16 +1,16 @@
 \section{Data, Provenance and Experimental Design}
 \label{sec:data-design}
-\chapterstatus{Editorial synthesis of the accepted provenance, notation and gate contracts. Provider-specific values remain governed by their source freezes.}
 
 \subsection{Data universe and dates}
 
 The legacy corpus contains different evidence domains: long-run gold and silver
-time series, London Stock Exchange market and option inputs, mine-level
+time series, LSE (London Strategic Edge) market and option inputs, mine-level
 operating data and synthetic DCF examples. Each retains its own provider,
 frequency, date range, unit and measure. The operating domain is quarterly and
 mine-level: Team~4 estimates on 2019Q1--2025Q4 Barrick reports, with shorter
 effective samples where leading observations are missing; 2026Q1--Q2 enter
-as actuals and forecasts cover 2026Q3--2030Q4
+as actuals used only for level checks, and forecasts cover 2026Q3--2030Q4, of
+which the valuation counts only flows after 2 September 2026
 (Section~\ref{sec:company-perimeter}). The 2 April 2026 GLD option snapshot
 and standalone Team~4 GBM paths are a separate legacy domain, excluded from
 the integrated valuation \cite{team4}. Gold histories, option-calibration
@@ -25,19 +25,19 @@ date. It is not a reproduction of the 31-date gold OOS panel. Missing, stale
 or wide-spread quotes remain exclusions; no synthetic quotes complete a date.
 The surviving contract catalogue prevents a complete point-in-time universe
 and expired-option history is unavailable from this API
-\cite{ib-historical-limitations}. Admitted dates and actual forecast gaps are
+\cite{ib-historical-limitations}. Accepted dates and actual forecast gaps are
 reported in Section~\ref{sec:copper-extension}.
 
 \subsection{Provenance and reproducibility}
 
-Every quantitative result admitted to the final study must be traceable through an input hash, as-of date, configuration, seed where applicable, executable stage, output path and tolerance. Exact reuse identifies material preserved from a source article; edited reuse identifies rearrangement or notation harmonisation; recomputed identifies a result created by a frozen executable run. A gap never authorises a fabricated value.
+Every quantitative result included in the final study must be traceable through an input hash, as-of date, configuration, seed where applicable, executable stage, output path and tolerance. Exact reuse identifies material preserved from a source article; edited reuse identifies rearrangement or notation harmonisation; recomputed identifies a result created by a fixed, versioned executable run. A gap never authorises a fabricated value.
 
 \subsection{Common notation, units and model interfaces}
 
 The notation distinguishes the physical measure $\mathbb P$ from the pricing
 measure $\mathbb Q$, GLD in USD/share from gold in USD/oz, annualised decimals
 from percentage points, and enterprise from equity value. Production is
-$\mathrm{Prod}$ or italic $Q$ in Chapter~11, distinct from $\mathbb Q$.
+$\mathrm{Prod}$ or italic $Q$ in Chapter~\ref{ch:dcf}, distinct from $\mathbb Q$.
 Ore is in tonnes, grade in g/t, recovery decimal, and production in troy
 ounces of $31.1035$ grams, usually reported in thousands. Gold CoS is USD
 per attributable ounce sold. Copper prices and CoS are USD/lb, attributable
@@ -45,6 +45,20 @@ sales are kt, and $1~\mathrm{t}=2204.6226218488~\mathrm{lb}$. Values use an
 explicit scale, normally USD millions; per-share values require a reconciled
 diluted-share denominator. Already attributable volumes are never scaled by
 ownership twice.
+
+Several standard symbols keep their conventional, local meaning in different
+chapters. In Chapter~\ref{ch:econometrics}, $\theta_j$ are moving-average
+coefficients, $p$ and $q$ are model orders and $L$ is the lag operator
+($Ly_t=y_{t-1}$); in the GARCH models of Chapters~\ref{ch:econometrics}
+and~\ref{ch:gold-econometrics}, $\alpha$ and $\beta$ are the ARCH and GARCH
+coefficients. In Chapters~\ref{ch:sv-jumps} and~\ref{ch:calibration}, $\kappa$
+and $\theta$ (written $\theta_v$ in Chapter~\ref{ch:calibration}) are the
+mean-reversion speed and long-run level of the variance, $\alpha$ also denotes
+the Carr--Madan damping coefficient, and in the Hawkes intensity $\alpha$ and
+$\beta$ are the excitation size and decay rate; the branching ratio is
+$\eta=\alpha/\beta$, distinct from event counts $n$, and $A,B$ (or $C,D$) are
+the Riccati coefficients of affine characteristic functions. In
+Chapter~\ref{ch:dcf}, $\kappa$ is the mean-reversion speed of the WACC process.
 
 \subsection{Evaluation design}
 
@@ -58,14 +72,14 @@ log values is not MAPE in USD/oz and depends on the log level and unit scale.
 The RMSE ratio is the useful comparison, not the stated MAPE level.
 
 Coverage and uncertainty sources must be explicit. The 95\% cost bands and
-80\% production bands describe operating uncertainty; the frozen Chapter~12
+80\% production bands describe operating uncertainty; the Chapter~\ref{ch:unified-experiment}
 quantiles vary gold prices and discount rates with production and costs fixed.
 The copper extension adds copper-price uncertainty under declared dependence
 scenarios. These quantities are neither interchangeable nor complete
 corporate confidence intervals.
 
 Copper reserved-strike scores test interpolation. Temporal scores fit only
-origin-date quotes and project variance/intensity to the next admitted date;
+origin-date quotes and project variance/intensity to the next accepted date;
 target forward and as-of rates condition repricing. Common target support,
 origin-mean and inside-hull persistence benchmarks, date-equal and pooled
 losses are retained separately. Conditional IV repricing does not test a
@@ -78,4 +92,15 @@ Three validation targets are required for both metals. Option repricing evaluate
 
 \subsection{Research boundaries}
 
-This document is a reproducible working compilation. It contains no investment recommendation. Source figures and quantitative tables are withheld from the master until their asset, generator, data and recomputation status are accepted.
+This document is a reproducible research compilation and contains no
+investment recommendation. Not every element of the eight source studies is
+reproduced. The theoretical Chapters~\ref{ch:probability}--\ref{ch:monte-carlo}
+and~\ref{ch:sv-jumps} retain the mathematics but omit the source studies'
+code listings, synthetic illustrations and their numerical outputs, so the
+variance-reduction benchmark of Chapter~\ref{ch:monte-carlo} is described by its
+design rather than its results; the mine-level production plots of the Team~4
+study are not repeated in Chapter~\ref{ch:operations}; and several
+source-study diagnostic figures for the historical 12 August calibration in
+Chapter~\ref{ch:calibration} are replaced by their regenerated counterparts for
+the current 2 September 2026 snapshot. These omissions concern illustrations,
+not inputs to the valuation.

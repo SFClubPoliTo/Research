@@ -1,0 +1,43 @@
+{
+  "model": "Bates",
+  "parameter_names": [
+    "v0",
+    "kappa",
+    "theta",
+    "sigma",
+    "rho",
+    "lambd",
+    "mu_J",
+    "sigma_J"
+  ],
+  "parameters": {
+    "v0": 0.052474087890721575,
+    "kappa": 3.3990023411754327,
+    "theta": 0.057570461163037163,
+    "sigma": 0.625591124594332,
+    "rho": -0.3482459684806982,
+    "lambd": 1.7215078859159556,
+    "mu_J": 0.0677650531717016,
+    "sigma_J": 0.053981287236977954
+  },
+  "objective": 4.081478995402077e-05,
+  "global_objective": 5.074296878347558e-05,
+  "warm_start_used": false,
+  "global_search_used": true,
+  "success": true,
+  "message": "Optimization terminated successfully",
+  "evaluations": 48,
+  "iterations": 5,
+  "elapsed_seconds": 16.058534800002235,
+  "initialization_source": null,
+  "date": "2026-09-02",
+  "strategy": "CC",
+  "source_surface": "data\\processed\\audit_inputs\\outputs\\sampling\\2026-09-02\\sample_CC_64.csv",
+  "profile": "full",
+  "seed": 8,
+  "n_points": 64,
+  "saved_at_utc": "2026-10-24T13:59:49.020605+00:00",
+  "audit_date": "2026-10-24",
+  "dividend_yield": 0.004,
+  "source_calibration": "data/processed/team8/calibration_q040_20261024/CC/2026-09-02/bates.json"
+}

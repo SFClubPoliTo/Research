@@ -15,9 +15,7 @@ def fit_arma_grid(series: pd.Series, p_max: int = P_MAX, q_max: int = Q_MAX) -> 
 
     for p in range(p_max + 1):
         for q in range(q_max + 1):
-            if p == 0 and q == 0:
-                continue
-
+            # ARMA(0,0) (constant mean, white noise) is a legitimate candidate.
             try:
                 with warnings.catch_warnings():
                     warnings.simplefilter("ignore")
@@ -40,7 +38,10 @@ def fit_arma_grid(series: pd.Series, p_max: int = P_MAX, q_max: int = Q_MAX) -> 
     if not rows:
         raise RuntimeError("No ARMA model could be estimated.")
 
-    return pd.DataFrame(rows).sort_values(["AIC", "BIC"]).reset_index(drop=True)
+    grid = pd.DataFrame(rows)
+    # Exact Gaussian MLE uses the full sample for every order, so AIC/BIC are comparable.
+    assert grid["nobs"].nunique() == 1, "ARMA candidates must share a common sample"
+    return grid.sort_values(["AIC", "BIC"]).reset_index(drop=True)
 
 
 def build_latex_arma_table(df: pd.DataFrame) -> str:
@@ -61,8 +62,10 @@ def build_latex_arma_table(df: pd.DataFrame) -> str:
         "\\footnotesize\n"
         "\\textit{Notes}: Daily log returns on GLD and SLV. "
         "For each asset, the table reports the ARMA($p,q$) specification minimizing AIC and BIC "
-        "over a grid with $p,q \\in \\{0,1,2,3\\}$, excluding the degenerate ARMA(0,0) case. "
-        "Models are estimated by maximum likelihood using the statsmodels ARIMA implementation with $d=0$.\n"
+        "over a grid with $p,q \\in \\{0,1,2,3\\}$, including ARMA(0,0), i.e. a constant mean with "
+        "white-noise errors. Models are estimated by exact Gaussian maximum likelihood using the statsmodels "
+        "ARIMA implementation with $d=0$; every candidate uses the same observations, so the information "
+        "criteria are directly comparable.\n"
         "\\end{minipage}\n"
         "\\end{table}\n"
     )

@@ -1,0 +1,13 @@
+# Python dependencies for the notebooks in production/ and ebitda_montecarlo/.
+# Versions validated on 24 October 2026 with Python 3.12.10 (Windows), on synthetic inputs.
+numpy==2.5.4
+pandas==3.1.0
+scipy==1.18.1
+matplotlib==3.11.2
+seaborn==0.13.2
+plotly==7.1.0
+openpyxl==3.1.5                  # pandas.read_excel for production/data/Quarterly Data.xlsx
+pmdarima==2.1.1                  # production_forecast.ipynb (SARIMA)
+nelson-siegel-svensson==0.5.0    # IV_gold_price_BS_inversion.ipynb (Treasury curve)
+ib_insync==0.9.86                # IV_gold_price_BS_inversion.ipynb, IB option-chain fetch cell only
+ipykernel==7.4.0                 # Jupyter kernel; use any Jupyter front end (JupyterLab, VS Code)

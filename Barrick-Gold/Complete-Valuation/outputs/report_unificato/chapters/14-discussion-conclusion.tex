@@ -1,9 +1,6 @@
 \chapter*{Conclusion and Future Research}
 \addcontentsline{toc}{chapter}{Conclusion and Future Research}
 \markboth{Conclusion and Future Research}{Conclusion and Future Research}
-\chapterstatus{Unnumbered synthesis of findings, present limitations and
-genuinely new research directions. Items already completed by the unified
-project are recorded as results rather than repeated as future work.}
 
 \section*{What the project has completed}
 
@@ -18,31 +15,50 @@ Several tasks described as future work in the standalone articles are now
 complete. The Team 8 project no longer stops at Black--Scholes, Heston or
 independent Bates jumps: it contains the full affine Bates--Hawkes
 specification, constrained calibration, residual and smile diagnostics,
-four-model path simulation and a dense-only rolling comparison over 30 origins and 4,667 common forecasts. Its
-price scenarios have also been connected to Barrick 2026Q1--Q2 actuals, the
-Team~4 forecast from 2026Q3 and the unified DCF/WACC/equity contract. The
-Team~4 price demonstrator is excluded. The numerical integration is an implemented four-branch scenario experiment; the physical forecasting and corporate valuation stages remain incomplete.
+four-model path simulation and a dense-only rolling comparison over
+\OosDates{} origins and \OosObservations{} common forecasts. Its price
+scenarios have also been connected, on a dated valuation clock, to the Team~4
+forecast from the 2026Q3 stub and the unified DCF/WACC contract; Barrick's
+Q1--Q2 2026 actuals precede the valuation time and serve only as level checks.
+The Team~4 price demonstrator is excluded. The numerical integration is an
+implemented four-branch scenario experiment; the physical forecasting and
+corporate valuation stages remain incomplete.
 
-The legacy per-share arithmetic is retained in the historical experiment only as a diagnostic of its unreconciled bridge. Its comparison with the stock quote cannot identify fair value, mispricing or physical probabilities. The copper extension likewise reports conditional aggregate sensitivities rather than a validated company value.
+The evidence was rebuilt on 24 October 2026. GLD's 0.40\% sponsor fee now
+enters the calibration as carry; the valuation counts only flows after
+2 September 2026; gold paths start from the XAUUSD spot of USD~4,391.32/oz at
+the valuation time rather than from Barrick's earlier Q2 average realised
+price; the daily path engines were corrected; Bates and Bates--Hawkes are
+refined from their nested models; and the rolling test gives every model the
+same optimizer search. Each correction moves the medians by less than the
+numerical range reported below (Table~\ref{tab:unified-attribution}).
 
-The comparison further shows that changing the gold-price law affects the
-tails more than the central corporate value when production, cost, WACC and
-the equity bridge are fixed. This is a useful attribution result: it identifies
-where price-model complexity propagates through the DCF and where downstream
-assumptions compress or dominate its effect.
+No per-share value is reported and no comparison with the stock quote is made: without a reconciled equity bridge such a comparison could not identify fair value, mispricing or physical probabilities. The copper extension likewise reports conditional aggregate sensitivities, about USD~\CuDeltaLow--\CuDeltaHigh~billion of explicit flows to 2030, rather than a validated company value.
+
+The comparison further shows that, with production, cost and WACC shocks
+held fixed, the choice of gold-price law hardly moves the central operating
+proxy. Medians range from USD~\ValMedianLow{} to \ValMedianHigh~billion across
+the four engines, whereas doubling the paths or changing the seed moves
+single-model medians across USD~\NumericalMedianLow--\NumericalMedianHigh~billion:
+the spread between models is within numerical noise and does not rank them.
+The terminal value carries about \TerminalShare\% of the mean, so the
+result depends more on the terminal convention than on the price model. This
+is a useful attribution result: it identifies where price-model complexity
+propagates through the DCF and where downstream assumptions compress or
+dominate its effect.
 
 \section*{Present limitations}
 
 The completed integration remains conditional at several economic interfaces.
 First, GLD option dynamics are estimated under \(\mathbb Q\), whereas a
 long-horizon operating valuation requires scenarios justified under
-\(\mathbb P\). Restarting the option-implied engines at a physical-gold level
+\(\mathbb P\). Starting the option-implied engines at the XAUUSD spot
 transfers distributional shape; it is not a validated GLD-to-gold conversion
-or change of measure. The gold start, Treasury curve, calibration surface,
-Barrick close and current surface audit are explicitly dated: the market snapshot is 2 September, while the realised-price anchor is a Q2 average.
+or change of measure. The gold spot, Treasury curve, calibration surface and
+valuation time are synchronous and dated 2 September 2026.
 
-Second, the unified run uses Barrick actuals only for 2026Q1--Q2 and fixes the
-Team~4 forecast thereafter. That design isolates price-engine risk but does not propagate reserve,
+Second, the unified run excludes the elapsed 2026Q1--Q2 actuals and fixes the
+Team~4 forecast from the 2026Q3 stub to 2030Q4. That design isolates price-engine risk but does not propagate reserve,
 grade, recovery, energy, labour, mine-mix or closure uncertainty. Dependence
 between gold prices and operating conditions is therefore not estimated.
 
@@ -50,12 +66,19 @@ Third, Team 5 supplies a coherent DCF architecture rather than a
 filing-reconciled Barrick model. The operating-to-EBIT bridge, cash taxes,
 working capital, sustaining and growth capex, debt, cash, minorities, streams,
 other claims, non-operating assets and diluted shares require one dated
-corporate reconciliation. The present zero bridge items and share-count proxy
-are assumptions. Finite-mine closure also remains less developed than the
+corporate reconciliation. No equity bridge is applied, so the outputs remain
+aggregate operating proxies. Finite-mine closure also remains less developed than the
 generic going-concern terminal block.
 
 Finally, a sophisticated stochastic law does not eliminate model risk. The
-current cross-section favours Heston, whereas Full Bates--Hawkes leads the rolling OOS ranking. Its branching ratio is 0.5569, not the former August floor. No model beats interpolated IV persistence. Parameter pressure,
+nested calibration guarantees that each richer model fits the current
+cross-section at least as well as the model it contains, so the in-sample
+ordering is not evidence of superiority. In the rolling repricing test Full
+Bates--Hawkes has the lowest date-equal IV RMSE, \OosWRMSE~bp, but its
+advantage over Bates is not significant and no model beats interpolated IV
+persistence. Its branching ratio is \HawkesBranching, below
+unity; the Feller constraint binds for the jump models and mean reversion is
+weakly identified. Parameter pressure,
 surface sampling, optimizer dependence, regime shifts and the choice of
 physical-measure transformation remain sources of uncertainty.
 
@@ -92,7 +115,7 @@ more of the equity-value distribution.
 
 A later information layer may augment the filtration with timestamped
 macroeconomic and geopolitical data. News embeddings, NLP classifications or
-machine-learning forecasts are admissible only with event-time alignment,
+machine-learning forecasts are acceptable only with event-time alignment,
 leakage controls, pre-declared benchmarks and true chronological evaluation.
 The relevant question is not whether a flexible model improves in-sample fit,
 but whether incremental information improves forecasts beyond price,
@@ -116,16 +139,16 @@ model. It is a reproducible framework that keeps historical evidence,
 option-implied information, operating assumptions and accounting claims
 separate until the moment they are deliberately connected.
 
-Within that framework, Full Bates--Hawkes offers the richest admitted
+Within that framework, Full Bates--Hawkes offers the richest accepted
 description of current option-implied variance and clustered jumps, while the
 four-model valuation shows how little a better surface fit alone can establish
-about a mining company's equity. The thesis closes with a conditional result,
+about a mining company's operating value. The thesis closes with a conditional result,
 an explicit inventory of unresolved economic bridges and a research programme
 capable of testing them. The copper extension of
 Section~\ref{sec:copper-extension} expands the operating perimeter and adds
 dated conditional surface tests, while leaving the accounting, realised-price,
-mine-life and equity bridges explicit. Its aggregate paired values do not
-supersede the gold-only per-share examples with a corporate target.
+mine-life and equity bridges explicit. Its aggregate paired values remain
+operating proxies, not a corporate target.
 The study does not issue a fair-value certification, target
 price or investment recommendation.
 

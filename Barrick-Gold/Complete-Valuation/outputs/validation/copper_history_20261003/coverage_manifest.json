@@ -13,7 +13,7 @@
   },
   "interpretation": "Retrieval failure or unacquired dates do not establish historical data absence. No OOS scores may be reported without eligible chronological pairs.",
   "date_specific_rates": {
-    "source": "C:\\Users\\salvm\\Desktop\\SF\\Research projects\\Barrick gold\\UNIFICATO\\Github-Branch\\paper_audit\\team8_data\\data\\processed\\usd_treasury_history.csv",
+    "source": "<contributor-home>\\Desktop\\SF\\Research projects\\Barrick gold\\UNIFICATO\\Github-Branch\\paper_audit\\team8_data\\data\\processed\\usd_treasury_history.csv",
     "sha256": "94268DEBA502A8DDABA81B120C8ADFD49B59D87D459056DD4AA407D9F0879F0E",
     "selection": "latest curve date <= observation date"
   },

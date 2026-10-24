@@ -16,19 +16,19 @@
   },
   "inputs": [
     {
-      "path": "C:\\Users\\salvm\\Desktop\\SF\\Research projects\\Barrick gold\\UNIFICATO\\Github-Branch\\data\\processed\\team4\\barrick_mine_operating_q1_q2_2026.csv",
+      "path": "<contributor-home>\\Desktop\\SF\\Research projects\\Barrick gold\\UNIFICATO\\Github-Branch\\data\\processed\\team4\\barrick_mine_operating_q1_q2_2026.csv",
       "sha256": "9CB616059846D22C095083C7AC29D775895D04DB9AE5FD394867DA8E091D94DA"
     },
     {
-      "path": "C:\\Users\\salvm\\Desktop\\SF\\Research projects\\Barrick gold\\UNIFICATO\\Github-Branch\\data\\processed\\team4\\barrick_total_gold_q1_q2_2026.csv",
+      "path": "<contributor-home>\\Desktop\\SF\\Research projects\\Barrick gold\\UNIFICATO\\Github-Branch\\data\\processed\\team4\\barrick_total_gold_q1_q2_2026.csv",
       "sha256": "D47EF91562F9D2ECD1432DF712D6A52EFB2ED9B9ECE97077B55B75D5B53EE912"
     },
     {
-      "path": "C:\\Users\\salvm\\Desktop\\SF\\Research projects\\Barrick gold\\UNIFICATO\\Github-Branch\\data\\manifests\\team4\\barrick_operating_q1_q2_2026_manifest.json",
+      "path": "<contributor-home>\\Desktop\\SF\\Research projects\\Barrick gold\\UNIFICATO\\Github-Branch\\data\\manifests\\team4\\barrick_operating_q1_q2_2026_manifest.json",
       "sha256": "71A8B159C8C309210C6123EEDA676981B6DCBFB1934F53E3630427255F282FDF"
     },
     {
-      "path": "C:\\Users\\salvm\\Desktop\\SF\\Research projects\\Barrick gold\\UNIFICATO\\Github-Branch\\config\\provisional_valuation_20260827_team4_separated.json",
+      "path": "<contributor-home>\\Desktop\\SF\\Research projects\\Barrick gold\\UNIFICATO\\Github-Branch\\config\\provisional_valuation_20260827_team4_separated.json",
       "sha256": "00C43CF8DB8600711BA43C64B9D2BF93E8A9F54A32B5AFBB8B7570DF735B2F28"
     }
   ],

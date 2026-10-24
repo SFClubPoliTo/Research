@@ -1,3 +1,22 @@
+# Cost-of-sales forecast (Article 4, Barrick Gold Research).
+# R packages and tested versions: see R_requirements.txt in this folder.
+#
+# Usage:
+#   Rscript cost_of_sales.R [COST_CSV] [WEIGHTS_CSV] [OUTPUT_DIR]
+# Defaults (relative to this script's folder):
+#   COST_CSV    = data/cost_of_sales.csv
+#   WEIGHTS_CSV = data/cost_of_sales_weights.csv
+#   OUTPUT_DIR  = output/
+#
+# Expected input layout (both CSVs, one row per mine-year, "wide" quarters):
+#   Miniera  - mine name (must match exactly between the two files)
+#   Anno     - calendar year (e.g. 2019)
+#   Q1,Q2,Q3,Q4 - quarterly values; "N/D" or empty = not available
+# COST_CSV:    cost of sales per ounce sold (US$/oz), mine level, as reported in
+#              Barrick's quarterly MD&A / "Mine Stats" operating tables.
+# WEIGHTS_CSV: gold ounces sold in the same mine-quarter, on the same basis
+#              (attributable vs 100%) as the cost per ounce. Used as weights.
+
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -7,26 +26,68 @@ library(forecast)
 library(tseries)
 
 # =====================================================================
+# CONFIGURATION
+# =====================================================================
+
+get_script_dir <- function() {
+  file_arg <- grep("^--file=", commandArgs(trailingOnly = FALSE), value = TRUE)
+  if (length(file_arg) == 1) return(dirname(normalizePath(sub("^--file=", "", file_arg))))
+  getwd()  # interactive use: run from the cost_of_sales/ folder
+}
+SCRIPT_DIR <- get_script_dir()
+cli_args   <- commandArgs(trailingOnly = TRUE)
+
+COST_CSV_PATH    <- if (length(cli_args) >= 1) cli_args[1] else file.path(SCRIPT_DIR, "data", "cost_of_sales.csv")
+WEIGHTS_CSV_PATH <- if (length(cli_args) >= 2) cli_args[2] else file.path(SCRIPT_DIR, "data", "cost_of_sales_weights.csv")
+OUTPUT_DIR       <- if (length(cli_args) >= 3) cli_args[3] else file.path(SCRIPT_DIR, "output")
+
+# "production" (default): ounce-weighted average across mines.
+# "equal": unweighted mean, kept ONLY to reproduce the run published on 8 May 2026.
+WEIGHTING <- "production"
+
+# Out-of-sample settings (Chunk 6)
+H_TEST    <- 12  # single hold-out length (quarters)
+H_CV      <- 4   # rolling-origin horizon (quarters)
+MIN_TRAIN <- 16  # first rolling-origin training window (quarters)
+
+# =====================================================================
 # CHUNK 1: DATA LOADING & PREPARATION
 # =====================================================================
 
-datastg <- read.csv("")
+read_wide_quarterly <- function(path, what) {
+  if (!file.exists(path)) {
+    stop(sprintf(paste0(
+      "%s file not found: %s\n",
+      "Expected a CSV with columns Miniera, Anno, Q1, Q2, Q3, Q4 (see header of this script\n",
+      "and the 'Data needed to reproduce' section of the README). Pass the path as a\n",
+      "command-line argument or place the file at the default location."), what, path),
+      call. = FALSE)
+  }
+  df <- read.csv(path, stringsAsFactors = FALSE, check.names = FALSE)
+  missing_cols <- setdiff(c("Miniera", "Anno", "Q1", "Q2", "Q3", "Q4"), names(df))
+  if (length(missing_cols) > 0) {
+    stop(sprintf("%s file %s is missing columns: %s", what, path,
+                 paste(missing_cols, collapse = ", ")), call. = FALSE)
+  }
+  df %>%
+    pivot_longer(
+      cols = c(Q1, Q2, Q3, Q4),
+      names_to = "Q", values_to = "Value",
+      values_transform = list(Value = as.character)
+    ) %>%
+    mutate(
+      Value = trimws(Value),
+      Value = ifelse(Value == "N/D" | Value == "", NA, Value),
+      Value = as.numeric(Value),
+      Quarter_Str = paste(Anno, Q),
+      YearQtr = as.yearqtr(Quarter_Str, format = "%Y Q%q"),
+      Date = as.Date(YearQtr)
+    ) %>%
+    filter(!is.na(Value))
+}
 
-long_df <- datastg %>%
-  pivot_longer(
-    cols = c(Q1, Q2, Q3, Q4), 
-    names_to = "Q", values_to = "Value",
-    values_transform = list(Value = as.character)
-  ) %>%
-  mutate(
-    Value = ifelse(Value == "N/D" | Value == "", NA, Value),
-    Value = as.numeric(Value),
-    Quarter_Str = paste(Anno, Q),
-    YearQtr = as.yearqtr(Quarter_Str, format = "%Y Q%q"),
-    Date = as.Date(YearQtr)
-  ) %>%
-  filter(!is.na(Value)) %>% 
-  filter(Date >= as.Date("2017-01-01")) %>% 
+long_df <- read_wide_quarterly(COST_CSV_PATH, "Cost-of-sales") %>%
+  filter(Date >= as.Date("2017-01-01")) %>%
   arrange(Miniera, Date)
 
 
@@ -34,11 +95,44 @@ long_df <- datastg %>%
 # CHUNK 2: MASTER CHAIN CREATION (LOG-SPACE)
 # =====================================================================
 
-avg_hist <- long_df %>%
-  group_by(Date, YearQtr) %>%
-  summarise(Avg_Value = mean(Value, na.rm = TRUE), .groups = "drop") %>%
-  mutate(Log_Value = log(Avg_Value)) %>% 
+# The mine panel is unbalanced (mines enter/leave the sample and have
+# different sizes). A simple mean gives a small mine the same weight as a
+# large one, so the "company" cost per ounce jumps whenever the mix changes.
+# The variable is a cost per ounce SOLD, so the consistent aggregate is the
+# ounce-weighted mean:  sum_i(CoS/oz_i * oz_i) / sum_i(oz_i)  = total cost of
+# sales / total ounces sold for the mines in the panel that quarter.
+# Weighting reduces, but does not remove, composition breaks when a mine
+# enters or exits the panel.
+if (WEIGHTING == "production") {
+  weights_long <- read_wide_quarterly(WEIGHTS_CSV_PATH, "Ounces-sold weights") %>%
+    select(Miniera, Date, Weight = Value)
+  long_w <- long_df %>% left_join(weights_long, by = c("Miniera", "Date"))
+  bad_w <- long_w %>% filter(is.na(Weight) | Weight <= 0)
+  if (nrow(bad_w) > 0) {
+    warning(sprintf(
+      "%d mine-quarters have a cost but no positive ounces-sold weight; they are excluded from the weighted average: %s",
+      nrow(bad_w), paste(unique(paste(bad_w$Miniera, bad_w$YearQtr)), collapse = "; ")))
+  }
+  avg_hist <- long_w %>%
+    filter(!is.na(Weight), Weight > 0) %>%
+    group_by(Date, YearQtr) %>%
+    summarise(Avg_Value = weighted.mean(Value, Weight), N_Mines = n(), .groups = "drop")
+} else if (WEIGHTING == "equal") {
+  warning("WEIGHTING = 'equal': unweighted mean across an unbalanced panel (legacy, published run only).")
+  avg_hist <- long_df %>%
+    group_by(Date, YearQtr) %>%
+    summarise(Avg_Value = mean(Value, na.rm = TRUE), N_Mines = n(), .groups = "drop")
+} else {
+  stop("WEIGHTING must be 'production' or 'equal'.", call. = FALSE)
+}
+avg_hist <- avg_hist %>%
+  mutate(Log_Value = log(Avg_Value)) %>%
   arrange(Date)
+
+# ts() assumes consecutive quarters: fail loudly on gaps.
+if (any(round(diff(as.numeric(avg_hist$YearQtr)) * 4) != 1)) {
+  stop("The aggregated cost series has missing quarters; fill the input data before fitting.", call. = FALSE)
+}
 
 start_year <- as.numeric(format(min(avg_hist$Date), "%Y"))
 start_qtr  <- (as.numeric(format(min(avg_hist$Date), "%m")) - 1) / 3 + 1
@@ -89,8 +183,15 @@ tryCatch(print(kpss.test(ts_log)),
 # CHUNK 5: ARIMA MODEL FITTING & DIAGNOSTICS
 # =====================================================================
 
+# Single model-selection procedure, used for the final forecast AND for every
+# validation window, so the out-of-sample test measures the procedure that
+# actually produces the forecast.
+fit_cos_model <- function(y) {
+  auto.arima(y, seasonal = TRUE, stepwise = FALSE, approximation = FALSE)
+}
+
 cat("\n--- FITTING SARIMA MODEL ---\n")
-fit <- auto.arima(ts_log, seasonal = TRUE, stepwise = FALSE, approximation = FALSE)
+fit <- fit_cos_model(ts_log)
 print(fit)
 
 # Inverse Roots Plot
@@ -109,26 +210,43 @@ tryCatch(print(shapiro.test(fit$residuals)),
 # CHUNK 6: OUT-OF-SAMPLE VALIDATION
 # =====================================================================
 
-h_test <- 12  
+h_test <- H_TEST
 n_total <- length(ts_log)
 
+# (a) Single hold-out: auto.arima re-run on the training window only.
 train_set <- head(ts_log, n_total - h_test)
 test_set  <- tail(ts_log, h_test)
 
-fit_train <- Arima(train_set, order = c(3,1,0), include.drift = TRUE)
+fit_train <- fit_cos_model(train_set)
+train_label <- as.character(fit_train)
 
 arima_forecast <- forecast(fit_train, h = h_test)
-naive_forecast <- naive(train_set, h = h_test) 
+naive_forecast <- naive(train_set, h = h_test)
 
-cat("\n--- ACCURACY: ARIMA(3,1,0) ---\n")
+cat("\n--- HOLD-OUT ACCURACY:", train_label, "(auto.arima on training window) ---\n")
 print(accuracy(arima_forecast, test_set))
-cat("\n--- ACCURACY: NAIVE MODEL (Benchmark) ---\n")
+cat("\n--- HOLD-OUT ACCURACY: NAIVE MODEL (Benchmark) ---\n")
 print(accuracy(naive_forecast, test_set))
 
 autoplot(arima_forecast) +
   autolayer(test_set, series = "Actual Data (Test Set)", color = "red") +
-  ggtitle("Out-of-Sample Validation: ARIMA Forecast vs Actual Data") +
+  ggtitle(paste("Out-of-Sample Validation:", train_label, "vs Actual Data")) +
   ylab("Log Values") + theme_minimal()
+
+# (b) Rolling origin (expanding window): auto.arima is re-selected and
+# re-estimated at every forecast origin, exactly as for the final forecast.
+cat("\n--- ROLLING-ORIGIN CV (auto.arima refit at each origin) ---\n")
+e_arima <- tsCV(ts_log, function(y, h) forecast(fit_cos_model(y), h = h),
+                h = H_CV, initial = MIN_TRAIN)
+e_naive <- tsCV(ts_log, function(y, h) naive(y, h = h),
+                h = H_CV, initial = MIN_TRAIN)
+cv_table <- data.frame(
+  Horizon     = seq_len(H_CV),
+  RMSE_ARIMA  = sqrt(colMeans(as.matrix(e_arima)^2, na.rm = TRUE)),
+  RMSE_Naive  = sqrt(colMeans(as.matrix(e_naive)^2, na.rm = TRUE)),
+  N_Forecasts = colSums(!is.na(as.matrix(e_arima)))
+)
+print(cv_table, row.names = FALSE)
 
 
 # =====================================================================
@@ -278,6 +396,25 @@ global_output_table <- fc_global_log %>%
 cat("\n--- FORECAST GLOBAL MASTER CHAIN (Avg Market Trend) ---\n")
 print(as.data.frame(global_output_table))
 
+# Export for ebitda_montecarlo/ebitda_mc.ipynb. Global_Value is exp(log
+# forecast), i.e. the median cost of sales per oz; Log_SD is the forecast
+# standard deviation in log space at each horizon (95% radius / 1.96), used
+# there to draw cost shocks. Resid_SD = in-sample one-step residual s.d.
+dir.create(OUTPUT_DIR, showWarnings = FALSE, recursive = TRUE)
+cost_export <- fc_global_log %>%
+  mutate(Quarter = as.character(as.yearqtr(Date)),
+         Global_Value = exp(Log_Value),
+         Global_Lower = exp(Log_Lower), Global_Upper = exp(Log_Upper),
+         Log_Mean = Log_Value,
+         Log_SD = Log_CI_Radius / qnorm(0.975),
+         Resid_SD = sqrt(fit$sigma2),
+         Model = as.character(fit),
+         Weighting = WEIGHTING) %>%
+  select(Quarter, Date, Global_Value, Global_Lower, Global_Upper, Log_Mean, Log_SD, Resid_SD, Model, Weighting)
+write.csv(cost_export, file.path(OUTPUT_DIR, "cost_forecast_global.csv"), row.names = FALSE)
+write.csv(output_table, file.path(OUTPUT_DIR, "cost_forecast_by_mine.csv"), row.names = FALSE)
+cat("\nForecast tables written to", normalizePath(OUTPUT_DIR), "\n")
+
 # Global Plot
 plot_global_hist <- avg_hist %>%
   mutate(Value = exp(Log_Value), Lower_CI = NA, Upper_CI = NA, Type = "Historical") %>%
@@ -299,7 +436,7 @@ p_global <- ggplot(plot_global_data, aes(x = Date, y = Value)) +
   scale_fill_manual(values = c("Historical" = NA, "Forecast" = "#e31a1c")) +
   coord_cartesian(xlim = c(min(plot_global_data$Date), global_plot_end_date)) +
   labs(title = "Global Master Chain Forecast (Market Trend)",
-       subtitle = "Trend medio del mercato (Zoom a 2 Anni)", y = "Average Value ($)", x = NULL) +
+       subtitle = "Trend medio del mercato (Zoom a 2 Anni)", y = "Cost of sales per oz (aggregate, $/oz)", x = NULL) +
   theme_bw() + theme(legend.position = "top", plot.title = element_text(face = "bold", size = 14))
 
 print(p_global)

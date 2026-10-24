@@ -8,14 +8,11 @@ measure at that interface, before production, costs and discounted cash flow.
 It applies to all four model families and to both commodities. It is not an
 editorial qualification appended to a completed corporate valuation.
 
-\chapterstatus{Research update of 6 October 2026, retaining the market cutoff
-of 2 September 2026. Historical inputs, restricted coefficient maps, initial
-physical estimates and numerical diagnostics have been implemented. A
-training-only physical GBM baseline has been scored at daily and quarterly
-horizons. Joint identification, numerical convergence of the richer models,
-commodity basis uncertainty and the corporate cash-flow bridge remain open.
-None of these diagnostics replaces the frozen scenario outputs with a
-validated corporate valuation.}
+The analysis in this section was updated on 6 October 2026 and keeps the
+market cutoff of 2 September 2026. Joint identification, numerical
+convergence of the richer models, commodity basis uncertainty and the
+corporate cash-flow bridge remain open, so none of these diagnostics replaces
+the scenario outputs with a validated corporate valuation.
 
 \subsection{The economic object and the two probability measures}
 
@@ -118,7 +115,7 @@ $c_I\alpha_Q/\beta_Q<1$. Stationarity and the algebra above do not, by
 themselves, prove that the candidate density is a true martingale over the
 required horizon. The finite-horizon argument below establishes the density for the stated
 restricted coefficient family. Initial-state consistency and empirical
-admission remain separate requirements.
+validation remain separate requirements.
 
 The Brownian part is checked separately using Novikov's sufficient condition.
 With $C=\left(\begin{smallmatrix}1&\rho\\\rho&1\end{smallmatrix}\right)$,
@@ -187,7 +184,7 @@ zero jump intensity, an equivalent measure cannot create jump events on a
 previously null event set. The current copper Bates fit has this boundary
 case. A physical jump requirement would therefore call for a separately
 versioned joint refit, not an arbitrary positive intensity inserted into the
-frozen fit. Very small jump marks can likewise make risk-premium estimates
+existing fit. Very small jump marks can likewise make risk-premium estimates
 weakly identified even when the algebra is admissible.
 
 \subsection{Historical information, clocks and the commodity basis}
@@ -335,14 +332,14 @@ errors must remain separate from option IV errors. Reusing a September
 calibration to forecast earlier dates would violate this design.
 
 Thirty historical surfaces have now been recovered from the observed fields
-of the frozen rolling panel, each with 64 contracts across at least three
+of the fixed rolling panel, each with 64 contracts across at least three
 expiries. The recovery excludes prior model predictions and support-selection
 flags; all dated spot levels agree with independently acquired GLD regular-session
 closes. These are observed legacy option-price fields, not asserted transaction
 prices. Recovering the observations does not recover historical model parameters:
 each origin still requires its own calibration. The window supports short-horizon
 experiments, but no 90-day target after the first July origin lies within the
-2 September market freeze.
+2 September market cutoff.
 
 Joint maximum likelihood is not a mathematical requirement of changing measure.
 A conditional two-stage estimator can calibrate structural pricing coefficients
@@ -360,8 +357,8 @@ The completed conditional GBM experiment has 29 next-session targets, from
 10 July--1 September origins. Each origin has a new option-volatility fit;
 the physical log drift is estimated from returns available by that origin.
 Exact lognormal prediction gives RMSE of USD~6.119 per GLD share against
-USD~6.117 for the no-change mean. Twenty-seven of the 29 nominal 95\%
-intervals cover the observed price. This short sample supplies no RMSE
+USD~6.117 for the no-change mean. In the matched four-model panel below,
+\CovBSNinetyFive{} nominal 95\% gold intervals cover the observed price. This short sample supplies no RMSE
 advantage, and it does not establish long-horizon calibration. These GLD
 errors are distinct from the USD/oz errors of the longer historical-only
 gold benchmark above. The richer-model origin experiment must additionally
@@ -374,7 +371,7 @@ budget; their forecasts remain in the comparison rather than being removed
 after observing the errors. Applying the origin-fitted deterministic gold
 basis to both models gives RMSE of USD~66.77/oz for Heston and 66.35/oz for
 GBM, against 66.09/oz for gold no-change. Both nominal 95\% intervals cover
-27 of 29 gold targets. These matched-sample results establish no RMSE
+\CovHNinetyFive{} gold targets. These matched-sample results establish no RMSE
 advantage, and do not certify parameter identification or long-horizon
 distributional accuracy.
 
@@ -399,14 +396,25 @@ deterministic basis; parameter and basis uncertainty are omitted.}
 Model & GLD RMSE & Gold RMSE & Gold 95\% & Gold 80\%\\
  & USD/share & USD/oz & coverage & coverage\\
 \midrule
-GBM & 6.119 & 66.35 & 27/29 & 21/29\\
-Heston & 6.157 & 66.77 & 27/29 & 20/29\\
-Bates & 6.162 & 66.84 & 25/29 & 17/29\\
-Bates--Hawkes & 6.072 & 65.81 & 25/29 & 16/29\\
+GBM & 6.119 & 66.35 & \CovBSNinetyFive & \CovBSEighty\\
+Heston & 6.157 & 66.77 & \CovHNinetyFive & \CovHEighty\\
+Bates & 6.162 & 66.84 & \CovBNinetyFive & \CovBEighty\\
+Bates--Hawkes & 6.072 & 65.81 & \CovWNinetyFive & \CovWEighty\\
 No-change mean & 6.117 & 66.09 & --- & ---\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+Coverage is tested against the binomial law of the nominal level. At 95\%
+the jump models cover \CovBNinetyFive{} targets (binomial $p=\CovBNinetyFiveP$),
+against \CovBSNinetyFive{} for GBM and Heston ($p=\CovBSNinetyFiveP$). At 80\%
+the jump models under-cover significantly: Bates covers \CovBEighty{}
+($p=\CovBEightyP$) and Bates--Hawkes \CovWEighty{} ($p=\CovWEightyP$), against
+\CovBSEighty{} for GBM ($p=\CovBSEightyP$) and \CovHEighty{} for Heston
+($p=\CovHEightyP$). The central intervals of the jump models are too narrow,
+and parameter and basis uncertainty are omitted. These origin fits predate the
+24 October carry correction: their pricing stage uses $q=0$, and they were not
+recalibrated with $q=0.40\%$.
 
 \paragraph{Numerical reliability and chronological initialization.}
 Two Heston physical optimizations (24 July and 20 August) and one
@@ -431,8 +439,8 @@ it is not a uniform warm-start experiment. A same-surface numerical check
 found different local minima for Heston and Bates, which prevents claiming
 that the faster initialization reproduces the original global optimum.
 The artifact audit verifies 58 pricing-to-physical hash links and 49
-strictly backward initialization links. Those checks establish provenance,
-not numerical convergence. The aggregate freezes are
+strictly backward initialization links. Those checks establish traceability,
+not numerical convergence. The aggregate output versions are
 \texttt{20261011-four-model-complete} and
 \texttt{20261011-four-model-gold-complete}.
 
@@ -452,7 +460,7 @@ the simulated variance path and event counts, a total of $N$ independent
 normal marks contributes mean $N\mu_{J,P}$ and variance $N\sigma_J^2$ to
 the conditional daily-return density. This is valid for the implemented
 nonmark-dependent intensity and variance dynamics. Event counts and
-variance paths remain sampled; the frozen panel above retains its original
+variance paths remain sampled; the fixed panel above retains its original
 filter. The new variant matches the one-step compound-Poisson normal-mixture
 reference and leaves the zero-jump filter unchanged.
 
@@ -468,7 +476,7 @@ integration work before relying on long-horizon physical distributions.
 \subsection{Consequences for the operating and valuation layers}
 
 The required revenue input is $\mathbb E^P[P_t^{\rm realised}Q_t^{\rm sold}]$
-on the admitted ownership basis. It reduces to a deterministic sales volume
+on the accepted ownership basis. It reduces to a deterministic sales volume
 times the expected realised price only under that operating simplification;
 with stochastic sales, dependence matters. Royalties, price-linked taxes,
 inventory timing and realised-price basis also belong in the operating
@@ -476,14 +484,14 @@ transformation. Depreciation inside Cost of Sales must be reconciled with
 cash capital expenditure and the EBIT-to-FCFF bridge.
 
 Instrument identity and the valuation clock impose further restrictions. A
-fixed-delivery copper future cannot be continued beyond expiry as a five-year
-spot process: rotating-delivery returns alone do not identify that extension.
+fixed-delivery copper future cannot be continued beyond expiry as a spot
+process to 2030: rotating-delivery returns alone do not identify that extension.
 A copper term-structure and realised-price basis are required. Likewise, a
 2 September valuation excludes already elapsed first- and second-quarter cash
 flows from future enterprise value. The remaining third-quarter stub, later
 quarters and balance-sheet claims must use a consistent valuation date.
 
-The frozen option-shape scenario law remains a separate experiment. None of
+The fixed option-shape scenario law remains a separate experiment. None of
 its valuation quantiles is retroactively relabelled physical because a
 coefficient map or a preliminary estimate now exists. A replacement requires
 admissible and identified physical models, origin-only validation, uncertainty

@@ -53,9 +53,11 @@ stages. Forward paths share the option-estimated initial state across measures.
 All four physical models now have 29 common next-session targets.
 After origin-only gold conversion, RMSE is USD~66.35/oz for GBM, 66.77
 for Heston, 66.84 for Bates and 65.81 for Bates--Hawkes, versus 66.09
-for no-change. The small Hawkes advantage does not establish superiority:
-nominal 95\% coverage is 27/29 for GBM/Heston and 25/29 for both jump
-models, with parameter and basis uncertainty omitted. Two Heston fits and
+for no-change. The small Hawkes advantage does not establish superiority.
+Nominal 95\% intervals cover \CovBSNinetyFive{} targets for GBM and Heston and \CovWNinetyFive{} for both jump models (binomial $p=\CovWNinetyFiveP$).
+At 80\% the jump models under-cover significantly: Bates covers \CovBEighty{} ($p=\CovBEightyP$) and Bates--Hawkes \CovWEighty{} ($p=\CovWEightyP$), against \CovBSEighty{} for GBM and \CovHEighty{} for Heston.
+Their central intervals are too narrow, and parameter and basis uncertainty are omitted.
+These origin fits predate the carry correction and use $q=0$; they were not recalibrated. Two Heston fits and
 one Hawkes fit fail to converge and remain included; independent filter
 checks show substantial seed sensitivity. Resumed fits use strictly earlier
 parameters as initial guesses with global fallback, while preserving prior

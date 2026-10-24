@@ -10,7 +10,7 @@ questions and should be read as a modular research programme, not as eight
 replications of one experiment. Table
 \ref{tab:team-question-model-output} identifies what each study contributes;
 Table \ref{tab:team-validation-role} records what has actually been validated
-and what remains inadmissible in the unified valuation.
+and what remains excluded from the unified valuation.
 
 \begin{table}[H]
 \centering
@@ -21,7 +21,7 @@ and what remains inadmissible in the unified valuation.
 \renewcommand{\arraystretch}{1.10}
 \begin{tabularx}{\textwidth}{@{}p{0.85cm}p{2.32cm}X X X@{}}
 \toprule
-\textbf{Study} & \textbf{Question} & \textbf{Admitted input} &
+\textbf{Study} & \textbf{Question} & \textbf{Accepted input} &
 \textbf{Core method} & \textbf{Source output} \\
 \midrule
 % Team 1: MAP-T1-01--07; BG-U-04.
@@ -32,7 +32,7 @@ GBM and Black--Scholes--Merton. & Canonical theoretical foundation for the
 pricing and measure conventions used downstream. \\
 % Team 2: MAP-T2-01--09; BG-U-05.
 T2 & How should conditional means, dependence and linear time-series dynamics
-be specified and interpreted? & Methodological examples; no frozen Barrick
+be specified and interpreted? & Methodological examples; no fixed Barrick
 dataset or executable implementation. & OLS and robust inference, returns and
 stationarity, AR/MA/ARIMA, rolling correlation and DCC. & Econometric vocabulary,
 diagnostics and causal caveats for later empirical studies. \\
@@ -64,7 +64,7 @@ Merton and Bates. & Model mechanisms and synthetic illustrations for the
 advanced option stack. \\
 % Team 7: T7-01--17; BG-U-07/BG-U-08.
 T7 & How have gold and silver returns, dependence and volatility behaved in a
-long historical sample? & A frozen legacy Yahoo sample whose provider, window
+long historical sample? & A fixed legacy Yahoo sample whose provider, window
 and scale remain separate from LSE. & Static and rolling dependence, OLS,
 AR/ARIMA, stylised facts, GARCH and GPH diagnostics. & Historical empirical
 tables and volatility evidence; no causal or Barrick-specific result. \\
@@ -88,7 +88,7 @@ residual, OOS and risk-neutral GLD-path outputs, ending before corporate value. 
 \begin{tabularx}{\textwidth}{@{}p{0.85cm}p{2.97cm}X X X@{}}
 \toprule
 \textbf{Study} & \textbf{Validation status} & \textbf{Role in unified work} &
-\textbf{Binding limitation} & \textbf{Provenance rule} \\
+\textbf{Binding limitation} & \textbf{Reuse rule} \\
 \midrule
 % Team 1: MAP-T1 coverage and GAP-BIB-01/GAP-MATH-01.
 T1 & Source mapped; no code parity. Formula and citation audit remains open. &
@@ -101,7 +101,7 @@ linear time-series method; Team 7 supplies applications. & Quantile regression
 and unused tests are outside the current main experiment. & Methodological
 claims only; do not manufacture a Barrick application. \\
 % Team 3: TEAM3-PARITY-FINDING; GAP-MODEL-02.
-T3 & Limited parity: source and primary CSV freeze accepted; figures, licence
+T3 & Limited parity: source and primary CSV snapshot accepted; figures, licence
 and historical runtime remain open. & Monte Carlo estimator, path and
 variance-reduction layer. & Copula/portfolio result chapters are placeholders
 and supporting modules are incomplete. & Synthetic outputs retain an explicit
@@ -113,7 +113,7 @@ baseline; separate copper extension. & Produced/sold basis, exceptional
 anchors, CoS/AISC/D\&A and cash-flow reconciliation remain open. & Preserve
 source forecasts and distinguish actuals, source demonstrator and extension. \\
 % Team 5: TEAM5-PARITY-FINDING; GAP-DCF-01/GAP-VAL-05/06.
-T5 & Limited parity: three frozen sources and three synthetic CSV outputs
+T5 & Limited parity: three archived sources and three synthetic CSV outputs
 accepted. & Accounting, FCFF, discounting and stochastic DCF layer. & Selected
 working-capital, NOPAT/FCFE and terminal formulas require correction; corporate
 inputs are absent. & Synthetic values are teaching benchmarks only. \\
@@ -130,11 +130,11 @@ realised-volatility context. & GARCH is full-sample rather than scored OOS;
 GPH estimates do not establish stationary long memory. & Keep Yahoo and LSE
 samples separate and exclude the source recommendation. \\
 % Team 8: TEAM8 G1.4, CL-005/011/012; GAP-PRED-01.
-T8 & Unit parity accepted on 109 unchanged files and 56 tests; G1.5 historical
+T8 & Unit parity accepted on 109 unchanged files and 56 tests; historical
 market parity is unproven. & Candidate option-implied price engine and model
 comparison. & Richer in-sample fit does not beat the previous-day IV surface
 OOS; GLD risk-neutral paths are not physical gold forecasts. & Keep the legacy
-freeze, current refresh and future valuation as three distinct experiments. \\
+snapshot, current refresh and future valuation as three distinct experiments. \\
 \bottomrule
 \end{tabularx}
 \end{table}

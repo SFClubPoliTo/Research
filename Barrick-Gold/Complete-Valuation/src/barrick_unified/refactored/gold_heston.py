@@ -12,8 +12,11 @@ class HestonGoldModel(GoldPriceModel):
     label = "Heston"
 
     def _simulate_fine(self, context: GoldSimulationContext) -> np.ndarray:
+        # Calibration files name the vol-of-vol "sigma" (Heston.PARAMETER_NAMES);
+        # older hand-written contexts used "xi".  Accept either.
+        p = context.parameters
         parameters = tuple(
-            float(context.parameters[name])
+            float(p[name] if name != "xi" else p.get("xi", p.get("sigma")))
             for name in ("v0", "kappa", "theta", "xi", "rho")
         )
         return context.team8_module.simulate_heston_paths(

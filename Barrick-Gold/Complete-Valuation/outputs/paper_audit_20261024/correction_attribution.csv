@@ -1,0 +1,17 @@
+model,step,median_bn
+black_scholes,"7 Sep Paper (legacy clock, frozen engines)",60.09653983657478
+black_scholes,"+ dated clock, path average, mid-period, corrected engines",57.80608526938339
+black_scholes,"+ spot anchor USD 4,391.32/oz at valuation time",57.107601507152616
+black_scholes,+ GLD carry q = 0.40% recalibration (final),56.317516670542766
+heston,"7 Sep Paper (legacy clock, frozen engines)",59.77338085299532
+heston,"+ dated clock, path average, mid-period, corrected engines",58.65393107787453
+heston,"+ spot anchor USD 4,391.32/oz at valuation time",57.9463992348586
+heston,+ GLD carry q = 0.40% recalibration (final),57.616416912534945
+bates_poisson,"7 Sep Paper (legacy clock, frozen engines)",59.11906405574272
+bates_poisson,"+ dated clock, path average, mid-period, corrected engines",59.33684010620005
+bates_poisson,"+ spot anchor USD 4,391.32/oz at valuation time",58.589490672125294
+bates_poisson,+ GLD carry q = 0.40% recalibration (final),59.47890287706917
+full_bates_hawkes,"7 Sep Paper (legacy clock, frozen engines)",59.8247395396775
+full_bates_hawkes,"+ dated clock, path average, mid-period, corrected engines",58.49102265708138
+full_bates_hawkes,"+ spot anchor USD 4,391.32/oz at valuation time",57.73919383484257
+full_bates_hawkes,+ GLD carry q = 0.40% recalibration (final),57.259595855493046

@@ -1,0 +1,34 @@
+{
+  "model": "Heston",
+  "parameter_names": [
+    "v0",
+    "kappa",
+    "theta",
+    "sigma",
+    "rho"
+  ],
+  "parameters": {
+    "v0": 0.05814898336027363,
+    "kappa": 4.295675841980746,
+    "theta": 0.06427637076425724,
+    "sigma": 0.7420016397162374,
+    "rho": -0.3337319375180999
+  },
+  "objective": 3.8042571493927823e-05,
+  "global_objective": 3.8042571493927823e-05,
+  "warm_start_used": false,
+  "global_search_used": true,
+  "success": true,
+  "message": "Optimization terminated successfully",
+  "evaluations": 6,
+  "iterations": 1,
+  "elapsed_seconds": 11.767108100000769,
+  "initialization_source": null,
+  "date": "2026-07-28",
+  "strategy": "ROLLING",
+  "source_surface": "data\\processed\\team8\\oos_q040_20261024\\calibration_sets\\2026-07-28\\calibration_surface.csv",
+  "profile": "full",
+  "seed": 8,
+  "n_points": 64,
+  "saved_at_utc": "2026-10-24T15:15:54.280512+00:00"
+}

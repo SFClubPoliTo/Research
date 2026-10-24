@@ -4,7 +4,7 @@
   "run_id": "20260825T130328Z-py3125",
   "runtime_status": "candidate_runtime_original_runtime_unknown",
   "interpreter": {
-    "executable": "C:/Users/salvm/AppData/Roaming/jupyterlab-desktop/jlab_server/python.exe",
+    "executable": "<contributor-home>/AppData/Roaming/jupyterlab-desktop/jlab_server/python.exe",
     "version": "3.12.5",
     "implementation": "CPython",
     "platform": "Windows-11-10.0.26200-SP0"

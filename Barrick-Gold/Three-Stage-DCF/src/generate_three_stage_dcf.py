@@ -8,6 +8,7 @@ Barrick Gold and it does not compute a share price.
 from __future__ import annotations
 
 import csv
+import warnings
 from dataclasses import dataclass, replace
 from pathlib import Path
 
@@ -37,8 +38,8 @@ class ModelParams:
     n_sim: int = 20_000
     seed: int = 42
 
-    high_years: int = 3
-    transition_years: int = 4
+    high_years: int = 3  # stage 1: constant high growth and ROIC
+    transition_years: int = 4  # stage 2: linear fade to stable values; stage 3 is the Gordon terminal value
 
     revenue_0: float = 1_000.0
     high_growth: float = 0.085
@@ -58,6 +59,7 @@ class ModelParams:
     wacc_reversion: float = 0.45
     wacc_volatility: float = 0.009
     corr_growth_wacc: float = -0.30
+    min_terminal_spread: float = 0.01  # explicit floor on WACC - g in the Gordon formula
 
 
 @dataclass
@@ -70,23 +72,27 @@ class SimulationResult:
     ev: np.ndarray
     pv_fcff: np.ndarray
     pv_terminal: np.ndarray
+    spread_floored: np.ndarray
 
 
 def year_count(p: ModelParams) -> int:
     return p.high_years + p.transition_years
 
 
-def growth_path(p: ModelParams) -> np.ndarray:
-    """Expected growth path from high growth to stable growth."""
+def fade_weights(p: ModelParams) -> np.ndarray:
+    """0 in stage 1, linear fade in stage 2, reaching 1 (stable) in the last explicit year."""
     t = np.arange(1, year_count(p) + 1)
-    transition = (t - 1) / max(year_count(p) - 1, 1)
-    return p.high_growth + (p.stable_growth - p.high_growth) * transition
+    return np.clip((t - p.high_years) / max(p.transition_years, 1), 0.0, 1.0)
+
+
+def growth_path(p: ModelParams) -> np.ndarray:
+    """Expected growth: constant high growth, then linear fade to stable growth."""
+    return p.high_growth + (p.stable_growth - p.high_growth) * fade_weights(p)
 
 
 def roic_path(p: ModelParams) -> np.ndarray:
-    t = np.arange(1, year_count(p) + 1)
-    transition = (t - 1) / max(year_count(p) - 1, 1)
-    return p.roic_high + (p.roic_stable - p.roic_high) * transition
+    """Expected ROIC: constant high ROIC, then linear fade to stable ROIC."""
+    return p.roic_high + (p.roic_stable - p.roic_high) * fade_weights(p)
 
 
 def simulate(p: ModelParams) -> SimulationResult:
@@ -135,11 +141,19 @@ def simulate(p: ModelParams) -> SimulationResult:
 
     nopat_terminal = nopat[:, -1] * (1.0 + p.stable_growth)
     fcff_terminal = nopat_terminal * (1.0 - p.stable_growth / p.roic_stable)
-    terminal_spread = np.maximum(wacc[:, -1] - p.stable_growth, 0.01)
+    raw_spread = wacc[:, -1] - p.stable_growth
+    spread_floored = raw_spread < p.min_terminal_spread
+    if spread_floored.any():
+        warnings.warn(
+            f"{int(spread_floored.sum())} of {p.n_sim} draws have WACC - g below "
+            f"{p.min_terminal_spread:.2%}; the Gordon spread is floored for these draws.",
+            stacklevel=2,
+        )
+    terminal_spread = np.maximum(raw_spread, p.min_terminal_spread)
     pv_terminal = (fcff_terminal / terminal_spread) * discount_factors[:, -1]
     ev = pv_fcff + pv_terminal
 
-    return SimulationResult(p, revenue, margin, wacc, fcff, ev, pv_fcff, pv_terminal)
+    return SimulationResult(p, revenue, margin, wacc, fcff, ev, pv_fcff, pv_terminal, spread_floored)
 
 
 def percentile_summary(values: np.ndarray) -> dict[str, float]:
@@ -187,7 +201,6 @@ def sensitivity(result: SimulationResult) -> list[dict[str, float | str]]:
         "Average WACC": result.wacc.mean(axis=1),
         "Terminal WACC": result.wacc[:, -1],
         "Average operating margin": result.margin.mean(axis=1),
-        "Terminal value share": result.pv_terminal / result.ev,
     }
     rows = []
     for name, values in drivers.items():
@@ -246,6 +259,10 @@ def plot_base(result: SimulationResult) -> None:
     axes[1, 0].set_ylabel("WACC (%)")
     axes[1, 0].legend()
 
+    for axis in (axes[0, 1], axes[1, 0]):
+        axis.axvline(result.params.high_years, color=COLORS["gray"], lw=0.9, ls="--")
+        axis.text(result.params.high_years, 0.98, " fade starts", transform=axis.get_xaxis_transform(), va="top", fontsize=8, color=COLORS["gray"])
+
     sens = sensitivity(result)
     names = [row["driver"] for row in sens]
     values = [float(row["rho"]) for row in sens]
@@ -264,11 +281,12 @@ def plot_base(result: SimulationResult) -> None:
 
 
 def scenario_params() -> dict[str, ModelParams]:
+    # Common random numbers: every scenario keeps the base seed, n_sim and horizon,
+    # so all scenarios are driven by identical standard-normal draws.
     base = ModelParams()
     return {
         "Conservative": replace(
             base,
-            seed=100,
             high_growth=0.055,
             stable_growth=0.018,
             revenue_volatility=0.14,
@@ -283,7 +301,6 @@ def scenario_params() -> dict[str, ModelParams]:
         "Base": base,
         "Expansion": replace(
             base,
-            seed=300,
             high_growth=0.110,
             stable_growth=0.030,
             revenue_volatility=0.10,
@@ -349,6 +366,8 @@ def main() -> None:
     base_summary = percentile_summary(base.ev)
     base_summary["terminal_value_share"] = float(np.mean(base.pv_terminal / base.ev))
     base_summary["explicit_cash_flow_share"] = float(np.mean(base.pv_fcff / base.ev))
+    base_summary["floored_spread_count"] = float(base.spread_floored.sum())
+    base_summary["floored_spread_share"] = float(base.spread_floored.mean())
     write_csv(
         OUT_DIR / "base_summary.csv",
         [{"metric": key, "value": f"{value:.6f}"} for key, value in base_summary.items()],
@@ -368,6 +387,7 @@ def main() -> None:
     scenario_rows = []
     for name, result in scenarios.items():
         summary = percentile_summary(result.ev)
+        diff = result.ev - scenarios["Base"].ev  # paired difference under common random numbers
         scenario_rows.append(
             {
                 "scenario": name,
@@ -377,12 +397,26 @@ def main() -> None:
                 "p5": f"{summary['p5']:.6f}",
                 "p95": f"{summary['p95']:.6f}",
                 "terminal_value_share": f"{float(np.mean(result.pv_terminal / result.ev)):.6f}",
+                "mean_diff_vs_base": f"{float(diff.mean()):.6f}",
+                "se_diff_vs_base": f"{float(diff.std(ddof=1) / np.sqrt(diff.size)):.6f}",
+                "floored_spread_count": int(result.spread_floored.sum()),
             }
         )
     write_csv(
         OUT_DIR / "scenario_summary.csv",
         scenario_rows,
-        ["scenario", "mean", "median", "std", "p5", "p95", "terminal_value_share"],
+        [
+            "scenario",
+            "mean",
+            "median",
+            "std",
+            "p5",
+            "p95",
+            "terminal_value_share",
+            "mean_diff_vs_base",
+            "se_diff_vs_base",
+            "floored_spread_count",
+        ],
     )
 
     print("Generated simulated three-stage DCF outputs:")

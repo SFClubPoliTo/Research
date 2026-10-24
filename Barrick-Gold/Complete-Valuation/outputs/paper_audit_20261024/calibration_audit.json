@@ -1,0 +1,44 @@
+{
+  "dividend_yield": 0.004,
+  "losses": {
+    "black_scholes": 0.0001526367806818936,
+    "heston": 4.4161400751975034e-05,
+    "bates_poisson": 4.081478995402077e-05,
+    "full_bates_hawkes": 2.685231911790534e-05
+  },
+  "nesting_holds": true,
+  "feller": {
+    "heston": {
+      "two_kappa_theta": 0.4262663075909215,
+      "vol_of_vol_squared": 0.4250088729914513,
+      "gap": 0.0012574345994701974,
+      "active": false
+    },
+    "bates_poisson": {
+      "two_kappa_theta": 0.39136426455142526,
+      "vol_of_vol_squared": 0.391364255171201,
+      "gap": 9.380224263999537e-09,
+      "active": true
+    },
+    "full_bates_hawkes": {
+      "two_kappa_theta": 0.396317036820052,
+      "vol_of_vol_squared": 0.39631702414880804,
+      "gap": 1.2671243942996568e-08,
+      "active": true
+    }
+  },
+  "feller_relaxed_heston": {
+    "loss": 1.4278045964483475e-05,
+    "parameters": {
+      "v0": 0.06396349724609587,
+      "kappa": 2.8752571006609755,
+      "theta": 0.08138250571694902,
+      "sigma": 1.157474366555063,
+      "rho": -0.04508296299516611
+    },
+    "loss_ratio_to_constrained": 0.32331506069460253
+  },
+  "bates_jump_intensity": 1.7215078859159556,
+  "kappa_profile_max_loss_ratio": 1.4547816373707647,
+  "interpretation": "Feller enforced as a hard constraint; kappa and jump parameters are weakly identified on 64 calls (see heston_kappa_profile.csv)."
+}

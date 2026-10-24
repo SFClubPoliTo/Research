@@ -44,6 +44,7 @@ from Heston import Heston
 from Bates import Bates
 from Hawkes import ExactHawkesCalibration
 from dated_initialization import parameter_vector
+from gld_carry import GLD_EXPENSE_RATIO, forward_equivalent_surface
 
 
 MODEL_FILES = {
@@ -278,6 +279,9 @@ def calibration_frame(frame: pd.DataFrame) -> pd.DataFrame:
         "conId",
         "localSymbol",
         "_row_id",
+        "K_quoted",
+        "price_quoted",
+        "dividend_yield_applied",
     ]
     columns = [c for c in preferred if c in frame.columns]
     return frame.loc[:, columns].copy()
@@ -395,12 +399,17 @@ def hawkes_payload(result: Any, elapsed: float) -> dict[str, Any]:
     }
     params["alpha"] = params["branching_ratio"] * params["beta"]
 
+    objective = float(result.fun)
+    # The retained point is the best admissible candidate (the objective is
+    # 1e8 outside the admissible set); SLSQP's own exit status is recorded
+    # separately so that a feasible fit is not discarded downstream.
     return {
         "model": "Full Bates-Hawkes",
         "parameter_names": names,
         "parameters": params,
-        "objective": float(result.fun),
-        "success": bool(result.success),
+        "objective": objective,
+        "success": bool(np.isfinite(objective) and objective < 1e8),
+        "optimizer_success": bool(result.success),
         "message": str(result.message),
         "elapsed_seconds": float(elapsed),
     }
@@ -705,18 +714,37 @@ def main() -> None:
     )
 
     parser.add_argument(
+        "--dividend-yield",
+        type=float,
+        default=GLD_EXPENSE_RATIO,
+        help=(
+            "Continuous carry of the underlying (GLD sponsor fee 0.40%%). "
+            "Applied once through the forward identity; surfaces already "
+            "carrying dividend_yield_applied are not rescaled again."
+        ),
+    )
+
+    parser.add_argument(
         "--force",
         action="store_true",
         help="Re-run requested models even when a successful JSON already exists.",
     )
 
     parser.add_argument(
-        "--no-hawkes-warm-start",
+        "--hawkes-warm-start", "--warm-start",
+        dest="hawkes_warm_start",
         action="store_true",
         help=(
-            "Disable automatic warm start of Full Bates-Hawkes from the nearest "
-            "successful earlier calibration in the same strategy/output root."
+            "Opt in to warm-starting Heston, Bates and Full Bates-Hawkes from the "
+            "nearest earlier successful calibration of the same model in the same "
+            "output root. Off by default, so every model uses the same search "
+            "policy and a fit does not depend on what else the folder holds."
         ),
+    )
+    parser.add_argument(
+        "--no-hawkes-warm-start",
+        action="store_true",
+        help="Accepted for compatibility; warm starts are already off by default.",
     )
 
     parser.add_argument(
@@ -738,6 +766,13 @@ def main() -> None:
     requested = parse_models(args.models)
 
     surface_raw, spot, diagnostics = load_selected_surface(source_path, min_dte=args.min_dte)
+    if "spot" not in surface_raw.columns:
+        surface_raw = surface_raw.assign(spot=float(spot))
+    surface_raw = forward_equivalent_surface(surface_raw, args.dividend_yield)
+    diagnostics["dividend_yield"] = float(args.dividend_yield)
+    diagnostics["dividend_yield_dropped_rows"] = int(
+        surface_raw.attrs.get("dividend_yield_dropped_rows", 0)
+    )
     surface = calibration_frame(surface_raw)
 
     output_root = Path(args.output_root)
@@ -763,8 +798,10 @@ def main() -> None:
         "profile": args.profile,
         "seed": int(args.seed),
         "objective": "mean squared price error divided by Vega^2",
+        "dividend_yield": float(args.dividend_yield),
+        "dividend_yield_method": "forward identity C(S,K;q)=exp(-qT)C(S,K*exp(qT);0)",
         "requested_models": requested,
-        "hawkes_warm_start_enabled": bool(not args.no_hawkes_warm_start),
+        "prior_origin_warm_start_enabled": bool(args.hawkes_warm_start and not args.no_hawkes_warm_start),
         "hawkes_warm_max_bates_ratio": float(args.hawkes_warm_max_bates_ratio),
         "created_or_updated_at_utc": utc_now_iso(),
     }
@@ -784,6 +821,9 @@ def main() -> None:
     print("=" * 84)
 
     cfg = settings(args.profile)
+    # Prior-origin warm starts are opt-in for every stochastic model, so the
+    # default search policy is the same for Heston, Bates and Bates-Hawkes.
+    warm_starts = bool(args.hawkes_warm_start and not args.no_hawkes_warm_start)
 
     # Bates is a dependency when Hawkes is requested.
     needs_bates_dependency = "hawkes" in requested
@@ -809,7 +849,8 @@ def main() -> None:
                 result = calibrate_bs(surface, spot)
 
             elif model == "heston":
-                prior_path, prior = find_previous_hawkes_result(output_root, strategy, date_slug, model)
+                prior_path, prior = (find_previous_hawkes_result(output_root, strategy, date_slug, model)
+                                     if warm_starts else (None, None))
                 report = Heston.calibrate_heston(
                     surface,
                     spot,
@@ -825,7 +866,8 @@ def main() -> None:
                     'sha256':file_sha256(prior_path)} if prior else None)
 
             elif model == "bates":
-                prior_path, prior = find_previous_hawkes_result(output_root, strategy, date_slug, model)
+                prior_path, prior = (find_previous_hawkes_result(output_root, strategy, date_slug, model)
+                                     if warm_starts else (None, None))
                 current_heston = read_result(date_dir / MODEL_FILES['heston'])
                 report = Bates.calibrate_bates(
                     surface,
@@ -857,7 +899,7 @@ def main() -> None:
                 warm_path = None
                 warm_payload = None
                 warm_seed = None
-                if not args.no_hawkes_warm_start:
+                if warm_starts:
                     warm_path, warm_payload = find_previous_hawkes_result(
                         output_root, strategy, date_slug
                     )

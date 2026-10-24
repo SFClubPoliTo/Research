@@ -14,7 +14,7 @@ The official dense-date exercise admits a date only when it contains at least 64
 
 ## 2. Common sampling geometry
 
-Sampling geometry must be selected across admitted dates, not independently on each date. The candidate set is:
+The calibration grid is **fixed a priori** to `CC` (8×8 Chebyshev–Chebyshev nodes, 64 actual observations) at every date and every rolling origin. It is not selected from data. The eight candidate geometries below are compared only as a robustness diagnostic:
 
 | Code | Maturity nodes | Strike nodes |
 | --- | --- | --- |
@@ -27,7 +27,7 @@ Sampling geometry must be selected across admitted dates, not independently on e
 | `GU` | Gaussian-centered | Uniform |
 | `GC` | Gaussian-centered | Chebyshev |
 
-The primary selection criterion is cross-date holdout maximum absolute implied-volatility error. Holdout RMSE and MAE are tie-breakers. The production dense rolling exercise currently uses a fixed `CC` 8×8 sample of actual observations at every origin.
+The diagnostic ranks the geometries by holdout maximum absolute implied-volatility error (L∞), with holdout RMSE and MAE as tie-breakers, by interpolating the sampled nodes back to the full surface. This ranking does **not** choose the calibration grid. Under it, `CC` ranks last of eight on 2 September 2026: its holdout L∞ is 242.5 bp against 150.7 bp for the first-ranked `GU`, although its holdout RMSE, 22.7 bp, is mid-table (`outputs/paper_audit_inputs_20260907/sampling/2026-09-02/sampling_comparison.csv`). `sampling_winner.json` records this explicitly: “CC is fixed ex ante for calibration and is not changed by the daily diagnostic ranking”. An earlier version of this document said that the grid was chosen by the L∞ criterion, but the code has never done that. If the article reports the sampling comparison, it must present `CC` as a design choice, not as the winner.
 
 ```powershell
 python src\batch_sampling_offline.py --start 2026-07-06 --end 2026-09-02 --n-t 8 --n-k 8 --min-dte 75
@@ -35,7 +35,7 @@ python src\batch_sampling_offline.py --start 2026-07-06 --end 2026-09-02 --n-t 8
 
 ## 3. Single-date calibration
 
-`calibrate_surface.py` reads an admitted surface directly, creates the selected 64-point sample, and writes each model result as soon as it completes.
+`calibrate_surface.py` reads an admitted surface directly, creates the selected 64-point sample, and writes each model result as soon as it completes. The GLD sponsor fee is applied as a continuous carry `q` (`--dividend-yield`, default 0.0040) through the forward identity C(S,K;q) = e^{-qT} C(S, K e^{qT}; 0) (`gld_carry.py`). Strikes and prices in the frozen `calibration_surface.csv` are therefore rescaled, with the quoted values kept in `K_quoted` and `price_quoted`. Warm starts from an earlier date are opt-in for every model (`--warm-start`, alias `--hawkes-warm-start`); `--no-hawkes-warm-start` is accepted as a no-op. With the flag, Heston and Bates try a local fit from the latest successful earlier date in the same output root, keep it only when it does not worsen the current loss, and otherwise run the global search; Bates–Hawkes starts from the earlier fit under the same rule. Without it, every model runs its own search, so the result does not depend on what else the output folder holds. Every result records `warm_start_used`, `global_search_used` and `initialization_source`. For Bates–Hawkes, `success` means that an admissible candidate was retained; the SLSQP exit status is stored separately in `optimizer_success`.
 
 ```powershell
 python src\calibrate_surface.py --date 2026-09-02 --surface data\processed\full_surfaces\GLD_2026-09-02_eligible_full_surface.csv --strategy CC --profile full
@@ -72,6 +72,16 @@ python src\oos_validation.py --start 2026-07-06 --end 2026-09-02 --min-dte 75 --
 ```
 
 The target is the next admitted dense date, not necessarily the next calendar date. The final admitted date is target-only unless a later target becomes available.
+
+The exercise is a conditional repricing test, not an ex-ante forecast. Parameters and projected states come from the origin, but the target date’s spot and no-look-ahead curve are used when the target contracts are priced. The two benchmarks see different information from the models. The persistence benchmark interpolates the whole origin surface, about 150 valid quotes per date on average, while the models are calibrated on the 64 CC nodes. Comparisons with persistence use only the target contracts inside the origin convex hull: 4,026 of the 4,667 common observations in the legacy run. Pricing exceptions are counted per model in `run_manifest.json`. `paper/rolling_oos_methodology_draft.tex` gives the exact definitions.
+
+## 5a. Calibration fragility
+
+Read the single-date parameters as weakly identified. On 2 September 2026 with q = 0.40% (`../Complete-Valuation/outputs/paper_audit_20261024/calibration_audit.json`):
+
+- the Feller constraint 2κθ ≥ ξ², imposed as a hard constraint, binds at the Bates and Bates–Hawkes optima and is within 0.3% of binding for Heston. Relaxing it lowers the Heston loss by about 68%;
+- κ is weakly identified. With the other Heston parameters re-optimised, the loss stays within 3% of the optimum for κ in [2, 4] (`heston_kappa_profile.csv`);
+- jump and Hawkes parameters are not individually identified from 64 calls. Only their combined effect on the smile is identified.
 
 ## 6. Required run metadata
 

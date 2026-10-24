@@ -1,8 +1,8 @@
 table_id,description,authoritative_path,status
-primary_valuation,Full Bates-Hawkes conditional value distribution,outputs/thesis/20260828T180000Z-unificato-publication/figures/fig_val_primary.csv,CURRENT
-multimodel_valuation,Four-engine conditional value comparison,outputs/thesis/20260828T180000Z-unificato-publication/figures/fig_val_multi.csv,CURRENT
-dcf_drivers,Growth ROIC and reinvestment schedule,outputs/thesis/20260828T180000Z-unificato-publication/figures/fig_dcf_drivers.csv,CURRENT
+primary_valuation,Full Bates-Hawkes and other engines: operating proxy on the dated clock (24 Oct 2026),outputs/paper_audit_20261024/proxy_summary.csv,CURRENT
+multimodel_valuation,Four-engine medians as each 24 Oct correction is added,outputs/paper_audit_20261024/correction_attribution.csv,CURRENT
+dcf_drivers,"Dated schedule: stub, flow times, production and unit cost per quarter",outputs/paper_audit_20261024/dated_schedule.csv,CURRENT
 wacc_assumptions,Common WACC transition assumptions,outputs/thesis/20260828T180000Z-unificato-publication/figures/fig_wacc_assumptions.csv,CURRENT
-terminal_value,Terminal multiple and contribution summary,outputs/thesis/20260828T180000Z-unificato-publication/figures/fig_terminal_value.csv,CURRENT
-calibration_rmse,Current option-surface calibration metrics,outputs/thesis/20260828T180000Z-unificato-publication/team8_empirical/baseline_calibration_metrics.csv,CURRENT
-welch_goyal,Rolling cumulative loss differences,outputs/thesis/20260828T180000Z-unificato-publication/team8_empirical/online_welch_goyal_cumulative.csv,CURRENT
+terminal_value,Terminal conventions and risk-free comparison of explicit flows,outputs/paper_audit_20261024/terminal_policy_comparison.csv,CURRENT
+calibration_rmse,"CC64 calibration with GLD carry q=0.40%, nested refinements",outputs/paper_audit_20261024/calibration_summary_audited.csv,CURRENT
+welch_goyal,Rolling OOS against mean and persistence benchmarks with DM tests,outputs/paper_audit_20261024/oos_dm_tests.csv,CURRENT

@@ -6,14 +6,14 @@
 \toprule
 Asset & p_AIC & d_AIC & q_AIC & AIC_min & p_BIC & d_BIC & q_BIC & BIC_min \\
 \midrule
-Gold & 2 & 1 & 0 & -28909.4140 & 0 & 1 & 1 & -28889.9939 \\
-Silver & 1 & 1 & 0 & -23448.9424 & 1 & 1 & 0 & -23429.5802 \\
+Gold & 0 & 1 & 0 & -28911.3271 & 0 & 1 & 0 & -28898.4190 \\
+Silver & 0 & 1 & 0 & -23450.7536 & 0 & 1 & 0 & -23437.8456 \\
 \bottomrule
 \end{tabular}
 
 \vspace{0.2cm}
 \begin{minipage}{0.9\textwidth}
 \footnotesize
-\textit{Notes}: The table reports selected ARIMA($p,1,q$) specifications for daily log prices of GLD and SLV. A single unit difference is imposed to reflect the near-unit-root behaviour of log-price levels documented by the AR(1) benchmark. Selection is performed over a grid with $p,q \in \{0,1,2,3\}$ using AIC and BIC.
+\textit{Notes}: The table reports selected ARIMA($p,1,q$) specifications for daily log prices of GLD and SLV. A single unit difference is imposed because ADF tests do not reject a unit root in log-price levels while KPSS tests reject level and trend stationarity (see the unit-root table). Selection is performed over a grid with $p,q \in \{0,1,2,3\}$, including ARIMA(0,1,0) with drift (a random walk), using AIC and BIC; every candidate is estimated by exact Gaussian maximum likelihood on the same observations.
 \end{minipage}
 \end{table}

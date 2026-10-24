@@ -20,38 +20,58 @@ RMSE of 2.0608 basis points against the continuously compounded par-yield proxy.
 This is not a bootstrapped zero-coupon term structure. Option-maturity rates
 and quarterly integral-preserving forward rates derive from this common curve.
 
-Current-snapshot IV RMSE is 97.2107 basis points for Black--Scholes, 49.4881
-for Heston, 54.6273 for Bates--Poisson and 52.9714 for Full Bates--Hawkes.
-Heston is therefore the in-sample winner: greater model complexity does not
-produce a monotone improvement in this cross-section. The Hawkes branching
-ratio is 0.5569, below the stationarity boundary, rather than at the former
-August lower bound.
+With the GLD sponsor fee treated as carry ($q=0.40\%$), the current-snapshot
+IV RMSE is \CalBSIVRMSE{} basis points for Black--Scholes, \CalHIVRMSE{} for
+Heston, \CalBIVRMSE{} for Bates--Poisson and \CalWIVRMSE{} for Full
+Bates--Hawkes. Bates is refined from the nested Heston point and Bates--Hawkes
+from the nested Bates point, so each richer model fits at least as well as the
+model it contains. The ordering is therefore a property of the nesting, not
+evidence of predictive or economic superiority. The 7 September fits with
+$q=0$ (\CalBSIVRMSELegacy, \CalHIVRMSELegacy, \CalBIVRMSELegacy{} and
+\CalWIVRMSELegacy~bp) target different implied volatilities and are not a
+like-for-like comparison. The Hawkes branching ratio is \HawkesBranching,
+below the stationarity boundary, with a kernel half-life of
+\HawkesHalfLifeDays{} days; these are risk-neutral fitted parameters on 64
+calls, not measured event persistence.
 
-The dense-only rolling panel contains 31 admitted dates and 30 forecast origins.
-Each origin uses its own CC64 fit and is evaluated on the next available dense
-date, yielding 4,667 common forecasts. Date-equal IV RMSE is 140.6528, 80.1964,
-69.3055 and 65.0507 basis points for the same four models. Full Bates--Hawkes
-is selected as the primary structural sensitivity on this OOS ranking, not on
-current-snapshot fit. None beats interpolated observed-IV persistence.
-The August normalized-target exercise retained elsewhere is historical and is
-not interchangeable with this dense-date design.
+The dense-only rolling panel contains 31 accepted dates and \OosDates{}
+forecast origins. Each origin is recalibrated on its own CC64 sample with
+$q=0.40\%$, nested starts and the same optimizer search for every model, and
+is evaluated on the next available dense date, yielding \OosObservations{}
+common forecasts. Date-equal IV RMSE is \OosBSRMSE, \OosHRMSE, \OosBRMSE{} and
+\OosWRMSE{} basis points for the same four models, against \OosPersistenceRMSE{}
+for interpolated observed-IV persistence on its own support. Every
+$R^2_{OOS}$ against persistence in Table~\ref{tab:current-dense-oos} is
+negative: no model beats persistence. Full Bates--Hawkes comes closest; its
+daily loss difference from persistence is not significant (DM
+$p=\OosWDMPersistenceP$), and neither is its advantage over Bates--Poisson
+($p=\OosDMHawkesVsBP$), whereas its advantages over Heston and
+Black--Scholes are significant ($p$-values of \OosDMHawkesVsHP{} and
+\OosDMHawkesVsBSP{} to three decimals). Full Bates--Hawkes is the primary
+structural illustration because it is the richest law, not because of this
+ranking. The August normalized-target exercise retained elsewhere is
+historical and is not interchangeable with this dense-date design.
 
 \begin{table}[H]
 \centering\small
-\begin{tabular}{lrrr}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrrr}
 \toprule
-Model & IV RMSE (bp) & $R^2$ vs mean (\%) & $R^2$ vs persistence (\%) \\
+ & IV RMSE & $R^2$ vs & $R^2$ vs & Dates beating & DM $p$ vs \\
+Model & (bp) & mean (\%) & persist. (\%) & persistence & persistence \\
 \midrule
-Black--Scholes & 140.6528 & -2.58 & -268.52 \\
-Heston & 80.1964 & 66.07 & -27.24 \\
-Bates--Poisson & 69.3055 & 72.97 & -12.92 \\
-Full Bates--Hawkes & 65.0507 & 75.81 & -3.68 \\
+Black--Scholes & \OosBSRMSE & $\OosBSRMean$ & $\OosBSRPersistence$ & \OosBSBeatsPersistence/\OosDates & \OosBSDMPersistenceP \\
+Heston & \OosHRMSE & $\OosHRMean$ & $\OosHRPersistence$ & \OosHBeatsPersistence/\OosDates & \OosHDMPersistenceP \\
+Bates--Poisson & \OosBRMSE & $\OosBRMean$ & $\OosBRPersistence$ & \OosBBeatsPersistence/\OosDates & \OosBDMPersistenceP \\
+Full Bates--Hawkes & \OosWRMSE & $\OosWRMean$ & $\OosWRPersistence$ & \OosWBeatsPersistence/\OosDates & \OosWDMPersistenceP \\
 \bottomrule
 \end{tabular}
-\caption{Current dense-only rolling performance with equal date weighting.
-The four-model target contains 4,667 observations; persistence comparisons
-use the 4,026 observations inside the origin interpolation domain. Scores
-against different benchmarks therefore must not be treated as identical-support
-loss ratios. Positive $R^2$ favours the model over its stated benchmark.}
+\caption{Dense-only rolling repricing with $q=0.40\%$, equal optimizer search
+and equal date weighting. The four-model target contains \OosObservations{}
+observations; persistence comparisons use the \OosPersistenceObservations{}
+observations inside the origin interpolation domain. Scores against different
+benchmarks therefore must not be treated as identical-support loss ratios.
+Positive $R^2$ favours the model over its stated benchmark; the
+Diebold--Mariano $p$-values use Newey--West errors on daily MSE differences.}
 \label{tab:current-dense-oos}
 \end{table}
