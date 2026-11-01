@@ -10,6 +10,3 @@ Eseguire dalla cartella `Valutation-pep` con `python -m ...`, per risolvere gli 
 - `relative/model.py`: riservato a G5, non chiamato dalla pipeline.
 - `pipeline.py`: `run_pipeline(config_path="config/config.yaml", is_final_run=False,
   override_sigma=None, g3_functions=None)`.
-
-La configurazione comune usa `fcff_parameters`, come il repository del collega.
-I parametri della funzione G2 conservano i nomi italiani definiti in D02.
