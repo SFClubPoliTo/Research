@@ -1,0 +1,5 @@
+-r requirements.txt
+yfinance
+pandas
+statsmodels
+seaborn

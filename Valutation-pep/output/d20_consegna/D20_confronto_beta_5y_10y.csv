@@ -1,0 +1,5 @@
+Benchmark;Beta_Stima [5Y];p_value [5Y];R_squared [5Y];Beta_Stima [10Y];p_value [10Y];R_squared [10Y]
+Mercato S&P 500 (SPY);0.5213;0.0;0.2716;0.506;0.0;0.2493
+Mercato NASDAQ 100 (QQQ);0.2524;0.0027;0.1072;0.2861;0.0;0.1312
+Settore Consumer Staples (XLP);0.8677;0.0;0.5547;0.8989;0.0;0.5977
+Paniere Core Peers (Equal-Weighted);0.726;0.0;0.5151;0.715;0.0;0.5052

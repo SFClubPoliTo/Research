@@ -20,8 +20,8 @@ Valutation-pep/
   README.md
 ```
 
-`data` e `output` contengono `.gitkeep`: Git non registra cartelle vuote.
-Gli output generati sono esclusi dal versionamento.
+Gli output generati sono esclusi dal versionamento, salvo i risultati ricevuti
+in `output/d20_consegna/`.
 
 ## Installazione e test
 
@@ -97,3 +97,40 @@ mancano funzioni/dati G3: non inseriamo fallback numerici. I test sono invece es
 2. G3: funzioni, valori WACC e ponte, firme definitive e convenzione del TV.
 3. G2/G3: rappresentazione della maturità terminale e allineamento di t=1 con
    la data di valutazione. Opzione A mantenuta finché non viene concordata B.
+
+## Consegne G1 e G5
+
+- `data/D04_ricavi_v1_G1.csv`: ricavi 2014–2025, rettifiche e riferimenti G1.
+  Separatore `;`, importi sia in milioni sia in miliardi USD. La serie omogenea
+  è `Ricavi Corretti ($B)`; FY2025 coincide con `r0 = 93.925`.
+  Il file viene conservato integralmente, incluse note e fonti.
+- `src/relative/d20_intermarket_analysis.py`: script D20 ricevuto da Davide e
+  Saverio (G5), senza modifiche alle formule o alle finestre di analisi.
+- `data/d20/README_G4.txt`: nota originale di consegna.
+- `output/d20_consegna/`: cinque CSV e un grafico ricevuti con D20. Sono risultati
+  della consegna, non ricalcolati durante questa integrazione.
+
+Per eseguire D20, dalla cartella `Valutation-pep`:
+
+```bash
+python -m pip install -r requirements-d20.txt
+cd output
+python ../src/relative/d20_intermarket_analysis.py
+```
+
+Lo script scarica le serie da Yahoo Finance e richiede una connessione Internet.
+Scrive in `output/output_d20/`, separato dai risultati consegnati. Non importarlo
+nella pipeline DCF: nella versione ricevuta il download parte all'esecuzione
+del modulo. Le dipendenze D20 sono separate da quelle della pipeline.
+
+L'aggiunta di D04 non modifica automaticamente la calibrazione: `sigma = 0.04`
+rimane il valore sintetico della configurazione. Per la stima dalla serie G1
+va usata la colonna dei ricavi corretti, ricalcolando i log-rendimenti dai livelli
+anziché utilizzare quelli arrotondati nel CSV. Lo stato complessivo resta sintetico
+finché non sono disponibili tutti i parametri G2/G3.
+
+Prima di aggiornare i risultati D20, confrontare con G5 due punti del codice
+consegnato: le etichette 5Y/10Y corrispondono agli intervalli 2020–2025 e
+2015–2025; il grafico cumulato usa `(1 + r).cumprod()` su rendimenti logaritmici,
+per i quali la ricostruzione coerente è `exp(r.cumsum())`. I file originali sono
+stati mantenuti senza rielaborazioni.
