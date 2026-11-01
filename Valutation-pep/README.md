@@ -1,9 +1,4 @@
 # PepsiCo DCF — G4 pipeline
-
-Porting del notebook `SF_PEPSICO_PLAYGROUND_corretto.ipynb` in moduli Python,
-con struttura e nomi del repository del collega. Ambito: integrazione e test
-della settimana 1; non è una valutazione definitiva.
-
 ## Struttura
 
 ```text
@@ -59,7 +54,7 @@ il test analitico sigma=0 non sostituisce quel confronto.
 - Sconto a fine anno con t=1. La data di valutazione originale 21/10/2026 resta
   da allineare con FY2026 come primo anno: non è stata modificata arbitrariamente.
 
-La chiave è `fcff_parameters`, come nella repo del collega. `margine` e `aliquota`
+La chiave è `fcff_parameters`. `margine` e `aliquota`
 conservano i precedenti valori sintetici; `da`, `capex`, `nwc`, `reinv_rate` e i
 tre WACC sono ancora mancanti (`null`). Anche gli importi del ponte sono sintetici.
 Per il run finale sia `meta.status` sia `fcff_parameters.status` devono essere `real`.
