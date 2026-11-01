@@ -1,0 +1,50 @@
+meta:
+  status: "synthetic"
+  currency: "USD"
+  scale: "billions"
+  # FY2026 as t=1 versus this valuation date: pending alignment with G3.
+  valuation_date: "2026-10-21"
+  horizon_years: 10
+
+simulation:
+  seed: 42
+  n_paths: 10000
+
+revenues:
+  r0: 93.925
+  sigma: 0.04
+  g_path: [0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04]
+
+fcff_parameters:
+  # Existing synthetic margin/tax values; replace with G2 parameter vectors.
+  margine: [0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16]
+  aliquota: [0.21, 0.21, 0.21, 0.21, 0.21, 0.21, 0.21, 0.21, 0.21, 0.21]
+  # D02 v2 option A. Missing vectors must come from G2; no zero fallback.
+  da: null
+  capex: null
+  nwc: null
+  reinv_rate: null
+  status: "provisional"
+
+rates_and_terminal:
+  wacc_by_stage:
+    growth: null
+    transition: null
+    maturity: null #also used for the terminal value
+
+  stage_years:     # D02 v2: 5 growth + 5 transition; maturity is terminal
+    growth: 5
+    transition: 5
+    maturity: 0
+  g_terminal: 0.025
+  roic_terminal: 0.12
+  margin_terminal: 0.16
+  tax_terminal: 0.21
+
+bridge:
+  items:
+    - {name: cash, value: 6.0, sign: 1}
+    - {name: non_operating_assets, value: 1.5, sign: 1}
+    - {name: total_debt, value: 42.0, sign: -1}
+    - {name: minorities_and_other, value: 0.5, sign: -1}
+  diluted_shares: 1.38

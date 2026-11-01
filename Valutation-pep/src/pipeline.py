@@ -1,0 +1,90 @@
+import yaml
+import numpy as np
+from pathlib import Path
+
+from src.revenues.model import simulate_revenues, estimate_sigma
+from src.fcff.model import fcff
+from src.rates.model import compute_enterprise_value
+from src.bridge.model import compute_equity_and_price
+
+
+def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = False, override_sigma: float = None,
+                 g3_functions: dict = None) -> dict:
+
+  base_dir = Path(__file__).resolve().parent.parent
+  with open(base_dir / config_path, "r", encoding="utf-8") as f:
+    cfg = yaml.safe_load(f)
+
+  # the final run needs to stop if the data are synthetic or temporary
+  status = cfg["meta"]["status"]
+
+  if is_final_run and status != "real":
+    raise RuntimeError("Pipeline block: all data need to be in status 'real'!")
+
+  if is_final_run and cfg["fcff_parameters"].get("status") != "real":
+    raise RuntimeError("Pipeline block: G2 parameters must have status 'real'!")
+
+  if g3_functions is None:
+    raise RuntimeError("Pending G3 repo functions: connect G3_FUNCTIONS before running")
+
+  for name in ("build_wacc_path", "compute_terminal_value", "compute_equity_and_price"):
+    if not callable(g3_functions.get(name)):
+      raise ValueError(f"Missing G3 adapter: {name}")
+
+  if any(cfg["rates_and_terminal"][key].get(stage) is None
+         for key in ("stage_years", "wacc_by_stage")
+         for stage in ("growth", "transition", "maturity")):
+    raise ValueError("Pending G2/G3: stage durations and WACC values are required")
+
+  seed = int(cfg["simulation"]["seed"])
+  n_paths = int(cfg["simulation"]["n_paths"])
+  r0 = float(cfg["revenues"]["r0"])
+  g_path = np.asarray(cfg["revenues"]["g_path"], dtype = float)
+  sigma = float(cfg["revenues"]["sigma"]) if override_sigma is None else override_sigma
+
+  if cfg["meta"]["horizon_years"] != 10 or g_path.shape != (10,):
+    raise ValueError("D02 v2 requires a 10-year forecast")
+  if cfg["rates_and_terminal"]["stage_years"] != {"growth": 5, "transition": 5, "maturity": 0}:
+    raise ValueError("D02 v2 requires 5 growth years and 5 transition years")
+
+  # chain execution G1->G2->G3
+  revs = simulate_revenues(r0 = r0, g_path = g_path, sigma = sigma, n_paths = n_paths, seed = seed)
+  nopat, reinvest, flussi = fcff(revs, r0, cfg["fcff_parameters"])
+  terminal = cfg["rates_and_terminal"]
+  if not np.isfinite(terminal["roic_terminal"]) or terminal["roic_terminal"] <= 0:
+    raise ValueError("Terminal ROIC must be finite and positive")
+  terminal_matches = (
+      (cfg["fcff_parameters"]["margine"][-1], terminal["margin_terminal"]),
+      (cfg["fcff_parameters"]["aliquota"][-1], terminal["tax_terminal"]),
+      (cfg["fcff_parameters"]["reinv_rate"][-1],
+       terminal["g_terminal"] / terminal["roic_terminal"]))
+  if not all(np.isclose(a, b, rtol=1e-8, atol=1e-10) for a, b in terminal_matches):
+    raise ValueError("G2 year-10 margin, tax and reinvestment must match G3 terminal inputs")
+  ev_out = compute_enterprise_value(revenues = revs, fcff = flussi, rates_and_terminal = cfg["rates_and_terminal"], g3_functions = g3_functions)
+  bridge_out = compute_equity_and_price(ev = ev_out["enterprise_value"], bridge_parameters = cfg["bridge"], g3_functions = g3_functions)
+
+  prices = bridge_out["share_price"]
+  evs = ev_out["enterprise_value"]
+
+  summary = {
+    "status": status,
+    "seed": seed,
+    "n_paths": n_paths,
+    "sigma_used": sigma,
+    "price_mean": float(np.mean(prices)),
+    "price_median": float(np.median(prices)),
+    "price_p5": float(np.percentile(prices, 5.0)),
+    "price_p95": float(np.percentile(prices, 95.0)),
+    "price_std_err": float(np.std(prices) / np.sqrt(n_paths)),
+    "ev_mean": float(np.mean(evs)),
+    "ev_median": float(np.median(evs)),
+    "ev_std_err": float(np.std(evs) / np.sqrt(n_paths)),
+    "mean_tv_weight": float(np.mean(ev_out["tv_weight"])),
+    "negative_equity_count": int(bridge_out["negative_equity_count"]),
+    "revenues_matrix": revs,
+    "prices_array": prices
+
+  }
+
+
+  return summary
