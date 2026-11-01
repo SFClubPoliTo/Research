@@ -6,15 +6,16 @@ def estimate_sigma (historical_revenues: np.array) -> float:
 
   # we can use the expression given in section 10.1 once computed the log returns (retruns must be positive if we want to take the log)
 
-  if np.any(historical_revenues <= 0):
-    raise ValueError("Historical revenues must be positive")   # Chat docet: when working with someone else's data always include controls
+  historical_revenues = np.asarray(historical_revenues, dtype=float)
+  if historical_revenues.ndim != 1 or historical_revenues.size < 3:
+    raise ValueError("At least three annual revenue observations are required")
+  if not np.all(np.isfinite(historical_revenues)) or np.any(historical_revenues <= 0):
+    raise ValueError("Historical revenues must be finite and positive")
 
   log_returns = np.log(historical_revenues[1:] / historical_revenues[:-1])
 
-  # if we want to use as stated in the guide the Bessel approximation for the std we can write
-  # return float(np.std(log_returns, ddof = 1))
-
-  return float(np.std(log_returns))
+  # Guida Valuation PEP, B7: sample standard deviation of annual log returns.
+  return float(np.std(log_returns, ddof=1))
 
 def simulate_revenues(r0: float, g_path: np.ndarray, sigma: float, n_paths: int, seed: int) -> np.ndarray:
 

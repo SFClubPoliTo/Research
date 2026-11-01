@@ -3,6 +3,7 @@ import numpy as np
 from pathlib import Path
 
 from src.revenues.model import simulate_revenues, estimate_sigma
+from src.revenues.calibration import calibrate_sigma
 from src.fcff.model import fcff
 from src.rates.model import compute_enterprise_value
 from src.bridge.model import compute_equity_and_price
@@ -24,6 +25,9 @@ def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = F
   if is_final_run and cfg["fcff_parameters"].get("status") != "real":
     raise RuntimeError("Pipeline block: G2 parameters must have status 'real'!")
 
+  if is_final_run and cfg["revenues"].get("sigma_status") != "real":
+    raise RuntimeError("Pipeline block: sigma must have status 'real'!")
+
   if g3_functions is None:
     raise RuntimeError("Pending G3 repo functions: connect G3_FUNCTIONS before running")
 
@@ -40,7 +44,10 @@ def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = F
   n_paths = int(cfg["simulation"]["n_paths"])
   r0 = float(cfg["revenues"]["r0"])
   g_path = np.asarray(cfg["revenues"]["g_path"], dtype = float)
-  sigma = float(cfg["revenues"]["sigma"]) if override_sigma is None else override_sigma
+  sigma_calibration = calibrate_sigma(cfg["revenues"])
+  sigma = sigma_calibration["sigma"] if override_sigma is None else float(override_sigma)
+  if not np.isfinite(sigma) or sigma < 0:
+    raise ValueError("Sigma must be finite and non-negative")
 
   if cfg["meta"]["horizon_years"] != 10 or g_path.shape != (10,):
     raise ValueError("D02 v2 requires a 10-year forecast")
@@ -71,6 +78,8 @@ def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = F
     "seed": seed,
     "n_paths": n_paths,
     "sigma_used": sigma,
+    "sigma_calibration": sigma_calibration,
+    "sigma_overridden": override_sigma is not None,
     "price_mean": float(np.mean(prices)),
     "price_median": float(np.median(prices)),
     "price_p5": float(np.percentile(prices, 5.0)),

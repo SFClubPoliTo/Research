@@ -86,6 +86,22 @@ def test_missing_g3_is_explicit():
         run_pipeline()
 
 
+def test_pipeline_uses_historical_sigma(tmp_path, config, g3_functions):
+    config['revenues']['sigma'] = .99  # Runtime must use D04, not the stored reference.
+    result = run_pipeline(save_config(tmp_path, config), g3_functions=g3_functions)
+    assert result['sigma_used'] == pytest.approx(.053417214240354643)
+    expected = simulate_revenues(93.925, np.full(10, .04), result['sigma_used'], 1000, 42)
+    np.testing.assert_allclose(result['revenues_matrix'], expected)
+    assert result['sigma_calibration']['status'] == 'provisional'
+    assert result['sigma_overridden'] is False
+
+
+def test_final_run_blocks_provisional_sigma(tmp_path, config, g3_functions):
+    config['meta']['status'] = config['fcff_parameters']['status'] = 'real'
+    with pytest.raises(RuntimeError, match='sigma'):
+        run_pipeline(save_config(tmp_path, config), is_final_run=True, g3_functions=g3_functions)
+
+
 def test_missing_g2_vectors_are_not_silently_filled(tmp_path, config, g3_functions):
     config['fcff_parameters']['da'] = None
     with pytest.raises(ValueError, match='da is missing'):

@@ -123,11 +123,31 @@ Scrive in `output/output_d20/`, separato dai risultati consegnati. Non importarl
 nella pipeline DCF: nella versione ricevuta il download parte all'esecuzione
 del modulo. Le dipendenze D20 sono separate da quelle della pipeline.
 
-L'aggiunta di D04 non modifica automaticamente la calibrazione: `sigma = 0.04`
-rimane il valore sintetico della configurazione. Per la stima dalla serie G1
-va usata la colonna dei ricavi corretti, ricalcolando i log-rendimenti dai livelli
-anziché utilizzare quelli arrotondati nel CSV. Lo stato complessivo resta sintetico
-finché non sono disponibili tutti i parametri G2/G3.
+## Stima provvisoria di sigma — settimana 2
+
+La volatilità annuale è stimata sui ricavi corretti G1 (2014–2025):
+12 osservazioni e 11 log-rendimenti, ricalcolati dai livelli in miliardi USD.
+La formula della guida, sezione B7, richiede la deviazione standard campionaria
+(`ddof=1`). Risultato: **0.053417214240354643**, circa **5.34% annuo**.
+La stima è provvisoria, in attesa della revisione statistica G5 nelle settimane 3–4;
+non modifica lo stato sintetico degli altri parametri né la crescita futura ipotizzata.
+
+Per riprodurre la calibrazione senza dipendere dai moduli G2/G3:
+
+```bash
+python -m src.revenues.calibration --output output/sigma_calibration.json
+```
+
+Il report contiene i log-rendimenti, il periodo, il metodo e l'hash del CSV.
+La pipeline ricalcola sigma da `historical_csv` e `historical_column`; il campo
+`sigma` nel YAML è il valore di riferimento della consegna, non un fallback.
+`override_sigma=0.0` resta disponibile per il test deterministico. Il risultato
+include `sigma_used`, `sigma_calibration` e `sigma_overridden`.
+Il run finale blocca anche `revenues.sigma_status` diverso da `real`.
+Anni mancanti o duplicati, ricavi non positivi/non finiti e un ricavo base diverso
+dall'ultima osservazione generano un errore esplicito.
+
+## Verifiche aperte D20
 
 Prima di aggiornare i risultati D20, confrontare con G5 due punti del codice
 consegnato: le etichette 5Y/10Y corrispondono agli intervalli 2020–2025 e
