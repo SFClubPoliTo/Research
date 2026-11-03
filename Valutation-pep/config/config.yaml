@@ -19,15 +19,15 @@ revenues:
   g_path: [0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04]
 
 fcff_parameters:
-  # Existing synthetic margin/tax values; replace with G2 parameter vectors.
-  margine: [0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16]
-  aliquota: [0.21, 0.21, 0.21, 0.21, 0.21, 0.21, 0.21, 0.21, 0.21, 0.21]
-  # D02 v2 option A. Missing vectors must come from G2; no zero fallback.
-  da: null
-  capex: null
-  nwc: null
-  reinv_rate: null
-  status: "provisional"
+  # G2 D07 v0, 28/10/2026. Replace with D11 before the final run.
+  status: provisional
+  margine: [0.159, 0.159, 0.159, 0.159, 0.159, 0.1582, 0.1574, 0.1566, 0.1558, 0.155]
+  aliquota: [0.19, 0.19, 0.19, 0.19, 0.19, 0.192, 0.194, 0.196, 0.198, 0.2]
+  da: [0.035, 0.035, 0.035, 0.035, 0.035]
+  capex: [0.055, 0.055, 0.055, 0.055, 0.055]
+  nwc: [-0.05, -0.05, -0.05, -0.05, -0.05]
+  reinv_rate: [0.1372877433149969, 0.13421580748624767, 0.13114387165749847, 0.12807193582874923,
+  0.125]
 
 rates_and_terminal:
   wacc_by_stage:
@@ -39,10 +39,11 @@ rates_and_terminal:
     growth: 5
     transition: 5
     maturity: 0
+  # Provisional maturity assumptions from G2 D07; pending agreement with G3.
   g_terminal: 0.025
-  roic_terminal: 0.12
-  margin_terminal: 0.16
-  tax_terminal: 0.21
+  roic_terminal: 0.20
+  margin_terminal: 0.155
+  tax_terminal: 0.20
 
 bridge:
   items:

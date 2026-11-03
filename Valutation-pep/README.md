@@ -36,8 +36,8 @@ I test verificano l'esempio D02, gli input G2, FCFF e NWC negativi,
 la traiettoria deterministica con sigma=0, la media Monte Carlo, il collegamento
 della pipeline, il blocco dei dati provvisori e la coerenza al terminale.
 Le funzioni G3 usate nei test sono sostituti dichiaratamente sintetici e non
-vengono usate dalla pipeline reale. Il benchmark D07 non è ancora disponibile:
-il test analitico sigma=0 non sostituisce quel confronto.
+vengono usate dalla pipeline reale. Il riferimento D07 è verificato con sigma=0
+e con i parametri provvisori G2, oltre ai test sintetici già presenti.
 
 ## Configurazione e convenzioni
 
@@ -54,9 +54,9 @@ il test analitico sigma=0 non sostituisce quel confronto.
 - Sconto a fine anno con t=1. La data di valutazione originale 21/10/2026 resta
   da allineare con FY2026 come primo anno: non è stata modificata arbitrariamente.
 
-La chiave è `fcff_parameters`. `margine` e `aliquota`
-conservano i precedenti valori sintetici; `da`, `capex`, `nwc`, `reinv_rate` e i
-tre WACC sono ancora mancanti (`null`). Anche gli importi del ponte sono sintetici.
+La chiave è `fcff_parameters`: contiene i vettori provvisori consegnati da G2
+in D07. I tre WACC sono ancora mancanti (`null`); gli importi del ponte restano
+sintetici. I parametri terminali sono allineati a D07, in attesa di conferma G3.
 Per il run finale sia `meta.status` sia `fcff_parameters.status` devono essere `real`.
 Cambiare i flag non rende automaticamente reali i dati: vanno prima sostituiti e verificati.
 
@@ -93,7 +93,7 @@ mancano funzioni/dati G3: non inseriamo fallback numerici. I test sono invece es
 
 ## Elementi ancora da ricevere/confermare
 
-1. G2: implementazione ufficiale `fcff`, vettori provvisori e benchmark D07.
+1. G2: D11, con parametri reali e raccordo dell’anno base. D07 v0 è integrato.
 2. G3: funzioni, valori WACC e ponte, firme definitive e convenzione del TV.
 3. G2/G3: rappresentazione della maturità terminale e allineamento di t=1 con
    la data di valutazione. Opzione A mantenuta finché non viene concordata B.
@@ -154,3 +154,36 @@ consegnato: le etichette 5Y/10Y corrispondono agli intervalli 2020–2025 e
 2015–2025; il grafico cumulato usa `(1 + r).cumprod()` su rendimenti logaritmici,
 per i quali la ricostruzione coerente è `exp(r.cumsum())`. I file originali sono
 stati mantenuti senza rielaborazioni.
+
+## D07 — FCFF v0 di G2
+
+Ricevuto e integrato il 3 novembre 2026. `src/fcff/model.py` contiene il codice
+G2 senza modifiche; i test ricevuti sono in `tests/test_fcff_d07.py`, con il solo
+import adattato alla repo. La nota originale è in `data/d07/README_G2.md`.
+
+I vettori in `config/config.yaml` sono generati da `build_params(ASSUMPTIONS_V0)`:
+margine 15.9% e aliquota 19% nei primi cinque anni, D&A 3.5%, capex 5.5%,
+coefficiente NWC -5%. In transizione margine e aliquota raggiungono 15.5% e 20%;
+il reinvestimento/NOPAT converge al 12.5% (= 2.5% / 20%). Si mantiene l’opzione A:
+il tasso al quinto anno è calcolato sul percorso deterministico con crescita 4%.
+
+La pipeline legge i vettori dal file comune, non usa automaticamente `PARAMS_V0`:
+quest’ultimo conserva il riferimento della consegna. Se cambiano le assunzioni
+di crescita o maturità, vanno ricostruiti e aggiornati i vettori di transizione.
+Tutti i parametri G2 restano `provisional`; lo stato complessivo resta `synthetic`
+perché WACC e ponte non sono ancora disponibili. Le fonti contabili citate da G2
+sono conservate nella loro nota; questa verifica riguarda codice e raccordi numerici,
+non una nuova revisione dei filing.
+
+Per riprodurre il confronto deterministico senza le funzioni G3:
+
+```bash
+python -m src.fcff.reference --output output/d07_reference.csv
+```
+
+Il comando usa configurazione comune e simulatore con sigma=0. I test confrontano
+i flussi con i valori del README G2, tenendo conto degli arrotondamenti.
+Il primo FCFF è circa 10.815 miliardi USD, l’ultimo circa 15.085.
+Restano validi i limiti della v0: possibile salto di reinvestimento al sesto anno
+nei percorsi stocastici e trattamento simmetrico delle imposte. La sostituzione
+con D11 non deve avvenire cambiando soltanto il flag di stato.

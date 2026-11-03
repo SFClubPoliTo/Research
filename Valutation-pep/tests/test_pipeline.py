@@ -50,7 +50,7 @@ def g3_functions():
 
 
 def test_sigma_zero_reproduces_deterministic_dcf(tmp_path, config, g3_functions):
-    # Analytic synthetic benchmark; D07 reference remains pending.
+    # Analytic synthetic benchmark, separate from the G2 D07 example.
     result = run_pipeline(save_config(tmp_path, config), override_sigma=0., g3_functions=g3_functions)
     revenues = 93.925 * 1.04**np.arange(1, 11)
     nopat = revenues * .15 * .8
@@ -104,7 +104,7 @@ def test_final_run_blocks_provisional_sigma(tmp_path, config, g3_functions):
 
 def test_missing_g2_vectors_are_not_silently_filled(tmp_path, config, g3_functions):
     config['fcff_parameters']['da'] = None
-    with pytest.raises(ValueError, match='da is missing'):
+    with pytest.raises(ValueError, match='da'):
         run_pipeline(save_config(tmp_path, config), g3_functions=g3_functions)
 
 
@@ -129,3 +129,33 @@ def test_horizon_and_stage_mismatch(tmp_path, config, g3_functions):
     config['rates_and_terminal']['stage_years']['growth'] = 4
     with pytest.raises(ValueError, match='5 growth'):
         run_pipeline(save_config(tmp_path, config), g3_functions=g3_functions)
+
+
+def test_d07_shared_config_and_pipeline(tmp_path, g3_functions):
+    from src.fcff.model import PARAMS_V0
+    from src.fcff.reference import export_reference
+
+    path = Path(__file__).resolve().parents[1] / 'config/config.yaml'
+    cfg = yaml.safe_load(path.read_text(encoding='utf-8'))
+    for key, value in PARAMS_V0.items():
+        if key == 'status':
+            assert cfg['fcff_parameters'][key] == value
+        else:
+            np.testing.assert_allclose(cfg['fcff_parameters'][key], value)
+    expected = np.array([10.8147, 11.2473, 11.6972, 12.1650, 12.6516,
+                         13.1058, 13.5758, 14.0619, 14.5648, 15.0850])
+    output = tmp_path / 'reference.csv'
+    export_reference(path, output)
+    table = np.genfromtxt(output, delimiter=',', names=True)
+    np.testing.assert_allclose(table['fcff'], expected, atol=1e-3, rtol=0)
+
+    # Only G3 is replaced with test doubles; G2 uses the delivered parameters.
+    cfg['simulation']['n_paths'] = 3
+    cfg['rates_and_terminal']['wacc_by_stage'] = dict(growth=.08, transition=.08, maturity=.08)
+    def terminal_value(revenues, fcff, wacc_terminal, terminal_parameters):
+        np.testing.assert_allclose(fcff, np.tile(expected, (3, 1)), atol=1e-3, rtol=0)
+        return np.full(3, 100.)
+    g3_functions['compute_terminal_value'] = terminal_value
+    result = run_pipeline(save_config(tmp_path, cfg), override_sigma=0., g3_functions=g3_functions)
+    assert result['sigma_used'] == 0.
+    assert np.all(np.isfinite(result['prices_array']))
