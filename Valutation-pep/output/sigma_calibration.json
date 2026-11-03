@@ -1,8 +1,8 @@
 {
-  "sigma": 0.053417214240354643,
+  "sigma": 0.05294302584051538,
   "status": "provisional",
-  "source": "data/D04_ricavi_v1_G1.csv",
-  "source_sha256": "4c76558dbfaffcb384152ffd71ee8b5e48d7fc864bedfe4b9b9498e2f92244d6",
+  "source": "data/D04_ricavi_v2_G1.csv",
+  "source_sha256": "eaf39ef2a3bab5a5af558098c1ce87e3566775e37698ad1d209502ed5a346d69",
   "column": "Ricavi Corretti ($B)",
   "units": "annual decimal volatility; revenues in billions USD",
   "start_year": 2014,
@@ -14,14 +14,14 @@
   "reference": "Guida Valuation PEP, B7",
   "log_returns": [
     -0.05864019070852298,
-    -0.004288521861962985,
-    0.012067564415383947,
+    -0.015336128359344272,
+    0.02311517091276514,
     0.01859513747188263,
     0.03974390917570619,
     0.04883395186442875,
     0.1267213124466513,
-    0.11904628359082094,
-    0.06002488478109149,
+    0.10731090991466251,
+    0.07176025845724995,
     0.0041783778232958825,
     0.02229623148203355
   ]

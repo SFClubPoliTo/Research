@@ -89,7 +89,7 @@ def test_missing_g3_is_explicit():
 def test_pipeline_uses_historical_sigma(tmp_path, config, g3_functions):
     config['revenues']['sigma'] = .99  # Runtime must use D04, not the stored reference.
     result = run_pipeline(save_config(tmp_path, config), g3_functions=g3_functions)
-    assert result['sigma_used'] == pytest.approx(.053417214240354643)
+    assert result['sigma_used'] == pytest.approx(0.05294302584051538)
     expected = simulate_revenues(93.925, np.full(10, .04), result['sigma_used'], 1000, 42)
     np.testing.assert_allclose(result['revenues_matrix'], expected)
     assert result['sigma_calibration']['status'] == 'provisional'

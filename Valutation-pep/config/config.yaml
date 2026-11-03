@@ -12,9 +12,9 @@ simulation:
 
 revenues:
   r0: 93.925
-  sigma: 0.053417214240354643  # Reference estimate; recalculated from D04 at runtime.
+  sigma: 0.05294302584051538  # Reference estimate; recalculated from D04 at runtime.
   sigma_status: "provisional"
-  historical_csv: "data/D04_ricavi_v1_G1.csv"
+  historical_csv: "data/D04_ricavi_v2_G1.csv"
   historical_column: "Ricavi Corretti ($B)"
   g_path: [0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04]
 

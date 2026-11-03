@@ -100,7 +100,7 @@ mancano funzioni/dati G3: non inseriamo fallback numerici. I test sono invece es
 
 ## Consegne G1 e G5
 
-- `data/D04_ricavi_v1_G1.csv`: ricavi 2014–2025, rettifiche e riferimenti G1.
+- `data/D04_ricavi_v2_G1.csv`: ricavi 2014–2025, rettifiche e riferimenti G1.
   Separatore `;`, importi sia in milioni sia in miliardi USD. La serie omogenea
   è `Ricavi Corretti ($B)`; FY2025 coincide con `r0 = 93.925`.
   Il file viene conservato integralmente, incluse note e fonti.
@@ -128,7 +128,7 @@ del modulo. Le dipendenze D20 sono separate da quelle della pipeline.
 La volatilità annuale è stimata sui ricavi corretti G1 (2014–2025):
 12 osservazioni e 11 log-rendimenti, ricalcolati dai livelli in miliardi USD.
 La formula della guida, sezione B7, richiede la deviazione standard campionaria
-(`ddof=1`). Risultato: **0.053417214240354643**, circa **5.34% annuo**.
+(`ddof=1`). Risultato: **0.05294302584051538**, circa **5.29% annuo**.
 La stima è provvisoria, in attesa della revisione statistica G5 nelle settimane 3–4;
 non modifica lo stato sintetico degli altri parametri né la crescita futura ipotizzata.
 
@@ -187,3 +187,20 @@ Il primo FCFF è circa 10.815 miliardi USD, l’ultimo circa 15.085.
 Restano validi i limiti della v0: possibile salto di reinvestimento al sesto anno
 nei percorsi stocastici e trattamento simmetrico delle imposte. La sostituzione
 con D11 non deve avvenire cambiando soltanto il flag di stato.
+
+## Aggiornamento D04 v2
+
+La serie attiva è ora `data/D04_ricavi_v2_G1.csv`, estratta dal foglio
+`D04_Serie_Ricavi_Corretti` dell’Excel G1 conservato in `data/D04_ricavi_v2_G1.xlsx`.
+Il CSV mantiene tutte le colonne, le note e i valori della consegna; la v1 resta
+in archivio e non viene più letta dalla configurazione.
+
+La rettifica della 53ª settimana riduce i ricavi corretti 2016 da 59.799 a 59.142
+miliardi USD e quelli 2022 da 86.142 a 85.137. FY2025 resta 93.925.
+Sigma viene ricalcolata dai livelli, senza usare i rendimenti arrotondati del foglio:
+`std(log(R[t] / R[t-1]), ddof=1) = 0.05294302584051538` (5.2943%).
+Il riepilogo G1 indica invece 5.32%: chiedere a G1 di verificare questa cifra;
+la pipeline usa il risultato riproducibile dalla serie consegnata.
+G1 marca la consegna v2 come definitiva; la calibrazione sigma resta provvisoria
+in attesa della revisione statistica G5 già prevista. Crescita futura e parametri
+D07 non cambiano.

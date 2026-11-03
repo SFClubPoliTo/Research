@@ -24,7 +24,7 @@ def test_d04_estimate():
     root = Path(__file__).resolve().parents[1]
     cfg = yaml.safe_load((root/'config/config.yaml').read_text(encoding='utf-8'))
     report = calibrate_sigma(cfg['revenues'])
-    assert report['sigma'] == pytest.approx(.053417214240354643)
+    assert report['sigma'] == pytest.approx(0.05294302584051538)
     assert report['sigma'] == pytest.approx(cfg['revenues']['sigma'])
     assert (report['start_year'], report['end_year']) == (2014, 2025)
     assert report['log_return_observations'] == 11
