@@ -1,21 +1,19 @@
-# use numpay array to avoid a computation that would last more than Rocco
-
 import numpy as np
+import pandas as pd
+from pathlib import Path
+
 
 def estimate_sigma (historical_revenues: np.array) -> float:
 
-  # we can use the expression given in section 10.1 once computed the log returns (retruns must be positive if we want to take the log)
-
-  historical_revenues = np.asarray(historical_revenues, dtype=float)
-  if historical_revenues.ndim != 1 or historical_revenues.size < 3:
-    raise ValueError("At least three annual revenue observations are required")
-  if not np.all(np.isfinite(historical_revenues)) or np.any(historical_revenues <= 0):
-    raise ValueError("Historical revenues must be finite and positive")
+  if np.any(historical_revenues <= 0):
+    raise ValueError("Historical revenues must be positive")   
 
   log_returns = np.log(historical_revenues[1:] / historical_revenues[:-1])
 
-  # Guida Valuation PEP, B7: sample standard deviation of annual log returns.
-  return float(np.std(log_returns, ddof=1))
+  # if we want to use as stated in the guide the Bessel approximation for the std we can write
+  
+  return float(np.std(log_returns, ddof = 1))
+
 
 def simulate_revenues(r0: float, g_path: np.ndarray, sigma: float, n_paths: int, seed: int) -> np.ndarray:
 
@@ -30,8 +28,8 @@ def simulate_revenues(r0: float, g_path: np.ndarray, sigma: float, n_paths: int,
     raise ValueError(f"sigma must be positive, while now sigma = {sigma}")
 
   horizon = len(g_path)
-  rng = np.random.default_rng(seed)                 # we have to simulate the noise
-
+  
+  rng = np.random.default_rng(seed)                 
   z = rng.standard_normal(size=(n_paths, horizon))
 
   drift = np.log(1.0 + g_path) - 0.5 * sigma**2
@@ -41,3 +39,28 @@ def simulate_revenues(r0: float, g_path: np.ndarray, sigma: float, n_paths: int,
   revenues_matrix = np.exp(cumulative_log_growth) * r0
 
   return revenues_matrix
+
+if __name__ == "__main__":
+
+    BASE_DIR = Path(__file__).resolve().parent.parent.parent
+    csv_path = BASE_DIR / "data" / "D04_ricavi_v1_G1.csv"
+
+    # read the CSV file specifiying to the compiler that the separator used is the ';'
+    df = pd.read_csv(csv_path, sep=";")
+
+    df = df.sort_values("Anno").reset_index(drop=True)
+    ricavi_storici = df["Ricavi Corretti ($B)"].to_numpy(dtype=float)
+
+    sigma_hat = estimate_sigma(ricavi_storici)
+    r0 = float(ricavi_storici[-1])
+    anno_base = int(df["Anno"].iloc[-1])
+
+    print("=" * 55)
+    print("CALIBRAZIONE RICAVI DA D04 (G1 -> G4)")
+    print("=" * 55)
+    print(f"Anni analizzati:            {df['Anno'].iloc[0]} - {anno_base} ({len(ricavi_storici)-1} variazioni YoY)")
+    print(f"Ricavo anno base r0 ({anno_base}): {r0:.3f} ($B)")
+    print(f"Sigma stimato (ddof=1):     {sigma_hat:.6f} ({sigma_hat*100:.2f}%)")
+    print("=" * 55)
+
+    
