@@ -13,6 +13,7 @@ def config():
     # Synthetic fixture only: do not write these parameters to the shared config.
     path = Path(__file__).resolve().parents[1] / 'config/config.yaml'
     cfg = yaml.safe_load(path.read_text(encoding='utf-8'))
+    cfg['revenues'].pop('d05', None)  # Keep the independent synthetic 4% benchmark.
     cfg['simulation']['n_paths'] = 1000
     cfg['fcff_parameters'] = {
         'margine': [.15]*10, 'aliquota': [.20]*10,
@@ -137,6 +138,7 @@ def test_d07_shared_config_and_pipeline(tmp_path, g3_functions):
 
     path = Path(__file__).resolve().parents[1] / 'config/config.yaml'
     cfg = yaml.safe_load(path.read_text(encoding='utf-8'))
+    cfg['revenues'].pop('d05', None)  # Original delivery reference, not a D05 scenario.
     for key, value in PARAMS_V0.items():
         if key == 'status':
             assert cfg['fcff_parameters'][key] == value

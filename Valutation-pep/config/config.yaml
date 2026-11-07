@@ -16,7 +16,12 @@ revenues:
   sigma_status: "provisional"
   historical_csv: "data/D04_ricavi_v2_G1.csv"
   historical_column: "Ricavi Corretti ($B)"
+  # Archived D07 reference only when d05 is present; runtime uses the selected workbook scenario.
   g_path: [0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04]
+  d05:
+    source: "data/d05/PEP_scenari.xlsx"
+    scenario: "base" # bear, base, growth
+    status: "provisional" # valuation date/source availability and G3 maturity approval pending
 
 fcff_parameters:
   # G2 D07 v0, 28/10/2026. Replace with D11 before the final run.

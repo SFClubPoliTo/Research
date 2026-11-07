@@ -1,4 +1,7 @@
-"""Esporta il caso deterministico FCFF senza richiedere i moduli di G3."""
+"""Esporta il riferimento originale D07 al 4%, ignorando intenzionalmente D05.
+
+Per gli scenari attivi usare: python -m src.revenues.scenarios
+"""
 
 import argparse
 import csv

@@ -4,17 +4,20 @@ from pathlib import Path
 
 from src.revenues.model import simulate_revenues, estimate_sigma
 from src.revenues.calibration import calibrate_sigma
+from src.revenues.scenarios import prepare_scenario
 from src.fcff.model import fcff
 from src.rates.model import compute_enterprise_value
 from src.bridge.model import compute_equity_and_price
 
 
 def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = False, override_sigma: float = None,
-                 g3_functions: dict = None) -> dict:
+                 g3_functions: dict = None, scenario: str = None) -> dict:
 
   base_dir = Path(__file__).resolve().parent.parent
   with open(base_dir / config_path, "r", encoding="utf-8") as f:
     cfg = yaml.safe_load(f)
+
+  cfg, scenario_info = prepare_scenario(cfg, scenario, is_final_run)
 
   # the final run needs to stop if the data are synthetic or temporary
   status = cfg["meta"]["status"]
@@ -74,6 +77,7 @@ def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = F
   evs = ev_out["enterprise_value"]
 
   summary = {
+    "scenario": scenario_info,
     "status": status,
     "seed": seed,
     "n_paths": n_paths,

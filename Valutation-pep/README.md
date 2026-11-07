@@ -1,4 +1,20 @@
 # PepsiCo DCF — G4 pipeline
+## D05 attivo (7 novembre 2026)
+
+La pipeline usa ora lo scenario **base** di `data/d05/PEP_scenari.xlsx`.
+Selezione in `revenues.d05.scenario`: `bear`, `base`, `growth`; override per run
+con `run_pipeline(..., scenario="growth")`. Crescita e reinvestimento G2 vengono
+allineati in memoria; sigma resta derivata da D04 v2. I dati restano provvisori.
+
+Dettagli, celle, verifiche aperte sulla data e istruzioni: [D05](data/d05/README.md).
+Per esportare i tre scenari deterministici senza G3:
+`python -m src.revenues.scenarios --output output/d05_reference.csv`.
+
+Le sezioni D07 sotto descrivono il riferimento originale al 4%, conservato per
+la regressione e per `src.fcff.reference`. Con D05 attivo non e' il percorso
+della pipeline: il vettore di crescita e il reinvestimento sono sostituiti
+dall'adattatore D05. I moduli originali G2 e le interfacce G3 sono preservati.
+
 ## Struttura
 
 ```text
