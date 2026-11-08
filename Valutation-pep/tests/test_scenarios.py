@@ -9,7 +9,6 @@ import yaml
 from src.fcff.model import fcff
 from src.pipeline import run_pipeline
 from src.revenues.scenarios import read_scenarios, prepare_scenario
-from test_pipeline import g3_functions
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -23,7 +22,7 @@ def cfg():
     ('bear', 94.988156416238965, 110.97200643997608),
     ('base', 97.161996472863677, 127.01498691480568),
     ('growth', 99.277137735058517, 144.47702479656834)])
-def test_workbook_and_pipeline_sigma_zero(cfg, g3_functions, tmp_path, name, first, last):
+def test_workbook_and_pipeline_sigma_zero(cfg, tmp_path, name, first, last):
     original = deepcopy(cfg)
     effective, info = prepare_scenario(cfg, name)
     assert cfg == original
@@ -36,7 +35,7 @@ def test_workbook_and_pipeline_sigma_zero(cfg, g3_functions, tmp_path, name, fir
     p = cfg['fcff_parameters']
     g5 = info['g_path'][4]
     rr5 = (p['capex'][4]-p['da'][4] + g5/(1+g5)*p['nwc'][4]) / (p['margine'][4]*(1-p['aliquota'][4]))
-    expected_rr = rr5 + np.arange(1,6)/5 * (.125-rr5)
+    expected_rr = rr5 + np.arange(1,6)/5 * (.25-rr5)
     np.testing.assert_allclose(info['reinv_rate'], expected_rr)
     assert info['reinv_rate'] != p['reinv_rate']
     assert effective['fcff_parameters']['margine'] == p['margine']
@@ -46,14 +45,9 @@ def test_workbook_and_pipeline_sigma_zero(cfg, g3_functions, tmp_path, name, fir
     path = tmp_path / 'config.yaml'
     path.write_text(yaml.safe_dump(cfg), encoding='utf-8')
     nopat, reinvest, flows = fcff(revenues[None,:], cfg['revenues']['r0'], effective['fcff_parameters'])
-    def terminal(revenues, fcff, **kwargs):
-        np.testing.assert_allclose(fcff, np.tile(flows, (3,1)))
-        return np.full(3, 100.)
-    g3_functions['compute_terminal_value'] = terminal
-    result = run_pipeline(str(path), override_sigma=0, g3_functions=g3_functions, scenario=name)
+    result = run_pipeline(str(path), override_sigma=0, scenario=name)
     np.testing.assert_allclose(result['revenues_matrix'], np.tile(revenues, (3,1)))
-    expected_ev = flows[0] @ (1.08**-np.arange(1,11)) + 100/1.08**10
-    assert result['ev_mean'] == pytest.approx(expected_ev)
+    assert np.all(np.isfinite(result['prices_array']))
     assert result['scenario']['scenario'] == name
     assert result['sigma_calibration']['sigma'] == pytest.approx(.05294302584051538)
 

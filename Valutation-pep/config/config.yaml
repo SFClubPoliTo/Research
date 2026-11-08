@@ -1,59 +1,114 @@
 meta:
-  status: "synthetic"
-  currency: "USD"
-  scale: "billions"
-  # FY2026 as t=1 versus this valuation date: pending alignment with G3.
-  valuation_date: "2026-10-21"
+  status: provvisory
+  currency: USD
+  scale: billions
+  valuation_date: '2026-10-21'
   horizon_years: 10
-
 simulation:
   seed: 42
   n_paths: 10000
-
 revenues:
   r0: 93.925
-  sigma: 0.05294302584051538  # Reference estimate; recalculated from D04 at runtime.
-  sigma_status: "provisional"
-  historical_csv: "data/D04_ricavi_v2_G1.csv"
-  historical_column: "Ricavi Corretti ($B)"
-  # Archived D07 reference only when d05 is present; runtime uses the selected workbook scenario.
-  g_path: [0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04]
+  sigma: 0.05294302584051538
+  sigma_status: provisional
+  historical_csv: data/D04_ricavi_v2_G1.csv
+  historical_column: Ricavi Corretti ($B)
+  g_path:
+  - 0.04
+  - 0.04
+  - 0.04
+  - 0.04
+  - 0.04
+  - 0.04
+  - 0.04
+  - 0.04
+  - 0.04
+  - 0.04
   d05:
-    source: "data/d05/PEP_scenari.xlsx"
-    scenario: "base" # bear, base, growth
-    status: "provisional" # valuation date/source availability and G3 maturity approval pending
-
+    source: data/d05/PEP_scenari.xlsx
+    scenario: base
+    status: provisional
 fcff_parameters:
-  # G2 D07 v0, 28/10/2026. Replace with D11 before the final run.
   status: provisional
-  margine: [0.159, 0.159, 0.159, 0.159, 0.159, 0.1582, 0.1574, 0.1566, 0.1558, 0.155]
-  aliquota: [0.19, 0.19, 0.19, 0.19, 0.19, 0.192, 0.194, 0.196, 0.198, 0.2]
-  da: [0.035, 0.035, 0.035, 0.035, 0.035]
-  capex: [0.055, 0.055, 0.055, 0.055, 0.055]
-  nwc: [-0.05, -0.05, -0.05, -0.05, -0.05]
-  reinv_rate: [0.1372877433149969, 0.13421580748624767, 0.13114387165749847, 0.12807193582874923,
-  0.125]
-
+  margine:
+  - 0.159
+  - 0.159
+  - 0.159
+  - 0.159
+  - 0.159
+  - 0.1582
+  - 0.1574
+  - 0.1566
+  - 0.1558
+  - 0.155
+  aliquota:
+  - 0.19
+  - 0.19
+  - 0.19
+  - 0.19
+  - 0.19
+  - 0.192
+  - 0.194
+  - 0.196
+  - 0.198
+  - 0.2
+  da:
+  - 0.035
+  - 0.035
+  - 0.035
+  - 0.035
+  - 0.035
+  capex:
+  - 0.055
+  - 0.055
+  - 0.055
+  - 0.055
+  - 0.055
+  nwc:
+  - -0.05
+  - -0.05
+  - -0.05
+  - -0.05
+  - -0.05
+  reinv_rate:
+  - 0.1372877433149969
+  - 0.13421580748624767
+  - 0.13114387165749847
+  - 0.12807193582874923
+  - 0.125
 rates_and_terminal:
-  wacc_by_stage:
-    growth: null
-    transition: null
-    maturity: null #also used for the terminal value
-
-  stage_years:     # D02 v2: 5 growth + 5 transition; maturity is terminal
-    growth: 5
-    transition: 5
-    maturity: 0
-  # Provisional maturity assumptions from G2 D07; pending agreement with G3.
+  price_share: 138.83
+  rf: 0.0496
+  erp: 0.042
+  rd: 0.0566
+  beta_growth: 0.52
+  beta_maturity: 0.8
+  k_transition: 0.5
+  diluted_shares: 1.366
+  debt_total_wacc: 51.881
   g_terminal: 0.025
-  roic_terminal: 0.20
+  roic_terminal: 0.1
   margin_terminal: 0.155
-  tax_terminal: 0.20
-
+  tax_terminal: 0.2
 bridge:
+  diluted_shares: 1.366
   items:
-    - {name: cash, value: 6.0, sign: 1}
-    - {name: non_operating_assets, value: 1.5, sign: 1}
-    - {name: total_debt, value: 42.0, sign: -1}
-    - {name: minorities_and_other, value: 0.5, sign: -1}
-  diluted_shares: 1.38
+    cash_and_equivalents: 10.675
+    short_term_investments: 0.488
+    tropicana_39_pct: 0.0
+    celsius_convertible_preferred: 1.482
+    short_term_debt: -9.223
+    long_term_debt: -42.658
+    euro_notes_oct_2026: -1.126
+    pension_and_medical_after_tax: -0.55379
+    non_controlling_interests: -0.195
+  provisional_items:
+  - cash_and_equivalents
+  - short_term_investments
+  - celsius_convertible_preferred
+  - short_term_debt
+  - long_term_debt
+  - euro_notes_oct_2026
+  - pension_and_medical_after_tax
+  - non_controlling_interests
+  - diluted_shares

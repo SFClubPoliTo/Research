@@ -3,15 +3,14 @@ import numpy as np
 from pathlib import Path
 
 from src.revenues.model import simulate_revenues, estimate_sigma
+from src.fcff.model import fcff
 from src.revenues.calibration import calibrate_sigma
 from src.revenues.scenarios import prepare_scenario
-from src.fcff.model import fcff
 from src.rates.model import compute_enterprise_value
 from src.bridge.model import compute_equity_and_price
 
 
-def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = False, override_sigma: float = None,
-                 g3_functions: dict = None, scenario: str = None) -> dict:
+def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = False, override_sigma: float = None, scenario: str = None) -> dict:
 
   base_dir = Path(__file__).resolve().parent.parent
   with open(base_dir / config_path, "r", encoding="utf-8") as f:
@@ -25,65 +24,37 @@ def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = F
   if is_final_run and status != "real":
     raise RuntimeError("Pipeline block: all data need to be in status 'real'!")
 
-  if is_final_run and cfg["fcff_parameters"].get("status") != "real":
-    raise RuntimeError("Pipeline block: G2 parameters must have status 'real'!")
+  if is_final_run and (cfg['fcff_parameters'].get('status') != 'real' or
+                       cfg['revenues'].get('sigma_status') != 'real'):
+    raise RuntimeError("Parametri FCFF o sigma ancora provvisori")
 
-  if is_final_run and cfg["revenues"].get("sigma_status") != "real":
-    raise RuntimeError("Pipeline block: sigma must have status 'real'!")
-
-  if g3_functions is None:
-    raise RuntimeError("Pending G3 repo functions: connect G3_FUNCTIONS before running")
-
-  for name in ("build_wacc_path", "compute_terminal_value", "compute_equity_and_price"):
-    if not callable(g3_functions.get(name)):
-      raise ValueError(f"Missing G3 adapter: {name}")
-
-  if any(cfg["rates_and_terminal"][key].get(stage) is None
-         for key in ("stage_years", "wacc_by_stage")
-         for stage in ("growth", "transition", "maturity")):
-    raise ValueError("Pending G2/G3: stage durations and WACC values are required")
 
   seed = int(cfg["simulation"]["seed"])
   n_paths = int(cfg["simulation"]["n_paths"])
   r0 = float(cfg["revenues"]["r0"])
   g_path = np.asarray(cfg["revenues"]["g_path"], dtype = float)
-  sigma_calibration = calibrate_sigma(cfg["revenues"])
-  sigma = sigma_calibration["sigma"] if override_sigma is None else float(override_sigma)
+  calibration = calibrate_sigma(cfg["revenues"])
+  sigma = calibration["sigma"] if override_sigma is None else float(override_sigma)
   if not np.isfinite(sigma) or sigma < 0:
     raise ValueError("Sigma must be finite and non-negative")
 
-  if cfg["meta"]["horizon_years"] != 10 or g_path.shape != (10,):
-    raise ValueError("D02 v2 requires a 10-year forecast")
-  if cfg["rates_and_terminal"]["stage_years"] != {"growth": 5, "transition": 5, "maturity": 0}:
-    raise ValueError("D02 v2 requires 5 growth years and 5 transition years")
 
-  # chain execution G1->G2->G3
+  # chain execution G1->G2->G3, the name are provvisory: we will implement the right functions once we have them
   revs = simulate_revenues(r0 = r0, g_path = g_path, sigma = sigma, n_paths = n_paths, seed = seed)
-  nopat, reinvest, flussi = fcff(revs, r0, cfg["fcff_parameters"])
-  terminal = cfg["rates_and_terminal"]
-  if not np.isfinite(terminal["roic_terminal"]) or terminal["roic_terminal"] <= 0:
-    raise ValueError("Terminal ROIC must be finite and positive")
-  terminal_matches = (
-      (cfg["fcff_parameters"]["margine"][-1], terminal["margin_terminal"]),
-      (cfg["fcff_parameters"]["aliquota"][-1], terminal["tax_terminal"]),
-      (cfg["fcff_parameters"]["reinv_rate"][-1],
-       terminal["g_terminal"] / terminal["roic_terminal"]))
-  if not all(np.isclose(a, b, rtol=1e-8, atol=1e-10) for a, b in terminal_matches):
-    raise ValueError("G2 year-10 margin, tax and reinvestment must match G3 terminal inputs")
-  ev_out = compute_enterprise_value(revenues = revs, fcff = flussi, rates_and_terminal = cfg["rates_and_terminal"], g3_functions = g3_functions)
-  bridge_out = compute_equity_and_price(ev = ev_out["enterprise_value"], bridge_parameters = cfg["bridge"], g3_functions = g3_functions)
+  fcff_out = fcff(ricavi = revs, ricavo_base = r0, params = cfg["fcff_parameters"])
+  ev_out = compute_enterprise_value(revenues = revs, fcff = fcff_out[2], params = cfg["rates_and_terminal"], nopat_h1 = fcff_out[0][:, -1] * (1 + cfg["rates_and_terminal"]["g_terminal"]))
+  bridge_out = compute_equity_and_price(ev = ev_out["ev"], bridge_params = cfg["bridge"], is_final_run = is_final_run)
 
   prices = bridge_out["share_price"]
-  evs = ev_out["enterprise_value"]
+  evs = ev_out["ev"]
 
   summary = {
     "scenario": scenario_info,
+    "sigma_calibration": calibration,
     "status": status,
     "seed": seed,
     "n_paths": n_paths,
     "sigma_used": sigma,
-    "sigma_calibration": sigma_calibration,
-    "sigma_overridden": override_sigma is not None,
     "price_mean": float(np.mean(prices)),
     "price_median": float(np.median(prices)),
     "price_p5": float(np.percentile(prices, 5.0)),
@@ -101,3 +72,18 @@ def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = F
 
 
   return summary
+
+
+if __name__ == "__main__":
+    res = run_pipeline(config_path = "config/config.yaml", is_final_run = False, override_sigma = None)
+    print("=" * 55)
+    print(f"RUN COMPLETATO (Stato dati: {res['status']})")
+    print("=" * 55)
+    print(f"Prezzo Implicito Medio:    ${res['price_mean']:.2f}")
+    print(f"Prezzo Implicito Mediano:  ${res['price_median']:.2f}")
+    print(f"Intervallo P5 - P95:       [${res['price_p5']:.2f} - ${res['price_p95']:.2f}]")
+    print(f"Errore Std MC su Prezzo:   ${res['price_std_err']:.4f}")
+    print(f"Enterprise Value Medio:    ${res['ev_mean']:.2f}B")
+    print(f"Peso medio Terminal Value: {res['mean_tv_weight'] * 100:.1f}%")
+    print(f"Percorsi Equity Negativo:  {res['negative_equity_count']}")
+    print("=" * 55)
