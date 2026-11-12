@@ -37,7 +37,7 @@ def run_pipeline(config_path: str, is_final_run: bool = False, override_sigma: f
   # chain execution G1->G2->G3, the name are provvisory: we will implement the right functions once we have them
   revs = simulate_revenues(r0 = r0, g_path = g_path, sigma = sigma, n_paths = n_paths, seed = seed)
   fcff_out = fcff(ricavi = revs, ricavo_base = r0, params = build_params(cfg["fcff_parameters"]))
-  ev_out = compute_enterprise_value(revenues = revs, fcff = fcff_out[2], params = cfg["rates_and_terminal"], nopat_h1 = fcff_out[0][:, -1] * (1 + cfg["fcff_parameters"]["g_inf"]))
+  ev_out = compute_enterprise_value(revenues = revs, fcff = fcff_out[2], params = cfg["rates_and_terminal"])
   bridge_out = compute_equity_and_price(ev = ev_out["ev"], bridge_params = cfg["bridge"], is_final_run = is_final_run)
 
   prices = bridge_out["share_price"]

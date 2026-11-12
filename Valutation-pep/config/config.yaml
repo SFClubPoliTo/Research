@@ -2,7 +2,7 @@ meta:
   status: provvisory
   currency: USD
   scale: billions
-  valuation_date: '2026-09-06'
+  valuation_date: '2026-10-08'
   horizon_years: 10
 simulation:
   seed: 42
@@ -44,19 +44,36 @@ fcff_parameters:
   
   
 rates_and_terminal:
-  price_share: 138.83
-  rf: 0.0496
+  price_share: 128.34
+  rf: 0.0522
   erp: 0.042
-  rd: 0.0566
-  beta_growth: 0.52
-  beta_maturity: 0.8
+  rd: 0.0592
+  beta_growth: 0.511
+  beta_maturity: 0.55
   k_transition: 0.5
   diluted_shares: 1.366
   debt_total_wacc: 51.881
   g_terminal: 0.025
-  roic_terminal: 0.1
+  roic_terminal: 0.2
   margin_terminal: 0.155
-  tax_terminal: 0.2
+  tax_terminal: 0.21
+  status: real
+  tax_marginal: 0.21
+  wacc_growth: 0.06752159394991522
+  wacc_maturity: 0.06878454474741877
+  wacc_by_year:
+  - 0.06752159394991522
+  - 0.06752159394991522
+  - 0.06752159394991522
+  - 0.06752159394991522
+  - 0.06752159394991522
+  - 0.068153069348667
+  - 0.06846880704804288
+  - 0.06862667589773083
+  - 0.0687056103225748
+  - 0.06874507753499678
+  first_year_fraction: 0.3076923076923077
+  first_discount_period: 0.21703296703296704
 bridge:
   diluted_shares: 1.366
   items:
@@ -66,15 +83,9 @@ bridge:
     celsius_convertible_preferred: 1.482
     short_term_debt: -9.223
     long_term_debt: -42.658
-    euro_notes_oct_2026: -1.126
     pension_and_medical_after_tax: -0.55379
     non_controlling_interests: -0.195
-  provisional_items:
-  - cash_and_equivalents
-  - short_term_investments
-  - celsius_convertible_preferred
-  - short_term_debt
-  - long_term_debt
-  - pension_and_medical_after_tax
-  - non_controlling_interests
-  - diluted_shares
+    cash_restricted_russia: 0.0
+    receivables_tbg: 0.0
+    dividends_payable: -2.0360000000000005
+  provisional_items: []

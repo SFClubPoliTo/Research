@@ -1,0 +1,21 @@
+# D13 - G3 -> G4 - v2 - generato 2026-11-12 - definitivo
+# Tassi in decimali, annuali, nominali, USD. Il WACC e' deterministico: uguale in tutti i percorsi e in tutti gli scenari.
+rates:
+  status: definitivo
+  valuation_date: 2026-10-08    # H01: uscita di 10-Q e risultati; bilancio del ponte al 2026-09-05
+  first_year_fraction: 0.30769230769230771   # = 112/364: del FCFF 2026 conta solo questa quota (6/9-26/12/2026, dopo il bilancio)
+  first_discount_period: 0.21703296703296704   # = 79/364: anni dalla data di valutazione alla fine dell'esercizio 2026 (8/10-26/12)
+  discount_time: [0.21703296703296704, 1.2170329670329672, 2.2170329670329672, 3.2170329670329672, 4.2170329670329672, 5.2170329670329672, 6.2170329670329672, 7.2170329670329672, 8.2170329670329672, 9.2170329670329672]   # anni dalla data di valutazione, flussi a fine esercizio 2026..2035; il terminal value usa l'ultimo
+  rf: 0.0522                       # LSEG TCM10 (= FRED DGS10), 2026-10-08
+  erp: 0.042                     # Damodaran ERPbymonth, 2026-10-01
+  beta_levered_growth: 0.511   # G5 D09 v1: mediana dei 9 peer con Blume, D/E di PEP
+  beta_levered_maturity: 0.55  # ipotesi G3: media del beta a 60 mesi, 2016-2026
+  rd_pretax: 0.0592            # rf + spread rating sintetico A+ (Damodaran)
+  tax_marginal: 0.21             # H10: 21% nel WACC e nel NOPAT a regime; il NOPAT parte dal 19% e converge negli anni 6-10 (G2)
+  debt_weight: 0.2284           # D/(D+E), D al 2026-09-05, E al 2026-10-08
+  years_growth: 5
+  years_transition: 5
+  k_transition: 0.5
+  wacc_growth: 0.067521593949915221
+  wacc_maturity: 0.068784544747418769       # w_inf: usato nel terminal value
+  wacc_by_year: [0.067521593949915221, 0.067521593949915221, 0.067521593949915221, 0.067521593949915221, 0.067521593949915221, 0.068153069348667, 0.068468807048042882, 0.068626675897730832, 0.0687056103225748, 0.068745077534996785]   # anni 1..10 = esercizi 2026..2035

@@ -78,14 +78,14 @@ if __name__ == "__main__":
         "Short-term debt obligations": -9.223,                          # 10-Q p. 6
         "Long-term debt obligations": -42.658,                          # 10-Q p. 6
         "Pension and retiree medical deficits, after tax": -(0.233 + 0.468) * (1 - tax),  # 10-K p. 86
+        "Dividends payable": -(1.967 + 6.004 - 5.935),
         "Non-controlling interests": -0.195                             # 10-Q p. 6; H13
     }
     diluted_shares = 1.366  # 10-Q cover and p. 26; H12
-    provisional = list(data_bridge) + ["Diluted shares"]
-    provisional.remove("Tropicana Brands Group (39%)")
+    provisional = []
 
     bridge = EquityBridge(data_bridge, diluted_shares, provisional)
-    print(f'total sum of the bridge: {bridge.bridge_total:.3f} USD bn')  # expected -41.111
+    print(f'total sum of the bridge: {bridge.bridge_total:.3f} USD bn')  # expected -42.021
 
     # Test
     ev_test = 250.0

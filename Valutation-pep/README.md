@@ -5,31 +5,21 @@ Dalla cartella `Valutation-pep`:
 ```bash
 python -m pip install -r requirements.txt
 python -m src.pipeline
-```
-
-Il run usa lo scenario base D05. Per scegliere uno scenario:
-
-```python
-from src.pipeline import run_pipeline
-res = run_pipeline(scenario="bear")  # bear, base, growth
-print(res["price_mean"])
-```
-
-Per esportare i tre scenari senza calcolare la valutazione:
-
-```bash
-python -m src.revenues.scenarios --output output/d05_reference.csv
 python -m src.revenues.calibration --output output/sigma_calibration.json
 ```
 
-D04 v2 contiene i ricavi storici G1; sigma è ricalcolata dai livelli (5,2943%).
-D05 contiene gli scenari consegnati da G1 e sostituisce la crescita sintetica al 4%.
-Sono previsioni, non ricavi osservati. Il file originale è in `data/d05/`.
-I parametri FCFF sono quelli provvisori D07; WACC e ponte usano i moduli G3.
-Il run completo resta provvisorio e non va presentato come valutazione definitiva.
+D13 v2 è conservato in `data/d13/`. Valutazione all’8 ottobre 2026,
+prezzo 128,34 USD e ponte al 5 settembre: −42,02079 miliardi USD.
+Il primo FCFF annuale è moltiplicato una sola volta per 112/364;
+il primo periodo di sconto è 79/364 anni, poi si aggiunge un anno per flusso.
+Il terminal value usa l’ultimo fattore di sconto. Crescita terminale 2,5%, ROIC 20%.
 
-Da confermare con G2/G3: D05 usa crescita terminale 2,5%, contro il 2% del
-precedente config G3. Il run usa 2,5% e conserva il ROIC G3 al 10%; il rapporto
-di reinvestimento converge quindi al 25%. Margine e aliquota terminali restano
-quelli D07 (15,5% e 20%). Va confermato anche FY2026 come primo anno rispetto
-alla data di valutazione 21/10/2026.
+Si usano i WACC del YAML D13, uguali per tutti i percorsi: ricalcolarli dal
+Python G3 dà una piccola differenza (circa 0,000001 in decimali).
+NOPAT terminale e scudo fiscale WACC usano il 21%.
+
+Il run resta provvisorio in attesa del completamento G2/D11.
+Nella pipeline attuale del collega la crescita è ancora quella di `revenues.g_path`
+e sigma è letta dal YAML: D05 e la calibrazione automatica non sono collegati al run.
+I vecchi test D07/scenari devono essere riallineati alla nuova interfaccia G2.
+Per verificare questa integrazione: `python -m pytest tests/test_d13.py tests/test_sigma.py -q`.
