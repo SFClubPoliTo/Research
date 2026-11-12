@@ -75,7 +75,6 @@ bridge:
   - celsius_convertible_preferred
   - short_term_debt
   - long_term_debt
-  - euro_notes_oct_2026
   - pension_and_medical_after_tax
   - non_controlling_interests
   - diluted_shares
