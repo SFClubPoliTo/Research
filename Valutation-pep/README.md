@@ -19,7 +19,15 @@ Python G3 dà una piccola differenza (circa 0,000001 in decimali).
 NOPAT terminale e scudo fiscale WACC usano il 21%.
 
 Il run resta provvisorio in attesa del completamento G2/D11.
-Nella pipeline attuale la crescita è ancora quella di `revenues.g_path`
-e sigma è letta dal YAML: D05 e la calibrazione automatica non sono collegati al run.
+La pipeline legge la crescita dallo scenario base D05 e ricalcola sigma da D04 v2.
+Il valore sigma nel YAML � solo un riferimento. Per cambiare scenario:
+
+```python
+from src.pipeline import run_pipeline
+res = run_pipeline(scenario="bear")  # bear, base, growth
+```
+
+D05 non modifica i parametri G2. Per il confronto deterministico usare
+`run_pipeline(override_sigma=0)`.
 I vecchi test D07/scenari devono essere riallineati alla nuova interfaccia G2.
 Per verificare questa integrazione: `python -m pytest tests/test_d13.py tests/test_sigma.py -q`.

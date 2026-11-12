@@ -2,36 +2,41 @@ import yaml
 import numpy as np
 from pathlib import Path
 
-from src.revenues.model import simulate_revenues, estimate_sigma
+from src.revenues.model import simulate_revenues
+from src.revenues.calibration import calibrate_sigma
+from src.revenues.scenarios import prepare_scenario
 from src.fcff.model import fcff, build_params
 from src.rates.model import compute_enterprise_value
 from src.bridge.model import compute_equity_and_price
 
 
-def run_pipeline(config_path: str, is_final_run: bool = False, override_sigma: float = None) -> dict:
+def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = False, override_sigma: float = None, scenario: str = None) -> dict:
   
   base_dir = Path(__file__).resolve().parent.parent
-  with open(base_dir / config_path, "r") as f:
+  with open(base_dir / config_path, "r", encoding="utf-8") as f:
     cfg = yaml.safe_load(f)
   
+  cfg, scenario_info = prepare_scenario(cfg, scenario, is_final_run)
+
   # the final run needs to stop if the data are synthetic or temporary
   status = cfg["meta"]["status"]
 
   if is_final_run and status != "real":
     raise RuntimeError("Pipeline block: all data need to be in status 'real'!")
 
-  '''
-  if any(cfg["rates_and_terminal"][key].get(stage) is None
-         for key in ("stage_years", "wacc_by_stage")
-         for stage in ("growth", "transition", "maturity")):
-    raise ValueError("Pending G2/G3: stage durations and WACC values are required")
-  '''
+  if is_final_run and (cfg['fcff_parameters'].get('status') != 'real' or
+                       cfg['revenues'].get('sigma_status') != 'real'):
+    raise RuntimeError("Parametri FCFF o sigma ancora provvisori")
+
 
   seed = int(cfg["simulation"]["seed"])
   n_paths = int(cfg["simulation"]["n_paths"])
   r0 = float(cfg["revenues"]["r0"])
   g_path = np.asarray(cfg["revenues"]["g_path"], dtype = float)
-  sigma = float(cfg["revenues"]["sigma"]) if override_sigma is None else override_sigma
+  calibration = calibrate_sigma(cfg["revenues"])
+  sigma = calibration["sigma"] if override_sigma is None else float(override_sigma)
+  if not np.isfinite(sigma) or sigma < 0:
+    raise ValueError("Sigma must be finite and non-negative")
 
 
   # chain execution G1->G2->G3, the name are provvisory: we will implement the right functions once we have them
@@ -44,6 +49,8 @@ def run_pipeline(config_path: str, is_final_run: bool = False, override_sigma: f
   evs = ev_out["ev"]
 
   summary = {
+    "scenario": scenario_info,
+    "sigma_calibration": calibration,
     "status": status,
     "seed": seed,
     "n_paths": n_paths,

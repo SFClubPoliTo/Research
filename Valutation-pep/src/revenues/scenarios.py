@@ -96,7 +96,7 @@ def read_scenarios(path):
 
 
 def prepare_scenario(cfg, scenario=None, is_final_run=False):
-    """Return a private effective config; preserve the delivered D07 baseline."""
+    """Select revenue growth without changing G2 assumptions."""
     cfg = deepcopy(cfg)
     spec = cfg['revenues'].get('d05')
     if spec is None:
@@ -115,21 +115,11 @@ def prepare_scenario(cfg, scenario=None, is_final_run=False):
     if not np.isclose(delivery['g_terminal'], terminal['g_terminal'], rtol=0, atol=1e-12):
         raise ValueError('D05 maturity requires alignment with G3 g_terminal')
     growth = delivery['scenarios'][name]['g_path']
-    params = cfg['fcff_parameters']
-    # Validate all delivered vectors before deriving anything; do not fill missing G2 inputs.
-    fcff(np.full((1, 10), delivery['r0']), delivery['r0'], params)
-    assumptions = {'status': params['status'], 'ricavo_base': delivery['r0'], 'growth': growth[:5],
-                   'm_growth': params['margine'][:5], 'tau_growth': params['aliquota'][:5],
-                   'm_inf': terminal['margin_terminal'], 'tau_inf': terminal['tax_terminal'],
-                   'g_inf': terminal['g_terminal'], 'roic_inf': terminal['roic_terminal'],
-                   **{key: params[key] for key in ('da', 'capex', 'nwc')}}
-    # Use G2's own option-A builder. Preserve margins/taxes exactly as delivered.
-    params['reinv_rate'] = build_params(assumptions)['reinv_rate'].tolist()
     cfg['revenues']['g_path'] = growth
     info = {key: delivery[key] for key in ('source_sha256', 'years', 'method', 'k')}
     info.update(scenario=name, source=spec['source'], status=spec['status'],
                 g_path=growth, g_terminal=delivery['g_terminal'],
-                reinv_rate=params['reinv_rate'], range=delivery['scenarios'][name]['range'])
+                range=delivery['scenarios'][name]['range'])
     return cfg, info
 
 
@@ -149,7 +139,7 @@ def main():
             g = np.array(effective['revenues']['g_path'])
             r0 = effective['revenues']['r0']
             r = r0 * np.cumprod(1+g)
-            nopat, reinvest, flows = fcff(r[None, :], r0, effective['fcff_parameters'])
+            nopat, reinvest, flows = fcff(r[None, :], r0, build_params(effective['fcff_parameters']))
             for i in range(10):
                 writer.writerow([name, 2026+i, g[i], r[i], nopat[0,i], reinvest[0,i], flows[0,i]])
     print(f'D05 reference: {dest}')
