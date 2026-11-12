@@ -32,5 +32,4 @@ Da confermare con G2/G3: D05 usa crescita terminale 2,5%, contro il 2% del
 precedente config G3. Il run usa 2,5% e conserva il ROIC G3 al 10%; il rapporto
 di reinvestimento converge quindi al 25%. Margine e aliquota terminali restano
 quelli D07 (15,5% e 20%). Va confermato anche FY2026 come primo anno rispetto
-alla data di valutazione 21/10/2026. Il riepilogo D04 indica sigma 5,32%, diversa
-dal valore ricalcolato. Le verifiche di stato bloccano il run finale.
+alla data di valutazione 21/10/2026.
