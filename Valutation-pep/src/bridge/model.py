@@ -77,7 +77,6 @@ if __name__ == "__main__":
         "Celsius convertible preferred (fair value)": 1.482,            # 10-Q p. 22
         "Short-term debt obligations": -9.223,                          # 10-Q p. 6
         "Long-term debt obligations": -42.658,                          # 10-Q p. 6
-        "Euro notes issued in October 2026": -1.126,                    # 424B2, settled 2026-10-16; H01
         "Pension and retiree medical deficits, after tax": -(0.233 + 0.468) * (1 - tax),  # 10-K p. 86
         "Non-controlling interests": -0.195                             # 10-Q p. 6; H13
     }
