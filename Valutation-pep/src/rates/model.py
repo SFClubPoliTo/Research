@@ -11,7 +11,7 @@ import numpy as np
 class WaccTerminalCalculator:
     def __init__(self, price_share, beta, tax, rf=0.0496, erp=0.042, rd=0.0566,
                  diluted_shares=1.366, debt_total=(9.223 + 42.658),
-                 g_inf=0.02, roic_inf=0.10, k_transition=0.5):
+                 g_inf=0.025, roic_inf=0.10, k_transition=0.5):
         # Valori di default da D08 v1 (sovrascrivibili da config.yaml)
         self.rf = rf
         self.beta = beta
@@ -86,7 +86,7 @@ def compute_enterprise_value(revenues: np.ndarray, fcff: np.ndarray, params: dic
     beta_growth = float(params.get("beta_growth", 0.52))
     beta_maturity = float(params.get("beta_maturity", 0.80))
     tax = float(params.get("tax_terminal", 0.21))
-    g_inf = float(params.get("g_terminal", 0.02))
+    g_inf = float(params.get("g_terminal", 0.025))
     roic_inf = float(params.get("roic_terminal", 0.10))
     m_inf = float(params.get("margin_terminal", 0.16))
 
