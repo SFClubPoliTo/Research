@@ -19,7 +19,7 @@ Python G3 dà una piccola differenza (circa 0,000001 in decimali).
 NOPAT terminale e scudo fiscale WACC usano il 21%.
 
 Il run resta provvisorio in attesa del completamento G2/D11.
-Nella pipeline attuale del collega la crescita è ancora quella di `revenues.g_path`
+Nella pipeline attuale la crescita è ancora quella di `revenues.g_path`
 e sigma è letta dal YAML: D05 e la calibrazione automatica non sono collegati al run.
 I vecchi test D07/scenari devono essere riallineati alla nuova interfaccia G2.
 Per verificare questa integrazione: `python -m pytest tests/test_d13.py tests/test_sigma.py -q`.
