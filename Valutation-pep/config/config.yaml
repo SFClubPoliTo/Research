@@ -58,7 +58,7 @@ rates_and_terminal:
   diluted_shares: 1.366
   debt_total_wacc: 51.881
   g_terminal: 0.025
-  roic_terminal: 0.2
+  # ROIC terminale calcolato nella pipeline: w_inf + spread G2 dello scenario.
   margin_terminal: 0.155
   tax_terminal: 0.21
   status: real

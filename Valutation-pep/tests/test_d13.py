@@ -11,7 +11,7 @@ def test_d13_matches_delivery():
     path=ROOT/'data/d13/codice/D13_wacc_terminal.py'
     spec=importlib.util.spec_from_file_location('g3',path)
     g3=importlib.util.module_from_spec(spec); spec.loader.exec_module(g3)
-    r=cfg['rates_and_terminal']
+    r=dict(cfg['rates_and_terminal'], roic_terminal=.20)  # Caso numerico di confronto con D13.
     growth=g3.WaccCalculator(128.34,.511,.21)
     maturity=g3.WaccCalculator(128.34,.55,.21).calculate_wacc_base()
     w=growth.generate_wacc_vector(growth.calculate_wacc_base(),maturity)

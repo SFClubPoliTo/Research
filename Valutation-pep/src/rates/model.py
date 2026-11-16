@@ -90,7 +90,7 @@ def compute_enterprise_value(revenues: np.ndarray, fcff: np.ndarray, params: dic
     beta_maturity = float(params.get("beta_maturity", 0.55))
     tax = float(params.get("tax_marginal", 0.21))
     g_inf = float(params.get("g_terminal", 0.025))
-    roic_inf = float(params.get("roic_terminal", 0.20))
+    roic_inf = float(params["roic_terminal"])
     m_inf = float(params.get("margin_terminal", 0.16))
 
     calc_growth = WaccTerminalCalculator(
