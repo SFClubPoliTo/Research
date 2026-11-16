@@ -10,11 +10,11 @@ from src.rates.model import compute_enterprise_value
 from src.bridge.model import compute_equity_and_price
 
 def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = False, override_sigma: float = None, scenario: str = None) -> dict:
-  
+
   base_dir = Path(__file__).resolve().parent.parent
   with open(base_dir / config_path, "r", encoding="utf-8") as f:
     cfg = yaml.safe_load(f)
-  
+
   cfg, scenario_info = prepare_scenario(cfg, scenario, is_final_run)
 
   # the final run needs to stop if the data are synthetic or temporary
@@ -26,7 +26,7 @@ def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = F
   if is_final_run and (cfg['fcff_parameters'].get('status') != 'real' or
                        cfg['revenues'].get('sigma_status') != 'real'):
     raise RuntimeError("Parametri FCFF o sigma ancora provvisori")
-  
+
   seed = int(cfg["simulation"]["seed"])
   n_paths = int(cfg["simulation"]["n_paths"])
   r0 = float(cfg["revenues"]["r0"])
