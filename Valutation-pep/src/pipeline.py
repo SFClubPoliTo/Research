@@ -9,19 +9,6 @@ from src.fcff.model import fcff, build_params
 from src.rates.model import compute_enterprise_value
 from src.bridge.model import compute_equity_and_price
 
-def load_g_path(xlsx_path: Path, scenario: str) -> np.ndarray:
-    """Legge i 10 tassi g_t dal foglio 'Scenari' di PEP_scenari.xlsx."""
-    col_map = {
-        "bear": "g_Basso",
-        "base": "g_Base",
-        "growth": "g_Alto",
-    }
-    if scenario not in col_map:
-        raise ValueError(f"Scenario non valido: {scenario}. Usa {list(col_map.keys())}")
-    
-    df = pd.read_excel(xlsx_path, sheet_name="Scenari")
-    return df[col_map[scenario]].dropna().to_numpy(dtype=float)[:10]
-
 def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = False, override_sigma: float = None, scenario: str = None) -> dict:
   
   base_dir = Path(__file__).resolve().parent.parent
@@ -43,10 +30,10 @@ def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = F
   seed = int(cfg["simulation"]["seed"])
   n_paths = int(cfg["simulation"]["n_paths"])
   r0 = float(cfg["revenues"]["r0"])
-  d05_path = base_dir / cfg["revenues"]["d05"]["source"]
-  g_path = load_g_path(d05_path, scenario)
+  g_path = np.asarray(cfg["revenues"]["g_path"], dtype=float)
+  selected_scenario = scenario_info["scenario"]
   fcff_cfg = dict(cfg["fcff_parameters"])
-  fcff_cfg["s_inf"] = float(cfg["fcff_parameters"]["s_inf"][scenario])
+  fcff_cfg["s_inf"] = float(cfg["fcff_parameters"]["s_inf"][selected_scenario])
 
   calibration = calibrate_sigma(cfg["revenues"])
   sigma = calibration["sigma"] if override_sigma is None else float(override_sigma)
