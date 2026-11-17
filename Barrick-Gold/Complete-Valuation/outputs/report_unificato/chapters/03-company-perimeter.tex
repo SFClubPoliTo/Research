@@ -36,7 +36,7 @@ interests into its stochastic modelling framework.
 \label{sec:company-perimeter}
 
 % Sources: Team 4 Sections 1.1.2--1.1.3, 2 and 3.1; Annual Report 2025,
-% MD&A mine tables and Note 2; 2026Q1--Q2 mine statistics in Chapter 10.
+% MD&A mine tables and Note 2; 2026Q1--Q2 mine statistics.
 A valuation must fix, by asset and date, the ownership and reporting basis,
 status and currency. These determine which volumes, costs, taxes, royalties,
 cash flows, debt claims and shares enter its numerator and denominator.
@@ -50,17 +50,14 @@ excluded copper and smaller gold operations \cite{team4}; this modelling
 choice does not demonstrate that copper is economically negligible.
 The eight mines produced 622 and 711 thousand attributable ounces in 2026Q1
 and 2026Q2 against company gold totals 719 and 796 thousand ounces
-(Chapter~\ref{ch:operations}): 86.5\% and 89.3\% of attributable gold production. These are
+\cite{barrick-mine-stats-2026}: 86.5\% and 89.3\% of attributable gold production. These are
 gold-volume coverage ratios, not corporate-revenue or value coverage.
 
-The fixed executable gold vector uses company totals of 719 and 796 koz,
-and company-wide CoS of USD~1,922 and 1,993/oz, for its first two quarters.
-From 2026Q3 it uses the eight-mine Team~4 forecast. Its first two actual
-quarters therefore have a broader asset scope than its forecast perimeter.
-This scope break remains explicit in the paired copper experiment; the
-eight-mine coverage table does not reconcile it. A consistent mine-level
-actual vector and matching aggregate costs are required before the baseline
-can be read as a strict eight-mine valuation.
+The executable gold vector stores the company totals (719 and 796 koz; CoS
+USD~1,922 and 1,993/oz) for 2026Q1--Q2 and the eight-mine Team~4 forecast
+from 2026Q3. Because the dated clock values only flows after 2 September 2026,
+the valued flows (2026Q3 stub onwards, gold and copper alike) lie entirely on
+the eight-mine forecast perimeter.
 
 \begin{table}[H]
 \centering
@@ -124,9 +121,8 @@ are removed mine by mine: Carlin contributes 28 quarters, North Mara 25 from
 2019Q4. A common starting year therefore does not imply identical effective
 samples for every driver. The 2026Q1--Q2 mine statistics replace the first
 two forecast quarters as actuals; forecasts from 2026Q3 remain as originally
-estimated (Chapter~\ref{ch:operations}). On the dated valuation clock those
-actuals precede the 2 September 2026 valuation time: they serve as level
-checks and are not valued (Chapter~\ref{ch:unified-experiment}).
+estimated (Chapter~\ref{ch:operations}). The actuals precede the valuation
+time and serve only as level checks (Section~\ref{sec:valuation-clock}).
 
 \section{Operating quantities supplied by the source programme}
 \label{sec:company-operating-quantities}
@@ -136,34 +132,18 @@ checks and are not valued (Chapter~\ref{ch:unified-experiment}).
 Production and CoS are forecast separately, mine by mine, over the source
 horizon 2026Q1--2030Q4. Annual quantities sum four quarters. The valuation
 uses only the remaining \StubDays{} days of 2026Q3 after 2 September and the
-18 quarters that follow. The price comes from Team~8 in
+17 full quarters that follow (18 valued quarters in total). The price comes from Team~8 in
 Chapter~\ref{ch:calibration}; Team~4's standalone demonstrator is excluded.
 
 \paragraph{Production.}
-Quarterly production of mine $i$ is built from three physical drivers,
-\begin{equation}
-\mathrm{Prod}_{i,t}=\frac{\kappa}{c}O_{i,t}G_{i,t}R_{i,t},
-\qquad\kappa=0.91,\quad c=31.1034768~\text{g/troy oz},
-\label{eq:company-production-identity}
-\end{equation}
-where $O$ is ore processed in tonnes, $G$ processed grade in grams per tonne
-and $R\in(0,1)$ recovery. Their product is recovered gold in grams; $c$
-converts grams to troy ounces. The empirical realization factor
-$\kappa$ is separate from this conversion. Its value $0.91$ is a
-source assumption/calibration, not a physical constant \cite{team4}; the historical
-realized/theoretical ratios needed to re-estimate it are not supplied
-by this identity. Recovery is a fraction (for example, 82\% is $0.82$).
-If $O$ is recorded in kt rather than tonnes, the same numerical
-formula returns koz rather than oz. The historical source text used the
-rounded $31.11$; changing the displayed constant does not recalculate
-any frozen forecast. Ore, grade and recovery model specifications
-remain those described in Chapter~10: ore uses
-SARIMA$(1,0,1)(1,0,0)_4$, grade AR(1) without seasonal terms, and recovery
-uniform historical bounds widened by $\pm1\%$, truncated to $[0.50,1.00]$.
-The source interprets $\kappa$ through mean mine realized/theoretical
-ratios and processing lags, including stockpiling, heap leaching and
-autoclave residence.
-Production bands are 80\% Goodman product-variance intervals under
+Production is the dimensional identity \eqref{eq:production}: ore (t) times
+grade (g/t) times recovery (a decimal fraction) divided by
+$c=31.1034768$~g per troy ounce, times the realization factor $\kappa=0.91$.
+That value of $\kappa$ is a source assumption/calibration, not a physical
+constant \cite{team4}; the historical realized/theoretical ratios needed to
+re-estimate it are not supplied. Ore follows SARIMA$(1,0,1)(1,0,0)_4$, grade
+AR(1), recovery a uniform law on historical bounds widened by $\pm1\%$ and
+truncated to $[0.50,1.00]$; production bands are 80\% Goodman intervals under
 independence (Chapter~\ref{ch:operations}).
 
 \paragraph{Costs.}
@@ -173,10 +153,10 @@ royalties, depreciation and community relations \cite{team4}; the 2025 report
 also identifies mining and production taxes. Consolidated gold CoS in 2025
 was USD~7,357 million: site costs 5,056; depreciation 1,588 (21.6\%);
 royalties 540 (7.3\%); mining and production taxes 132; community relations
-41 \cite{barrick-ar-2025}. The production-weighted log master chain is
-ARIMA$(3,1,0)$ with drift, projected to each mine by
-$\beta_i=0.67\,\sigma(r_{i,t})/\sigma(r_{\mathrm{global},t})+0.33$ and anchored
-at 2025Q4. Cost bands are 95\%, versus production's 80\%.
+41 \cite{barrick-ar-2025}. Costs follow the log master chain that the source
+describes as production-weighted (Chapter~\ref{ch:operations}), with 95\%
+bands; the frozen R script differs in weighting, window and clamping, and the
+inherited cost vectors are used as given.
 
 \paragraph{Operating output.}
 For quarterly gold price $P_t$ in USD/oz, the source passes
@@ -281,7 +261,7 @@ and non-operating assets restated consistently with attributable flows,
 without deducting the same partners' interests twice; reconciled diluted
 shares; the North America IPO status at the valuation date and the resulting
 look-through ownership; and a documented security and corporate-action policy
-for the market comparison.
+for any future market comparison.
 
 \section{Risk boundary and permitted use}
 \label{sec:company-risk-boundary}
@@ -293,10 +273,11 @@ Loulo--Gounkoto suspension as a mine-specific shock absorbed geographically
 and over time, and simultaneous failures as negligible \cite{team4}.
 This is an assumption, not an estimated geopolitical-risk bound.
 
-Production diversification does not imply independent costs. Bartlett's test
-rejects independence ($p=0.0186$); PC1 explains 41.22\% of quarterly cost
-shocks, the first two components 62.79\% \cite{team4}. Shared cost shocks
-motivate the master chain and remain systematic across the perimeter.
+Production diversification does not imply independent costs: the source
+reports Bartlett's $p=0.0186$ against an identity correlation matrix and
+PC1/PC1--PC2 shares of 41.22\%/62.79\% \cite{team4}. This indicates common
+cost variation, not its macro cause, and motivates the master chain
+(Chapter~\ref{ch:operations}).
 
 Cost paths start at 2025Q4. Loulo--Gounkoto's USD~4,151/oz CoS includes the
 inventory fair-value increment on reconsolidation, versus cash costs

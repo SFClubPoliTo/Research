@@ -65,12 +65,14 @@ de-Americanisation. The four models have their own copper calibrations.
 The initial 2 September static surface contains 88 real quotes, 76 eligible,
 with 62 fitted and 14 reserved strikes. Those held-out strikes test
 interpolation, not temporal OOS. The subsequent historical pilot samples ten
-dates spanning July--September, using up to 112 spaced locations over expiries
+dates from 9 July to 2 September 2026, including the final three consecutive
+dates, using up to 112 spaced locations over expiries
 75--250 days away. Quality filters require bid/ask validity, quote and future
 age at most 120 seconds and relative spread at most 20\%. Only dates with
 64 actual eligible quotes on at least three expiries enter temporal fitting.
 No quotes are generated to meet the threshold. This fit uses all eligible
-sampled quotes, rather than gold's fixed CC64 sample.
+sampled quotes, rather than gold's fixed CC64 sample. It is not a
+reproduction of the 31-date gold OOS panel.
 
 Each origin uses only its own options and an as-of Treasury curve; its
 structural parameters are held fixed while variance/intensity is projected to
@@ -89,11 +91,11 @@ is the base gold/copper scenario; terminal Gaussian-score dependence
 $\pm0.5$ uses whole-path permutations preserving marginal distributions and
 is not an estimated Brownian correlation. The primary comparison values
 explicit flows to 2030 without terminal value; signed perpetuity is a separate
-sensitivity. Gold and copper share the dated clock of
-Chapter~\ref{ch:unified-experiment}: only flows after the 2 September 2026
-valuation time are valued, the Q1--Q2 2026 actuals are excluded, and the
-quarter containing the valuation date contributes its remaining \StubDays{}
-days. Copper paths use the same corrected daily engines as gold. The
+sensitivity. The copper increments are paired means of these explicit flows;
+they are not additive to the gold medians or quantiles of
+Table~\ref{tab:unified-quantiles}, which include terminal value. Gold and
+copper share the dated clock and the daily engines of
+Section~\ref{sec:valuation-clock}. The
 2 September copper Bates fit has zero jump intensity, so that engine reduces to
 Heston. Neither conditional forwards nor IV tests validate physical copper
 prices to 2030, future mine sales, costs or corporate equity value.

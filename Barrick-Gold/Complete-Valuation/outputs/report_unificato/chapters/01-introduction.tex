@@ -1,12 +1,13 @@
-\chapter{From SF Research to the Integrated Barrick Project}
+\chapter{From Starting Finance Club PoliTo Research to the Integrated Barrick Project}
 \label{ch:introduction}
 
 \section{Research question, community and valuation object}
 
 % Sources: CONTENT-LEDGER BG-U-01, BG-U-10--14; CL-001/002/011/013;
 % Team 8 T8-17--19; Team 4 MAP-T4-08--12; Team 5 T5-02--19;
-% SF Research complete guide, project organisation and unification workflow.
-SF Research did not begin as a preassembled quantitative-finance laboratory.
+% Research-area guide, project organisation and unification workflow.
+Starting Finance Club PoliTo Research did not begin as a preassembled
+quantitative-finance laboratory.
 It originated as a comparatively vertical group, strongly represented by
 management-engineering students and initially centred on events and financial
 education. Research activity first appeared through short studies developed by
@@ -38,27 +39,26 @@ gold, production and costs into margins; and corporate finance closes the DCF.
 The thesis is therefore both a valuation study and a record of how theoretical
 ideas become mutually dependent when applied to one object.
 
-The integrated research question is: \emph{how can uncertainty in commodity
-prices, production, costs and corporate assumptions be propagated into a
-distribution of Barrick free cash flow and value without confusing
-risk-neutral option information with a physical operating forecast?} The
-object is not a point price produced by an isolated option model. It is a
-conditional distribution of enterprise value and, after a separately verified
-capital bridge, equity value and value per diluted share. The comparison with
-the observed market price is therefore a dated diagnostic inside a declared
-assumption set, not a target price or a recommendation.
+The integrated research question is: \emph{how much does the choice of
+gold-price model matter for a discounted operating-margin proxy of Barrick when
+production, costs and discount-rate shocks are held fixed, and how can
+option-implied information enter that valuation without being confused with a
+physical operating forecast?} The object is not a point price produced by an
+isolated option model. It is the conditional distribution of a discounted
+operating-margin proxy for an eight-mine gold perimeter. A reconciled
+enterprise value, and from it equity value and value per diluted share,
+require separately verified accounting and capital bridges. Because these
+bridges are not yet reconciled, this edition
+reports aggregate operating proxies only, with no per-share value or
+market-price comparison, and no target price or recommendation; the bridge and
+any market comparison are future work.
 
 This project was developed within Research, the Starting Finance Club PoliTo
 area dedicated to collaborative quantitative, economic, financial and
 methodological projects. Its members bring heterogeneous backgrounds---from
 management engineering and mathematics to data science, computational methods
 and quantitative finance---so the research process is organised around
-knowledge sharing rather than an assumed common starting point. The practical
-objective is to establish enough shared language and method for contributors
-with different training to make a verifiable contribution, while keeping
-technical depth accessible to readers who did not participate in the project.
-This description concerns how the work was organised; it is not presented as a
-formal institutional mission or organisational chart.
+knowledge sharing rather than an assumed common starting point.
 
 That collaborative setting is material to the valuation design. The commodity
 block must state whether paths are risk-neutral, physical or explicit
@@ -75,41 +75,19 @@ or silently filling missing data.
 \section{From eight autonomous studies to one chain of evidence}
 
 % Sources: CONTENT-LEDGER authority table; MAP-T1--T4; T5-01--T8-20;
-% SF Research complete guide, unification and review workflow.
-The eight source studies divide the problem into complementary modules. Team 1
-provides probability, measure and Black--Scholes foundations; Team 2 provides
-regression and linear time-series methods; Team 3 provides Monte Carlo and
-simulation diagnostics; Team 4 maps production, cost and price scenarios into
-an operating layer; Team 5 supplies DCF, FCFF, WACC and stochastic-valuation
-concepts; Team 6 develops stochastic variance, jumps and Fourier pricing; Team
-7 supplies historical gold, dependence and volatility evidence; and Team 8
-compares option-surface models and produces risk-neutral GLD paths. These were
-autonomous studies with different immediate questions, conventions and
-validation states, not chapters originally written as a single sequential
-paper.
-
-Unification was consequently treated as a separate research phase rather than
-as copy-and-paste assembly. Before drafting the integrated argument, the work
-fixed the accepted sources and material claims, assigned an authority to each
-concept, and classified outputs as theoretical, synthetic, legacy empirical,
-current empirical or newly generated. Data and notation contracts then made
-dates, currencies, units, measures and interfaces explicit. Source-model
-implementations were preserved and subjected to parity tests before being
-connected to the unified runner, while the current LSE (London Strategic Edge)
-data refresh was recorded as
-a separate evidence layer so that a new market observation could not be
-mistaken for a re-estimation of every legacy study.
-
-The execution itself followed two connected workstreams. The code stream built
-and tested the valuation pipeline, generated tables and figures from accepted
-manifests, and exposed unresolved inputs instead of replacing them with silent
-assumptions. The writing and LaTeX stream harmonised notation, removed
-duplication, created transitions and kept claims tied to their evidence status.
-Technical review checked models, calculations and reproducibility; editorial
-review checked scope, language and reader navigation; final quality assurance
-tested both the compiled artifact and the consistency between prose, tables,
-figures and generated outputs. Section~\ref{sec:team-study-synthesis} makes the
-resulting roles and validation states directly comparable.
+% Research-area guide, unification and review workflow.
+The eight source studies are complementary modules
+(Table~\ref{tab:team-question-model-output}), with different questions,
+conventions and validation states, not chapters of one paper. Unification was
+therefore a separate research phase rather than copy-and-paste assembly. Each
+concept received one source authority; outputs were classified as
+theoretical, synthetic, legacy empirical, current empirical or newly
+generated; shared data and notation contracts fixed dates, currencies, units,
+measures and interfaces; and source-model implementations were parity-tested
+before being connected to the unified runner. The LSE (London Strategic Edge)
+data refresh was kept as a separate evidence layer, so that a new market
+observation could not be mistaken for a re-estimation of every legacy study.
+Section~\ref{sec:team-study-synthesis} compares the resulting roles.
 
 \section{Contribution, falsifiable boundaries and roadmap}
 
@@ -118,12 +96,26 @@ The first contribution is an auditable handoff from option-implied dynamics to
 corporate quantities. The second is an evidence hierarchy that separates
 source-model parity, market-data validity, statistical fit, predictive tests,
 numerical convergence and accounting reconciliation. The third is a reporting
-contract: a stochastic valuation must expose its median and tails, the
-contemporaneous market-price reference and the assumptions that move the
-distribution, rather than presenting a single estimate with false precision.
+contract: a stochastic valuation must expose its median and tails, its
+numerical precision and the assumptions that move the distribution, rather
+than presenting a single estimate with false precision.
 Together, these contributions make disagreement inspectable: a reader can see
 whether a result changes because of market evidence, model form, operating
 assumptions, accounting treatment or the equity bridge.
+
+Methodologically, Black--Scholes/GBM, Heston, Bates--Poisson and Full
+Bates--Hawkes are calibrated, with nested refinements and the trust's 0.40\%
+carry, to 64 GLD calls of 2 September 2026, and drive daily gold paths from the
+XAUUSD spot on a dated clock that values only flows after that date. With
+production, costs and WACC shocks common to all four branches, the median
+proxies lie between USD~\ValMedianLow{} and \ValMedianHigh~billion, within the
+numerical range of a single model (USD~\NumericalMedianLow--\NumericalMedianHigh~billion),
+and the terminal value carries about \TerminalShare\% of the mean. In
+\OosDates{} rolling repricing tests Full Bates--Hawkes has the lowest error but
+no model beats implied-volatility persistence. The main limits are equally
+explicit: the price laws are risk-neutral without a validated physical map,
+operating uncertainty is not propagated, and the accounting and equity bridges
+remain open.
 
 The same structure creates falsifiable boundaries. Better option fit does not
 prove better out-of-sample forecasts; better forecasts do not prove a valid
@@ -141,7 +133,8 @@ valuation perimeter. Part II consolidates the mathematical, econometric and
 numerical prerequisites from the bottom up. Part III first tests the legacy
 gold series with discrete-time methods, then introduces the affine
 stochastic-volatility and jump model ladder, and finally calibrates and
-compares the models on the option surface. Part IV carries the accepted gold,
-production and cost paths through component margin and DCF, validates the integrated
-experiment and closes with limitations and future research. No part of the
+compares the models on the option surface. Part IV carries the gold paths and
+the fixed production and cost forecasts through component margin and DCF,
+validates the integrated experiment and closes with limitations and future
+research. No part of the
 study provides a buy, sell or hold recommendation.
