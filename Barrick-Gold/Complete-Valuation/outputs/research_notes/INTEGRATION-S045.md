@@ -146,7 +146,7 @@ carry justified by the declining gold backing and gold futures; early exercise
 described as numerically negligible; Feller binds for the jump models and the
 Heston optimum lies on the boundary (the relaxed fit, with vol of vol about
 1.16, violates it); Heston simulation described as full truncation, as in
-`gold_paths.py`; price-error ranking qualified (vega-weighted loss is nested,
+`gold_paths.py`; Article 7 order selection reported with the corrected grid, which admits the zero-order model and selects no lag; price-error ranking qualified (vega-weighted loss is nested,
 price RMSE is not); the introduction and the DCF chapter no longer promise a
 per-share value or market comparison; internal run identifiers, file paths
 and workflow language removed; uncited bibliography entries removed and the
@@ -174,8 +174,8 @@ chapter files and the self-blocked August source generator were removed.
 
 | Measure | 24 October | 17 November |
 | --- | --- | --- |
-| Long edition pages | 212 | 196 |
-| Long edition words (PDF text) | 101,412 | 94,089 |
+| Long edition pages | 212 | 197 |
+| Long edition words (PDF text) | 101,412 | 94,169 |
 | Display equations in source | 747 | 668 |
 | Paper pages | 10 | 10 |
 
