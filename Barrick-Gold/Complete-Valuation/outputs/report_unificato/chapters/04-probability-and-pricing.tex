@@ -9,7 +9,7 @@ A measurable space is a pair consisting of a set and a $\sigma$-algebra.
 A particularly important example is a Borel space, where the $\sigma$-algebra is the Borel $\sigma$-algebra of a topological space.
 
 \par
-A measurable space captures and generalises intuitive notions such as length, area, and volume with a set $X$ of ``points'' in the space. However, regions of the space are the elements of the $\sigma$-algebra, since intuitive measures are not usually defined for individual points. The algebra also captures relationships between regions: a region can be defined as an intersection of other regions, a union of other regions, or the space with the exception of another region.
+A measurable space captures and generalizes intuitive notions such as length, area, and volume with a set $X$ of ``points'' in the space. However, regions of the space are the elements of the $\sigma$-algebra, since intuitive measures are not usually defined for individual points. The algebra also captures relationships between regions: a region can be defined as an intersection of other regions, a union of other regions, or the space with the exception of another region.
 
 \par
 \textbf{Definition.} Consider a set $X$ and a $\sigma$-algebra $\mathcal{F}$ on $X$. Then the tuple $(X, \mathcal{F})$ is called a \textit{measurable space}. The elements of $\mathcal{F}$ are called \textit{measurable sets} within the measurable space.
@@ -455,7 +455,7 @@ We first begin with the definition of standard Brownian motion. A stochastic pro
 
 
 These properties uniquely characterize standard Brownian motion. The combination of Gaussian independent increments and continuity makes it a central process in modeling continuous random phenomena.
-\subsection{Construction of Brownian Motion}
+\subsection{Construction of Brownian Motion}\label{sec:bm-construction}
 Up to this point, we have described the main properties that a Brownian motion should satisfy. 
 However, stating its properties is not enough to guarantee that a process with such characteristics actually exists.
 Hence, we need to prove the existence of such a process.
@@ -598,7 +598,7 @@ Together with adaptedness, this formalizes the intuitive understanding that Brow
 In financial markets, asset prices reflect both the present value of the firm and expectations about their future performance. These expectations, however, fluctuate over time introducing an uncertainty component into the asset price. The resulting randomness in asset prices is possible to model through the use of stochastic differential equations (SDEs).
 SDEs provide analytical tools for validating numerical schemes and serve as building blocks for more sophisticated stochastic models of market dynamics.
 Among all continuous-time models, the most fundamental is the Geometric Brownian Motion (GBM). In this framework, the logarithm of the asset price follows an arithmetic Brownian motion driven by a Wiener process. This ensures properties that align well with real-world financial data: prices remain strictly positive, returns are continuous and volatility acts proportionally to the current price level.
-However, formulating and analysing the GBM model rigorously requires the mathematical machinery of stochastic calculus. Before introducing GBM explicitly, we therefore present the notions of stochastic integrands and square-integrable processes, develop the Itô integral, and establish the general theory of SDEs.
+However, formulating and analyzing the GBM model rigorously requires the mathematical machinery of stochastic calculus. Before introducing GBM explicitly, we therefore present the notions of stochastic integrands and square-integrable processes, develop the Itô integral, and establish the general theory of SDEs.
 \subsection{Stochastic Integrands and SDEs}
 The Stochastic Differential Equation (SDE) is defined in terms of the Itô integral with respect to the standard Brownian motion $W_t$. To ensure the existence and properties of this integral, the functions we integrate (the integrands) must satisfy specific mathematical conditions.
 \paragraph{Stochastic Integrands and Square-Integrable Variables}
@@ -664,7 +664,7 @@ chain rule but is not in general a martingale; the difference is the covariation
 term, not the use of future information. Pricing below uses the It\^o convention.
 \subsection{Geometric Brownian Motion}\label{sec:gbm}
 
-We now apply the general theory of stochastic integrals and Itô calculus to derive and analyse the most fundamental model for asset prices in continuous time: the \emph{Geometric Brownian Motion} (GBM). This model captures proportional growth, multiplicative noise and strict positivity of prices, and forms the basis of the Black--Scholes option pricing framework.
+We now apply the general theory of stochastic integrals and Itô calculus to derive and analyze the most fundamental model for asset prices in continuous time: the \emph{Geometric Brownian Motion} (GBM). This model captures proportional growth, multiplicative noise and strict positivity of prices, and forms the basis of the Black--Scholes option pricing framework.
 \paragraph{Definition of the GBM SDE}
 
 \begin{definition}[Geometric Brownian Motion]
@@ -743,16 +743,16 @@ From this expression we obtain several fundamental properties:
 \end{enumerate}
 
 
-\paragraph{Interpretation in Financial Modelling}
+\paragraph{Interpretation in Financial Modeling}
 
-The GBM SDE captures two essential facts commonly observed in financial markets, making it a natural starting point for modelling asset prices in continuous time.
+The GBM SDE captures two essential facts commonly observed in financial markets, making it a natural starting point for modeling asset prices in continuous time.
 
 \begin{itemize}
     \item \textbf{Proportional volatility:}  
     The diffusion term $\sigma S_t dW_t$ is proportional to the current level of the asset price. This implies that the magnitude of random fluctuations increases with the price itself. As a consequence, the model assumes that returns, rather than absolute price changes, exhibit a constant level of volatility over time. This property is consistent with empirical observations in financial data, where percentage changes tend to be more stable than absolute variations.
 
     \item \textbf{Strict positivity of prices:}  
-    The explicit solution of the GBM, given in~\eqref{eq:GBM-solution}, is expressed as an exponential function of a Brownian motion. Since the exponential function is always strictly positive, it follows that $S_t > 0$ almost surely for all $t \ge 0$. This property is particularly important in financial modelling, as it ensures that asset prices cannot become negative.
+    The explicit solution of the GBM, given in~\eqref{eq:GBM-solution}, is expressed as an exponential function of a Brownian motion. Since the exponential function is always strictly positive, it follows that $S_t > 0$ almost surely for all $t \ge 0$. This property is particularly important in financial modeling, as it ensures that asset prices cannot become negative.
 \end{itemize}
 
 \section{Risk-Neutral Pricing}

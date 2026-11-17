@@ -20,7 +20,7 @@ the scenario outputs with a validated corporate valuation.
 
 An option calibration estimates coefficients under a pricing measure
 $\mathbb Q$, conditional on the chosen model and market inputs. Expected
-realised commodity prices and revenue forecasts require the physical measure
+realized commodity prices and revenue forecasts require the physical measure
 $\mathbb P$. An option-implied distribution alone does not identify expected
 physical returns, volatility risk premia or jump risk premia. Joint
 underlying and option evidence is therefore relevant to identification
@@ -39,11 +39,11 @@ to physical paths automatically identify a valid pricing kernel. The
 cash-flow definition, risk adjustment and treatment of dependence must be
 reconciled in either route.
 
-The intended route here is physical commodity paths, realised selling-price
+The intended route here is physical commodity paths, realized selling-price
 basis, attributable sales volumes, revenue, reconciled FCFF and corporate
 discounting. Gold is required in USD per troy ounce and copper in USD per
 pound, with explicit conversion to the financial reporting scale. GLD shares,
-a copper futures delivery and Barrick's quarterly average realised selling
+a copper futures delivery and Barrick's quarterly average realized selling
 price are distinct economic objects. Restarting the first at the level of
 the last does not resolve their differences.
 
@@ -78,7 +78,7 @@ coefficient on the same path. Substitution into CIR variance gives
 Thus $\kappa\theta$ is preserved in this restricted family. This is a
 consequence of the selected square-root shift, not a universal restriction
 on every possible stochastic-volatility measure change. The estimation
-parameterisation uses $\log(\kappa_P/\kappa_Q)$ to enforce positivity.
+parameterization uses $\log(\kappa_P/\kappa_Q)$ to enforce positivity.
 
 For normally distributed log jump sizes, a separate positive intensity
 ratio $c_I$ and an exponential mark tilt $b_J$ specify
@@ -104,7 +104,7 @@ $a_t^Q+\eta_Sv_t-\lambda_t^Qk_Q$, with arrivals and marks generated under
 $\mathbb P$.
 
 For exponential Hawkes arrivals, $\lambda_t^Q$ denotes the pricing-intensity
-functional evaluated on the same realised counting history. Constant scaling
+functional evaluated on the same realized counting history. Constant scaling
 then preserves the exponential form:
 \begin{equation}
 \lambda_{0,P}=c_I\lambda_{0,Q},\quad
@@ -231,7 +231,7 @@ excluded without selecting a different contract retrospectively. There are
 408 accepted returns from 14 November 2024 to 2 September 2026, 65 origin
 failures and 14 target-liquidity exclusions. These rotating-delivery returns
 avoid artificial rollover jumps but do not identify spot drift, convenience
-yield, collateral returns or a five-year realised selling-price curve.
+yield, collateral returns or a five-year realized selling-price curve.
 
 \subsection{Estimation and numerical evidence}
 
@@ -268,7 +268,7 @@ mean negative log likelihood moves approximately from $-3874.56$ to
 $-3876.82$ for Heston, from $-3875.82$ to $-3877.13$ for Bates, and from
 $-3878.72$ to $-3881.11$ for Hawkes when moving from one to eight substeps
 per observation. Parameters are held fixed during this check. Remaining
-simulation variation and discretisation sensitivity prevent these likelihoods
+simulation variation and discretization sensitivity prevent these likelihoods
 from establishing a reliable model ranking. Parameter refitting at a
 converged resolution, multiple starts, identification checks and uncertainty
 assessment remain necessary; optimizer success alone does not satisfy them.
@@ -298,11 +298,12 @@ gold GBM and a no-change conditional mean, with historically estimated gold
 volatility, provide comparators. Each fit uses only available origin history.
 The basis requires at least 253 training prices; the GLD volatility history
 is longer, so the variants differ in both input history and basis treatment.
+Table~\ref{tab:physical-gold-baseline} reports the results.
 
 \begin{table}[H]
 \centering\small
 \caption{Training-only physical gold baselines, cutoff 2 September 2026.
-RMSE is in USD/oz; coverage is realised coverage of nominal 95\% plug-in
+RMSE is in USD/oz; coverage is realized coverage of nominal 95\% plug-in
 intervals. Quarterly forecasts overlap.}
 \label{tab:physical-gold-baseline}
 \begin{tabularx}{\textwidth}{@{}Xrrrr@{}}
@@ -365,11 +366,11 @@ USD~6.117 for the no-change mean. In the matched four-model panel below,
 advantage, and it does not establish long-horizon calibration. These GLD
 errors are distinct from the USD/oz errors of the longer historical-only
 gold benchmark above. The richer-model origin experiment must additionally
-resolve particle and time-discretisation sensitivity.
+resolve particle and time-discretization sensitivity.
 
 The Heston panel has subsequently completed the same 29 forecast origins.
 Its GLD RMSE is USD~6.157 per share, against 6.119 for conditional GBM and
-6.117 for no-change. Two physical optimisations exhaust their evaluation
+6.117 for no-change. Two physical optimizations exhaust their evaluation
 budget; their forecasts remain in the comparison rather than being removed
 after observing the errors. Applying the origin-fitted deterministic gold
 basis to both models gives RMSE of USD~66.77/oz for Heston and 66.35/oz for
@@ -445,7 +446,7 @@ against 106.45 for no-change. Conversion fits the log GLD/gold ratio only
 through each origin and multiplies the forecast mean and quantiles by the
 predicted factor, without using the target GLD price. The gold no-change
 benchmark uses the actual origin gold price. Gold midpoints remain distinct
-from Barrick's realised selling prices.
+from Barrick's realized selling prices.
 
 \paragraph{Analytical integration of normal marks.}
 An optional filter variant integrates jump amplitudes analytically. Given
@@ -468,24 +469,24 @@ integration work before relying on long-horizon physical distributions.
 
 \subsection{Consequences for the operating and valuation layers}
 
-The required revenue input is $\mathbb E^P[P_t^{\rm realised}Q_t^{\rm sold}]$
+The required revenue input is $\mathbb E^P[P_t^{\rm realized}Q_t^{\rm sold}]$
 on the accepted ownership basis. It reduces to a deterministic sales volume
-times the expected realised price only under that operating simplification;
+times the expected realized price only under that operating simplification;
 with stochastic sales, dependence matters. Royalties, price-linked taxes,
-inventory timing and realised-price basis also belong in the operating
+inventory timing and realized-price basis also belong in the operating
 transformation. Depreciation inside Cost of Sales must be reconciled with
 cash capital expenditure and the EBIT-to-FCFF bridge.
 
 Instrument identity and the valuation clock impose further restrictions. A
 fixed-delivery copper future cannot be continued beyond expiry as a spot
 process to 2030: rotating-delivery returns alone do not identify that extension.
-A copper term-structure and realised-price basis are required. Likewise, a
+A copper term-structure and realized-price basis are required. Likewise, a
 2 September valuation excludes already elapsed first- and second-quarter cash
 flows from future enterprise value. The remaining third-quarter stub, later
 quarters and balance-sheet claims must use a consistent valuation date.
 
 The fixed option-shape scenario law remains a separate experiment. None of
-its valuation quantiles is retroactively relabelled physical because a
+its valuation quantiles is retroactively relabeled physical because a
 coefficient map or a preliminary estimate now exists. A replacement requires
 admissible and identified physical models, origin-only validation, uncertainty
 propagation, compatible discounting and reconciled corporate inputs. The

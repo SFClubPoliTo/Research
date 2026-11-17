@@ -38,11 +38,11 @@ dollar. This subsection describes the exact assets, indices, and data sources us
 chapter, as well as the sampling frequency and time span of the dataset.
 \subsubsection{Precious metals}
 
-As reference precious–metal assets we use the SPDR Gold Shares ETF (GLD) and the iShares Silver Trust (SLV), both quoted in US dollars and traded on U.S. exchanges. Gold is treated as the primary asset of interest, while silver provides a
-natural benchmark to assess whether empirical properties and co–movements are specific to
+As reference precious-metal assets we use the SPDR Gold Shares ETF (GLD) and the iShares Silver Trust (SLV), both quoted in US dollars and traded on U.S. exchanges. Gold is treated as the primary asset of interest, while silver provides a
+natural benchmark to assess whether empirical properties and co-movements are specific to
 gold or shared across precious metals. Using prices denominated in US dollars ensures
 comparability with the chosen bond, equity, and currency variables, and avoids additional
-complications arising from exchange–rate conversions. These highly liquid ETFs provide practical proxies for the spot prices of gold and silver over a long sample period.
+complications arising from exchange-rate conversions. These highly liquid ETFs provide practical proxies for the spot prices of gold and silver over a long sample period.
 \subsubsection{Government bonds}
 
 For the fixed-income side, the current figure layer employs the LSE 10-year
@@ -124,11 +124,11 @@ Time variation is tracked with rolling correlations
 In our context, static correlations offer a baseline picture of how gold and silver are
 related to bonds, equities, and the US dollar on average, while rolling correlations
 highlight whether gold behaves more like a hedge or a safe haven in specific subperiods,
-such as financial crises or high–inflation episodes.
+such as financial crises or high-inflation episodes.
 
 In the empirical implementation, we first compute the static Pearson correlation matrix
-using the daily return and yield–change series over the full common sample period. This
-matrix provides a compact summary of the average linear co–movements between gold, silver,
+using the daily return and yield-change series over the full common sample period. This
+matrix provides a compact summary of the average linear co-movements between gold, silver,
 bonds, equities and the U.S. dollar.
 
 \begin{figure}[htbp]
@@ -164,9 +164,9 @@ r^{gold}_t = \beta_0 + \beta_1 \Delta y_t + \beta_2 r^{equity}_t
 r^{silver}_t = \gamma_0 + \gamma_1 \Delta y_t + \gamma_2 r^{equity}_t
 + \gamma_3 r^{usd}_t + v_t,
 \]
-where $u_t$ and $v_t$ denote error terms capturing all other factors that affect precious–
-metal returns but are not explicitly included in the specification. These baseline models
-allow us to quantify how gold and silver co–move with fixed–income markets, stock markets,
+where $u_t$ and $v_t$ denote error terms capturing all other factors that affect precious-metal
+returns but are not explicitly included in the specification. These baseline models
+allow us to quantify how gold and silver co-move with fixed-income markets, stock markets,
 and the US dollar, holding the other drivers constant.
 
 From a conceptual standpoint, the interpretation of the coefficients can follow two
@@ -174,10 +174,10 @@ complementary perspectives. A \emph{causal} interpretation would require strong 
 assumptions on the error terms and on the absence of omitted variables, as emphasized in
 the discussion of the zero conditional mean assumption and omitted variable bias in the
 OLS framework. In this chapter, we primarily adopt a \emph{predictive} and descriptive
-perspective: the coefficients are interpreted as measures of conditional co–movement and as
-indicators of hedge and safe–haven properties, rather than as structural causal effects
+perspective: the coefficients are interpreted as measures of conditional co-movement and as
+indicators of hedge and safe-haven properties, rather than as structural causal effects
 (see also the distinction between causal and forecasting objectives in standard
-econometrics and time–series texts, e.g.,~\cite{Wooldridge2020,Tsay2010}).
+econometrics and time-series texts, e.g.,~\cite{Wooldridge2020,Tsay2010}).
 
 \section{Applied Cross-Asset Evidence}
 
@@ -239,7 +239,7 @@ equity-sensitive and remain time varying. In the joint regressions, silver's
 equity loading is $0.2625$ (robust standard error $0.0424$), compared with
 $0.0224$ ($0.0250$) for gold; the dollar loadings are $-1.6229$ ($0.0860$)
 and $-0.9248$ ($0.0466$), respectively. The joint $R^2$ values are $0.205$
-for silver and $0.197$ for gold.
+for silver and $0.197$ for gold (Table~\ref{tab:t7-silver-ols}).
 
 \begin{table}[htbp]
 \centering
@@ -342,11 +342,14 @@ persistence, not reliable return predictability.
 
 \section{AR, ARMA and ARIMA Diagnostics}
 
-Higher-order autoregressions do not overturn the AR(1) result. AIC and BIC
-select low-dimensional specifications and the joint lag tests provide little
-evidence that lagged daily returns explain current returns. ARMA searches also
-remain parsimonious and are not stable enough across criteria to reveal a
-substantive conditional-mean law.
+Higher-order autoregressions do not overturn the AR(1) result. The published
+searches minimized the criteria only over $p+q\geq 1$, so they could not
+select white noise. The corrected companion grid of 24 October 2026, which
+admits the order-zero model, selects no lag for either metal by both AIC
+and BIC: AR(0), ARMA$(0,0)$ and ARIMA$(0,1,0)$ (ARMA$(0,0)$ AIC
+$-28{,}911.33$ for gold and $-23{,}450.75$ for silver). The joint lag tests in Table~\ref{tab:t7-arp-diagnostics} likewise provide
+no evidence that lagged daily returns explain current returns. The conclusion of
+no conditional-mean predictability is therefore strengthened.
 
 \begin{table}[htbp]
 \centering
@@ -361,14 +364,20 @@ Gold   & 1 & 1 & 0.000006 & 0.0144 & 0.9046 \\
 Silver & 1 & 1 & 0.000040 & 0.0779 & 0.7801 \\
 \bottomrule
 \end{tabular}
+\begin{minipage}{0.90\textwidth}
+\footnotesize\emph{Notes:} Cells reproduce the published Team~7 article,
+whose search excluded lag zero. The corrected companion grid, which admits
+lag zero, selects lag 0 by both AIC and BIC for both metals.
+\end{minipage}
 \end{table}
 
 ARIMA is not rejected because prices are non-stationary: differencing is
-precisely how the model addresses that feature. On log prices, the legacy
-selection produces ARIMA$(2,1,0)$ by AIC and ARIMA$(0,1,1)$ by BIC for gold;
-for silver both criteria select ARIMA$(1,1,0)$. Once differenced, these models
-are close to the simple ARMA descriptions of returns and add little predictive
-structure at the horizon considered.
+precisely how the model addresses that feature. On log prices, the published
+selection, restricted to $p+q\geq 1$, produces ARIMA$(2,1,0)$ by AIC and
+ARIMA$(0,1,1)$ by BIC for gold, and ARIMA$(1,1,0)$ by both criteria for
+silver (Table~\ref{tab:t7-arma-arima-selection}). Once white noise is admitted, both criteria select ARIMA$(0,1,0)$ for
+both metals: log prices behave as a random walk and the differenced series has
+no predictable conditional mean at the horizon considered.
 
 \begin{table}[htbp]
 \centering
@@ -388,9 +397,13 @@ Silver & Log price, AIC/BIC & ARIMA$(1,1,0)$ & -23,448.9424 & -23,429.5802 \\
 \bottomrule
 \end{tabular}
 \begin{minipage}{0.94\textwidth}
-\footnotesize\emph{Notes:} The equality of several ARMA and ARIMA criteria is
-expected because first-differenced log prices are the return series. Dashes
-mark the criterion not used for the stated selection.
+\footnotesize\emph{Notes:} Cells reproduce the published Team~7 article,
+whose searches excluded $p+q=0$. The corrected companion grid (24 October
+2026), which admits white noise, selects ARMA$(0,0)$ and ARIMA$(0,1,0)$ for
+both metals by AIC and BIC (gold AIC $-28{,}911.33$, BIC $-28{,}898.42$;
+silver AIC $-23{,}450.75$, BIC $-23{,}437.85$). The equality of several ARMA
+and ARIMA criteria is expected because first-differenced log prices are the
+return series. Dashes mark the criterion not used for the stated selection.
 \end{minipage}
 \end{table}
 
@@ -419,8 +432,8 @@ Silver & 0.00014 & 0.01990 & -0.85 & 7.79 & 10.79 \\
 \end{table}
 The table preserves the source-PDF moments; saved CSV excess kurtosis is
 6.23770 (gold) and 7.78276 (silver). The cause of this smaller discrepancy
-is unverified; it is distinct from the AR(1) SE/$t$ divergence and does
-not establish an error in the ARMA/ARIMA tables.
+is unverified; it is distinct from the AR(1) SE/$t$ divergence and from the
+order-zero exclusion in the ARMA/ARIMA searches.
 
 Figures~\ref{fig:t7-return-histograms} and
 \ref{fig:t7-return-qqplots}, regenerated on current LSE GLD/SLV returns, make
@@ -459,7 +472,8 @@ mass; the Q--Q deviations are especially pronounced for silver.
 Absolute and squared returns show positive serial dependence even when raw
 return autocorrelation is weak. Large changes tend to be followed by large
 changes of either sign, and shocks decay slowly. This volatility clustering is
-the empirical feature that a constant-variance mean model misses most clearly.
+the empirical feature that a constant-variance mean model misses most clearly;
+the rolling volatility in Figure~\ref{fig:t7-rolling-volatility} makes it visible.
 
 \begin{figure}[htbp]
 \centering
@@ -526,7 +540,7 @@ L-BFGS-B optimizes $\mu$ and transformed parameters
 Bounds are $\mu\in[-2,2]$, $\vartheta_1\in[-20,4]$ and
 $\vartheta_2,\vartheta_3\in[-8,8]$, with a 3,000-iteration cap.
 Hence $\alpha<0.30$ and $\alpha+\beta<0.999$ are imposed restrictions.
-The table reports the obtained LSE fits, with higher persistence for
+Table~\ref{tab:t7-garch-parameters} reports the obtained LSE fits, with higher persistence for
 SLV. Reported convergence flags certify neither global optimality nor
 an unrestricted fit; no robust/Hessian covariance or out-of-sample
 assessment is supplied here. The separate ten-day forecasts belong
@@ -611,7 +625,7 @@ separate question is whether a volatility proxy also displays hyperbolically
 decaying, long-range dependence of the fractionally integrated type~\cite{GrangerJoyeux1980,Hosking1981}. Team~7 applied the semiparametric
 Geweke--Porter--Hudak estimator~\cite{GewekePorterHudak1983} to absolute daily returns. The published
 estimates in Table~\ref{tab:t7-gph} are positive and precisely estimated. The
-current LSE figure rebuild no longer clips the estimate at an implementation
+current LSE re-estimation no longer clips the estimate at an implementation
 boundary. Its unclipped estimates are $\hat d=\GphGoldAbs$ for GLD and
 $\hat d=\GphSilverAbs$ for SLV; it does not reuse the published point
 estimates.
@@ -683,7 +697,8 @@ structural breaks or jump arrivals. The GPH result is boundary-sensitive. The
 published AR(1) robust standard errors differ from the Newey--West HAC values
 of the corrected companion code (Table~\ref{tab:t7-ar1-level-return}); the
 small excess-kurtosis difference noted under Table~\ref{tab:t7-return-moments}
-remains unexplained. No estimates are recomputed here.
+remains unexplained. Published Team~7 tables are not re-estimated; the GARCH
+and GPH figures are current LSE refits.
 
 \paragraph{Residual research agenda.}
 Work that remains genuinely open includes a same-date, multi-provider rebuild
@@ -693,8 +708,8 @@ causal identification of macroeconomic shocks; and robust long-memory tests
 under breaks. The most important interface question is the mapping between
 historical $\mathbb P$ dynamics and option-implied $\mathbb Q$ parameters.
 An augmented filtration that converts textual macroeconomic and geopolitical
-information into measurable state variables is also a credible machine-
-learning extension, but it is outside the evidence completed in this thesis.
+information into measurable state variables is also a credible machine-learning
+extension, but it is outside the evidence completed in this thesis.
 Additional regressors, quantile methods and formal regime identification
 likewise remain extensions rather than completed results.
 

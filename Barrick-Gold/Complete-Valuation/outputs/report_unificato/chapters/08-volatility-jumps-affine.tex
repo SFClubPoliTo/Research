@@ -113,7 +113,7 @@ In the context of quantitative finance, $\lambda$ represents the mean arrival ra
 The Homogeneous Poisson Process can be equivalently defined through the continuous time intervals elapsed between consecutive jumps. Rather than counting the number of events in a fixed time window, we analyze the random time required for the next event to occur. Let $\tau_1, \tau_2, \dots, \tau_n$ be the strictly increasing random arrival times of the jumps, where $\tau_1$ is the time of the first event. We define the sequence of interarrival times (or waiting times) $\{T_n\}_{n \ge 1}$ as:
 $$T_1 = \tau_1$$
 $$T_n = \tau_n - \tau_{n-1}, \quad \text{for } n \ge 2$$
-For a Homogeneous Poisson Process with intensity $\lambda > 0$, the interarrival times $T_1, T_2, \dots$ form a sequence of independent and identically distributed (i.i.d.) random variables following an Exponential distribution. The probability density function (PDF) of each interarrival time $T_n$ is:
+For a Homogeneous Poisson Process with intensity $\lambda > 0$, the interarrival times $T_1, T_2, \dots$ form an i.i.d.\ sequence (Section~\ref{sec:bm-construction}) of random variables following an Exponential distribution. The probability density function (PDF) of each interarrival time $T_n$ is:
 $$f_T(t) = \lambda e^{-\lambda t}, \quad \text{for } t \ge 0$$
 Integrating this density, we can determine the probability that the waiting time exceeds a certain threshold $t$. In reliability engineering and mathematical finance, this is known as the survival probability, formalized as $\mathbb{P}[X > x] = 1 - F_X(x)$. For our interarrival times, the survival probability assumes the explicit form:
 $$\mathbb{P}[T_n > t] = \int_t^\infty \lambda e^{-\lambda s} ds = e^{-\lambda t}$$
@@ -151,7 +151,7 @@ Let $(\Omega, \mathcal{F}, \mathbb{P})$ be a probability space and let $\{N_t\}_
 
 The random variables $Y_i$ represent the jump sizes and take values in $\mathbb{R}$. This construction allows one to associate to each jump time $\tau_i$ of the Poisson process a mark $Y_i$, thus obtaining a marked point process.
 
-From a modelling perspective, the independence assumption reflects the fact that the arrival times of jumps and their magnitudes are driven by distinct sources of randomness.
+From a modeling perspective, the independence assumption reflects the fact that the arrival times of jumps and their magnitudes are driven by distinct sources of randomness.
 
 \medskip
 
@@ -218,7 +218,7 @@ Brownian motion describes so effectively. A realistic model of the
 underlying asset price must superpose the two mechanisms: a diffusive
 component for the ordinary trading noise and a compound Poisson
 component for the discontinuous revaluations of the underlying
-asset. This programme, originally proposed by
+asset. This program, originally proposed by
 Merton~\cite{Merton1976}, yields the class of \emph{jump--diffusion} models.
 
 Let $(\Omega, \mathcal{F}, \{\mathcal{F}_t\}_{t\geq 0}, \mathbb{P})$
@@ -330,7 +330,7 @@ removes the two most consequential structural limitations of the
 diffusive framework simultaneously, at the cost of introducing a
 second, discontinuous source of randomness whose implications for
 hedging and for the uniqueness of the equivalent martingale measure
-will be analysed in the next subsection.
+will be analyzed in the next subsection.
 \subsection{Drift Compensation and Risk-Neutral Dynamics}
 \label{sec:jd-risk-neutral}
 
@@ -407,7 +407,7 @@ From a financial perspective, this result highlights a key difference with respe
 
 The compound Poisson processes introduced in the previous section already provide a first example of stochastic dynamics with discontinuous sample paths. Their jump activity is, however, finite on every compact time interval. In many applications, especially in quantitative finance, one needs a broader class of processes capable of combining a continuous martingale component, a drift term, and a possibly much richer jump structure. This leads naturally to the class of L\'evy processes.
 
-L\'evy processes play a central role in modern stochastic modelling because they preserve, in continuous time, the two structural properties that make random walks tractable: independence and stationarity of increments. They therefore constitute the canonical continuous-time extension of sums of i.i.d.\ random variables and provide the natural probabilistic framework for discontinuous asset returns.
+L\'evy processes play a central role in modern stochastic modeling because they preserve, in continuous time, the two structural properties that make random walks tractable: independence and stationarity of increments. They therefore constitute the canonical continuous-time extension of sums of i.i.d.\ random variables and provide the natural probabilistic framework for discontinuous asset returns.
 \subsection{Definition and Main Properties}
 
 We work on a filtered probability space
@@ -446,7 +446,7 @@ A stochastic process $\{X_t\}_{t\geq 0}$ is called a \emph{L\'evy process} if th
 The c\`adl\`ag regularity of the sample paths can in fact be derived from the remaining four properties: any process satisfying the first four conditions of the definition admits a modification whose trajectories are almost surely c\`adl\`ag (see \cite[Theorem~11.5]{Sato1999}). We include it in the definition in order to fix the version of the process with which we work throughout.
 \end{remark}
 
-The definition isolates the continuous-time analogue of a random walk. Indeed, if one observes a L\'evy process only on a deterministic grid $0,\Delta,2\Delta,\dots$, then the increments
+The definition isolates the continuous-time analog of a random walk. Indeed, if one observes a L\'evy process only on a deterministic grid $0,\Delta,2\Delta,\dots$, then the increments
 \[
 X_{\Delta}-X_0,\quad X_{2\Delta}-X_{\Delta},\quad \dots,\quad X_{n\Delta}-X_{(n-1)\Delta}
 \]
@@ -609,7 +609,7 @@ The second structural ingredient is \emph{independence of increments}. This mean
 
 Formally, this is the independent-increments condition of the definition above.
 
-This property is essential in continuous-time finance because it formalises the idea that the future innovation of the process, once a present time is fixed, is probabilistically decoupled from the past. When combined with stationarity, it implies that the distribution of future increments depends only on the length of the future horizon, not on the calendar date at which the horizon begins.
+This property is essential in continuous-time finance because it formalizes the idea that the future innovation of the process, once a present time is fixed, is probabilistically decoupled from the past. When combined with stationarity, it implies that the distribution of future increments depends only on the length of the future horizon, not on the calendar date at which the horizon begins.
 
 \medskip
 
@@ -686,7 +686,7 @@ These expressions are consistent with the characteristic functions \eqref{eq:BM_
 \subsection{The L\'evy--Khintchine Representation}
 
 
-The preceding section shows that every L\'evy process admits a characteristic exponent $\psi$. The next question is structural: which functions $\psi$ can arise from a L\'evy process? The answer is given by the L\'evy--Khintchine formula, which provides a complete parametric characterisation of all admissible exponents.
+The preceding section shows that every L\'evy process admits a characteristic exponent $\psi$. The next question is structural: which functions $\psi$ can arise from a L\'evy process? The answer is given by the L\'evy--Khintchine formula, which provides a complete parametric characterization of all admissible exponents.
 
 \begin{theorem}[L\'evy--Khintchine formula]
 A function $\psi:\mathbb{R}\to\mathbb{C}$ is the characteristic exponent of a L\'evy process if and only if it can be written in the form
@@ -803,7 +803,7 @@ The general formula contains the principal examples already discussed.
 Thus Brownian motion, compound Poisson processes, and jump--diffusions are not external to the theory: they are embedded in the general L\'evy--Khintchine representation as particular specifications of the triplet $(\gamma,A,\nu)$.
 \subsubsection{Why the formula matters in finance}
 
-From the viewpoint of financial modelling, the L\'evy--Khintchine formula is important for two reasons.
+From the viewpoint of financial modeling, the L\'evy--Khintchine formula is important for two reasons.
 
 First, it provides a complete classification of the admissible building blocks for return dynamics with stationary independent increments. Once the triplet
 \[
@@ -821,7 +821,7 @@ Second, it separates in a transparent way the three sources of variation:
 This decomposition is conceptually important because many asset-pricing models used in practice may be interpreted as different specifications of the L\'evy triplet. In particular, jump--diffusion models correspond to the case in which both $A\neq 0$ and the L\'evy measure $\nu$ is finite, whereas more general pure-jump models allow for infinite jump activity.
 
 \begin{remark}\label{rem:levy-drift}
-In asset-pricing applications the underlying price process is often modelled as $S_t = S_0 e^{X_t}$, where $\{X_t\}_{t\geq 0}$ is a L\'evy process representing the log-return. For the discounted price $e^{-rt}S_t$ to be a martingale under a risk-neutral measure, the exponent $\psi$ must satisfy
+In asset-pricing applications the underlying price process is often modeled as $S_t = S_0 e^{X_t}$, where $\{X_t\}_{t\geq 0}$ is a L\'evy process representing the log-return. For the discounted price $e^{-rt}S_t$ to be a martingale under a risk-neutral measure, the exponent $\psi$ must satisfy
 \[
 \psi(-i) = r,
 \]
@@ -829,7 +829,7 @@ which yields the risk-neutral drift restriction
 \[
 \gamma = r - \tfrac{1}{2}A - \int_{\mathbb{R}\setminus\{0\}}\left(e^x - 1 - x\,\mathbf{1}_{\{|x|\leq 1\}}\right)\nu(dx),
 \]
-provided $\int_{\{|x|>1\}} e^x\,\nu(dx)<\infty$. This condition generalises the drift compensation derived above for the jump--diffusion case.
+provided $\int_{\{|x|>1\}} e^x\,\nu(dx)<\infty$. This condition generalizes the drift compensation derived above for the jump--diffusion case.
 \end{remark}
 
 The L\'evy--Khintchine representation therefore closes the probabilistic block in a natural way: after introducing discontinuous dynamics through compound Poisson processes, we now arrive at the full class of continuous-time processes with stationary independent increments. In the following section, this structure becomes analytically even more useful, because characteristic functions and Fourier methods act directly on the exponent $\psi$, making valuation problems tractable even when transition densities are not available in closed form.
@@ -842,7 +842,7 @@ In the classical Black-Scholes-Merton model, the probability density function (P
 
 To overcome this analytical bottleneck, modern quantitative finance shifts the pricing problem from the standard spatial domain (the state space of asset prices) into the frequency domain. This transformation relies heavily on the concept of the Characteristic Function (CF).
 
-Conceptually, the characteristic function is the probabilistic analogue of the Fourier transform used in signal processing and systems engineering. Just as a physical signal can be decomposed into a continuous spectrum of complex exponential frequencies, a probability distribution can be completely identified by its Fourier transform. 
+Conceptually, the characteristic function is the probabilistic analog of the Fourier transform used in signal processing and systems engineering. Just as a physical signal can be decomposed into a continuous spectrum of complex exponential frequencies, a probability distribution can be completely identified by its Fourier transform. 
 
 Analytically, for a random variable $X$ defined on a probability space $(\Omega, \mathcal{F}, \mathbb{P})$, the characteristic function $\varphi_X(u)$ is defined as the expected value of the complex exponential of $X$:
 \begin{equation}
@@ -1065,7 +1065,7 @@ The minimal modification of the Black--Scholes dynamics consistent with
 these facts consists in enlarging the state space by adjoining a second
 factor that represents the instantaneous variance and that is itself
 governed by a stochastic differential equation, possibly correlated with
-the Brownian motion driving the price. To formalise this idea we work on
+the Brownian motion driving the price. To formalize this idea we work on
 the filtered probability space
 $(\Omega,\mathcal{F},\{\mathcal{F}_t\}_{t\geq 0},\mathbb{P})$ already
 introduced in the preceding sections, satisfying the usual conditions of
@@ -1111,7 +1111,7 @@ The state vector of the model is the pair $(S_t,v_t)$. The price equation
 \eqref{eq:SV_price} replaces the constant diffusion coefficient $\sigma$
 of \eqref{eq:BS_SDE} with the random non-anticipative volatility
 $\sqrt{v_t}$, while \eqref{eq:SV_variance} specifies the dynamics of the
-variance and characterises the particular member of the class. Different
+variance and characterizes the particular member of the class. Different
 choices of $(\alpha,\beta)$ produce qualitatively different models: a
 linear drift $\alpha(t,v) = \kappa(\theta-v)$ with constants
 $\kappa,\theta>0$ enforces mean reversion of the variance to the long-run
@@ -1151,7 +1151,7 @@ W^{v}_t
 \rho W^{S}_t+\sqrt{1-\rho^2}Z_t.
 \]
 Let $r$ denote the constant risk-free rate and assume an equivalent
-change of measure $\mathbb{P}\sim\mathbb{Q}$ characterised by the
+change of measure $\mathbb{P}\sim\mathbb{Q}$ characterized by the
 Girsanov density
 \begin{equation}\label{eq:SV_girsanov}
 \frac{d\mathbb{Q}}{d\mathbb{P}}\bigg|_{\mathcal{F}_t}
@@ -1341,7 +1341,7 @@ smile through two distinct channels.
           the same conditional mean and variance cannot be reused.
 
           To see the mechanism in a transparent way, consider the
-          simplified centred mixture
+          simplified centered mixture
           \[
           Y_T=\sqrt{I_T}\,Z,
           \qquad Z\sim\mathcal{N}(0,1),
@@ -1610,7 +1610,7 @@ and consequently
 +
 o_{\mathbb{P}}(\sqrt{T}).
 \end{equation}
-Thus, at leading order, the short-time behaviour of a pure stochastic
+Thus, at leading order, the short-time behavior of a pure stochastic
 volatility diffusion is still locally Gaussian.  The randomness of
 $v_t$ affects higher-order corrections, but it does not create an
 order-one discontinuous return over an arbitrarily short horizon.
@@ -1619,13 +1619,13 @@ order-one discontinuous return over an arbitrarily short horizon.
 
 A pure diffusion-based stochastic volatility model is said to exhibit a
 \emph{short-maturity limitation} when its continuous-path structure makes
-the leading short-time behaviour of log-returns locally Gaussian, so that
+the leading short-time behavior of log-returns locally Gaussian, so that
 very steep short-dated smiles and skews can be reproduced only through
 higher-order variance effects or through extreme parameter values.
 \end{definition}
 
 This limitation is structural, not specific to the Heston
-parametrisation.  The Heston model enriches Black--Scholes by making the
+parametrization.  The Heston model enriches Black--Scholes by making the
 variance stochastic and mean-reverting, but it still satisfies
 \eqref{eq:SV_no_jump}.  It therefore captures persistent stochastic
 variance, but not abrupt short-horizon repricing.
@@ -1667,11 +1667,11 @@ The structural power of the Merton model is most evident in the frequency domain
     \psi_{Merton}(u) = iu \left( r - \frac{1}{2}\sigma^2 - \lambda k \right) - \frac{1}{2}\sigma^2 u^2 + \lambda \left( e^{iu\alpha_J - \frac{1}{2}\delta_J^2 u^2} - 1 \right)
 \end{equation}
 
-Its horizon behaviour is compared with Heston and Bates in Section~\ref{sec:model-comparison}.
+Its horizon behavior is compared with Heston and Bates in Section~\ref{sec:model-comparison}.
 \subsection{Bates as a Unified Jump-Volatility Model}\label{sec:bates-model}
 
 \paragraph{Heston benchmark.}
-Heston~\cite{Heston1993} is the stochastic-volatility benchmark \eqref{eq:heston_S}--\eqref{eq:heston_corr}, with affine characteristic function \eqref{eq:heston_CF_affine}; its continuous-path behaviour at short maturities is discussed in Section~\ref{sec:sv-limits}.
+Heston~\cite{Heston1993} is the stochastic-volatility benchmark \eqref{eq:heston_S}--\eqref{eq:heston_corr}, with affine characteristic function \eqref{eq:heston_CF_affine}; its continuous-path behavior at short maturities is discussed in Section~\ref{sec:sv-limits}.
 
 The Bates model~\cite{Bates1996} embeds Merton's lognormal jump process into Heston's stochastic volatility environment, giving an affine jump-diffusion~\cite{DuffiePanSingleton2000}. Under the risk-neutral measure $\mathbb{Q}$, the joint dynamics of the asset price $S_t$ and its instantaneous variance $v_t$ are governed by the following system of stochastic differential equations:
 \begin{equation}\label{eq:bates_dynamics}
@@ -1707,8 +1707,8 @@ variance is $T(\sigma^2+\lambda\mathbb E[J^2])$. These relations concern
 log-return moments, not implied-volatility derivatives.
 
 Heston instead generates continuous random variance. In the
-independent-driver case its log-return law admits the integrated-
-variance Gaussian-mixture description proved above. With nonzero
+independent-driver case its log-return law admits the integrated-variance
+Gaussian-mixture description proved above. With nonzero
 price--variance correlation, a representation based only on $I_T$
 omits a correlated integral. Vol-of-vol controls one source of
 variance-path randomness, but it is not the sole determinant of all
@@ -1720,13 +1720,13 @@ The most critical theoretical distinction concerns how the implied volatility sk
 
 \begin{enumerate}
 \item \textbf{Jump effects.} Jump marks and arrival dynamics can affect
-short-maturity tails and option wings. Under the stated independent-
-increment moment assumptions, standardized log-return skewness may scale
+short-maturity tails and option wings. Under the stated independent-increment
+moment assumptions, standardized log-return skewness may scale
 as $T^{-1/2}$ and excess kurtosis as $T^{-1}$. The CLT does not turn
 those statements into a universal implied-volatility-slope formula.
 \item \textbf{Stochastic-variance effects.} Price--variance correlation
 and vol-of-vol can generate a nonzero short-maturity ATM skew as well
-as maturity-dependent effects. Its longer-horizon behaviour depends
+as maturity-dependent effects. Its longer-horizon behavior depends
 on parameters and the asymptotic regime; no universal dominance over
 jump models is asserted here.
 \end{enumerate}
@@ -1753,7 +1753,7 @@ or better prediction.
 
 The Bates model still assumes jump arrivals with a constant intensity. Replacing
 it by an exponential Hawkes intensity~\cite{Hawkes1971}, which raises near-term
-intensity after each event and keeps the enlarged state affine, gives the Full
+intensity after each event and keeps the enlarged state affine, gives the
 Bates--Hawkes layer used in this study. Its definition, the stationarity
 condition $\eta<1$ and the exact affine transform are in
 Section~\ref{sec:hawkes-definition} and Section~\ref{sec:bh-dynamics}; the Hawkes
@@ -1772,6 +1772,6 @@ text-based or other heterogeneous data.
 
 \section{The Theoretical Model Ladder}
 
-Black--Scholes leads to Heston, then Bates with Merton jumps, then Full
+Black--Scholes leads to Heston, then Bates with Merton jumps, then
 Bates--Hawkes self-excitation. Theory closes here; calibration, out-of-sample
 tests and simulation follow in Chapter~\ref{ch:calibration}.

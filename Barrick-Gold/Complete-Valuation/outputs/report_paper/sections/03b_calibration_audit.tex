@@ -23,7 +23,7 @@ The residual maps, the parameters and the valuation paths come from one recalibr
 \end{methodbox}
 
 \subsection{What the residual maps add}
-The residual heatmaps show where each specification systematically over- or under-prices the observed implied-volatility surface. Black--Scholes leaves the strongest smile and term-structure pattern. Bates is refined from the nested Heston point and Bates--Hawkes from the nested Bates point, so each richer model fits at least as well as the model it contains (Table~\ref{tab:iv_rmse}). All maps use one colour scale; calibration fit does not establish economic superiority.
+The residual heatmaps show where each specification systematically over- or under-prices the observed implied-volatility surface. Black--Scholes leaves the strongest smile and term-structure pattern. Bates is refined from the nested Heston point and Bates--Hawkes from the nested Bates point, so each richer model fits at least as well as the model it contains (Table~\ref{tab:iv_rmse}). All maps use one color scale; calibration fit does not establish economic superiority.
 
 \noindent\begin{minipage}{\columnwidth}
 {\centering
@@ -44,8 +44,8 @@ The residual heatmaps show where each specification systematically over- or unde
   \par\vspace{1pt}{\footnotesize\textbf{(c)} Bates--Poisson\par}
   \vspace{3pt}
   \includegraphics[width=0.95\linewidth]{\FigBatesHawkesResidualHeatmap}
-  \par\vspace{1pt}{\footnotesize\textbf{(d)} Full Bates--Hawkes\par}
-  \captionof*{figure}{\textbf{Figure~\ref{fig:residual_maps} (continued).} Bates--Poisson and Full Bates--Hawkes residual maps; all colourbars share the same residual range.}
+  \par\vspace{1pt}{\footnotesize\textbf{(d)} Bates--Hawkes\par}
+  \captionof*{figure}{\textbf{Figure~\ref{fig:residual_maps} (continued).} Bates--Poisson and Bates--Hawkes residual maps; all colorbars share the same residual range.}
 \par}
 \end{minipage}\par
 
@@ -60,7 +60,7 @@ Model & $q=0.40\%$ & 7 Sep, $q=0$ \\
 Black--Scholes & \CalBSIVRMSE & \CalBSIVRMSELegacy \\
 Heston & \CalHIVRMSE & \CalHIVRMSELegacy \\
 Bates--Poisson & \CalBIVRMSE & \CalBIVRMSELegacy \\
-Full Bates--Hawkes & \CalWIVRMSE & \CalWIVRMSELegacy \\
+Bates--Hawkes & \CalWIVRMSE & \CalWIVRMSELegacy \\
 \bottomrule
 \end{tabular}
 \end{table}

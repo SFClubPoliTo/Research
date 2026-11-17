@@ -1,17 +1,17 @@
 \section{Data and Valuation Setup}
 
 \subsection{Controlled layer separation}
-The integrated experiment is organized as a controlled handoff across three modules. Team 8 governs only the gold-price process; Team 4 supplies the operating forecasts; and Team 5 maps those inputs through a common tax, WACC and terminal-value contract without a reconciled equity bridge. In the four-model comparison only the gold engine changes: the same Team 4 production and unit-cost forecasts, the same Team 5 corporate rules and the same WACC shocks are reused across runs.
+The integrated experiment is organized as a controlled handoff across three modules. Team 8 governs only the gold-price process; Team 4 supplies the operating forecasts; and Team 5 maps those inputs through a common tax, WACC and terminal-value contract (Table~\ref{tab:frozen_contract}) without a reconciled equity bridge. In the four-model comparison only the gold engine changes: the same Team 4 production and unit-cost forecasts, the same Team 5 corporate rules and the same WACC shocks are reused across runs.
 
 \subsection{Valuation clock}
-The valuation time is the 2 September 2026 close (20:00~UTC). Only flows after it are valued. Barrick's Q1--Q2 2026 actuals have already been realised and are excluded; they are used only to check levels. The quarter that contains the valuation date contributes its remaining \StubDays{} of 92 days, under the stated assumption that production and unit cost are uniform within the quarter. Seventeen full quarters follow, to 31 December 2030, so 18 quarters are valued in total (\HorizonYears{} years). Revenue in each quarter uses the average simulated daily gold price over its remaining interval, and each flow is discounted from the midpoint of that interval.
+The valuation time is the 2 September 2026 close (20:00~UTC). Only flows after it are valued. Barrick's Q1--Q2 2026 actuals have already been realized and are excluded; they are used only to check levels. The quarter that contains the valuation date contributes its remaining \StubDays{} of 92 days, under the stated assumption that production and unit cost are uniform within the quarter. Seventeen full quarters follow, to 31 December 2030, so 18 quarters are valued in total (\HorizonYears{} years). Revenue in each quarter uses the average simulated daily gold price over its remaining interval, and each flow is discounted from the midpoint of that interval.
 
 \subsection{Calibration snapshot and carry}
 The calibration uses the 2 September 2026 GLD call surface from Interactive Brokers. After the common DTE $\geq75$ and numerical filters, the dense surface contains 605 eligible observations across 12 expiries and 146 strikes, with 79--653 days to expiry. The $8\times8$ Chebyshev--Chebyshev sample (CC64) contains 64 distinct actual contracts spanning eight expiries and 20 strikes. The rate input is a same-date NSS fit to 14 U.S. Treasury tenors \citep{nss1994,treasury2026}, with a 2.0608~bp RMSE against the continuously compounded par-yield proxy; it is not a bootstrapped zero curve.
 
 GLD's sponsor fee of 0.40\% a year is paid by selling gold, so the gold backing of each share declines at that rate \citep{spdr2025}. If a share is replicated by holding its gold, the GLD forward is $S e^{(r-q)T}$ with $q=0.40\%$ even though no cash is distributed; the fee alone does not prove this, because GLD shares can also be held directly. Two independent observations support the value: the GLD/gold log-ratio trend of $-0.396\%$ a year over 2022--2026, and COMEX gold futures, whose carry against the synchronous spot implies a GLD yield of \FuturesYieldLow--\FuturesYieldHigh\% at 0.5--0.8 years. The carry is applied exactly through $C(S,K;q)=e^{-qT}C(S,Ke^{qT};0)$.
 
-The gold scenarios start from the XAUUSD spot of USD~4,391.32/oz at the valuation time, synchronous with the GLD close. The earlier draft started from Barrick's Q2 average realised price of USD~4,417/oz, which predates the valuation by two months.
+The gold scenarios start from the XAUUSD spot of USD~4,391.32/oz at the valuation time, synchronous with the GLD close. The earlier draft started from Barrick's Q2 average realized price of USD~4,417/oz, which predates the valuation by two months.
 
 \subsection{Probability measure}
 Option parameters are estimated under $\mathbb Q$. The scenario drift is the integral-preserving forward curve of the Treasury fit. Read as a physical expectation, this assumes no gold risk premium, which is a common assumption for an asset with near-zero market beta but is not estimated here. The option-implied volatility shape is carried over as a conditional assumption; it is not a validated physical law. Expected flows are then discounted at WACC, as in an ordinary DCF. For comparison, Section~\ref{sec:results} also reports the explicit flows discounted at the risk-free curve. A full $\mathbb Q\rightarrow\mathbb P$ specification would need price, variance and jump risk premia (Section~\ref{sec:paper-physical-measure}).
@@ -24,7 +24,7 @@ Option parameters are estimated under $\mathbb Q$. The scenario drift is the int
 \toprule
 Block & Current experiment \\
 \midrule
-Gold layer & Black--Scholes/GBM, Heston, Bates--Poisson and Full Bates--Hawkes calibrated by Team 8 under $\mathbb Q$ with $q=0.40\%$. \\
+Gold layer & Black--Scholes/GBM, Heston, Bates--Poisson and Bates--Hawkes calibrated by Team 8 under $\mathbb Q$ with $q=0.40\%$. \\
 Operations & Team 4 production and unit-cost forecasts from 2026Q3 (stub) to 2030Q4; actuals excluded. \\
 Corporate mapping & Team 5 tax, growth--ROIC--reinvestment schedule, stochastic WACC and explicit terminal convention; no equity bridge. \\
 Simulation & 8,192 paths, daily steps, one common WACC shock array. \\

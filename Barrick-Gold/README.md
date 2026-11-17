@@ -14,7 +14,7 @@
 | Article 6 | [Beyond Black-Scholes Synthetic Examples](./JumpSVFourier/) | Davide Sisto, Matteo Armando | June 12, 2026 | Jump/stochastic-volatility simulations and reproducibility assets. |
 | Article 7 | [Gold, Monetary Regimes, and Volatility Dynamics](./Gold-Volatility-Research/) | Davide D'Amico, Pietro Weisz | June 19, 2026 | Gold/silver econometrics, volatility diagnostics and generated tables. |
 | Article 8 | [Advanced Stochastic Modeling for Gold Options](./Gold-Options-Stochastic-Modeling/) | Alessandro Coco, Salvatore Gabriele Messina | **September 4, 2026** | Public Team 8 source package, same-date Treasury curve, aggregate calibration/OOS evidence and figures. |
-| Complete Valuation | [Shared research project](./Complete-Valuation/) | Barrick Gold Research Teams | Research in progress | One code and data infrastructure; full unified report and condensed Paper, dated physical-price experiments, operating models and valuation reconciliation. |
+| Complete Valuation | [Shared research project](./Complete-Valuation/) | Barrick Gold Research Teams (Teams 1-8) | Unified report and Paper, 17 November 2026 | One code and data infrastructure; full unified report and condensed Paper, dated physical-price experiments, operating models and valuation reconciliation. |
 
 ## Repository map
 

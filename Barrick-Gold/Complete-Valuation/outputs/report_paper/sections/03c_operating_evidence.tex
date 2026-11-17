@@ -3,7 +3,7 @@
 Team 4 supplies the inherited operating scenarios, checked against Q1--Q2 2026 statistics. Its earlier gold simulation is excluded: all price paths come from Team 8. These fixed inputs permit model attribution but are not independently validated operating forecasts.
 
 \subsection{Cost-of-sales block}
-The cost model in Section~\ref{sec:paper-operating-models} extracts a common log-space trend, forecasts it with ARIMA(3,1,0) with drift, and reconstructs mine-level paths with volatility-scaled anchors. Its reported selection and hold-out diagnostics are inherited evidence, not revalidated forecasts or a jointly simulated cost state.
+The cost model in Section~\ref{sec:paper-operating-models} extracts a common log-space trend, forecasts it with ARIMA(3,1,0) with drift, and reconstructs mine-level paths with volatility-scaled anchors (Figure~\ref{fig:team4_cost_qoq}). Its reported selection and hold-out diagnostics are inherited evidence, not revalidated forecasts or a jointly simulated cost state.
 
 \noindent\begin{minipage}{\columnwidth}
 {\centering
@@ -16,7 +16,7 @@ The cost model in Section~\ref{sec:paper-operating-models} extracts a common log
 The valuation uses the 18 forecast cost entries from 2026Q3 to 2030Q4; the two 2026 actuals precede the valuation date and are not valued. It does not propagate the source study's operating distributions.
 
 \subsection{Production block}
-Production is reconstructed from ore processed, grade and recovery using the specifications in Section~\ref{sec:paper-operating-models}. This preserves mine heterogeneity. The SARIMA orders are admitted from the source study, which does not report their selection by AIC/BIC.
+Production is reconstructed from ore processed, grade and recovery (Figure~\ref{fig:team4_process_qoq}) using the specifications in Section~\ref{sec:paper-operating-models}. This preserves mine heterogeneity (Figure~\ref{fig:team4_production_qoq}). The SARIMA orders are admitted from the source study, which does not report their selection by AIC/BIC.
 
 \noindent\begin{minipage}{\columnwidth}
 {\centering
@@ -37,7 +37,7 @@ Production is reconstructed from ore processed, grade and recovery using the spe
 The original study also develops Goodman variance propagation and confidence bands for the production components. Those distributions remain useful evidence on operating-model uncertainty, but they are not propagated jointly in the four-engine corporate experiment: only the refreshed point vectors are passed downstream.
 
 \subsection{Forecast handoff used by the valuation}
-The final handoff keeps observed and modelled quantities distinct. Barrick's Q1--Q2 2026 actual production and CoS describe the operating state before the valuation date and are not discounted; the Team 4 forecasts begin at Q3 2026, of which only the part after 2 September is valued, and run to 2030Q4.
+The final handoff keeps observed and modeled quantities distinct. Barrick's Q1--Q2 2026 actual production and CoS describe the operating state before the valuation date and are not discounted; the Team 4 forecasts begin at Q3 2026, of which only the part after 2 September is valued, and run to 2030Q4 (Figure~\ref{fig:team4_contract}).
 
 \noindent\begin{minipage}{\columnwidth}
 {\centering
@@ -48,5 +48,5 @@ The final handoff keeps observed and modelled quantities distinct. Barrick's Q1-
 \end{minipage}\par
 
 \begin{methodbox}[Prudential operating boundary]
-Option-implied laws supply conditional scenario shapes to the proxy layer. Costs retain a persistent trend without additional technology-driven cost reductions. This is prudential relative to otherwise identical efficiency-improvement scenarios, but it does not establish a mathematical lower bound. Stochastic costs could yield favourable and adverse outcomes; the current fixed vectors preserve attribution across gold engines. Growth is already included in the common DCF schedule.
+Option-implied laws supply conditional scenario shapes to the proxy layer. Costs retain a persistent trend without additional technology-driven cost reductions. This is prudential relative to otherwise identical efficiency-improvement scenarios, but it does not establish a mathematical lower bound. Stochastic costs could yield favorable and adverse outcomes; the current fixed vectors preserve attribution across gold engines. Growth is already included in the common DCF schedule.
 \end{methodbox}

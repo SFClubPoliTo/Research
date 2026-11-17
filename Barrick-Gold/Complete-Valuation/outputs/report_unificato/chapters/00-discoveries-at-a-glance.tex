@@ -50,33 +50,31 @@ The terminal assumptions, not the gold model, decide the level.
 \small
 In \OosDates{} rolling repricing tests, Bates--Hawkes has the lowest error among the
 four models (\OosWRMSE~bp), but carrying the last observed implied-volatility
-surface forward is still more accurate: the out-of-sample $R^2$ against
-persistence is \OosWRPersistence\% for Bates--Hawkes and lower for the others.
+surface forward is still marginally more accurate on its support
+($R^2 = \OosWRPersistence\%$, DM $p = \OosWDMPersistenceP$); the other models
+have lower out-of-sample $R^2$ against persistence.
 \end{tcolorbox}
 
 \noindent\textbf{What these numbers are.} They are operating-margin proxies,
-not enterprise or equity values: the equity bridge (debt, cash, minorities,
-other claims and the diluted share count) is not reconciled, so no value per
-share is reported and no comparison with Barrick's share price is made. The
-results are research sensitivities, not fair values, target prices or
-investment advice.
+not enterprise or equity values (Section~\ref{sec:company-financial-perimeter}): research
+sensitivities, not fair values, target prices or investment advice.
 
 \noindent\textbf{What the four models do---and do not do.} Black--Scholes/GBM,
-Heston, Bates--Poisson and Full Bates--Hawkes govern only the \emph{gold-price
+Heston, Bates--Poisson and Bates--Hawkes govern only the \emph{gold-price
 layer}. They are calibrated to 64 GLD calls of 2 September 2026 with the
 trust's 0.40\% sponsor fee as carry. They do not generate mine production or
 costs: those come from Team~4's operating forecasts, identical in every run.
 The unified DCF and the stochastic WACC shocks are common as well. Only flows
 after the 2 September 2026 valuation time are valued; Barrick's Q1--Q2 2026
-actuals have already been realised and are excluded.
+actuals have already been realized and are excluded.
+Figure~\ref{fig:discoveries-multimodel} shows the four resulting distributions.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.88\textwidth]{\FigFigValMulti}
   \caption{Operating-proxy distributions under the four gold-price laws on the
   dated clock, 8,192 paths each, with common operations, WACC shocks and
-  signed terminal closure. No share count, equity bridge or market reference
-  is used.}
+  signed terminal closure.}
   \label{fig:discoveries-multimodel}
 \end{figure}
 
@@ -94,7 +92,8 @@ spot of USD~4,391.32/oz at the valuation time and drift at the Treasury
 forward rate, which as a physical expectation assumes no gold risk premium.
 The option-implied volatility shape is carried over as a stated assumption,
 not a validated physical law. Section~\ref{sec:physical-measure-bridge} reports the separate physical
-forecasting evidence.
+forecasting evidence; Table~\ref{tab:discoveries-evidence} summarizes the
+evidence behind each layer.
 
 \begin{table}[H]
 \centering

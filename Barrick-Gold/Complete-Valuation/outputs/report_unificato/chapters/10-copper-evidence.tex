@@ -59,15 +59,16 @@ every option's matching future is verified from its actual underlying
 contract identifier. A 600-step constant-volatility futures tree estimates
 American IV, then constructs equivalent European Black--76 quotes for the
 European Heston, Bates and affine Hawkes engines. The 300/600-step difference
-measures numerical discretisation sensitivity, not the error of stochastic
-de-Americanisation. The four models have their own copper calibrations.
+measures numerical discretization sensitivity, not the error of stochastic
+de-Americanization. The four models have their own copper calibrations.
 
 The initial 2 September static surface contains 88 real quotes, 76 eligible,
 with 62 fitted and 14 reserved strikes. Those held-out strikes test
 interpolation, not temporal OOS. The subsequent historical pilot samples ten
 dates from 9 July to 2 September 2026, including the final three consecutive
 dates, using up to 112 spaced locations over expiries
-75--250 days away. Quality filters require bid/ask validity, quote and future
+75--250 days away (coverage in Table~\ref{tab:copper-temporal-coverage}).
+Quality filters require bid/ask validity, quote and future
 age at most 120 seconds and relative spread at most 20\%. Only dates with
 64 actual eligible quotes on at least three expiries enter temporal fitting.
 No quotes are generated to meet the threshold. This fit uses all eligible
@@ -79,10 +80,14 @@ structural parameters are held fixed while variance/intensity is projected to
 the next accepted date. Target matching futures and dated rates condition
 scoring. Common target support, origin-mean IV and persistence inside the
 origin surface's convex hull are reported explicitly. This is conditional
-IV-surface validation, not a physical price forecast. The current catalogue
+IV-surface validation, not a physical price forecast. The current catalog
 has survivorship limits and IB does not return expired-option history
 \cite{ib-historical-limitations}. Missing quotes and request timeouts are
 separate findings; timeouts do not prove historical data absence.
+Table~\ref{tab:copper-temporal-models} and
+Figure~\ref{fig:copper-temporal-oos} report the date-equal results;
+Table~\ref{tab:copper-fixed-origin} freezes the first admitted fit as a
+robustness check.
 
 \paragraph{Valuation boundary.}
 Copper paths follow log-linear observed forward anchors at \emph{future
@@ -91,7 +96,8 @@ is the base gold/copper scenario; terminal Gaussian-score dependence
 $\pm0.5$ uses whole-path permutations preserving marginal distributions and
 is not an estimated Brownian correlation. The primary comparison values
 explicit flows to 2030 without terminal value; signed perpetuity is a separate
-sensitivity. The copper increments are paired means of these explicit flows;
+sensitivity. The copper increments are paired means of these explicit flows
+(Table~\ref{tab:copper-paired-value});
 they are not additive to the gold medians or quantiles of
 Table~\ref{tab:unified-quantiles}, which include terminal value. Gold and
 copper share the dated clock and the daily engines of

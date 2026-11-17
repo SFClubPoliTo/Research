@@ -30,7 +30,7 @@ an explicit copper scenario, without rewriting the fixed gold experiment.
 Neither perimeter represents every corporate asset or a reconciled claim on
 the whole company. The case connects commodity prices, production and costs
 to component margin and a conditional DCF, bringing the team's valuation
-interests into its stochastic modelling framework.
+interests into its stochastic modeling framework.
 
 \section{The company perimeter is a model input}
 \label{sec:company-perimeter}
@@ -46,7 +46,7 @@ Table~\ref{tab:company-operating-perimeter} records the gold perimeter.
 Bulyanhulu, Carlin, Cortez, Kibali, Loulo--Gounkoto, North Mara, Pueblo Viejo
 and Turquoise Ridge form the base of the gold operating computations,
 including Chapter~\ref{ch:operations}'s production-weighted cost master chain. The source
-excluded copper and smaller gold operations \cite{team4}; this modelling
+excluded copper and smaller gold operations \cite{team4}; this modeling
 choice does not demonstrate that copper is economically negligible.
 The eight mines produced 622 and 711 thousand attributable ounces in 2026Q1
 and 2026Q2 against company gold totals 719 and 796 thousand ounces
@@ -124,7 +124,7 @@ two forecast quarters as actuals; forecasts from 2026Q3 remain as originally
 estimated (Chapter~\ref{ch:operations}). The actuals precede the valuation
 time and serve only as level checks (Section~\ref{sec:valuation-clock}).
 
-\section{Operating quantities supplied by the source programme}
+\section{Operating quantities supplied by the source program}
 \label{sec:company-operating-quantities}
 
 % Sources: Team 4 Sections 1.1.3, 2.2--2.4, 3.1--3.2 and 4.1;
@@ -147,15 +147,15 @@ truncated to $[0.50,1.00]$; production bands are 80\% Goodman intervals under
 independence (Chapter~\ref{ch:operations}).
 
 \paragraph{Costs.}
-CoS is USD per attributable ounce sold, excluding closure or care-and-
-maintenance sites. The 2024 definition used by Team~4 includes site costs,
+CoS is USD per attributable ounce sold, excluding closure or care-and-maintenance
+sites. The 2024 definition used by Team~4 includes site costs,
 royalties, depreciation and community relations \cite{team4}; the 2025 report
 also identifies mining and production taxes. Consolidated gold CoS in 2025
 was USD~7,357 million: site costs 5,056; depreciation 1,588 (21.6\%);
 royalties 540 (7.3\%); mining and production taxes 132; community relations
 41 \cite{barrick-ar-2025}. Costs follow the log master chain that the source
 describes as production-weighted (Chapter~\ref{ch:operations}), with 95\%
-bands; the frozen R script differs in weighting, window and clamping, and the
+bands; the original Team~4 implementation differs in weighting, window and clamping, and the
 inherited cost vectors are used as given.
 
 \paragraph{Operating output.}
@@ -173,8 +173,10 @@ EBIT: G\&A, exploration, project expenditure and other items are absent.
 CoS is per ounce \emph{sold}, while the identity multiplies ounces
 \emph{produced}. Forecast royalties are fixed per ounce, although Barrick
 attributes about USD~55/oz of the 2025 CoS increase to higher royalties from
-higher realised gold prices \cite{barrick-ar-2025}. Chapter~\ref{ch:dcf} must reconcile
+higher realized gold prices \cite{barrick-ar-2025}. Chapter~\ref{ch:dcf} must reconcile
 these mismatches before the proxy becomes accounting cash flow.
+Table~\ref{tab:company-operating-contract} summarizes the module's operating
+contract.
 
 \begin{table}[H]
 \centering
@@ -203,7 +205,7 @@ taxes, capex, G\&A, exploration and exceptional anchors; no AISC model. \\
 Commodity price & Source only: GBM at USD~4,677/oz on 2 April 2026 using GLD
 per-expiry volatility; excluded here. & Team~8 engines ($q=0.40\%$) started
 from the XAUUSD spot of USD~4,391.32/oz at the valuation time; no GLD-level
-conversion; realised basis, hedging and measures. \\
+conversion; realized basis, hedging and measures. \\
 Operating output & After-depreciation component margin, called EBITDA in
 source. & EBIT, taxes, working capital and capex bridge. \\
 Dependence & Ore--grade $r\approx-0.45$, ore--recovery $r\approx-0.17$;
@@ -231,18 +233,18 @@ not multiplied mechanically by one aggregate ownership fraction.
 
 No per-share value is reported: the diluted-share count remains unreconciled
 (Chapter~\ref{ch:dcf}).
-Shares claim the whole company, whereas the gold baseline and gold-plus-
-copper extension cover defined subsets. Per-share division allocates a
+Shares claim the whole company, whereas the gold baseline and gold-plus-copper
+extension cover defined subsets. Per-share division allocates a
 perimeter proxy; it does not yield full-company equity fair value. The copper
 extension reports aggregate operating-value proxies without per-share targets.
 
 Loulo--Gounkoto was suspended 14 January 2025, placed under provisional
 administration and deconsolidated 16 June, then returned to Barrick control
 16 December following the agreement announced 24 November. On 1 December
-2025 the Board authorised preparation of an IPO of an entity holding its
+2025 the Board authorized preparation of an IPO of an entity holding its
 Nevada Gold Mines and Pueblo Viejo interests plus Fourmile, expected by late
 2026 with Barrick retaining control \cite{barrick-ar-2025}. External ownership
-would change effective look-through interests in four modelled mines. The
+would change effective look-through interests in four modeled mines. The
 December 2025 percentages cannot simply be carried beyond completion.
 The 2025 Hemlo and Tongon sales lie outside the eight-mine vector.
 The annual report alone does not fix IPO status on 2 September 2026.
@@ -251,7 +253,7 @@ minority-stake IPO expected by year end \cite{barrick-ipo-2026,barrick-q2-releas
 The latter also announces Newmont's consent, an early contribution of excluded
 properties to Nevada Gold Mines and a USD~1.95 billion top-up payment. Those
 events require their own asset, timing and cash-bridge reconciliation; they
-do not authorise a silent change to the fixed eight-mine forecast vector.
+do not authorize a silent change to the fixed eight-mine forecast vector.
 The 2026Q2 operating release predates the 2 September market snapshot, but its
 reporting-period end, publication date and October retrieval remain distinct.
 
@@ -284,7 +286,7 @@ inventory fair-value increment on reconsolidation, versus cash costs
 USD~1,448/oz. Its 2026 CoS guidance USD~2,860--3,140/oz still includes higher
 purchase-price-allocation depreciation \cite{barrick-ar-2025}. Projecting
 that anchor carries an exceptional effect forward; it needs a separate
-normalisation check. The forecast vector is not altered here.
+normalization check. The forecast vector is not altered here.
 
 Reserve life is outside the model. Grade is stationary over five years under
 feed-blending arguments; depletion, closure, high-grading, throttling and

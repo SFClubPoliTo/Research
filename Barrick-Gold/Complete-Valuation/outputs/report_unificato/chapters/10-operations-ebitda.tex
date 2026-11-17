@@ -8,7 +8,7 @@ The accurate valuation of mining assets fundamentally relies on the precise esti
 Complementary to the cost side, the second pillar of operational profitability is gold production, the primary driver of the firm's revenue stream. Forecasting total output as a single time series is unsatisfactory: the heterogeneity of individual assets and the compounding of mine-specific shocks degrade the signal-to-noise ratio and inflate the resulting confidence intervals. To address this, we adopt a bottom-up physical decomposition into Ore Processed, Average Grade, and Recovery Rate, with ore forecast through a seasonal ARIMA model, grade through a non-seasonal AR(1), and recovery simulated within historically observed operational bounds. Aggregate uncertainty is then evaluated using Goodman's variance-of-products formula under independence, which preserves the multiplicative structure of the production formula while avoiding the explosive variance of a naive product of confidence intervals.
 
 \subsubsection{Objective}
-The objective is to build a five-year operating contract for Barrick's production and Cost of Sales. Due to the compounding volatility inherent in the mining sector, traditional top-down forecasting models frequently generate explosive variances and operationally impossible scenarios, such as negative costs or unbounded production. To resolve these structural limitations, this chapter proposes a bottom-up model. By decomposing operating performance into geological and metallurgical drivers, the approach aims to stabilise medium-term cost and production forecasts without producing a standalone price or valuation result.
+The objective is to build a five-year operating contract for Barrick's production and Cost of Sales. Due to the compounding volatility inherent in the mining sector, traditional top-down forecasting models frequently generate explosive variances and operationally impossible scenarios, such as negative costs or unbounded production. To resolve these structural limitations, this chapter proposes a bottom-up model. By decomposing operating performance into geological and metallurgical drivers, the approach aims to stabilize medium-term cost and production forecasts without producing a standalone price or valuation result.
 \subsubsection{Data Sources}
 Data are Barrick's quarterly mine reports for the eight-mine gold perimeter of
 Section~\ref{sec:company-perimeter}; copper is added separately
@@ -175,7 +175,7 @@ It is crucial to note that this metric differs from a standard financial Beta (C
 
 Given the limited sample size (at most 28 quarters per mine), the raw $\beta_{raw,i}$ estimates are subject to significant sampling noise. Extreme values (e.g., $\beta > 3.0$) are often artifacts of single outlier events rather than persistent structural characteristics.
 
-To mitigate this, we apply Blume's Adjustment~\cite{Blume1975}, a shrinkage technique used in finance to adjust beta estimates towards the market mean of 1.0. This assumes that over the long run, extreme volatility characteristics tend to revert to the mean, which is a reasonable assumption to make given that the cost of sales is highly dependent on oil and fuel prices that exhibit strong volatility clustering.
+To mitigate this, we apply Blume's Adjustment~\cite{Blume1975}, a shrinkage technique used in finance to adjust beta estimates toward the market mean of 1.0. This assumes that over the long run, extreme volatility characteristics tend to revert to the mean, which is a reasonable assumption to make given that the cost of sales is highly dependent on oil and fuel prices that exhibit strong volatility clustering.
 
 The adjusted beta $\beta_{adj,i}$ is calculated as a weighted average:
 \[
@@ -284,7 +284,7 @@ Unlike tonnage or grade, which are largely determined by mine plans and geologic
 
 Instead, the algorithm treats the future recovery rate as a stochastic variable, simulating it using a Uniform Distribution $U(\min, \max)$ bounded by the mine's historical operational extremes, with a $\pm$1\% adjustment, a 50\% floor and 100\% ceiling. For instance, Carlin's recovery is randomly sampled between $0.71$ and $0.85$, for each forecasted period, representing a bounded scenario assumption whose distribution and temporal dependence require validation.
 \subsection{Synthesis and Forecast Outputs}
-In the final step, the algorithm executes the Production Formula across the forecasted arrays. By combining the deterministic SARIMA outputs with the stochastic uniform distribution and scaling by the realization factor, the script generates an annual production trajectory with 80\% bands. Because recovery is drawn once per period, the point path is one scenario realisation rather than expected production; only these point vectors enter the valuation.
+In the final step, the algorithm executes the Production Formula across the forecasted arrays. By combining the deterministic SARIMA outputs with the stochastic uniform distribution and scaling by the realization factor, the script generates an annual production trajectory with 80\% bands. Because recovery is drawn once per period, the point path is one scenario realization rather than expected production; only these point vectors enter the valuation.
 \subsubsection{Confidence Intervals}
 The computation of confidence intervals is problematic if we consider the product of three separate components for the production forecast. We want a 80\% CI for the final product, for the production.
 The confidence interval of the product can not be just the product of the confidence intervals of the components, because in doing that we would create a "worst-case scenario", where the intervals are too wide and operationally useless.
@@ -347,7 +347,7 @@ In the last historical year, total company production was lower than the histori
 \subsubsection{Uncertainties and Unknown Events}
 Events such as the closure of Loulo--Gounkoto may affect specific mines; the source does not model them explicitly, judging that doing so would over-complicate the forecast.
 
-Geographic diversification can reduce exposure to some local disruptions, but the source does not estimate the probability of simultaneous failures. Common energy, financial, political and operational shocks can affect several sites. Absorption of shocks across mines and time remains a modelling assumption, not a demonstrated negligible joint risk.
+Geographic diversification can reduce exposure to some local disruptions, but the source does not estimate the probability of simultaneous failures. Common energy, financial, political and operational shocks can affect several sites. Absorption of shocks across mines and time remains a modeling assumption, not a demonstrated negligible joint risk.
 
 \section{Handoff to the independent price and valuation layers}
 

@@ -4,7 +4,8 @@
 The valuation uses the 2 September 2026 GLD call snapshot, distinct from the
 historical source-study examples. It applies DTE $\geq75$ (expiries 79--653
 days); the CC64 geometry and counts are given with
-Figure~\ref{fig:t8-market-inputs}.
+Figure~\ref{fig:t8-market-inputs}. Figure~\ref{fig:gld-current-option-surface}
+shows the surface and the 64 selected nodes.
 
 \begin{figure}[H]
 \centering
@@ -21,11 +22,10 @@ and quarterly integral-preserving forward rates derive from this common curve.
 
 With the GLD sponsor fee treated as carry ($q=0.40\%$), the current-snapshot
 IV RMSE is \CalBSIVRMSE{} basis points for Black--Scholes, \CalHIVRMSE{} for
-Heston, \CalBIVRMSE{} for Bates--Poisson and \CalWIVRMSE{} for Full
-Bates--Hawkes. Because the fits are nested, each richer model attains a
-vega-weighted calibration loss no higher than the model it contains; here the
-IV RMSE ordering follows. It is a property of the nesting, not evidence of
-predictive or economic superiority. The 7 September fits with
+Heston, \CalBIVRMSE{} for Bates--Poisson and \CalWIVRMSE{} for
+Bates--Hawkes; the ordering follows from the nested fits
+(Table~\ref{tab:t8-model-errors}) and is not evidence of predictive or
+economic superiority. The 7 September fits with
 $q=0$ (\CalBSIVRMSELegacy, \CalHIVRMSELegacy, \CalBIVRMSELegacy{} and
 \CalWIVRMSELegacy~bp) target different implied volatilities and are not a
 like-for-like comparison. The Hawkes branching ratio is \HawkesBranching,
@@ -46,12 +46,12 @@ options. Date-equal RMSE is the mean of the daily RMSEs. Date-equal IV RMSE is \
 \OosWRMSE{} basis points for the same four models, against \OosPersistenceRMSE{}
 for interpolated observed-IV persistence on its own support. Every
 $R^2_{OOS}$ against persistence in Table~\ref{tab:current-dense-oos} is
-negative: no model beats persistence. Full Bates--Hawkes comes closest; its
+negative: no model beats persistence. Bates--Hawkes comes closest; its
 daily loss difference from persistence is not significant (Diebold--Mariano
 test~\cite{DieboldMariano1995} with Newey--West errors, $p=\OosWDMPersistenceP$), and neither is its advantage over Bates--Poisson
 ($p=\OosDMHawkesVsBP$), whereas its advantages over Heston and
 Black--Scholes are significant ($p$-values of \OosDMHawkesVsHP{} and
-\OosDMHawkesVsBSP{} to three decimals). Full Bates--Hawkes is the primary
+\OosDMHawkesVsBSP{} to three decimals). Bates--Hawkes is the primary
 structural illustration because it is the richest law, not because of this
 ranking. None of these benchmark comparisons establishes physical gold
 forecasting accuracy. The historical August fixed-target exercise
@@ -69,7 +69,7 @@ Model & (bp) & mean (\%) & persist. (\%) & persistence & persistence \\
 Black--Scholes & \OosBSRMSE & $\OosBSRMean$ & $\OosBSRPersistence$ & \OosBSBeatsPersistence/\OosDates & \OosBSDMPersistenceP \\
 Heston & \OosHRMSE & $\OosHRMean$ & $\OosHRPersistence$ & \OosHBeatsPersistence/\OosDates & \OosHDMPersistenceP \\
 Bates--Poisson & \OosBRMSE & $\OosBRMean$ & $\OosBRPersistence$ & \OosBBeatsPersistence/\OosDates & \OosBDMPersistenceP \\
-Full Bates--Hawkes & \OosWRMSE & $\OosWRMean$ & $\OosWRPersistence$ & \OosWBeatsPersistence/\OosDates & \OosWDMPersistenceP \\
+Bates--Hawkes & \OosWRMSE & $\OosWRMean$ & $\OosWRPersistence$ & \OosWBeatsPersistence/\OosDates & \OosWDMPersistenceP \\
 \bottomrule
 \end{tabular}
 \caption{Dense-only rolling repricing with $q=0.40\%$, equal optimizer search
@@ -77,7 +77,7 @@ and equal date weighting. The four-model target contains \OosObservations{}
 observations; persistence comparisons use the \OosPersistenceObservations{}
 observations inside the origin interpolation domain. Scores against different
 benchmarks therefore must not be treated as identical-support loss ratios.
-Positive $R^2$ favours the model over its stated benchmark; the
+Positive $R^2$ favors the model over its stated benchmark; the
 Diebold--Mariano $p$-values use Newey--West errors on daily MSE differences.}
 \label{tab:current-dense-oos}
 \end{table}
