@@ -8,7 +8,7 @@ Chapter~\ref{ch:gold-regimes} explains why gold has to be read across monetary r
 chapter asks a narrower question: what can a conventional daily time-series
 analysis learn from the historical sample before an option-implied,
 continuous-time model is introduced? The sequence moves from returns and
-cross-asset dependence to conditional-mean models, stylised facts and
+cross-asset dependence to conditional-mean models, stylized facts and
 conditional variance. It is diagnostic. It does not claim that historical
 Yahoo observations, the current LSE (London Strategic Edge) macro panel and the later option surface
 are one homogeneous dataset. The published AR/ARMA/ARIMA and regression
@@ -20,97 +20,19 @@ not merged.
 \section{Data and Econometric Framework}
 \subsection{Return Construction}
 
-A rigorous econometric analysis of gold and silver requires a clear and consistent definition
-of asset returns. Throughout the chapter we work with price time series observed at regular
-intervals and transform these prices into simple and log returns in order to obtain
-stationary, scale–free measures of performance that can be compared across assets and time
-horizons (see, e.g.,~\cite{Wooldridge2020,Tsay2010}). The Team~7 data work and empirical results are replicable using the
+The Team~7 data work and empirical results are replicable using the
 accompanying code and scripts provided in D'Amico and Weisz~\cite{team7-code}.
-\subsubsection{Price series and notation}
-
-Let $P^{(i)}_t$ denote the price of asset $i$ at time $t$, where $t = 1,2,\dots,T$ indexes
-equally spaced observation dates (for example, daily or weekly trading days). In our
-application, the set of assets $i$ includes gold, silver, an equity index, a government bond
-benchmark, and a broad US dollar index.\footnote{The exact instruments and data sources
-are specified in Section~\textit{Asset Selection: Bonds, Stocks, Dollar}.}
-Working with prices directly is informative for descriptive purposes, but prices are typically 
-non–stationary and depend on the scale of the asset. For econometric modeling we therefore
-move to returns, which remove the level effect and produce a dimensionless measure of
-percentage change~\cite{Wooldridge2020}.
-\subsubsection{Simple returns}
-
-The starting point is the one–period simple gross return. For a given asset $i$, the gross
-return between $t-1$ and $t$ is defined as
-\[
-1 + R^{(i)}_t = \frac{P^{(i)}_t}{P^{(i)}_{t-1}},
-\]
-so that $1 + R^{(i)}_t$ measures the growth factor of the price over a single period. 
-Rearranging, we can write
-\[
-P^{(i)}_t = P^{(i)}_{t-1} (1 + R^{(i)}_t),
-\]
-which emphasizes that the current price is obtained by compounding the past price with the
-realized return. The net simple return $R^{(i)}_t$ is then
-\[
-R^{(i)}_t = \frac{P^{(i)}_t - P^{(i)}_{t-1}}{P^{(i)}_{t-1}},
-\]
-representing the percentage change in the price between two consecutive observations.
-
-Over multiple periods, from $t-k$ to $t$, the $k$–period simple gross return is defined as
-\[
-1 + R^{(i)}_{t,[k]} = \frac{P^{(i)}_t}{P^{(i)}_{t-k}}
-= \prod_{j=0}^{k-1} \bigl(1 + R^{(i)}_{t-j}\bigr).
-\]
-This expression shows that multi–period gross returns are obtained by compounding the
-sequence of one–period gross returns. Although intuitive, simple returns are not additive
-over time, which complicates some aspects of statistical analysis and portfolio aggregation.
-\subsubsection{Log returns and time additivity}
-
-To address these limitations, it is standard in empirical finance and time–series analysis
-to work with log (continuously compounded) returns~\cite{Tsay2010}. For asset $i$, the log
-return between $t-1$ and $t$ is defined as
-\[
-r^{(i)}_t = \ln \bigl(1 + R^{(i)}_t\bigr)
-= \ln \left( \frac{P^{(i)}_t}{P^{(i)}_{t-1}} \right)
-= \ln P^{(i)}_t - \ln P^{(i)}_{t-1},
-\]
-where we denote $p^{(i)}_t = \ln P^{(i)}_t$ the log price. Log returns preserve the ranking
-of simple returns but possess a key technical advantage: they are additive over time. For a
-$k$–period horizon we have
-\[
-r^{(i)}_{t,[k]}
-= \ln \bigl(1 + R^{(i)}_{t,[k]}\bigr)
-= \sum_{j=0}^{k-1} r^{(i)}_{t-j}.
-\]
-Thus the total log return over a holding period is simply the sum of the intermediate
-one–period log returns. This time additivity greatly simplifies theoretical modeling and
-empirical work, especially when aggregating returns across different horizons or computing
-cumulative performance.
-
-In addition, for small net returns $R^{(i)}_t$ in absolute value, the approximation
-$r^{(i)}_t \approx R^{(i)}_t$ holds, so that log returns can be interpreted as approximate
-percentage changes. For daily or weekly data on liquid financial assets, log returns retain
-an intuitive economic interpretation while offering more tractable statistical properties
-\cite{Tsay2010}.
-\subsubsection{Choice of return measure in this study}
-
-In line with the empirical literature on precious metals, we compute and analyze log
-returns for all assets considered in the chapter. Simple returns are used only for
-intermediate computations and for robustness checks when comparing with existing studies
-expressed in percentage terms. Concretely, given a price series $P^{(i)}_t$ for gold,
-silver, bonds, equities, or the US dollar index, we define the corresponding log return
-series by
-\[
-r^{(i)}_t = \ln P^{(i)}_t - \ln P^{(i)}_{t-1},
-\]
-and we treat $\{ r^{(i)}_t \}_{t=1}^T$ as the primary object of interest in the econometric
-analysis that follows.
-
-Working with log returns has two main implications for the rest of the chapter: it facilitates the comparison of co–movements between gold, silver, and other financial
-assets, since all series are expressed on a common, dimensionless scale and additionally provides a natural starting point for the time–series modeling in subsequent chapters, where we study distributional properties, temporal dependence, and conditional volatility
-using models tailored to return dynamics.
+Returns are as defined in Section~\ref{sec:returns-definitions}. For each price
+series $P^{(i)}_t$ (gold, silver, the equity index and the US dollar index), the
+primary object is the daily log return
+$r^{(i)}_t=\ln P^{(i)}_t-\ln P^{(i)}_{t-1}$; for small net returns
+$r^{(i)}_t\approx R^{(i)}_t$, so log returns read as approximate percentage
+changes~\cite{Tsay2010}. Simple returns are used only for robustness checks
+against studies expressed in percentage terms. The Treasury regressor is
+instead the daily yield change $\Delta y_t=y_t-y_{t-1}$ in the provider's
+quote units; it is not a bond-price or total return.
 \subsection{Asset Selection: Bonds, Stocks, Dollar}
-The empirical analysis focuses on the joint behaviour of gold and silver with respect to
+The empirical analysis focuses on the joint behavior of gold and silver with respect to
 three major segments of global financial markets: government bonds, equities, and the US
 dollar. This subsection describes the exact assets, indices, and data sources used in the
 chapter, as well as the sampling frequency and time span of the dataset.
@@ -177,32 +99,18 @@ Treasury yield. Sample: 1 May 2006--31 December 2024.
 
 
 Overall, the mean daily returns are close to zero for all assets, as expected at this
-frequency, while standard deviations differ markedly across series. Silver (SLV) and the
-S\&P 500 display the highest volatility, whereas the U.S. dollar index and changes in the
-10-year yield are substantially less volatile in relative terms. The minima and maxima
+frequency, while standard deviations differ markedly across series. Among the return series,
+silver is the most volatile and the dollar index the least; the yield-change
+dispersion is in yield units and is not ranked against them. The minima and maxima
 suggest that all series occasionally experience large daily moves, with more pronounced
 extremes for silver and equities, anticipating the heavy tails and volatility clustering
-documented in later chapters.
+documented later in this chapter.
 \subsection{Correlation and Regression Design}
 
-The empirical framework of this chapter is built around two complementary tools: correlation
-measures and linear regression models. Correlations provide a first description of the
-co–movements between gold, silver, and other financial assets, while regressions formalize
-these relationships in a conditional, ceteris paribus sense and allow us to control for
-multiple drivers simultaneously. In this subsection we outline the design choices behind
-these tools, setting the stage for the econometric analysis developed in the following
-chapter.
 \subsubsection{Static and dynamic correlations}
 
-Let $r^{(i)}_t$ and $r^{(j)}_t$ denote the log returns of two assets $i$ and $j$ at time $t$,
-constructed as described in the previous subsections. A natural measure of linear
-dependence between the two series is the Pearson correlation coefficient
-\[
-\rho_{ij} = \frac{\operatorname{Cov}(r^{(i)}_t, r^{(j)}_t)}
-{\sqrt{\operatorname{Var}(r^{(i)}_t)\,\operatorname{Var}(r^{(j)}_t)}},
-\]
-which summarizes whether returns tend to move in the same direction ($\rho_{ij} > 0$),
-in opposite directions ($\rho_{ij} < 0$), or show no linear association ($\rho_{ij} \approx 0)$.
+Linear dependence between the log returns $r^{(i)}_t$ and $r^{(j)}_t$ is
+measured by the Pearson coefficient $\rho_{ij}$ of Section~\ref{sec:acf}.
 Weak stationarity alone does not ensure consistent correlation estimates.
 For example, joint strict stationarity and ergodicity, finite second
 moments and positive marginal variances give the required law of large
@@ -210,13 +118,8 @@ numbers for sample moments. A central limit theorem or confidence band
 needs additional conditions. Here sample correlations describe average
 co-movement in the stated sample, without identifying causality.
 
-However, financial markets are characterized by changing regimes and time–varying
-dependence. To account for this, we complement static correlations with \emph{rolling}
-correlations computed over moving windows. Given a window length $W$, the rolling
-correlation between assets $i$ and $j$ at time $t$ is defined as the sample correlation
-computed using only the observations $t-W+1,\dots,t$. By sliding the window along the
-sample, we obtain a time series of correlation estimates that reveals how the strength and
-sign of co–movements evolve across tranquil periods and episodes of market stress.
+Time variation is tracked with rolling correlations
+(Section~\ref{sec:rolling-correlation}).
 
 In our context, static correlations offer a baseline picture of how gold and silver are
 related to bonds, equities, and the US dollar on average, while rolling correlations
@@ -247,18 +150,18 @@ shows that both sign and magnitude vary through time.
 \subsubsection{Linear regression framework}
 
 
-Building on the correlation analysis discussed above, we next specify linear regression models that relate gold and silver returns to the macro-financial drivers identified in Chapter~\ref{ch:gold-regimes} and formalised econometrically in Chapter~\ref{ch:econometrics}.
+Building on the correlation analysis discussed above, we next specify linear regression models that relate gold and silver returns to the macro-financial drivers identified in Chapter~\ref{ch:gold-regimes} and formalized econometrically in Chapter~\ref{ch:econometrics}.
 While correlations are symmetric and purely descriptive, regression models impose a
 direction of explanation and allow us to condition on multiple variables at once
 \cite{Wooldridge2020}. Following the econometric framework introduced in the theoretical
 section on ordinary least squares, we model gold and silver returns as linear functions of
-bond, equity, and dollar returns:
+the daily 10-year yield change and equity and dollar log returns:
 \[
-r^{gold}_t = \beta_0 + \beta_1 r^{bond}_t + \beta_2 r^{equity}_t
+r^{gold}_t = \beta_0 + \beta_1 \Delta y_t + \beta_2 r^{equity}_t
 + \beta_3 r^{usd}_t + u_t,
 \]
 \[
-r^{silver}_t = \gamma_0 + \gamma_1 r^{bond}_t + \gamma_2 r^{equity}_t
+r^{silver}_t = \gamma_0 + \gamma_1 \Delta y_t + \gamma_2 r^{equity}_t
 + \gamma_3 r^{usd}_t + v_t,
 \]
 where $u_t$ and $v_t$ denote error terms capturing all other factors that affect precious–
@@ -275,24 +178,6 @@ perspective: the coefficients are interpreted as measures of conditional co–mo
 indicators of hedge and safe–haven properties, rather than as structural causal effects
 (see also the distinction between causal and forecasting objectives in standard
 econometrics and time–series texts, e.g.,~\cite{Wooldridge2020,Tsay2010}).
-\subsubsection{Extensions and robustness}
-
-The original article presented volatility modelling as a future extension. In
-the unified thesis, part of that agenda is already completed: GARCH evidence is
-reported later in this chapter, continuous-time stochastic variance and jumps
-are developed in Chapter~\ref{ch:sv-jumps}, and option-surface calibration is performed in
-Chapter~\ref{ch:calibration}. Additional regressors, quantile methods and formal regime or causal
-identification remain robustness extensions rather than completed results.
-
-The linear regression framework adopted in this chapter is primarily designed for descriptive and predictive purposes rather than for structural causal inference. The estimated coefficients should therefore be interpreted as measures of conditional comovement and as indicative of hedge or safe-haven behaviour \emph{in our sample and at the daily frequency considered}, under the maintained assumptions on the error term and the chosen set of regressors, rather than as evidence of deep causal effects.
-
-
-These design choices provide a coherent link between the descriptive correlation analysis,
-the linear regression framework, and the volatility models that follow. The following
-sections implement this framework empirically, estimating the models for gold and silver
-and interpreting the results in light of their proposed roles as hedges, safe havens, and
-diversifiers.
-
 
 \section{Applied Cross-Asset Evidence}
 
@@ -409,7 +294,7 @@ The combined evidence supports three limited conclusions. Gold and silver are
 strongly related but silver is materially more volatile; gold's unconditional
 equity relationship is weak; and the negative dollar relationship is much
 more stable than the bond-yield or equity relations. The evidence motivates
-state-dependent volatility modelling, but it does not establish a universal
+state-dependent volatility modeling, but it does not establish a universal
 safe-haven law.
 
 \section{Log Prices, Returns and Stationarity}
@@ -425,7 +310,7 @@ forecastability.
 
 For returns, the same benchmark changes sharply. The estimated AR(1)
 coefficient is approximately $-0.0024$ for gold and $0.0063$ for silver, with
-robust standard errors near $0.0202$ and $0.0227$ and essentially zero
+published robust standard errors near $0.0202$ and $0.0227$ and essentially zero
 $R^2$. At the daily frequency the conditional mean is therefore weak even
 though the price level is persistent.
 
@@ -445,15 +330,13 @@ Silver & Return    & 0.0063  & 0.0227 &    0.28 & 0.0000 \\
 \bottomrule
 \end{tabular}
 \begin{minipage}{0.90\textwidth}
-\footnotesize\emph{Notes:} Cells preserve the Team~7 PDF snapshot.
-The frozen CSV robust-SE/$t$ pairs (rounded) are
-0.000518785/1926.2686 (gold) and 0.000973411/1025.0763 (silver)
-in \texttt{ar1\_log\_prices.csv}; for returns they are
-0.014595135/$-0.16559$ (gold) and 0.014596015/0.43386 (silver)
-in \texttt{ar1\_returns.csv}. Coefficients and $R^2$ agree at the
-shown precision; the cause of the SE/$t$ discrepancy is unresolved.
-High fit in levels reflects near-unit-root persistence, not reliable
-return predictability.
+\footnotesize\emph{Notes:} Cells reproduce the published Team~7 article.
+The corrected companion code reports Newey--West HAC standard errors and
+$t$-statistics of 0.000587/1703.3 (gold) and 0.001228/812.7 (silver) for
+log prices, and 0.01942/$-0.124$ (gold) and 0.02480/0.255 (silver) for
+returns. Coefficients and $R^2$ agree at the shown precision, and no
+significance conclusion changes. High fit in levels reflects near-unit-root
+persistence, not reliable return predictability.
 \end{minipage}
 \end{table}
 
@@ -542,7 +425,7 @@ not establish an error in the ARMA/ARIMA tables.
 Figures~\ref{fig:t7-return-histograms} and
 \ref{fig:t7-return-qqplots}, regenerated on current LSE GLD/SLV returns, make
 the departure from Gaussianity visible. The
-centre is sharper than the fitted normal density and both tails contain more
+center is sharper than the fitted normal density and both tails contain more
 mass; the Q--Q deviations are especially pronounced for silver.
 
 \begin{figure}[htbp]
@@ -621,9 +504,7 @@ reproduce the compact persistence table in the Team~7 article.
 
 \section{ARCH and GARCH Evidence}
 
-An ARCH model~\cite{Engle1982} makes conditional variance depend on past squared innovations,
-while a GARCH model~\cite{Bollerslev1986} also propagates its own lagged variance. For the benchmark
-GARCH$(1,1)$,
+Chapter~\ref{ch:econometrics} defines the ARCH/GARCH family~\cite{Engle1982,Bollerslev1986}; the benchmark here is GARCH$(1,1)$,
 \[
  r_t=\mu+\varepsilon_t,\qquad
  \sigma_t^2=\omega+\alpha\varepsilon_{t-1}^2+\beta\sigma_{t-1}^2.
@@ -753,8 +634,9 @@ Silver & 0.552 & 0.080 & 6.91 \\
 The absolute-return ACF in Figure~\ref{fig:t7-absolute-return-acf}
 and filtered series in Figure~\ref{fig:t7-fractional-differencing}
 are descriptive LSE diagnostics; a visual change after filtering alone
-does not establish reduced low-frequency persistence. The finite filter
-assigns weight $w_0$ to the current observation and subsequent weights
+does not establish reduced low-frequency persistence. The finite filter,
+a truncation of $(1-B)^d=\sum_{k\ge0}w_kB^k$ with backshift operator $B$,
+$w_0=1$ and $w_k=-w_{k-1}(d-k+1)/k$, assigns weight $w_0$ to the current observation and subsequent weights
 to past observations. With $L$ retained weights, its first $L-1$ values
 are undefined (599 if $L=600$), so the filtered sample differs from
 the full sample used for the raw GPH slope.
@@ -797,21 +679,11 @@ returns affect interpretation.
 Static and rolling correlations and HC1 regressions are descriptive; they do
 not identify monetary, inflationary or geopolitical shocks. Normal-innovation
 GARCH does not represent leverage asymmetry, heavy-tailed innovations,
-structural breaks or jump arrivals. The GPH result is boundary-sensitive. In
-addition, the AR(1) and moment-table notes identify PDF/CSV discrepancies;
-their causes remain unresolved, and no estimates are recomputed here.
-
-\paragraph{Developments already completed in the unified thesis.}
-The standalone article described continuous-time stochastic volatility,
-option calibration and company valuation as ``next steps.'' They are no
-longer future work here. Chapter~\ref{ch:sv-jumps} develops Black--Scholes, Heston,
-Bates--Poisson and Bates--Hawkes dynamics, including clustered jumps.
-Chapter~\ref{ch:calibration} calibrates the option-pricing layer to a dated GLD surface under the
-risk-neutral measure $\mathbb Q$. Chapters~\ref{ch:operations} and~\ref{ch:dcf} build the production,
-cost and DCF interfaces, while Chapter~\ref{ch:unified-experiment} propagates the four gold-price
-engines through a common Barrick valuation experiment and validates their
-comparability. The present chapter supplies the historical empirical
-motivation for those completed layers; it is not their terminal result.
+structural breaks or jump arrivals. The GPH result is boundary-sensitive. The
+published AR(1) robust standard errors differ from the Newey--West HAC values
+of the corrected companion code (Table~\ref{tab:t7-ar1-level-return}); the
+small excess-kurtosis difference noted under Table~\ref{tab:t7-return-moments}
+remains unexplained. No estimates are recomputed here.
 
 \paragraph{Residual research agenda.}
 Work that remains genuinely open includes a same-date, multi-provider rebuild
@@ -823,6 +695,8 @@ historical $\mathbb P$ dynamics and option-implied $\mathbb Q$ parameters.
 An augmented filtration that converts textual macroeconomic and geopolitical
 information into measurable state variables is also a credible machine-
 learning extension, but it is outside the evidence completed in this thesis.
+Additional regressors, quantile methods and formal regime identification
+likewise remain extensions rather than completed results.
 
 The decision point is therefore precise. ARIMA remains valid for integrated
 levels and GARCH remains useful for discrete-time conditional variance, but
