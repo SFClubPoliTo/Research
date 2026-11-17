@@ -1,12 +1,12 @@
 {
   "edition": "unificato",
-  "archive_sha256": "de96606f9c597f1a6c71eb1342f8403063cc1adff4629efee26f4e1b853c322b",
+  "archive_sha256": "036ee1b4bb557d9d5725c65d683730a45e32207caeb1b40911ad6b75fac00b0d",
   "file_count": 74,
   "shared_images": 46,
   "files": [
     {
       "path": "Articolo.pdf",
-      "sha256": "b8171d6dd938fad32df572f8c686707370331205323a2b29bbdbb7cbd06f2042"
+      "sha256": "78980a9882a37e348d8bf16a1d72caab3d3f72ddf9679a78c86d7498d267487c"
     },
     {
       "path": "Articolo.tex",
@@ -22,7 +22,7 @@
     },
     {
       "path": "chapters/00-team.tex",
-      "sha256": "704a681515b30a50e92298101c529ccd77ce5f0478ecba9c4a36ba9c877ad0c1"
+      "sha256": "7c94a04cf3d0b66f4ca92e5fc44def525f3a915c7ed8f604aa73cb54c1f82fcc"
     },
     {
       "path": "chapters/01-introduction.tex",
