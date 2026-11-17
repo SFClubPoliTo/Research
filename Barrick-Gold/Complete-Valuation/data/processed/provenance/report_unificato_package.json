@@ -1,12 +1,12 @@
 {
   "edition": "unificato",
-  "archive_sha256": "f9c7eb9febf78858cd96732bf64f93a521fa039cd3b14e6e3c92ccc28dd1d2a2",
+  "archive_sha256": "bead9f5a23d03c3c573d4238c3dafbd3c216839c3a5a59c87316b522ef85b72f",
   "file_count": 73,
   "shared_images": 46,
   "files": [
     {
       "path": "Articolo.pdf",
-      "sha256": "cb6dd5b7d43467f841138c8e02ced005650ed7716ac406c8b9f326dd0452f2f5"
+      "sha256": "7ffef40b2741ed9654f3b9fb11019759d35266b679b1bc779b3aeded43c1a14b"
     },
     {
       "path": "Articolo.tex",
@@ -94,7 +94,7 @@
     },
     {
       "path": "chapters/11-dcf.tex",
-      "sha256": "7dfe85fa9929e9a1770f4c463249220259ee0441d3f48ac88af7c0e630cd0623"
+      "sha256": "a34fc5c6312af6f48616571d804a1ea06d97bffc4ed96b631917ba90ec20e962"
     },
     {
       "path": "chapters/12-unified-experiment.tex",

@@ -1,12 +1,12 @@
 {
   "edition": "paper",
-  "archive_sha256": "6107d482f76397cdc010d39d27ee9c4acb86f47fe4f6413aa36ac77ead7c2bbe",
+  "archive_sha256": "f217c3f8f76791d41691ea9000c8bf1b9ada861a971c96cf942e63086fbf6e56",
   "file_count": 43,
   "shared_images": 27,
   "files": [
     {
       "path": "Articolo.pdf",
-      "sha256": "2433cab9bd3acfcc8211e367a91d326724cb3fa0428028af08f6c3c9425d7b74"
+      "sha256": "a0aa659d07030b71d0e23f19171dcca2763429a56942a93a6f2ed888312fcae8"
     },
     {
       "path": "Articolo.tex",
@@ -138,7 +138,7 @@
     },
     {
       "path": "sections/03b_calibration_audit.tex",
-      "sha256": "f5cf7a9525fe00c7db87d0983565cb22a4be3e44efdecea4960b981ad98d40d5"
+      "sha256": "be6e2f1cdcc732fa1913e108353c602a5c242258c5474fbb07913663f8efdbe1"
     },
     {
       "path": "sections/03c_operating_evidence.tex",
