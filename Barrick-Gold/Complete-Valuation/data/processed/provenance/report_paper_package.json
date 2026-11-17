@@ -1,16 +1,16 @@
 {
   "edition": "paper",
-  "archive_sha256": "f217c3f8f76791d41691ea9000c8bf1b9ada861a971c96cf942e63086fbf6e56",
+  "archive_sha256": "29cdd448f289be29c08e5923fac9fa2d8a31b6e822a2039d3333922a102525ad",
   "file_count": 43,
   "shared_images": 27,
   "files": [
     {
       "path": "Articolo.pdf",
-      "sha256": "a0aa659d07030b71d0e23f19171dcca2763429a56942a93a6f2ed888312fcae8"
+      "sha256": "c93f8eb23588b2da26275c8d72928e5f91b97e09440effcdcc85dba898e022f6"
     },
     {
       "path": "Articolo.tex",
-      "sha256": "de984e96454ffba262344efde77dbdc26f03169de211fc729f986f633adc7e38"
+      "sha256": "9c3f9bdb32aa82eb6aad6648023946642e3321b77d1c5a3e9d3881914d04e652"
     },
     {
       "path": "Copertina_research.pdf",
@@ -126,7 +126,7 @@
     },
     {
       "path": "sections/01_introduction.tex",
-      "sha256": "02fc2958ab723869da729e56505f3669fc946263995b25d82223384dd7542240"
+      "sha256": "57e83c440ed8a5820fa2b83f4b80ecdd8f9702a7e20f3f3643b14777d5d00a27"
     },
     {
       "path": "sections/02_data_assumptions.tex",
