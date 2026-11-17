@@ -5,10 +5,10 @@ Date: 17 November 2026. Branch `integrato/barrick-s045` of this repository.
 This note records how the externally prepared S044 revision of the unified
 report (28 of 75 audit interventions applied to an earlier draft) was
 combined with the 24 October corrections already published here, and what
-was changed afterwards in both report editions. Earlier states remain
-recoverable from Git: commit `25b4bca` is the 24 October version; the S044
-baseline corresponds, chapter by chapter, to the repository state of commit
-`98fd945`.
+was changed afterwards in both report editions. The 24 October version remains
+recoverable from Git (commit `25b4bca`); the S044 baseline corresponds,
+chapter by chapter, to commit `98fd945`. The S044 working repository itself is
+not kept in this tree: its corrections are incorporated as listed below.
 
 ## 1. Merge of the S044 interventions
 
@@ -24,7 +24,7 @@ per-share values from 24 October prevail.
 | 03 company perimeter | INT-031 | Merged cleanly (units of the production identity, troy-ounce constant). |
 | 04 probability and pricing | INT-005, 006, 007, 008, 010 | Merged cleanly. |
 | 05 econometrics | INT-011, 012, 013, 014 | Merged cleanly. |
-| 06 Monte Carlo | INT-016, 017, 018, 019, 021, 022, 023, 024 | Merged; two conflicts resolved in favour of S044 (QMC point sets are not i.i.d.; payoff dispersion of one QMC set is not a standard error). The S044 phrase "no such results are supplied here" was replaced by a pointer to the Article 3 code, which does compute a replication-based error from independent scrambled Sobol' sets. Sobol' citation restored. |
+| 06 Monte Carlo | INT-016, 017, 018, 019, 021, 022, 023, 024 | Merged; two conflicts resolved in favour of S044 (QMC point sets are not i.i.d.; payoff dispersion of one QMC set is not a standard error). The S044 phrase "no such results are supplied here" was replaced by a pointer to the Article 3 code, which does compute a replication-based error from independent scrambled Sobol' sets. Sobol' citation restored. The illustrative integral example, whose printed numbers had never been reproduced, was recomputed with a fixed seed (`default_rng(42)`, N = 10,000); S044's caveat that one interval proves nothing is kept. |
 | 07 gold econometrics | INT-043, 044, 045 | Conflicts resolved in favour of 24 October: the corrected code no longer clips the GPH estimate, so the S044 description of post-estimation clipping (0.452/0.490, m = 37) describes superseded code. INT-044 (constrained GARCH estimator) merged and checked against `src/barrick_unified/empirical_figures.py`. INT-045 merged; its AR(1) note was later updated to the Newey-West errors of the corrected Article 7 code. |
 | 08 volatility, jumps, affine | INT-020, 025, 026, 027, 028 | Eight conflicts resolved in favour of S044 (conditional Gaussian mixtures, Gil-Pelaez with initial spot and improper integral, correlated-driver caveat, cumulants of compound jumps). Citations and the label `eq:SV_kurtosis` restored. |
 | 09 option calibration | INT-030 | Conflicts resolved in favour of S044 (Hawkes empty-history initialization; the alpha = 0 limit is an inhomogeneous Poisson law, constant intensity also needs lambda_0 = lambda_bar). Hawkes citation restored. |
@@ -169,7 +169,7 @@ technical-audit supplements (q = 0, earlier numbers) were removed.
 
 All S044 corrections inside removed blocks were kept or moved to the
 definitive location. No citation key or unique figure was removed; one
-duplicate figure (same Hawkes path and seed) was removed. Two never-compiled
+figure was removed: it repeated, with five illustrative paths per model, the jump path already shown in the retained intensity figure (same seed); mean jump counts remain tabulated. Two never-compiled
 chapter files and the self-blocked August source generator were removed.
 
 | Measure | 24 October | 17 November |
@@ -186,4 +186,4 @@ references or uncited entries; the generated results file is byte-identical
 in both editions; numbers were reconciled with `outputs/paper_audit_20261024/`
 and the Article 7 CSV outputs. Not re-executed: calibration, OOS and
 valuation pipelines (they need licensed row-level option data kept locally).
-No numerical result was changed in this revision.
+No empirical or valuation result was changed in this revision; the only recomputed number is the illustrative Monte Carlo integral example of chapter 6.
