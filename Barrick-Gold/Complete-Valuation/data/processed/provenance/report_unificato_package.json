@@ -1,16 +1,16 @@
 {
   "edition": "unificato",
-  "archive_sha256": "bead9f5a23d03c3c573d4238c3dafbd3c216839c3a5a59c87316b522ef85b72f",
+  "archive_sha256": "e5c4d1267426f6287f1aee561bf2d9b1ff7b842bf69c903773e7cdd961a6f1f8",
   "file_count": 73,
   "shared_images": 46,
   "files": [
     {
       "path": "Articolo.pdf",
-      "sha256": "7ffef40b2741ed9654f3b9fb11019759d35266b679b1bc779b3aeded43c1a14b"
+      "sha256": "5d1bd0ea7dbda303c4030882f110b4bdefaf3a6b53f261803de227e845e7f305"
     },
     {
       "path": "Articolo.tex",
-      "sha256": "275eb754889bc1dbc2d947fadcd947f10441121c0287a32db49fc3123c09d372"
+      "sha256": "0f7ba44f59c74cc7609cffbf1f01a845e040ca10ecd7efc43db15330634ea2a0"
     },
     {
       "path": "Copertina_research.pdf",
