@@ -1,23 +1,4 @@
-% Fragment to be included in Articolo_team8_working.tex.
-% Suggested packages in the main preamble:
-% \usepackage{amsmath,amssymb,booktabs}
-%
-% Rewritten on 24 October 2026 so that the text describes exactly what
-% src/oos_validation.py and src/calibrate_surface.py do (see the README
-% section "Corrections (24 October 2026)").  The previous version described a
-% weekly design with 35 transitions, 140 forecasts, a normalized ex-ante grid
-% and "no variable dated after t"; none of these matched the code.
-%
-% ---------------------------------------------------------------------------
-% NUMBER HOOK FOR THE CORRECTED RUN (q = 0.40%, 30 origins, no warm starts).
-% ../img/diagnostics_ibkr/oos_article_numbers.tex is written by
-% Complete-Valuation/src/build_report_fragments.py from the corrected run
-% (data/processed/team8/oos_q040_20261024): counts, R^2 against persistence,
-% Diebold--Mariano statistics (Newey--West, 3 lags) and dates beating
-% persistence.  oos_validation.py writes only oos_run_counts.tex and
-% oos_table_rows.tex, so re-running it cannot overwrite this hook.
-% The placeholders below appear only if the generated file is missing.
-% ---------------------------------------------------------------------------
+% Fragment: suggested packages amsmath, amssymb, booktabs.
 \IfFileExists{../img/diagnostics_ibkr/oos_article_numbers.tex}{%
   \input{../img/diagnostics_ibkr/oos_article_numbers.tex}}{}
 \providecommand{\OOSPending}{\textbf{[pending corrected run]}}

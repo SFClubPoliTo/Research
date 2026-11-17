@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this repository, please cite it using the metadata below."
-title: "Gold, Monetary Regimes, and Volatility Dynamics: From the Gold Standard to Econometric Evidence and Foundations for Heston-Type Models"
+title: "Gold, Monetary Regimes, and Volatility Dynamics"
 type: software
 authors:
   - family-names: "D'Amico"

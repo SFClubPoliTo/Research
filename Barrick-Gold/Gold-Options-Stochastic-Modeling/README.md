@@ -4,8 +4,8 @@ Research code and reproducibility assets for the Starting Finance Club PoliTo ar
 
 ## 👥 Authors
 
-- [Salvatore Gabriele Messina](https://github.com/SalvatoreMessina11)
 - [Alessandro Coco](https://github.com/0c0c)
+- [Salvatore Gabriele Messina](https://github.com/SalvatoreMessina11)
 
 ## 🎯 Purpose
 
@@ -111,15 +111,17 @@ Row-level IB/OPRA option quotes are kept local and are not redistributed. This c
 
 ## 📚 Citation
 
-Messina, Salvatore Gabriele, and Alessandro Coco. *Advanced Stochastic Modeling for Gold Options: Supporting Code*. Starting Finance Club PoliTo, Research repository, 2026.
+Coco, Alessandro, and Salvatore Gabriele Messina. *Advanced Stochastic Modeling for Gold Options: Supporting Code*. Starting Finance Club PoliTo, Research repository, 2026.
 
-The direct article PDF link will be added after publication.
+The article was published on September 4, 2026 and is available from the [Starting Finance Club PoliTo publications page](https://sfclubpolito.it/pubblicazioni).
 
 ## September 7 Paper audit
 
-The calibration code now preserves better candidates and admits the nested zero-jump and zero-excitation cases. Current-snapshot local refinements are stored separately in `outputs/paper_audit_20260907/parameters/`; original rolling OOS parameters and results have not been recalibrated. For the full offline main runner, tests and operating-proxy figures, use [Complete-Valuation](../Complete-Valuation/).
+The calibration code now preserves better candidates and admits the nested zero-jump and zero-excitation cases. Current-snapshot local refinements are stored separately in `outputs/paper_audit_20260907/parameters/`; as of 7 September, the original rolling OOS parameters and results had not been recalibrated; this was superseded by the corrected 24 October run described below. For the full offline main runner, tests and operating-proxy figures, use [Complete-Valuation](../Complete-Valuation/).
 
 The manifest paths `team8_data/data/processed/` map here to `data/processed/`; `audit_inputs/outputs/` maps to `outputs/paper_audit_inputs_20260907/`. The original Team 8 manuscript has not been scientifically rewritten by this Paper-focused revision.
+
+`outputs/paper_audit_20260907/technical_audit.pdf` and `outputs/paper_audit_20260907/review_status.json` are the superseded pre-correction audit of 7 September (q = 0 convention). They are kept for provenance only and do not describe the corrected 24 October run.
 
 ## Corrections (24 October 2026)
 

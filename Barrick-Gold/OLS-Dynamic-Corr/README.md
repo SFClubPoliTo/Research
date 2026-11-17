@@ -22,7 +22,7 @@ OLS-Dynamic-Corr/
 
 ## 🚧 Code Status
 
-No executable code folder was supplied with the article materials currently available in the team workspace. The publication package is therefore organized around the article PDF and Drive deliverables.
+No code was released for this article. This companion folder documents the article and links to the published PDF.
 
 ## 🧪 Reproducibility Notes
 
