@@ -115,6 +115,10 @@ An internal audit found several methodological and reproducibility issues. The c
 - **Reproducibility (step 01, `main.py`).** Step 01 no longer writes empty CSVs when the download fails. It falls back to the frozen raw file with a clear message, or stops with an error if that file is missing. `--offline` is now available, and `requirements.txt` pins exact versions.
 - **Environment drift.** With the pinned versions, the uncorrected code reproduces the Gaussian GARCH estimates up to about 1e-8. The layout of `descriptive_stats.tex` and `correlation_matrix.tex` changes slightly because pandas 3 formats `to_latex` differently. The processed datasets are identical. Every PNG is re-rendered by the newer matplotlib, but only `arfima_fd_gold.png` and `arfima_fd_silver.png` change in content.
 
+## 🗄️ Data licence
+
+The data in `data/raw/` and the Yahoo-derived files in `data/processed/` come from Yahoo Finance. They are included only so that the published tables can be reproduced, and they remain subject to the provider's terms of use. To obtain fresh data, run `python src/main.py` without `--offline` (or `python src/01_data_download.py`), which re-downloads the series from Yahoo Finance.
+
 ## 📚 Citation
 
-D'Amico, D. and Weisz, P., *Gold, Monetary Regimes, and Volatility Dynamics: supporting code*, Starting Finance Club PoliTo Research, GitHub repository, expected publication 19/06/2026, accessed 02/06/2026.
+D'Amico, D. and Weisz, P., *Gold, Monetary Regimes, and Volatility Dynamics: supporting code*, Starting Finance Club PoliTo Research, GitHub repository, publication PDF at https://sfclubpolito.it/pubblicazioni, published 19/06/2026.

@@ -21,7 +21,7 @@ Bates adds compensated compound-Poisson jumps \citep{bates1996},
 \end{equation}
 where $k=\E^{\mathbb Q}[e^J-1]$.
 
-\subsection{Full Bates--Hawkes: implemented affine engine}
+\subsection{Bates--Hawkes: implemented affine engine}
 The full engine preserves Heston variance but replaces the constant Poisson arrival rate with an exponential Hawkes state \citep{hawkes1971}:
 \begin{align}
 \frac{\dd S_t}{S_{t^-}}&=(r_t-q_t-\lambda_t k)\dd t+\sqrt{v_t}\dd W_t^S+(e^J-1)\dd N_t,\\
@@ -45,7 +45,7 @@ with the jump block determined by the Riccati system
 where $\psi_J(u)=\exp(iu\mu_J-\tfrac12\sigma_J^2u^2)$. European call prices use Fourier-COS inversion \citep{cos2008}, with independent diffusion and jump drivers. The identities $\phi(0)=1$, the martingale condition at $u=-i$, and the limit $\alpha\to0$, $\lambda_0=\bar\lambda$, back to Bates are used as implementation checks.
 
 \begin{methodbox}[Model-role constraint]
-These processes govern commodity prices only. The copper extension uses forward-price analogues; neither price layer generates Barrick production or costs.
+These processes govern commodity prices only. The copper extension uses forward-price analogs; neither price layer generates Barrick production or costs.
 \end{methodbox}
 
 \subsection{Option-surface calibration and predictive test}
@@ -65,7 +65,6 @@ R^2_{OOS,m\mid b}=1-\frac{\sum_t n_t^{-1}\sum_j e_{m,t,j}^2}{\sum_t n_t^{-1}\sum
 \end{equation}
 against both the origin cross-sectional mean IV and an origin observed-IV surface interpolated in maturity and log-moneyness inside its convex hull. The target spot and rate curve enter only as scoring-date conditioning variables. This design prevents the lowest in-sample IV error from being interpreted automatically as predictive dominance.
 
-% Expansion p2 - 2026-09-06
 Origin parameters are frozen before next-date scoring; target quotes do not select them. Conditioning on target spot and rates makes this a repricing test, not a joint ex ante forecast. Persistence is evaluated only on its interpolation support; unmatched observations are not zero losses.
 
 \input{sections/03e_physical_measure}
@@ -90,7 +89,7 @@ Team 4 models production components without claiming AIC/BIC selection. With ore
 Q_t^{phys}=\mathrm{Ore}_t\,\mathrm{Grade}_t\,\mathrm{Recovery}_t/31.1035,
 \label{eq:production_formula}
 \end{equation}
-with ore modelled as $SARIMA(1,0,1)(1,0,0)_4$, grade as a non-seasonal AR(1), and recovery sampled uniformly from historical extrema widened by one percentage point and truncated to $[0.50,1.00]$. Team 4 additionally applies a 0.91 empirical realization factor, not a unit conversion; its transfer across mines remains unvalidated. The valuation retains the frozen Team 4 vectors, not the Goodman distributions; production bands are 80\% and cost bands 95\%, while product-variance formulas require explicit dependence assumptions.
+with ore modeled as $SARIMA(1,0,1)(1,0,0)_4$, grade as a non-seasonal AR(1), and recovery sampled uniformly from historical extrema widened by one percentage point and truncated to $[0.50,1.00]$. Team 4 additionally applies a 0.91 empirical realization factor, not a unit conversion; its transfer across mines remains unvalidated. The valuation retains the frozen Team 4 vectors, not the Goodman distributions; production bands are 80\% and cost bands 95\%, while product-variance formulas require explicit dependence assumptions.
 
 \subsection{Path simulation}
 All four engines are simulated on a daily grid from the valuation time with full-truncation Euler variance \citep{lord2010}: the variance state is carried unclipped and only $\max(v,0)$ enters drift and diffusion. For Bates--Hawkes the intensity decays exactly between days, the number of jumps in a day is Poisson with the exact integral of that decay, and the drift is compensated by the same integral, so each step is a martingale given its starting state. Monte Carlo call prices at one and three years agree with the COS prices within about two batch standard errors for every model (8 independent batches of 16,384 paths).

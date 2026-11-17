@@ -33,7 +33,7 @@ uncertainty of one model, and the medians do not rank the models.
   right=3mm
 ]
 \small
-Flows to 31 December 2030 are worth \textbf{USD~\ValExplicitLow--\ValExplicitHigh~billion};
+Median flows to 31 December 2030 range from \textbf{USD~\ValExplicitLow{} to \ValExplicitHigh~billion} across the four engines;
 the perpetuity after 2030 carries about \textbf{\TerminalShare\%} of the mean proxy.
 The terminal assumptions, not the gold model, decide the level.
 \end{tcolorbox}
@@ -48,52 +48,33 @@ The terminal assumptions, not the gold model, decide the level.
   right=3mm
 ]
 \small
-In 30 rolling repricing tests, Bates--Hawkes has the lowest error among the
-four models (\OosWRMSE~bp), but carrying the previous day's implied-volatility
-surface forward is still more accurate: the out-of-sample $R^2$ against
-persistence is \OosWRPersistence\% for Bates--Hawkes and lower for the others.
+In \OosDates{} rolling repricing tests, Bates--Hawkes has the lowest error among the
+four models (\OosWRMSE~bp), but carrying the last observed implied-volatility
+surface forward is still marginally more accurate on its support
+($R^2 = \OosWRPersistence\%$, DM $p = \OosWDMPersistenceP$); the other models
+have lower out-of-sample $R^2$ against persistence.
 \end{tcolorbox}
 
 \noindent\textbf{What these numbers are.} They are operating-margin proxies,
-not enterprise or equity values: the equity bridge (debt, cash, minorities,
-other claims and the diluted share count) is not reconciled, so no value per
-share is reported and no comparison with Barrick's share price is made. The
-results are research sensitivities, not fair values, target prices or
-investment advice.
+not enterprise or equity values (Section~\ref{sec:company-financial-perimeter}): research
+sensitivities, not fair values, target prices or investment advice.
 
 \noindent\textbf{What the four models do---and do not do.} Black--Scholes/GBM,
-Heston, Bates--Poisson and Full Bates--Hawkes govern only the \emph{gold-price
+Heston, Bates--Poisson and Bates--Hawkes govern only the \emph{gold-price
 layer}. They are calibrated to 64 GLD calls of 2 September 2026 with the
 trust's 0.40\% sponsor fee as carry. They do not generate mine production or
 costs: those come from Team~4's operating forecasts, identical in every run.
 The unified DCF and the stochastic WACC shocks are common as well. Only flows
 after the 2 September 2026 valuation time are valued; Barrick's Q1--Q2 2026
-actuals have already been realised and are excluded.
-
-\begin{table}[H]
-\centering
-\caption{Median operating proxy under each gold-price law, USD billion. Explicit: flows to 2030 without terminal value.}
-\label{tab:discoveries-medians}
-\small
-\begin{tabular}{@{}lrrr@{}}
-\toprule
-Gold engine & Median & P10--P90 & Explicit \\
-\midrule
-Black--Scholes/GBM & \ValBSMedian & \ValBSPTen--\ValBSPNinety & \ValBSExplicit \\
-Heston & \ValHMedian & \ValHPTen--\ValHPNinety & \ValHExplicit \\
-Bates--Poisson & \ValBMedian & \ValBPTen--\ValBPNinety & \ValBExplicit \\
-Full Bates--Hawkes & \ValWMedian & \ValWPTen--\ValWPNinety & \ValWExplicit \\
-\bottomrule
-\end{tabular}
-\end{table}
+actuals have already been realized and are excluded.
+Figure~\ref{fig:discoveries-multimodel} shows the four resulting distributions.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.88\textwidth]{\FigFigValMulti}
   \caption{Operating-proxy distributions under the four gold-price laws on the
   dated clock, 8,192 paths each, with common operations, WACC shocks and
-  signed terminal closure. No share count, equity bridge or market reference
-  is used.}
+  signed terminal closure.}
   \label{fig:discoveries-multimodel}
 \end{figure}
 
@@ -103,8 +84,7 @@ dynamics; Team~4 supplies the production and unit-cost layer; Team~5 maps the
 resulting component margin through cash-flow and discounting identities;
 Team~3 supplies simulation diagnostics. The remaining teams provide
 probability, econometric, historical-volatility and stochastic-process
-foundations. Integration required one owner for each variable, common units
-and dates, and separate code, factual, editorial and visual reviews.
+foundations.
 
 The chain separates calibration from forecasting. Option parameters are
 estimated under the risk-neutral measure; the scenarios start from the gold
@@ -112,7 +92,8 @@ spot of USD~4,391.32/oz at the valuation time and drift at the Treasury
 forward rate, which as a physical expectation assumes no gold risk premium.
 The option-implied volatility shape is carried over as a stated assumption,
 not a validated physical law. Section~\ref{sec:physical-measure-bridge} reports the separate physical
-forecasting evidence.
+forecasting evidence; Table~\ref{tab:discoveries-evidence} summarizes the
+evidence behind each layer.
 
 \begin{table}[H]
 \centering
@@ -125,17 +106,12 @@ forecasting evidence.
 \textbf{Evidence block} & \textbf{Dated observation} &
 \textbf{Permitted interpretation} \\
 \midrule
-Barrick equity, \texttt{B} & 86 valid daily unadjusted-close bars from
-27 April to 27 August 2026 (LSE run \texttt{20260828T070000Z-lse-nss});
-cumulative change 16.20\%, annualised log-return volatility 51.23\%, maximum
-drawdown $-26.10\%$. & Short-window market diagnostic only; not a long-run
-return or volatility estimate. \\
-GLD reference series & 1,425 daily bars from 4 January 2021 to 27 August 2026;
-total return 131.06\%, annualised volatility 18.21\%, maximum drawdown
-$-26.23\%$. & ETF price in USD/share; neither physical gold in USD/oz nor
-Barrick's realised selling price. \\
-GLD surface & 605 eligible calls; CC64 selects 64 actual contracts across eight
-maturities and 20 strikes on 2 September 2026; same-date 14-tenor Treasury
+Market diagnostics & Barrick \texttt{B}: 86 daily bars, 27 April--27 August
+2026; GLD: 1,425 daily bars, 4 January 2021--27 August 2026
+(Section~\ref{sec:lse-current-diagnostics}). & Short-window diagnostics only;
+GLD is an ETF in USD/share, not physical gold in USD/oz. \\
+GLD surface & 605 eligible calls; a 64-contract Chebyshev--Chebyshev design
+(CC64) selects actual contracts across eight maturities and 20 strikes on 2 September 2026; same-date 14-tenor Treasury
 curve; carry $q=0.40\%$. & Option-implied calibration input; no physical
 drift is identified. \\
 Path engines & Daily full-truncation schemes with exact Hawkes intensity
@@ -148,16 +124,6 @@ differences to the gold-price engine. \\
 \bottomrule
 \end{tabularx}
 \end{table}
-
-\noindent\textbf{Who produced the study.} Research is the Starting Finance
-Club PoliTo area in which members collaborate on quantitative, economic,
-financial and methodological projects. The Barrick programme joined eight
-autonomous teams with backgrounds spanning management engineering,
-mathematics, data science, computation and quantitative finance. Common
-foundations and coordination rules allowed specialised work to remain deep
-while still being reviewed and reused across teams. The unified study keeps
-their authorship and source evidence, and treats integration as a distinct
-phase with its own code, writing, technical, editorial and visual reviews.
 
 The chapters that follow reconstruct the company and data perimeter, the
 mathematical and empirical model layers, the common operating and DCF

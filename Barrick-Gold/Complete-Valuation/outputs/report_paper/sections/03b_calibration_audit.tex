@@ -23,7 +23,7 @@ The residual maps, the parameters and the valuation paths come from one recalibr
 \end{methodbox}
 
 \subsection{What the residual maps add}
-The residual heatmaps show where each specification systematically over- or under-prices the observed implied-volatility surface. Black--Scholes leaves the strongest smile and term-structure pattern. Bates is refined from the nested Heston point and Bates--Hawkes from the nested Bates point, so each richer model fits at least as well as the model it contains (Table~\ref{tab:iv_rmse}). All maps use one colour scale; calibration fit does not establish economic superiority.
+The residual heatmaps show where each specification systematically over- or under-prices the observed implied-volatility surface. Black--Scholes leaves the strongest smile and term-structure pattern. Bates is refined from the nested Heston point and Bates--Hawkes from the nested Bates point, so each richer model attains a calibration loss no larger than the model it contains; the implied-volatility errors follow (Table~\ref{tab:iv_rmse}). All maps use one color scale; calibration fit does not establish economic superiority.
 
 \noindent\begin{minipage}{\columnwidth}
 {\centering
@@ -44,8 +44,8 @@ The residual heatmaps show where each specification systematically over- or unde
   \par\vspace{1pt}{\footnotesize\textbf{(c)} Bates--Poisson\par}
   \vspace{3pt}
   \includegraphics[width=0.95\linewidth]{\FigBatesHawkesResidualHeatmap}
-  \par\vspace{1pt}{\footnotesize\textbf{(d)} Full Bates--Hawkes\par}
-  \captionof*{figure}{\textbf{Figure~\ref{fig:residual_maps} (continued).} Bates--Poisson and Full Bates--Hawkes residual maps; all colourbars share the same residual range.}
+  \par\vspace{1pt}{\footnotesize\textbf{(d)} Bates--Hawkes\par}
+  \captionof*{figure}{\textbf{Figure~\ref{fig:residual_maps} (continued).} Bates--Poisson and Bates--Hawkes residual maps; all colorbars share the same residual range.}
 \par}
 \end{minipage}\par
 
@@ -60,7 +60,7 @@ Model & $q=0.40\%$ & 7 Sep, $q=0$ \\
 Black--Scholes & \CalBSIVRMSE & \CalBSIVRMSELegacy \\
 Heston & \CalHIVRMSE & \CalHIVRMSELegacy \\
 Bates--Poisson & \CalBIVRMSE & \CalBIVRMSELegacy \\
-Full Bates--Hawkes & \CalWIVRMSE & \CalWIVRMSELegacy \\
+Bates--Hawkes & \CalWIVRMSE & \CalWIVRMSELegacy \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -69,5 +69,5 @@ Full Bates--Hawkes & \CalWIVRMSE & \CalWIVRMSELegacy \\
 With the fee as carry the fit deteriorates: the Heston price RMSE rises from USD~\CarryPriceRMSEZero{} to \CarryPriceRMSEFee{}, and the loss increases in every moneyness bucket. The calls therefore price a higher carry than Treasury rates less the fee. Call-only surfaces cannot separate that carry from skew, so a fitted carry would not be a forward; the futures-implied fee is used instead, and identifying the forward would need puts or box-spread rates.
 
 \begin{methodbox}[Calibration fragility]
-The Feller condition is imposed as a hard constraint and binds at the optimum for Bates and Bates--Hawkes; without it the Heston loss falls by \FellerRelaxedLossRatio\%. The Heston loss changes by less than 3\% for $\kappa$ between \KappaFlatLow{} and \KappaFlatHigh, so mean reversion is weakly identified. With $q=0.40\%$ the Bates jump intensity is \BatesLambda{} a year rather than zero, but jump and Hawkes parameters rest on 64 calls and are not individually identified. Bates--Hawkes branching is \HawkesBranching{} with a kernel half-life of \HawkesHalfLifeDays{} days.
+The Feller condition is imposed as a hard constraint. It binds at the optimum for Bates and Bates--Hawkes; the Heston optimum lies just inside the boundary, but without the constraint the optimizer moves into the Feller-violating region, where the Heston loss is \FellerRelaxedLossRatio\% lower. The Heston loss changes by less than 3\% for $\kappa$ between \KappaFlatLow{} and \KappaFlatHigh, so mean reversion is weakly identified. With $q=0.40\%$ the Bates jump intensity is \BatesLambda{} a year rather than zero, but jump and Hawkes parameters rest on 64 calls and are not individually identified. Bates--Hawkes branching is \HawkesBranching{} with a kernel half-life of \HawkesHalfLifeDays{} days.
 \end{methodbox}

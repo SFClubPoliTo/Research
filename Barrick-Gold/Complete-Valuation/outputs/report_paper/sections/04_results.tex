@@ -21,7 +21,7 @@ Same, risk-free discounting & \ValWExplicitRiskFree \\
 \end{table}
 
 \begin{findingbox}[Interpretation]
-These are unconstrained aggregate operating proxies, not enterprise or equity values. Negative outcomes are not negative limited-liability share prices, and no market comparison is made.
+Table~\ref{tab:primary_signal} and Figure~\ref{fig:value_distribution} report unconstrained aggregate operating proxies, not enterprise or equity values. Negative outcomes are not negative limited-liability share prices, and no market comparison is made.
 \end{findingbox}
 
 \noindent\begin{minipage}{\columnwidth}
@@ -33,7 +33,7 @@ These are unconstrained aggregate operating proxies, not enterprise or equity va
 \end{minipage}\par
 
 \subsection{Model choice matters less than numerical noise}
-Medians range from USD~\ValMedianLow{} to \ValMedianHigh~billion across the four engines and P90 from \ValPNinetyLow{} to \ValPNinetyHigh. Doubling the paths to 16,384 or changing the seed moves single-model medians across USD~\NumericalMedianLow--\NumericalMedianHigh~billion; for Bates--Hawkes alone the range is \NumericalHawkesLow--\NumericalHawkesHigh. The numerical range of one model is as wide as the spread between models, so the four medians do not rank the models. Explicit flows to 2030 are worth USD~\ValExplicitLow--\ValExplicitHigh~billion and the terminal value carries about \TerminalShare\% of the mean.
+Medians range from USD~\ValMedianLow{} to \ValMedianHigh~billion across the four engines (Table~\ref{tab:model_comparison}) and P90 from \ValPNinetyLow{} to \ValPNinetyHigh. Doubling the paths to 16,384 or changing the seed moves single-model medians across USD~\NumericalMedianLow--\NumericalMedianHigh~billion; for Bates--Hawkes alone the range is \NumericalHawkesLow--\NumericalHawkesHigh. The numerical range of one model is as wide as the spread between models, so the four medians do not rank the models (Figure~\ref{fig:multimodel_value_overlay}). Explicit flows to 2030 are worth USD~\ValExplicitLow--\ValExplicitHigh~billion and the terminal value carries about \TerminalShare\% of the mean.
 
 \begin{table}[H]
 \centering
@@ -46,13 +46,13 @@ Gold engine & Median & Explicit \\
 Black--Scholes & \ValBSMedian & \ValBSExplicit \\
 Heston & \ValHMedian & \ValHExplicit \\
 Bates--Poisson & \ValBMedian & \ValBExplicit \\
-Full Bates--Hawkes & \ValWMedian & \ValWExplicit \\
+Bates--Hawkes & \ValWMedian & \ValWExplicit \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{What the corrections changed}
-Table~\ref{tab:attribution} applies the corrections of this revision one at a time to the 7 September medians. The dated clock removes Barrick's first-half 2026 margin, which the earlier version discounted as a future flow, and ends the explicit horizon at 2030; between the two editions the explicit flows fall from about USD~13 to 11~billion. Each step moves the medians by less than the numerical range above.
+Table~\ref{tab:attribution} applies the corrections of this revision one at a time to the 7 September medians. The dated clock removes Barrick's first-half 2026 margin, which the earlier version discounted as a future flow, and ends the explicit horizon at 2030; between the 7 September and the current version the explicit flows fall from about USD~13 to 11~billion. Each step moves the medians by less than the numerical range above.
 
 \begin{table}[H]
 \centering

@@ -67,4 +67,4 @@ An audit found two errors in the jump simulation, and the Heston and Fourier mat
 
 ## 📚 Citation
 
-Sisto, D. and Armando, M., *Beyond Black-Scholes: Mathematical Foundations for Jump Processes, Stochastic Volatility, and Fourier Methods*, Starting Finance Club PoliTo Research, GitHub repository, publication PDF at https://sfclubpolito.it/pdf-viewer.html?file=Pubblicazioni%2FBeyond%20Black-Scholes%20-%20Jumps%20%26%20Stochastic%20Volatility.pdf&lang=it, published 12/06/2026, accessed 31/05/2026.
+Sisto, D. and Armando, M., *Beyond Black-Scholes: Mathematical Foundations for Jump Processes, Stochastic Volatility, and Fourier Methods*, Starting Finance Club PoliTo Research, GitHub repository, publication PDF at https://sfclubpolito.it/pdf-viewer.html?file=Pubblicazioni%2FBeyond%20Black-Scholes%20-%20Jumps%20%26%20Stochastic%20Volatility.pdf&lang=it, published 12/06/2026.

@@ -1,16 +1,16 @@
 {
   "edition": "paper",
-  "archive_sha256": "d6e9da018c5a985148c6ad77ab447fabdc9158e318567eda07dfb7f9c78da205",
-  "file_count": 47,
+  "archive_sha256": "f217c3f8f76791d41691ea9000c8bf1b9ada861a971c96cf942e63086fbf6e56",
+  "file_count": 43,
   "shared_images": 27,
   "files": [
     {
       "path": "Articolo.pdf",
-      "sha256": "0310796d4bdb3dd74efdd7aa63d09ee8048be1fd3764db26ce17310136e604f8"
+      "sha256": "a0aa659d07030b71d0e23f19171dcca2763429a56942a93a6f2ed888312fcae8"
     },
     {
       "path": "Articolo.tex",
-      "sha256": "f87636ccf54f38db9978300a0a3c9c53a46df87646373ca79a59544f854dc1f4"
+      "sha256": "de984e96454ffba262344efde77dbdc26f03169de211fc729f986f633adc7e38"
     },
     {
       "path": "Copertina_research.pdf",
@@ -126,39 +126,39 @@
     },
     {
       "path": "sections/01_introduction.tex",
-      "sha256": "1a6582cbdc13dfaaefa5f19717d098f53cbae5c450ba77ff55280b57957d4023"
+      "sha256": "02fc2958ab723869da729e56505f3669fc946263995b25d82223384dd7542240"
     },
     {
       "path": "sections/02_data_assumptions.tex",
-      "sha256": "b799e64f12c4f3460fc4e2ba4906beafdf0f372ff374d87e0a9066c1164bcd56"
+      "sha256": "5bf65c2cfd1e2b5e6d3d5355194b1db0bb77651bcce723c3a6295acc3bc9f637"
     },
     {
       "path": "sections/03_methodology.tex",
-      "sha256": "f62faef203a424a9d5147153d730384cfeceaf4d6d39f842a5c654e539e79ab4"
+      "sha256": "43eb4bffc54078c57d56162fe4c302009a68e80e3b398f19c63d2d4e4d1e41f4"
     },
     {
       "path": "sections/03b_calibration_audit.tex",
-      "sha256": "7e202e8b084fd86ae231fa11515e6ad5026acadbc7bae5f2815f0a102283b042"
+      "sha256": "be6e2f1cdcc732fa1913e108353c602a5c242258c5474fbb07913663f8efdbe1"
     },
     {
       "path": "sections/03c_operating_evidence.tex",
-      "sha256": "1de5382f5b31c3d09b10fe1053acaf912b45f1e4d0f4fd1f1fdae66b406e2921"
+      "sha256": "6175a92a1ca41cfd68a1133bf5cad2b082edd9ce6f845832fa9024f01865cfac"
     },
     {
       "path": "sections/03d_valuation_audit.tex",
-      "sha256": "53415f6e5399d9819a4e3d32c208012ea4696bfdb7399949d9dc60cbab150d67"
+      "sha256": "be7acc86dbe74dc15bd95add44d053479787723afba1d62d5ac707156defae7a"
     },
     {
       "path": "sections/03e_physical_measure.tex",
-      "sha256": "6f17a2b5bf42e4e44903e9e9fbf39a7a703618430bd6532f51fac5411e0f7516"
+      "sha256": "947e571a4399475c0f41b7a7f60851a744f519d9ebda88c90a093dcebc3af4db"
     },
     {
       "path": "sections/04_results.tex",
-      "sha256": "691bd47c15fcefeb4dcc10ee626d69511c169b34f6196ddd76c7f5c8c13a26a1"
+      "sha256": "2c0c9701aed0cd012fc63e350986373e25b23ddfe3f159d645ecb4fc35396cf2"
     },
     {
       "path": "sections/04b_copper_extension.tex",
-      "sha256": "10bfd039077ce14393113b3ebe4d74ddf7cc4bcfbdb9f36575e1f913296ce3c6"
+      "sha256": "53135bf46ea934f07b764e6b50185f3fe7e2482819018b937f4eadb44bdd8929"
     },
     {
       "path": "sections/05_robustness.tex",
@@ -166,31 +166,15 @@
     },
     {
       "path": "sections/06_conclusion.tex",
-      "sha256": "567b7869fedb1e2f876c7b575dc0be593d7f91e4e226e0407e78a47a67b1e392"
+      "sha256": "c703eb945dc0d3f290b0365d8a7743aef694b97107c48e4a022beccdb4ec25cb"
     },
     {
       "path": "sections/07_references.tex",
-      "sha256": "245db1a7e8e27efcd026f56254b17fed3bd4550437bb19b28ea71b241f06fb55"
+      "sha256": "64f352f57a095592c8f5712fc53a23ca2751844bf98400d50e9cd1a428bd2108"
     },
     {
       "path": "sections/generated/results_20261024.tex",
       "sha256": "4f2db688f97f544d0fbf7cf47b4e525a420182447e68c27f870dbb786c29be6f"
-    },
-    {
-      "path": "supplements/copper_technical_audit.pdf",
-      "sha256": "6a45744b57ca44c248648087cb1fbd75582654c2722e203d8d4716489c9cddc7"
-    },
-    {
-      "path": "supplements/copper_technical_audit.tex",
-      "sha256": "65f0afb17a9a22c4672a17a83845008e01c5dfbbdd7af4eea2e76ddb901bedd5"
-    },
-    {
-      "path": "supplements/technical_audit.pdf",
-      "sha256": "344a8a3c7d476ff680c846614f27a845f442af9e19f90d4ed3d268c5920a44fc"
-    },
-    {
-      "path": "supplements/technical_audit.tex",
-      "sha256": "9e6afde399c91d8811e6ca584b11f397e44734f12c86f42df0ab01c254c84bb2"
     }
   ]
 }

@@ -9,13 +9,9 @@ on 27 April 2026; a ticker-reuse guard therefore excludes 1,415 earlier rows
 rather than attributing them to Barrick. The resulting sample contains only 86
 daily unadjusted-close bars through 27 August 2026. Its statistics are useful
 for describing the observed short window, but not for estimating long-horizon
-expected returns or producing a corporate valuation.\cite{lse-2026}
+expected returns or producing a corporate valuation~\cite{lse-2026}.
 
-GLD enters this section as an ETF price series only. It also supplied the
-standalone Team~4 option chain dated 2 April 2026, used to extract per-maturity
-volatilities \cite{team4}. Neither that snapshot nor the GLD price level
-enters the component margin of Section~\ref{sec:company-operating-quantities},
-which is expressed in gold USD per ounce. The catalog's valid-from date is
+GLD enters here as an ETF price series only, not as gold in USD/oz. The catalog's valid-from date is
 a provider validity rule, not the corporate ticker-change date: the latter
 is 9 May 2025 (Section~\ref{sec:company-identity}).
 
@@ -36,11 +32,13 @@ GLD & 1,425 & 131.06\% & 18.21\% & $-26.23\%$ &
 \end{tabularx}
 \end{table}
 
-Returns are close-to-close log returns and annualization uses 252 observations;
+Returns in Table~\ref{tab:lse-current-market-diagnostics} are close-to-close
+log returns and annualization uses 252 observations;
 drawdown is computed from the running maximum of the canonical close. Prices
 and volumes are not forward-filled. Every trailing statistic is backward-looking
 and inclusive at time $t$, so no future observation enters the value reported
-at $t$.
+at $t$. Figure~\ref{fig:lse-current-market-context} plots the separately
+indexed series.
 
 \begin{figure}[H]
 \centering

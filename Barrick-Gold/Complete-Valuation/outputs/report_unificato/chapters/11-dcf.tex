@@ -1,6 +1,6 @@
 \chapter{A Three-Stage DCF Framework for Mining Valuation}
 \label{ch:dcf}
-This chapter reconstructs Team~5's contribution: accounting reclassification, FCFF/FCFE, WACC, a three-stage transition and a reproducible synthetic Monte Carlo illustration. It corrects the terminal-value cash-flow definition and adapts the framework to a finite-resource miner. Synthetic values are never reported as Barrick estimates.
+This chapter reconstructs the Team~5 study~\cite{team5}: accounting reclassification, FCFF/FCFE, WACC, a three-stage transition and the design of a synthetic Monte Carlo illustration whose numerical results are not reproduced here. It corrects the terminal-value cash-flow definition and adapts the framework to a finite-resource miner. Synthetic values are never reported as Barrick estimates.
 
 \section{Valuation object: firm value before equity value}
 
@@ -19,7 +19,8 @@ before financing:
 EV_0=\sum_{y=1}^{H}\frac{FCFF_y}{\prod_{s=1}^{y}(1+w_s)}
      +\frac{TV_H^{Firm}}{\prod_{s=1}^{H}(1+w_s)}.
 \end{equation}
-The unified experiment adopts the firm route because the Team 4 operating
+Of the two routes in Table~\ref{tab:dcf-route-consistency}, the unified
+experiment adopts the firm route because the Team 4 operating
 layer produces pre-financing drivers. For scenario \(m\), enterprise value is
 converted to equity and then to a per-share quantity only through an explicit
 bridge:
@@ -31,25 +32,15 @@ V_{ps}^{(m)}&=\frac{EqV^{(m)}}{N_{dil}}.
 \end{align}
 The signs, scale, currency, security and date of every bridge item are part of
 the valuation result. A direct FCFE calculation cannot be used to hide an
-unreconciled capital structure.
+unreconciled capital structure. The present run stops before both steps.
 
 For the attributable perimeter of Section~\ref{sec:company-financial-perimeter},
-the generic bridge requires a basis check: mine-level partners' interests
-already excluded from the operating flows must not be deducted again as
-non-controlling interests. Consolidated cash, debt and other claims must be
-mapped to those flows and corporate-level obligations. The zero placeholders
-in the frozen numerical experiment do not perform that reconciliation.
-Its diluted-share proxy allocates a subset operating value across whole-company
-shares and cannot establish a corporate fair value. The copper extension
-therefore reports aggregate values only.
-
-The gold component margin multiplies production by a CoS measure defined per
-ounce sold and containing depreciation, royalties and production taxes.
-It is neither EBITDA nor fully reconciled EBIT. Separate sales/inventory,
-D\&A, royalty response, working-capital and sustaining/growth-capital bridges
-are required. Tanzania's legal ownership and economic-sharing agreement and
-Loulo--Gounkoto's exceptional 2025Q4 cost anchor are additional checks;
-their identification does not silently normalise the frozen inputs.
+partners' interests already excluded from the operating flows must not be
+deducted again. The gold component margin \eqref{eq:company-component-margin}
+is neither EBITDA nor reconciled EBIT, so the sales, D\&A, royalty,
+working-capital and capex bridges of Table~\ref{tab:dcf-reclassification} are
+required. The run applies no bridge and reports aggregate operating proxies
+only, for gold and copper alike.
 
 \begin{table}[H]
 \centering
@@ -61,7 +52,7 @@ Route & Cash flow & Discount rate & Output and principal consistency test \\
 Firm valuation & FCFF before debt service & WACC & Enterprise value; operating
 cash flows must exclude financing and be reconciled to invested capital. \\
 Equity valuation & FCFE after net borrowing & Cost of equity & Equity value;
-leverage policy and net borrowing must be modelled explicitly. \\
+leverage policy and net borrowing must be modeled explicitly. \\
 \bottomrule
 \end{tabularx}
 \caption{The two DCF routes recovered from Team 5. Mixing FCFF with the cost of
@@ -113,7 +104,7 @@ interest tax shields and income on excluded assets do not belong in NOPAT.
 Block & Valuation treatment & Mining-specific control \\
 \midrule
 Revenue and operating cost & Build EBIT before financing. & Reconcile ounces,
-realised price, ownership, royalties and whether cost metrics include D\&A or
+realized price, ownership, royalties and whether cost metrics include D\&A or
 sustaining investment. \\
 Working capital & Include operating receivables, inventories and payables. &
 Do not treat cash, debt or financing balances as operating working capital. \\
@@ -139,12 +130,12 @@ Team 5 starts from sales, costs, margins, depreciation and working capital.
 For a miner, the generic sales-growth shortcut is replaced by the more
 informative component identity
 \begin{equation}
-Revenue_y^{(m)}=Q_y^{(m)}P_y^{realised,(m)}+\text{other operating revenue}_y^{(m)},
+Revenue_y^{(m)}=Q_y^{(m)}P_y^{realized,(m)}+\text{other operating revenue}_y^{(m)},
 \end{equation}
-where production \(Q\), realised price \(P^{realised}\), ownership and hedging
+where production \(Q\), realized price \(P^{realized}\), ownership and hedging
 must share units and period conventions. Cost ratios can still be used as
 checks, but a constant COGS-to-sales assumption is weak when grades, strip
-ratios, energy, labour and mine mix change independently of price.
+ratios, energy, labor and mine mix change independently of price.
 
 The admitted cash-flow identity is
 \begin{align}
@@ -166,8 +157,9 @@ growth is \(g_y\) and the return on new invested capital is represented by
 \qquad
 FCFF_y=NOPAT_y\left(1-\frac{g_y}{ROIC_y}\right).
 \end{equation}
-This identity prevents a model from assuming growth without funding it. It is
-a consistency check rather than a licence to estimate Barrick's growth or
+With a defined invested-capital base and return on new capital, this identity
+checks that assumed growth is funded; it does not by itself make any imposed
+cash-flow path consistent. It is a consistency check rather than a license to estimate Barrick's growth or
 ROIC from the gold or equity-price series.
 
 \section{Discount rate: currency, risk and capital structure}
@@ -233,47 +225,51 @@ capacity and return on new capital.
 The equations above describe the reusable method; this section discloses the
 numbers actually passed to the current unified run. They are read from
 the common September valuation input contract, not inferred
-from the plotted valuation output. All four price branches use the same values.
+from the plotted valuation output. All four price branches use the same values
+(Table~\ref{tab:current-editable-valuation-parameters}).
 They are deliberately classified as methodological assumptions because no
 filing-level WACC, invested-capital reconstruction or mine-closure calibration
 currently supports them as Barrick point estimates.
 
 \begin{table}[H]
 \centering
-\caption{Editable non-gold parameters used by the current executable valuation.}
+\caption{Non-gold parameters used by the current valuation.}
 \label{tab:current-editable-valuation-parameters}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.10}
 \begin{tabularx}{\textwidth}{@{}p{3.15cm}p{1.35cm}X X@{}}
 \toprule
-Configuration field & Current & Where it enters & Interpretation and effect \\
+Parameter & Current & Where it enters & Interpretation and effect \\
 \midrule
-\texttt{model.tax\_rate} & 25.0\% & Converts component margin to an
-after-tax proxy. & Higher tax lowers explicit and terminal FCFF. \\
-\texttt{model.high\_growth} & 8.5\% & First point of the five-year linear
+Tax rate \(\tau\) & 25.0\% & Converts component margin to an
+after-tax proxy. & Lowers positive flows; on negative after-tax margins the
+symmetric rule acts as an immediate tax credit, so higher tax raises them. \\
+High growth \(g_{hg}\) & 8.5\% & First point of the five-rate-year linear
 growth schedule. & Raises early reinvestment through \(g/ROIC\); it does not
 directly grow the operating margin paths. \\
-\texttt{model.stable\_growth} & 2.5\% & Last schedule point and terminal
-growth \(g_s\). & Changes terminal reinvestment and the \(w-g\) denominator. \\
-\texttt{model.roic\_high} & 14.5\% & First point of the ROIC schedule. & At
+Stable growth \(g_s\) & 2.5\% & Last schedule point and terminal
+growth. & Changes terminal reinvestment, the \(w-g\) denominator and the WACC
+floor \(g_s+1\%\). \\
+\(ROIC_{hg}\) & 14.5\% & First point of the ROIC schedule. & At
 fixed growth, higher ROIC reduces required reinvestment. \\
-\texttt{model.roic\_stable} & 10.5\% & Last ROIC and terminal return. & Sets
+\(ROIC_s\) & 10.5\% & Last ROIC and terminal return. & Sets
 terminal reinvestment \(g_s/ROIC_s=23.81\%\). \\
-\texttt{model.wacc\_0} & 9.1\% & WACC of the first year after valuation and
+Initial WACC \(w_0\) & 9.1\% & WACC of the first year after valuation and
 initial state of the process. & Affects the conditional path of years 2--5. \\
-\texttt{model.wacc\_long\_run} & 8.3\% & Mean-reversion level. & Pulls later
+Long-run WACC \(\bar w\) & 8.3\% & Mean-reversion level. & Pulls later
 discount rates toward 8.3\%. \\
-\texttt{model.wacc\_reversion} & 0.45 & Annual reversion speed. & Controls how
+WACC reversion \(\kappa\) & 0.45 & Annual reversion speed. & Controls how
 quickly the initial 9.1\% approaches the long-run level. \\
-\texttt{model.wacc\_volatility} & 0.9\% & Diffusion scale of annual WACC. &
+WACC volatility \(\sigma_w\) & 0.9\% & Assumed OU diffusion scale (not an
+observed WACC SD). &
 Widens the discount-rate and terminal-value distributions. \\
-\texttt{model.terminal\_}\newline\texttt{spread\_floor} & 1.0\% & Lower-bound distance above
+Terminal spread floor & 1.0\% & Lower-bound distance above
 stable growth. & Enforces \(w_y\geq g_s+1\%=3.5\%\), with a separate 25\% cap. \\
-\texttt{equity\_bridge.*} & zeros & Not applied. & Debt, cash, minorities,
+Equity bridge items & zeros & Not applied. & Debt, cash, minorities,
 other claims and non-operating assets are not reconciled, so no equity value is
 reported. \\
-\texttt{diluted\_shares\_mn} & 1,675.51 & Not applied. & Unreconciled; no value
+Diluted shares \(N_{dil}\) (mn) & 1,675.51 & Not applied. & Unreconciled; no value
 per share is reported. \\
 \bottomrule
 \end{tabularx}
@@ -282,10 +278,11 @@ per share is reported. \\
 The five schedule points, one per year since the valuation date, are generated by \texttt{numpy.linspace}; each quarterly flow takes the point of the year in which it falls.
 Growth therefore moves through 8.5\%, 7.0\%, 5.5\%, 4.0\% and 2.5\%; ROIC moves
 through 14.5\%, 13.5\%, 12.5\%, 11.5\% and 10.5\%. The corresponding
-reinvestment rates are 58.62\%, 51.85\%, 44.00\%, 34.78\% and 23.81\%.
-Figure~\ref{fig:current-dcf-driver-schedule} is generated by the valuation code
-from those exact run inputs, and its CSV/JSON sidecars retain every plotted
-number and field name.
+reinvestment rates are 58.62\%, 51.85\%, 44.00\%, 34.78\% and 23.81\%
+(Figure~\ref{fig:current-dcf-driver-schedule}). These five points form one
+linear transition, not a separate high-growth plateau. They set assumed
+reinvestment ratios, while the component margin comes from the fixed operating
+vectors, so no invested-capital roll-forward ties realized growth to \(g_y\).
 
 \IfFileExists{../img/publication/a6d80008228502ce_dcf_driver_schedule.png}{%
   \begin{figure}[H]
@@ -310,7 +307,9 @@ w_{y+1}&=\bar w+(w_y-\bar w)e^{-\kappa}
 \sqrt{\frac{1-e^{-2\kappa}}{2\kappa}},
 \end{align}
 with \(\bar w=8.3\%\), \(\kappa=0.45\), \(\sigma_w=0.9\%\) and independent
-standard-normal shocks. The zero-shock path is approximately 8.81\%, 8.63\%,
+standard-normal shocks. The resulting path is then clipped to
+\([g_s+1\%,25\%]\), so the applied law is not an unrestricted Gaussian OU
+process. The zero-shock path is approximately 8.81\%, 8.63\%,
 8.51\% and 8.43\% for years 2--5. The actual valuation uses 8,192
 stochastic WACC paths, created once with seed 20260902 and reused byte-for-byte
 under every gold model. Thus the shaded interval in
@@ -332,11 +331,15 @@ price engine.
   substitute path is supplied manually.}%
 }
 
-The terminal block takes the signed after-tax component margin of the last
-four quarters, grows it once, funds stable growth at \(g_s/ROIC_s\), capitalises the resulting
+Each explicit quarter uses \(FCFF=A-\max(A,0)\,g_y/ROIC_y\) with
+\(A=CM(1-\tau)\): reinvestment is charged only on positive after-tax margin,
+and taxing a negative margin assumes an immediate tax credit. No loss
+carry-forward or abandonment option is modeled. The terminal block takes the
+signed after-tax component margin of the last
+four quarters, grows it once, funds stable growth at \(g_s/ROIC_s\), capitalizes the resulting
 FCFF at \(w_H-g_s\), and then discounts it back over the same path. The left
 panel of Figure~\ref{fig:current-terminal-value-mechanics} makes the two most
-sensitive editable inputs visible without pretending that the normalized
+most sensitive inputs visible without pretending that the normalized
 multiple is a company estimate. The right panel compares the median proxy under each terminal convention, and
 with the explicit flows discounted at the risk-free curve. This is the place to
 judge whether the horizon to 2030 leaves excessive weight in the terminal value:
@@ -349,8 +352,8 @@ the terminal block carries about \TerminalShare\% of the mean in every engine.
     \includegraphics[width=0.49\textwidth]{\FigFigTerminalShare}
     \caption{Terminal-value mechanics. Left: normalized sensitivity to stable
     growth and terminal WACC at the current stable ROIC. Right: median proxy
-    under the terminal conventions and with risk-free discounting of the
-    explicit flows, for the four gold-price engines (24 October run).}
+    by terminal convention for the four gold-price engines (24 October run;
+    values in Table~\ref{tab:unified-terminal}).}
     \label{fig:current-terminal-value-mechanics}
   \end{figure}
 }{%
@@ -358,22 +361,13 @@ the terminal block carries about \TerminalShare\% of the mean in every engine.
   reconstructed sensitivity is admitted.}%
 }
 
-This register also clarifies how the project is joined. Team~8 changes only the
-gold path; the Barrick/Team~4 operating vector is common; the tax,
-growth--ROIC reinvestment rule, WACC array and terminal policy are common; and
-the unresolved equity bridge is not applied. Consequently, editing any field
-in Table~\ref{tab:current-editable-valuation-parameters} changes all four
-branches together. Editing a Team~8 parameter changes only its corresponding
-gold-price branch. No Team~4 simulated gold price or demonstrator valuation is
-used.
-
 \section{Finite-resource closure for a mining company}
 
 Perpetual growth is not the automatic base case for a miner because reserves,
 mine lives and closure obligations are finite. The terminal policy must connect
 the explicit asset horizon to depletion, replacement, exploration and future
 portfolio renewal. The alternatives in Table~\ref{tab:terminal-closure-alternatives}
-are mutually exclusive modelling choices rather than terms to be blended.
+are mutually exclusive modeling choices rather than terms to be blended.
 
 \begin{table}[H]
 \centering
@@ -386,7 +380,7 @@ are mutually exclusive modelling choices rather than terms to be blended.
 Closure & Required evidence & Main risk \\
 \midrule
 Finite asset run-off & Mine lives, production decline, closure liabilities and
-post-closure cash flows. & Omitting unmodelled replacement or corporate costs. \\
+post-closure cash flows. & Omitting unmodeled replacement or corporate costs. \\
 Explicit portfolio renewal & Exploration, development and acquisition
 reinvestment tied to additions and future production. & Treating speculative
 replacement as certain or costless. \\
@@ -396,6 +390,11 @@ perpetual-growth denominator. \\
 \bottomrule
 \end{tabularx}
 \end{table}
+
+The executable run uses the going-concern row only as a conditional assumption
+(signed perpetuity for gold; explicit flows without terminal value as the copper
+primary case); no run-off or renewal policy is estimated, and the terminal
+share is not evidence that the mines produce indefinitely.
 
 \section{From deterministic DCF to a stochastic valuation distribution}
 
@@ -414,7 +413,7 @@ EV^{(m)}=\sum_{y=1}^{H}FCFF_y^{(m)}DF_y^{(m)}
 The unified run applies the same identities to quarterly flows timed at the
 midpoint of each quarter's remaining interval after the valuation date
 (Chapter~\ref{ch:unified-experiment}). The reporting object is the empirical distribution
-\(\{EV^{(1)},\ldots,EV^{(M)}\}\), summarised by its median, tail quantiles,
+\(\{EV^{(1)},\ldots,EV^{(M)}\}\), summarized by its median, tail quantiles,
 dispersion, terminal-value share and sensitivity measures. Dependence is part
 of the model: weak operating states may coincide with higher discount rates,
 and growth, margins, ROIC and reinvestment must move as a coherent narrative.
@@ -423,7 +422,7 @@ The accepted Team~5 contribution is methodological: distributions, fan
 charts, terminal-value shares and driver attribution must be reported, and
 Monte Carlo sampling error must be separated from economic dispersion. Its
 standalone numerical example uses synthetic value units and is therefore
-retained only as a branch-level implementation test. It is intentionally not
+retained only as an implementation test. It is intentionally not
 shown as Barrick evidence and contributes no simulated company price to the
 unified valuation.
 
@@ -460,12 +459,12 @@ mining cost, D\&A, capex, tax and closure definitions reconciled. \\
 FCFF engine & NOPAT, reinvestment and pathwise discounting identities. & Team
 4-to-EBIT bridge, working capital, sustaining/growth capex and dimensional
 tests. \\
-WACC & Cost-of-equity/debt and capital-weight architecture. & Dated currency-
-consistent risk-free curve, ERP, beta, borrowing spread, tax and market-value
+WACC & Cost-of-equity/debt and capital-weight architecture. & Dated currency-consistent
+risk-free curve, ERP, beta, borrowing spread, tax and market-value
 weights. \\
 Three-stage closure & Joint transition and growth--ROIC--reinvestment
-consistency. & Mine horizon and one explicit, tested run-off, renewal or going-
-concern policy. \\
+consistency. & Mine horizon and one explicit, tested run-off, renewal or going-concern
+policy. \\
 Stochastic DCF & Distributional estimator, fan charts, quantiles, terminal
 share and sensitivity reporting. & Approved joint scenarios, measure policy,
 seeds, convergence and dependence diagnostics. \\
@@ -475,7 +474,7 @@ minorities, streams, other claims, non-operating assets and diluted shares. \\
 \end{tabularx}
 \end{table}
 
-The next chapter uses this architecture as a common contract across four gold-
-price engines. It reports the conditional Barrick experiment and its validation
+The next chapter uses this architecture as a common contract across four gold-price
+engines. It reports the conditional Barrick experiment and its validation
 in one place; the calibration and predictive evidence itself remains in
-Chapter~9 and is not repeated.
+Chapter~\ref{ch:calibration} and is not repeated.

@@ -24,7 +24,7 @@
 \usepackage{tikz}
 \usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue]{hyperref}
 
-\providecommand{\LILink}{https://www.linkedin.com/company/starting-finance-club-polito}
+\providecommand{\LILink}{https://www.linkedin.com/company/startingfinance-club-polito}
 \providecommand{\IGLink}{https://www.instagram.com/sfclubpolito}
 \providecommand{\Website}{https://sfclubpolito.it/}
 \providecommand{\R}{\mathbb{R}}
@@ -151,10 +151,10 @@
 \textbf{Team 5} & Federico Vesco; Lorenzo Pietra; Bader Moussaif\\
 \textbf{Team 6} & Davide Sisto; Matteo Armando\\
 \textbf{Team 7} & Davide D'Amico; Pietro Weisz\\
-\textbf{Team 8} & Salvatore Gabriele Messina; Alessandro Coco
+\textbf{Team 8} & Alessandro Coco; Salvatore Gabriele Messina
 \end{tabular}
 }
-\date{24 October 2026}
+\date{17 November 2026}
 
 \newcommand{\abstracttext}{%
 % The generated results are input locally here because the title page is set
@@ -169,11 +169,12 @@ to one source authority and links the layers through explicit date, unit,
 measure and accounting contracts. The central question is how much the choice
 of gold-price model matters for a discounted operating-margin proxy of Barrick
 when production, costs and discount-rate shocks are held fixed.
-Black--Scholes/GBM, Heston, Bates--Poisson and Full Bates--Hawkes are
-calibrated, with nested refinements, to 64 GLD calls of 2 September 2026
+Black--Scholes/GBM, Heston, Bates--Poisson and Full Bates--Hawkes
+(hereafter Bates--Hawkes) are calibrated, with nested refinements, to 64 GLD calls of 2 September 2026
 selected by a Chebyshev design from 605 eligible quotes, with the trust's
-0.40\% sponsor fee treated as carry. Each richer model fits at least as well as
-the model it contains (IV RMSE \CalBSIVRMSE, \CalHIVRMSE, \CalBIVRMSE{} and
+0.40\% sponsor fee treated as carry. Nested refinement guarantees that each
+richer model's calibration loss is no larger than that of the model it
+contains (IV RMSE \CalBSIVRMSE, \CalHIVRMSE, \CalBIVRMSE{} and
 \CalWIVRMSE~bp); calibration fit does not establish predictive or economic
 superiority. The engines drive daily gold paths from the XAUUSD spot of
 USD~4,391.32/oz at the valuation time on a dated clock: Barrick's Q1--Q2 2026
@@ -183,10 +184,11 @@ USD~\ValMedianLow{} and \ValMedianHigh~bn for all four models, a spread no
 larger than the numerical sensitivity of a single model
 (USD~\NumericalMedianLow--\NumericalMedianHigh~bn across path counts and
 seeds); the terminal value carries about \TerminalShare\% of the mean. In
-\OosDates{} equal-search rolling repricing tests Full Bates--Hawkes has the
+\OosDates{} equal-search rolling repricing tests Bates--Hawkes has the
 lowest error, \OosWRMSE~bp, but no model beats the persistence of the
 implied-volatility surface. Three producing copper mines add about
-USD~\CuDeltaLow--\CuDeltaHigh~bn of explicit flows to 2030. The price laws are
+USD~\CuDeltaLow--\CuDeltaHigh~bn of explicit flows to 2030 (a paired mean, not
+additive to the medians). The price laws are
 risk-neutral: no GLD-to-gold basis or $\mathbb Q$-to-$\mathbb P$ mapping is
 validated, and mine-level operating uncertainty is not propagated. The proxy
 has no equity bridge, so no per-share value or market comparison is reported.
@@ -225,7 +227,7 @@ advice.\endgroup}
 \hypersetup{
   pdftitle={Stochastic Framework for Barrick Mining Corporation Valuation},
   pdfsubject={Conditional multi-model valuation of Barrick Mining Corporation},
-  pdfauthor={Starting Finance Club PoliTo --- Research Area}
+  pdfauthor={Starting Finance Club PoliTo Research}
 }
 
 \begin{document}
@@ -277,31 +279,31 @@ advice.\endgroup}
 
 \begin{references}
 \bibitem{team1}
-Stefano Falcione and Marco Fracca, \emph{Black--Scholes Foundations}, Barrick project source article, supplied workspace copy.
+Stefano Falcione and Marco Fracca, \emph{Foundations for the Black--Scholes Framework}, Starting Finance Club PoliTo Research, 17 April 2026.
 
 \bibitem{team2}
-Filippo Triassi and Giorgio Zoccatelli, \emph{OLS and Dynamic Correlations}, Barrick project source article, supplied workspace copy.
+Filippo Triassi and Giorgio Zoccatelli, \emph{A Statistical Exploration of Financial Time Series}, Starting Finance Club PoliTo Research, 24 April 2026.
 
 \bibitem{team3}
-Andrea Rostagno and Francesco Florio, \emph{Monte Carlo Risk}, Barrick project source article, supplied workspace copy.
+Andrea Rostagno and Francesco Florio, \emph{Monte Carlo Methods and Portfolio Simulation}, Starting Finance Club PoliTo Research, 1 May 2026.
 
 \bibitem{team4}
-Giacomo Scali and Jacopo Foralosso, \emph{Component-Driven EBITDA}, Barrick project source article, supplied workspace copy.
+Giacomo Scali and Jacopo Foralosso, \emph{Component-Driven EBITDA Forecast for Barrick Gold}, Starting Finance Club PoliTo Research, 8 May 2026.
 
 \bibitem{team5}
-Federico Vesco, Lorenzo Pietra and Bader Moussaif, \emph{Three-Stage DCF}, Barrick project source article, supplied workspace copy.
+Federico Vesco, Lorenzo Pietra and Bader Moussaif, \emph{Three-Stage DCF with Simulated Data}, Starting Finance Club PoliTo Research, 30 May 2026.
 
 \bibitem{team6}
-Davide Sisto and Matteo Armando, \emph{Beyond Black--Scholes}, Barrick project source article, supplied workspace copy.
+Davide Sisto and Matteo Armando, \emph{Beyond Black--Scholes Synthetic Examples}, Starting Finance Club PoliTo Research, 12 June 2026.
 
 \bibitem{team7}
-Davide D'Amico and Pietro Weisz, \emph{Gold Volatility Dynamics}, Barrick project source article, supplied workspace copy.
+Davide D'Amico and Pietro Weisz, \emph{Gold, Monetary Regimes, and Volatility Dynamics: From the Gold Standard to Econometric Evidence and Foundations for Heston-Type Models}, Starting Finance Club PoliTo Research, 19 June 2026.
 
 \bibitem{team8}
-Salvatore Gabriele Messina and Alessandro Coco, \emph{Gold Options Stochastic Modeling}, Barrick project source article, supplied workspace copy.
+Alessandro Coco and Salvatore Gabriele Messina, \emph{Advanced Stochastic Modeling for Gold Options}, Starting Finance Club PoliTo Research, 4 September 2026.
 
 \bibitem{lse-2026}
-London Strategic Edge, \emph{Market-data and options datasets}, provider snapshot accessed 28 August 2026. Aggregate statistics and derived figures are reported under the project's non-redistribution boundary.
+London Strategic Edge, \emph{Market-data and options datasets}, provider extraction of 28 August 2026 (Barrick and GLD market-context series; the historical option snapshot is dated 12 August 2026). Aggregate statistics and derived figures are reported under the project's non-redistribution boundary.
 
 \bibitem{barrick-name-2025}
 Barrick Mining Corporation, \emph{Barrick Announces Name Change to Barrick Mining Corporation and Election of Directors}, 6 May 2025, \href{https://www.barrick.com/English/news/news-details/2025/barrick-announces-name-change-to-barrick-mining-corporation-and-election-of-directors/default.aspx}{official corporate release}.
@@ -320,10 +322,9 @@ Barrick Mining Corporation, \emph{Q1 and Q2 2026 Mine Statistics},
 and \href{https://s25.q4cdn.com/322814910/files/doc_financial/quarterly_results/2026/q2/Barrick_Q2_2026_Mine_Stats.pdf}{Q2 tables}.
 
 \bibitem{ib-historical-limitations}
-IB API, \emph{Historical Data Limitations},
+Interactive Brokers, \emph{TWS API: Historical Data Limitations},
 \href{https://interactivebrokers.github.io/tws-api/historical_limitations.html}{API historical-data documentation},
-accessed 3 October 2026. Availability is supplemented by actual read-only
-historical bid/ask retrievals, whose local manifests retain timestamps and hashes.
+accessed 3 October 2026.
 
 \bibitem{barrick-ipo-2026}
 Barrick Mining Corporation, \emph{Barrick Advances IPO of North American Gold
@@ -347,28 +348,26 @@ Board of Governors of the Federal Reserve System, \emph{Exploring Central Bank G
 World Gold Council, \emph{Gold Demand Trends Q2 2026: Central Banks}, accessed 27 August 2026, \href{https://www.gold.org/goldhub/research/gold-demand-trends/gold-demand-trends-q2-2026/central-banks}{demand report}.
 
 \bibitem{pan2002}
-Pan, J. (2002), \emph{The jump-risk premia implicit in options: evidence from an integrated time-series study}, Journal of Financial Economics 63(1), 3--50, \href{https://doi.org/10.1016/S0304-405X(01)00088-5}{doi:10.1016/S0304-405X(01)00088-5}.
+J.~Pan, The jump-risk premia implicit in options: evidence from an integrated time-series study, \emph{Journal of Financial Economics} 63(1), 3--50, 2002, \href{https://doi.org/10.1016/S0304-405X(01)00088-5}{doi:10.1016/S0304-405X(01)00088-5}.
 
 \bibitem{schwartz1997}
-Schwartz, E.~S. (1997), \emph{The stochastic behavior of commodity prices: implications for valuation and hedging}, Journal of Finance 52(3), 923--973, \href{https://doi.org/10.1111/j.1540-6261.1997.tb02721.x}{doi:10.1111/j.1540-6261.1997.tb02721.x}.
+E.~S. Schwartz, The stochastic behavior of commodity prices: implications for valuation and hedging, \emph{Journal of Finance} 52(3), 923--973, 1997, \href{https://doi.org/10.1111/j.1540-6261.1997.tb02721.x}{doi:10.1111/j.1540-6261.1997.tb02721.x}.
 
-\bibitem{github-placeholder}
-Barrick Gold Research Teams, \emph{Stochastic Valuation of Barrick Mining: unified thesis and supporting code}, Starting Finance Club PoliTo, \href{https://github.com/StartingFinanceClubPoliTo/Research/tree/main/Barrick-Gold/Barrick\%20Mining\%20UNIFICATO}{Barrick Mining UNIFICATO repository}, accessed 29 August 2026.
 \bibitem{schonbucher2001}
-Sch\"onbucher, P.~J. (2001), \emph{A LIBOR Market Model with Default Risk},
-Bonn Econ Discussion Papers 15/2001, Theorem~1,
+P.~J. Sch\"onbucher, A LIBOR Market Model with Default Risk,
+\emph{Bonn Econ Discussion Papers} 15/2001, Theorem~1, 2001,
 \href{https://www.econstor.eu/bitstream/10419/78414/1/bgse15_2001.pdf}{author manuscript}.
 
 \bibitem{sokol-hansen2015}
-Sokol, A. and Hansen, N.~R. (2015), \emph{Exponential martingales and changes of
-measure for counting processes}, Stochastic Analysis and Applications 33(5),
-823--843, \href{https://doi.org/10.1080/07362994.2015.1040890}{doi:10.1080/07362994.2015.1040890}.
+A.~Sokol and N.~R. Hansen, Exponential martingales and changes of
+measure for counting processes, \emph{Stochastic Analysis and Applications} 33(5),
+823--843, 2015, \href{https://doi.org/10.1080/07362994.2015.1040890}{doi:10.1080/07362994.2015.1040890}.
 
 \bibitem{team7-code}
 D.~D'Amico and P.~Weisz, \emph{Gold, Monetary Regimes, and Volatility Dynamics: From the Gold Standard to Econometric Evidence and Foundations for Heston-Type Models}, supplementary code and reproducibility package, version 1.0.0, Starting Finance Club PoliTo Research, 19 June 2026, \url{https://github.com/StartingFinanceClubPoliTo/Research}.
 
 \bibitem{MessinaSoriano2026}
-S.~G. Messina and N.~Soriano, \emph{High-Frequency Market Making under Avellaneda--Stoikov: Rough Volatility and End-of-Day Inventory Control}, Starting Finance Club PoliTo Research, 2026.
+S.~G. Messina and N.~Soriano, \emph{High-Frequency Market Making under Avellaneda--Stoikov: Rough Volatility and End-of-Day Inventory Control}, Starting Finance Club PoliTo Research, 26 June 2026.
 
 \bibitem{Akaike1974}
 H.~Akaike, A new look at the statistical model identification, \emph{IEEE Transactions on Automatic Control} 19(6), 716--723, 1974.
@@ -395,7 +394,7 @@ M.~E. Blume, Betas and their regression tendencies, \emph{Journal of Finance} 30
 T.~Bollerslev, Generalized autoregressive conditional heteroskedasticity, \emph{Journal of Econometrics} 31(3), 307--327, 1986.
 
 \bibitem{BordoKydland1995}
-M.~D. Bordo and F.~E. Kydland, The gold standard as a rule: an essay in exploration, \emph{Explorations in Economic History} 32(4), 423--464, 1995 (circulated as a Federal Reserve Bank of Cleveland working paper in 1992).
+M.~D. Bordo and F.~E. Kydland, The gold standard as a rule: an essay in exploration, \emph{Explorations in Economic History} 32(4), 423--464, 1995 (earlier version: NBER Working Paper 3367, 1990).
 
 \bibitem{BordoRockoff1996}
 M.~D. Bordo and H.~Rockoff, The gold standard as a ``good housekeeping seal of approval'', \emph{Journal of Economic History} 56(2), 389--428, 1996.
@@ -417,6 +416,9 @@ P.~Carr and D.~B. Madan, Option valuation using the fast Fourier transform, \emp
 
 \bibitem{CoxIngersollRoss1985}
 J.~C. Cox, J.~E. Ingersoll and S.~A. Ross, A theory of the term structure of interest rates, \emph{Econometrica} 53(2), 385--407, 1985.
+
+\bibitem{DieboldMariano1995}
+F.~X. Diebold and R.~S. Mariano, Comparing predictive accuracy, \emph{Journal of Business \& Economic Statistics} 13(3), 253--263, 1995.
 
 \bibitem{DuffiePanSingleton2000}
 D.~Duffie, J.~Pan and K.~Singleton, Transform analysis and asset pricing for affine jump-diffusions, \emph{Econometrica} 68(6), 1343--1376, 2000.

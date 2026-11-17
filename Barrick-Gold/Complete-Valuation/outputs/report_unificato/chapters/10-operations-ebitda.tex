@@ -3,26 +3,16 @@
 \label{ch:operations}
 \section{Introduction, Data and Definitions}
 \subsection{Overview}
-The accurate valuation of mining assets fundamentally relies on the precise estimation of future Cost of Sales (CoS). However, projecting these operational costs over a medium term horizon, specifically the five-year source horizon 2026--2030, presents significant statistical hurdles, most notably the management of variance within highly volatile commodities markets. When applied to isolated mining operations, standard econometric models frequently generate confidence intervals that are prohibitively wide for practical financial modeling, occasionally yielding illogical outputs such as negative costs or exponential growth trajectories. To mitigate these structural limitations, this paper introduces a hybrid Log-Space SARIMA framework.
+The accurate valuation of mining assets fundamentally relies on the precise estimation of future Cost of Sales (CoS). However, projecting these operational costs over a medium term horizon, specifically the five-year source horizon 2026--2030, presents significant statistical hurdles, most notably the management of variance within highly volatile commodities markets. When applied to isolated mining operations, standard econometric models frequently generate confidence intervals that are prohibitively wide for practical financial modeling, occasionally yielding illogical outputs such as negative costs or exponential growth trajectories. To mitigate these structural limitations, this chapter adopts a hybrid Log-Space SARIMA framework.
 
 Complementary to the cost side, the second pillar of operational profitability is gold production, the primary driver of the firm's revenue stream. Forecasting total output as a single time series is unsatisfactory: the heterogeneity of individual assets and the compounding of mine-specific shocks degrade the signal-to-noise ratio and inflate the resulting confidence intervals. To address this, we adopt a bottom-up physical decomposition into Ore Processed, Average Grade, and Recovery Rate, with ore forecast through a seasonal ARIMA model, grade through a non-seasonal AR(1), and recovery simulated within historically observed operational bounds. Aggregate uncertainty is then evaluated using Goodman's variance-of-products formula under independence, which preserves the multiplicative structure of the production formula while avoiding the explosive variance of a naive product of confidence intervals.
 
-Gold price risk is deliberately outside this chapter. The operating forecasts produced here are handed to the independent Team~8 price layer and to the unified DCF only after production and Cost of Sales have been constructed. This separation prevents the historical Team~4 price demonstrator from being confused with the gold scenarios and corporate valuation used in the unified experiment.
 \subsubsection{Objective}
-The objective is to build a five-year operating contract for Barrick's production and Cost of Sales. Due to the compounding volatility inherent in the mining sector, traditional top-down forecasting models frequently generate explosive variances and operationally impossible scenarios, such as negative costs or unbounded production. To resolve these structural limitations, this chapter proposes a bottom-up model. By decomposing operating performance into geological and metallurgical drivers, the approach aims to stabilise medium-term cost and production forecasts without producing a standalone price or valuation result.
+The objective is to build a five-year operating contract for Barrick's production and Cost of Sales. Due to the compounding volatility inherent in the mining sector, traditional top-down forecasting models frequently generate explosive variances and operationally impossible scenarios, such as negative costs or unbounded production. To resolve these structural limitations, this chapter proposes a bottom-up model. By decomposing operating performance into geological and metallurgical drivers, the approach aims to stabilize medium-term cost and production forecasts without producing a standalone price or valuation result.
 \subsubsection{Data Sources}
-The source operating data were extracted from Barrick's quarterly reports,
-published under its former and current legal names. The Team~4 gold
-module concentrates on eight mines and omits copper and other gold assets.
-That source scope does not demonstrate a negligible revenue or valuation
-contribution from the excluded assets. Section~\ref{sec:company-perimeter}
-fixes the reporting basis; Section~\ref{sec:copper-extension} separately adds
-three copper operations without modifying the original gold forecast vector.
-
-The mines included in the analysis are:
-\begin{itemize}
-  \item Bulyanhulu, Carlin, Cortez, Kibali, Loulo--Gounkoto, North Mara, Pueblo Viejo, Turquoise Ridge.
-\end{itemize}
+Data are Barrick's quarterly mine reports for the eight-mine gold perimeter of
+Section~\ref{sec:company-perimeter}; copper is added separately
+(Section~\ref{sec:copper-extension}).
 \subsubsection{Definitions of Financial and Process Metrics}
 To ensure clarity in valuation, we adopt the standard definitions provided in the Barrick Annual Report 2024~\cite{barrick-ar-2024}.
 
@@ -36,7 +26,7 @@ Total physical volume of ore (gold-bearing rock) measured in tonnes, that has be
 \end{definition}
 
 \begin{definition}[Average grade]
-Concentration or richness of gold (measured in grams/tonne) within the ore that's being processed.
+Concentration or richness of gold (measured in grams/tonne) within the ore that is being processed.
 \end{definition}
 
 \begin{definition}[Recovery rate]
@@ -47,7 +37,7 @@ Percentage of gold present in the ore successfully extracted. It measures the ef
 % Chapter : Methodology
 % ===============================
 \section{Cost of sales forecast methodology}
-This chapter details the forecasting algorithm implemented in R. Before defining the final "Log-Space Delta-Anchor" model, we outline the investigative process and alternative approaches that were discarded, justifying the necessity of the chosen methodology. The data utilized for this study was gathered from Barrick Gold's quarterly reports for the selected mines previously mentioned in the introduction. Although historical data for certain mines extends back to 2016, a complete, continuous dataset devoid of missing values (NaNs) across all selected mines is only available from 2019 onward. Consequently, to ensure data integrity and consistency, only data from 2019 onwards has been used for the following analysis~\cite{team4}.
+This chapter details the forecasting algorithm implemented in R. Before defining the final "Log-Space Delta-Anchor" model, we outline the investigative process and alternative approaches that were discarded, justifying the necessity of the chosen methodology. The data utilized for this study was gathered from Barrick Gold's quarterly reports for the selected mines previously mentioned in the introduction. Although historical data for certain mines extends back to 2016, the source restricts the analysis to data from 2019 onwards; effective samples still differ by mine (North Mara starts in 2019Q4)~\cite{team4}.
 
 \subsection{Evolution of the Modeling Strategy}
 The development of the valuation model proceeded through three distinct iterations. The challenges encountered in the first two approaches directly informed the design of the final Global Master Chain framework.
@@ -66,21 +56,17 @@ However, this approach proved unfeasible for two reasons:
 
 \paragraph{Attempt 2 -- Idiosyncratic Univariate Forecasting:}
 We subsequently moved to univariate time series models, applying standard forecasting algorithms directly to the data of each individual mine. We tested: ETS (Error, Trend, Seasonality) and Holt-Winters Exponential Smoothing.\\
-Those failed due to sample size limitations. The reliable dataset covers the period from Q1 2019 to Q4 2025, providing approximately $N \approx 24$ data points per mine. Given the high operational volatility of individual sites (due to maintenance shutdowns, grade variations, or local disruptions), the signal-to-noise ratio was too low. The models frequently failed to converge or produced confidence intervals so wide that they encompassed negative costs, rendering them useless for valuation.
+Those failed due to sample size limitations. The 2019Q1--2025Q4 window contains at most 28 quarters per mine, fewer where leading observations are missing. Given the high operational volatility of individual sites (due to maintenance shutdowns, grade variations, or local disruptions), the signal-to-noise ratio was too low. The models frequently failed to converge or produced confidence intervals so wide that they encompassed negative costs, rendering them useless for valuation.
 
 \paragraph{Final Approach -- The Global Master Chain Hypothesis:}
 
 By overlaying the time series of all major mines on a single plot, we observed synchronicity in the movements of Cost of Sales, particularly when analyzing relative changes rather than absolute dollar amounts. 
 
-To statistically validate this visual intuition~\cite{Hair2019}, we analyzed the quarter-over-quarter cost shocks of the mines. The dataset was strictly filtered to include only data from 2019 onwards, ensuring a complete, balanced panel across all operations and cleanly capturing the recent era of heightened macroeconomic volatility.
+To statistically validate this visual intuition~\cite{Hair2019}, we analyzed the quarter-over-quarter cost shocks of the mines. The source uses quarterly changes from 2019 onwards; it does not report the aligned sample or its missing-data treatment.
 
-First, a \textbf{Bartlett's Test}~\cite{Hair2019} was conducted on the correlation matrix of the mines' percentage cost changes. The test yielded a statistically significant result (\textbf{p-value = 0.0186}), allowing us to cleanly reject the null hypothesis that the mines' cost structures evolve independently.
+First, a \textbf{Bartlett's Test}~\cite{Hair2019} was conducted on the correlation matrix of the mines' percentage cost changes. The test yielded a statistically significant result (\textbf{p-value = 0.0186}), rejecting the null of an identity correlation matrix of cost changes.
 
-Subsequently, a \textbf{Principal Component Analysis} (PCA) was performed to isolate and quantify this shared momentum~\cite{Hair2019}. The results provided robust quantitative support for the Global Master Chain Hypothesis: the first principal component (PC1) alone explains \textbf{41.22\% }of the total variance in cost shocks across the dataset. Furthermore, the first two principal components combined account for nearly 63\% (62.79\%) of all cost fluctuations, confirming a heavily macro-driven environment.
-
-
-
-In a real-world operational context, where individual physical assets are subject to severe local disruptions (e.g., distinct labor strikes, regional weather events, and varying ore grades), discovering that over 40\% of all cost volatility is dictated by a single, shared principal component is highly significant~\cite{Hair2019}.
+Subsequently, a \textbf{Principal Component Analysis} (PCA) was performed to isolate and quantify this shared momentum~\cite{Hair2019}. The results support the Global Master Chain Hypothesis: the first principal component (PC1) alone explains \textbf{41.22\% }of the total variance in cost shocks across the dataset. Furthermore, the first two principal components combined account for nearly 63\% (62.79\%) of all cost fluctuations, consistent with a substantial common cost factor; the decomposition does not identify its economic cause.
 
 This observation provided the empirical justification to adopt a Log-Space Beta scaling Anchor approach. This method consists of aggregating all mines to extract a stable global signal (the "Master Chain"), forecasts this stable signal, and then projects the trend back onto individual mines using a volatility scalar ($\beta$).
 
@@ -105,6 +91,7 @@ Let $Y_{i,t}$ be the Cost of Sales for mine $i$ at time $t$. Let $Q_{i,t}$ repre
 M_t = \ln(\bar{Y}_t) = \ln\left( \frac{\sum_{i=1}^{N} Q_{i,t} Y_{i,t}}{\sum_{i=1}^{N} Q_{i,t}} \right)
 \]
 \end{definition}
+\paragraph{Specification authority.} This weighted definition follows the source text. The frozen copy of the Team~4 R script instead averages mine costs without weights from 2017 and clamps the shrunk volatility ratio to $[0.1,2.5]$. Which specification generated the inherited cost vectors is not established; they are used as given, not re-estimated.
 \subsection{SARIMA Model, Results and Validation}
 Having established the Global Master Chain as a reliable proxy for the shared cost momentum across all mining operations, the next critical step is to forecast its future trajectory. To accomplish this, we utilize a Seasonal Autoregressive Integrated Moving Average (SARIMA) framework~\cite{BoxJenkins1970} as our primary forecasting engine. 
 
@@ -113,7 +100,7 @@ This section details the complete modeling workflow applied to the log-transform
 To forecast the Master Chain $M_t$, we employ a Seasonal Autoregressive Integrated Moving Average (SARIMA) framework. This class of models extends the standard ARIMA structure to explicitly capture both non-seasonal momentum and repeating seasonal cycles inherent in financial and operational time series.
 
 
-A general $SARIMA(p,d,q)(P,D,Q)_s$ model is defined mathematically as.
+A general $SARIMA(p,d,q)(P,D,Q)_s$ model is defined as follows.
 
 \begin{definition}[SARIMA Formulation]
 Let $y_t$ represent the observed value of the time series at time $t$. The generalized multiplicative SARIMA model is expressed as:
@@ -171,7 +158,7 @@ The predictive accuracy was measured using Root Mean Squared Error (RMSE) and Me
 
 
 
-On the source's 12-quarter holdout, ARIMA reduced log-master-chain RMSE from 0.1512 to 0.0504. The reported MAPE of 0.603\% is computed on log values and is not a percentage error in USD/oz costs. This finite comparison supports the source specification on that sample; level-scale validation and stability across origins remain necessary.
+On the source's 12-quarter holdout, ARIMA reduced log-master-chain RMSE from 0.1512 to 0.0504. The reported MAPE of 0.603\% (1.77\% for the random walk) is computed on log values and is not a percentage error in USD/oz costs. A log error of $0.05$ is roughly a 5\% level error, so the RMSE ratio, not the stated MAPE level, is the useful comparison. This finite comparison supports the source specification on that sample; level-scale validation and stability across origins remain necessary.
 
 \subsection{Volatility Scaling (\texorpdfstring{$\beta$}{beta})}
 To project the global master trend onto individual mines, we cannot assume a 1:1 relationship. Some mines exhibit significantly higher operational risk than the global average due to specific geological or geopolitical factors. We estimate a specific volatility scalar, $\beta_i$~\cite{PoonGranger2003}.
@@ -183,12 +170,12 @@ Let $r_{i,t} = \Delta \ln(Y_{i,t})$ be the log-return of mine $i$, and $r_{globa
 \beta_{raw,i} = \frac{\sigma(r_{i,t})}{\sigma(r_{global,t})}
 \]
 
-It is crucial to note that this metric differs from a standard financial Beta (CAPM), which is defined as $\rho_{i,m} \cdot \frac{\sigma_i}{\sigma_m}$. We deliberately exclude the correlation coefficient ($\rho_{i,m}$) from our calculation. In cost forecasting, a low correlation between a specific mine and the global index often indicates high \textit{idiosyncratic} risk (e.g., local strikes, wall collapses) rather than stability. A regression-based Beta would dampen the projected volatility for uncorrelated assets, leading to dangerously narrow confidence intervals. By utilizing the simple ratio of standard deviations, we ensure that the forecast envelope fully reflects the mine's total historical instability, regardless of its correlation with the global cycle.
+It is crucial to note that this metric differs from a standard financial Beta (CAPM), which is defined as $\rho_{i,m} \cdot \frac{\sigma_i}{\sigma_m}$. We deliberately exclude the correlation coefficient ($\rho_{i,m}$) from our calculation. In cost forecasting, a low correlation between a specific mine and the global index often indicates high \textit{idiosyncratic} risk (e.g., local strikes, wall collapses) rather than stability. A regression-based Beta would dampen the projected volatility for uncorrelated assets, leading to dangerously narrow confidence intervals. Scaling the common log-cost path by this ratio is a forecasting convention; it does not show that mine-specific residual risk or interval coverage is recovered.
 
 
-Given the limited sample size ($N \approx 30$ quarters per mine), the raw $\beta_{raw,i}$ estimates are subject to significant sampling noise. Extreme values (e.g., $\beta > 3.0$) are often artifacts of single outlier events rather than persistent structural characteristics.
+Given the limited sample size (at most 28 quarters per mine), the raw $\beta_{raw,i}$ estimates are subject to significant sampling noise. Extreme values (e.g., $\beta > 3.0$) are often artifacts of single outlier events rather than persistent structural characteristics.
 
-To mitigate this, we apply Blume's Adjustment~\cite{Blume1975}, a shrinkage technique used in finance to adjust beta estimates towards the market mean of 1.0. This assumes that over the long run, extreme volatility characteristics tend to revert to the mean, which is a reasonable assumption to make given that the cost of sales is highly dependent on oil and fuel prices that exhibit strong volatility clustering.
+To mitigate this, we apply Blume's Adjustment~\cite{Blume1975}, a shrinkage technique used in finance to adjust beta estimates toward the market mean of 1.0. This assumes that over the long run, extreme volatility characteristics tend to revert to the mean, which is a reasonable assumption to make given that the cost of sales is highly dependent on oil and fuel prices that exhibit strong volatility clustering.
 
 The adjusted beta $\beta_{adj,i}$ is calculated as a weighted average:
 \[
@@ -200,7 +187,7 @@ We utilize the standard weighting of $w = 0.67$ (assigning 2/3 weight to the obs
 \beta_{final,i} = 0.67 \cdot \frac{\sigma(r_{i,t})}{\sigma(r_{global,t})} + 0.33
 \]
 
-This regularization prevents the model from projecting explosive volatility for mines with short-term historical shocks, while still respecting their relative risk profile.
+Affine shrinkage pulls the ratio toward one but imposes no upper bound; the clamp in the R script is a separate convention absent from this formula.
 \subsubsection{Log-Space Projection}
 Let $A_{i} = \ln(Y_{i, T})$ be the "Anchor", the logarithm of the last observed actual value for mine $i$. The forecast for $h$ steps ahead is calculated by accumulating the forecasted global deltas ($\Delta \hat{M}$), scaled by the mine's beta:
 
@@ -233,17 +220,27 @@ The Log-Space Delta-Anchor method successfully mitigated the "exploding variance
 % ===============================
 \section{Production Forecast Methodology}
 
-In order to derive a robust approximation of Barrick Gold's future revenue stream, we must first accurately forecast the primary driver of that revenue: gold production. 
-
-Attempting to forecast total gold production as a single time series yields unsatisfactory results due to the inherent differences between the individual mining operators and their compounding volatility. A component-based approach is therefore preferred. In this context, we break down production into its fundamental physical factors: \textbf{Ore Processed}, \textbf{Average Grade}, and \textbf{Recovery Rate}. 
-
-Furthermore, to align our output with standard financial reporting, we apply a unit conversion from metric tonnes to Troy Ounces (oz) by multiplying the result by $\frac{1}{31.11}$. Finally, we incorporate a historical realization factor of $0.91$. This factor represents the mean ratio across all mines between theoretical production and true realized output. It effectively accounts for the "delayed" nature of processing circuits, such as stockpiling, leaching pad dynamics, and autoclave residence times, where processes initiated in one quarter may not yield sale-able metal until subsequent quarters~\cite{team4}.
+Production is decomposed into Ore Processed, Average Grade and Recovery Rate.
+Ore in tonnes times grade in g/t and recovery as a fraction gives recovered
+gold in grams; dividing by $c=31.1034768$ g per troy ounce gives ounces, which
+is not a tonnes-to-ounces conversion applied to ore. The dimensionless
+realization factor $\kappa=0.91$ is a source calibration, not a physical
+constant; the source interprets it through processing lags (stockpiling, leach
+pads, autoclave residence), an interpretation that does not validate its
+historical calibration. The source text's rounded $31.11$ and its frozen
+forecast vectors remain historical records, not recomputed outputs.
 \subsection{The Production Formula}
-The deterministic equation governing quarterly production is defined as follows:
-
+With units specified explicitly, the production identity is
 \begin{equation}\label{eq:production}
-    \text{Production (oz)} = \text{Ore Processed} \cdot \text{Average Grade} \cdot \text{Recovery Rate} \cdot 0.91 \cdot \frac{1}{31.11}  
+\mathrm{Prod}_{i,t}\,[\mathrm{oz}]
+=\frac{\kappa\,O_{i,t}\,[\mathrm t]\,
+G_{i,t}\,[\mathrm{g/t}]\,R_{i,t}}{c\,[\mathrm{g/oz}]},
+\qquad \kappa=0.91,\quad c=31.1034768.
 \end{equation}
+Here $R_{i,t}$ is a decimal recovery fraction. When $O$ is in kt,
+the corresponding numerical output is in koz. This dimensional
+identity does not imply that the historical forecast vectors have
+been rescaled.
 
 The expected future production will be computed forecasting the variables within this formula. To do so, a programmatic pipeline was developed in Python to process, analyze, and simulate data for each major asset. The methodology is broken down into four distinct computational phases.
 
@@ -251,12 +248,12 @@ The expected future production will be computed forecasting the variables within
 Mining data frequently suffers from reporting gaps, particularly in the early stages of an asset's lifecycle or post-acquisition. The algorithm first cleans the dataset by identifying and removing leading null values (NaNs) to establish a continuous, reliable time series. For example, in the analysis of the Carlin complex, the algorithm isolates a clean, unbroken dataset comprising 28 historical quarters spanning from Q1 2019 to Q4 2025. While for North Mara, the historical quarters are 25, starting from Q4 2019, since that was the time the mine could be analyzed individually from the reports.
 
 \paragraph{Phase 2 -- Operational Correlation and Bottleneck Analysis:}
-Before forecasting, the script conducts a correlation analysis to uncover hidden operational dynamics between the production components. Two critical metallurgical phenomena were identified:
+Before forecasting, the script conducts a correlation analysis to uncover hidden operational dynamics between the production components. Two correlations were reported; the operational readings below are interpretations, not causal estimates:
 
 \begin{itemize}
-    \item \textbf{Dilution and Bulk Mining Strategy:} The algorithm detected a negative correlation ($ r\approx -0.45$) between \textit{Ore Processed} and \textit{Average Grade}. Operationally, this indicates a "bulk mining" strategy. To increase total tonnage processed, the mine must extract lower-quality, marginal parts of the orebody or blend high-grade ore with lower-grade stockpiles. This process, known as dilution, artificially lowers the average grade as volume increases.
+    \item \textbf{Dilution and Bulk Mining Strategy:} The algorithm detected a negative correlation ($ r\approx -0.45$) between \textit{Ore Processed} and \textit{Average Grade}. A plausible reading is a ``bulk mining'' strategy. To increase total tonnage processed, the mine must extract lower-quality, marginal parts of the orebody or blend high-grade ore with lower-grade stockpiles. This process, known as dilution, artificially lowers the average grade as volume increases.
     
-    \item \textbf{Plant Bottlenecks and Residence Time:} The analysis revealed a weak-to-moderate negative correlation ($r \approx -0.17$) between \textit{Ore Processed} and the \textit{Recovery Rate}. This highlights a fundamental plant bottleneck: processing facilities are engineered for an optimal flow rate (throughput). Pushing excess ore through the circuit reduces the "residence time" that a gold-bearing particle spends in chemical or physical extraction. Consequently, chemical reactions do not fully complete, leading to more valuable metal being lost to tailings (waste) and driving down the overall recovery rate.
+    \item \textbf{Plant Bottlenecks and Residence Time:} The analysis revealed a weak-to-moderate negative correlation ($r \approx -0.17$) between \textit{Ore Processed} and the \textit{Recovery Rate}. This is compatible with a plant bottleneck: processing facilities are engineered for an optimal flow rate (throughput). Pushing excess ore through the circuit reduces the "residence time" that a gold-bearing particle spends in chemical or physical extraction. Consequently, chemical reactions do not fully complete, leading to more valuable metal being lost to tailings (waste) and driving down the overall recovery rate.
 \end{itemize}
 
 
@@ -287,18 +284,16 @@ Unlike tonnage or grade, which are largely determined by mine plans and geologic
 
 Instead, the algorithm treats the future recovery rate as a stochastic variable, simulating it using a Uniform Distribution $U(\min, \max)$ bounded by the mine's historical operational extremes, with a $\pm$1\% adjustment, a 50\% floor and 100\% ceiling. For instance, Carlin's recovery is randomly sampled between $0.71$ and $0.85$, for each forecasted period, representing a bounded scenario assumption whose distribution and temporal dependence require validation.
 \subsection{Synthesis and Forecast Outputs}
-In the final step, the algorithm executes the Production Formula across the forecasted arrays. By combining the deterministic SARIMA outputs with the stochastic uniform distribution and scaling by the realization factor, the script generates an expected annual production trajectory complete with 80\% Confidence Intervals (CI).
+In the final step, the algorithm executes the Production Formula across the forecasted arrays. By combining the deterministic SARIMA outputs with the stochastic uniform distribution and scaling by the realization factor, the script generates an annual production trajectory with 80\% bands. Because recovery is drawn once per period, the point path is one scenario realization rather than expected production; only these point vectors enter the valuation.
 \subsubsection{Confidence Intervals}
 The computation of confidence intervals is problematic if we consider the product of three separate components for the production forecast. We want a 80\% CI for the final product, for the production.
 The confidence interval of the product can not be just the product of the confidence intervals of the components, because in doing that we would create a "worst-case scenario", where the intervals are too wide and operationally useless.
 
 Even under independence, the probability that all three components fall below their respective 10th percentiles is 0.001. This joint event does not determine the quantile of their product; multiplying marginal interval endpoints does not produce a 99.9\% interval or a calibrated 80\% interval for production.
 
-The source uses an independence approximation for variance propagation. A law-of-large-numbers argument does not justify independence or offsetting shocks in a product of three drivers. Observed ore--grade and ore--recovery dependence must be accounted for before interpreting these bands as calibrated predictive intervals.
-
 Therefore, to create an 80\% CI for total production, we use a statistical method called \textbf{Goodman's Exact Variance of Products}.
 \subsubsection{Goodman's Formula}
-Published in 1960 by Leo A. Goodman~\cite{Goodman1960}, this formula calculates how uncertainties compound geometrically when variables are multiplied together. The original formula for three variables, considering $X$(Ore processed), $Y$(Average grade) and $Z$(Recovery rate), is as follow:
+Published in 1960 by Leo A. Goodman~\cite{Goodman1960}, this formula calculates how uncertainties compound geometrically when variables are multiplied together. The original formula for three variables, considering $X$(Ore processed), $Y$(Average grade) and $Z$ (Recovery rate), is:
 
 \begin{equation}
     Var(XYZ) = \mu_X^2 \mu_Y^2 \sigma_Z^2 + \mu_X^2 \mu_Z^2 \sigma_Y^2 + \mu_Y^2 \mu_Z^2 \sigma_X^2 + \mu_X^2 \sigma_Y^2 \sigma_Z^2 + \mu_Y^2 \sigma_X^2 \sigma_Z^2 + \mu_Z^2 \sigma_X^2 \sigma_Y^2 + \sigma_X^2 \sigma_Y^2 \sigma_Z^2
@@ -312,7 +307,7 @@ Relative error is the standard deviation divided by the expected mean.
     R_X=\frac{\sigma_X}{\mu_X}
 \end{equation}
 
-In this way, Goodman's formula can be rearrange as follow:
+In this way, Goodman's formula can be rearranged as
 
 \begin{equation}
     R_{prod}^2 = (1 + R_X^2)(1 + R_Y^2)(1 + R_Z^2) - 1
@@ -332,7 +327,7 @@ CI_{upper} = \mathbb{E}_{prod} + Z_{score} \cdot \sigma_{prod}
 
 This Goodman equation assumes independence, although the reported driver
 correlations violate it. Team~4 omits estimated cross-covariances because
-approximately 28 quarters per mine provide a short sample. Negative
+at most 28 quarters per mine provide a short sample. Negative
 ore--grade dependence may reduce product variance relative to independence;
 it does not prove conservative interval coverage. These are the source's
 80\% operating bands, not an empirically validated bound or the valuation's
@@ -350,43 +345,24 @@ In the last historical year, total company production was lower than the histori
 
 
 \subsubsection{Uncertainties and Unknown Events}
-Events like the closure of Loulo--Gounkoto may happen for specific mines and should be considered in the forecast of the production; nevertheless we thought about different reasons of why it would be an over complication of the model. 
+Events such as the closure of Loulo--Gounkoto may affect specific mines; the source does not model them explicitly, judging that doing so would over-complicate the forecast.
 
-Geographic diversification can reduce exposure to some local disruptions, but the source does not estimate the probability of simultaneous failures. Common energy, financial, political and operational shocks can affect several sites. Absorption of shocks across mines and time remains a modelling assumption, not a demonstrated negligible joint risk.
+Geographic diversification can reduce exposure to some local disruptions, but the source does not estimate the probability of simultaneous failures. Common energy, financial, political and operational shocks can affect several sites. Absorption of shocks across mines and time remains a modeling assumption, not a demonstrated negligible joint risk.
 
 \section{Handoff to the independent price and valuation layers}
 
-The operating layer ends with production and Cost of Sales. For a quarterly
-gold scenario \(P_t\), the pre-reconciliation component margin passed to the
-DCF is
-\[
-    M_t=(P_t-\mathrm{CoS}_t)\,\mathrm{Production}_t .
-\]
-This identity is retained from Team~4, but \(P_t\) is not generated by the
-Team~4 article. Chapter~\ref{ch:calibration} supplies the four current Team~8 price engines and
-Chapter~\ref{ch:unified-experiment} performs the corporate valuation. The old NSS--IV--GBM--EBITDA
-sequence was useful as a standalone demonstration of an integrated stochastic
-DCF; including it here would create a second, incompatible price process and
-would blur the origin of the valuation inputs.
-
-The separation is enforced in three places. First, the gold engines start
-from the XAUUSD spot of USD~4,391.32/oz at the 2 September 2026 valuation
-time, synchronous with the GLD surface, rather than from a Barrick realised
-price. Second, quarterly risk-neutral
-rates come from the current Team~8 LSE (London Strategic Edge) Treasury input rather than the Team~4
-NSS fit. Third, all simulated paths come from Black--Scholes, Heston,
-Bates--Poisson or Bates--Hawkes under one common conditional bridge. Thus
-Team~4 contributes operational mechanics and forecasts only; it contributes
-no simulated gold price and no standalone valuation output.
+Production and Cost of Sales feed the component margin
+\eqref{eq:company-component-margin}. Team~4 contributes operational mechanics
+and forecasts only, with no simulated gold price or standalone valuation
+output: the price \(P_t\) comes only from the four Team~8 engines of
+Chapter~\ref{ch:calibration}, started from the XAUUSD spot at the valuation
+time with the Team~8 Treasury curve, and the exclusion of the Team~4 price
+demonstrator is fixed in Section~\ref{sec:controlled-design}.
 
 \subsection{Limitations carried forward}
 
-The 2026Q1--Q2 refresh removes the earlier lack of current operating evidence,
-but it does not turn the later Team~4 values into management guidance. From
-2026Q3 onward they remain research forecasts. Mine depletion, reserve lives,
-closures, recovery interventions, cost inflation by jurisdiction and
-price-dependent management actions are not endogenous. These are live model
-limitations. By contrast, richer stochastic volatility and jump models are
-not future work for this chapter: they have already been implemented and
-tested in Chapters~\ref{ch:sv-jumps}--\ref{ch:calibration}, then propagated through the unified experiment in
-Chapter~\ref{ch:unified-experiment}.
+The 2026Q1--Q2 refresh documents current operating evidence
+(Section~\ref{sec:company-perimeter}), but from 2026Q3 the values remain
+research forecasts, not guidance. Depletion, reserve life, closures, recovery
+interventions, jurisdictional cost inflation and price-dependent management
+actions are not endogenous (Section~\ref{sec:company-risk-boundary}).
