@@ -8,13 +8,15 @@ measure at that interface, before production, costs and discounted cash flow.
 It applies to all four model families and to both commodities. It is not an
 editorial qualification appended to a completed corporate valuation.
 
-The analysis in this section was updated on 6 October 2026 and keeps the
-market cutoff of 2 September 2026. Joint identification, numerical
+The analysis in this section keeps the market cutoff of 2 September 2026; its
+origin panels (output versions dated 11 October 2026) predate the 24 October
+carry correction. Joint identification, numerical
 convergence of the richer models, commodity basis uncertainty and the
 corporate cash-flow bridge remain open, so none of these diagnostics replaces
 the scenario outputs with a validated corporate valuation.
 
 \subsection{The economic object and the two probability measures}
+\label{sec:pq-two-measures}
 
 An option calibration estimates coefficients under a pricing measure
 $\mathbb Q$, conditional on the chosen model and market inputs. Expected
@@ -189,9 +191,9 @@ weakly identified even when the algebra is admissible.
 
 \subsection{Historical information, clocks and the commodity basis}
 
-The additional IB API history contains 1,253 GLD regular-session daily closes
+The additional Interactive Brokers history contains 1,253 GLD regular-session daily closes
 from 7 September 2021 to 2 September 2026. Its 168 overlapping observations
-match the existing Paper series exactly. Full-session closes were not
+match the previously acquired GLD daily series exactly. Full-session closes were not
 interchangeable with that series and are kept separate. Daily underlying
 observations serve time-series estimation; the roughly 100-contract budget
 for a sparse option surface governs a different, cross-sectional sample.
@@ -238,13 +240,13 @@ over $h_j$ years, the constant log drift estimate is
 $\widehat a=\sum_jx_j/\sum_jh_j$, and the arithmetic drift is
 $\widehat\mu_P=\widehat a+\widehat\sigma^2/2$. On the five-year GLD sample,
 the historical diffusion estimate is $20.87\%$ and arithmetic drift
-$19.75\%$ annually. Holding the current option-implied diffusion at
-$25.09\%$ gives drift $20.72\%$, with a model-conditional approximate
+$19.75\%$ annually. Holding the 2 September pre-carry ($q=0$) Black--Scholes
+implied diffusion at $25.09\%$ gives drift $20.72\%$, with a model-conditional approximate
 95\% interval from $-1.30\%$ to $42.74\%$. This wide interval matters for
-multi-year revenues. The fixed-current-$Q$ estimate is in-sample and is not
+multi-year revenues. The fixed-$Q$ estimate is in-sample and is not
 used to score historical forecasts.
 
-The richer preliminary fits hold the current audited Paper pricing
+The richer preliminary fits hold the audited 7 September ($q=0$) pricing
 coefficients fixed and estimate the restricted physical premia against
 historical GLD returns with a particle likelihood. They are exploratory
 conditional fits, not jointly estimated historical $P/Q$ systems. In
@@ -277,6 +279,7 @@ relative to the one-step diagnostic. This refinement does not establish
 convergence of a refitted estimator or an OOS advantage for Hawkes.
 
 \subsection{Three validation targets and the first physical baseline}
+\label{sec:physical-validation-targets}
 
 Option repricing, physical commodity prediction and operating prediction
 answer different questions. The existing option test evaluates pricing
@@ -427,22 +430,12 @@ within-grid negative-log-likelihood spread across seeds is approximately
 not confidence intervals: optimizer termination does not certify a stable
 likelihood estimate or identified premia.
 
-The resumed computation initializes from the latest successful strictly
-earlier origin, then refits on the current origin's information. Heston
-and Bates first try constrained local refinement with global fallback;
-Bates--Hawkes also retains a current-origin nested Bates candidate. The
-physical stage compares earlier premia with zero premia on the current
-training likelihood before choosing its start. Saved artifacts record
-the source date and hash. Existing cold-start results are preserved, so
-this completed panel has a documented mixture of initialization policies;
-it is not a uniform warm-start experiment. A same-surface numerical check
-found different local minima for Heston and Bates, which prevents claiming
-that the faster initialization reproduces the original global optimum.
-The artifact audit verifies 58 pricing-to-physical hash links and 49
-strictly backward initialization links. Those checks establish traceability,
-not numerical convergence. The aggregate output versions are
-\texttt{20261011-four-model-complete} and
-\texttt{20261011-four-model-gold-complete}.
+The panel mixes cold starts with warm starts from the latest strictly
+earlier origin, each refitted on its own origin's information; it is not a
+uniform warm-start experiment. A same-surface numerical check found different
+local minima for Heston and Bates, so the faster initialization is not claimed
+to reproduce the original global optimum. The audited initialization links
+establish traceability, not numerical convergence.
 
 The original 10 July pilot, trained on 1,214 GLD returns and forecasting
 13 July, is included in the panel. Its gold absolute errors were
