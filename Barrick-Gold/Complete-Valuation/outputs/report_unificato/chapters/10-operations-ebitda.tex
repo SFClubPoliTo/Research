@@ -237,13 +237,28 @@ In order to derive a robust approximation of Barrick Gold's future revenue strea
 
 Attempting to forecast total gold production as a single time series yields unsatisfactory results due to the inherent differences between the individual mining operators and their compounding volatility. A component-based approach is therefore preferred. In this context, we break down production into its fundamental physical factors: \textbf{Ore Processed}, \textbf{Average Grade}, and \textbf{Recovery Rate}. 
 
-Furthermore, to align our output with standard financial reporting, we apply a unit conversion from metric tonnes to Troy Ounces (oz) by multiplying the result by $\frac{1}{31.11}$. Finally, we incorporate a historical realization factor of $0.91$. This factor represents the mean ratio across all mines between theoretical production and true realized output. It effectively accounts for the "delayed" nature of processing circuits, such as stockpiling, leaching pad dynamics, and autoclave residence times, where processes initiated in one quarter may not yield sale-able metal until subsequent quarters~\cite{team4}.
+Ore processed in tonnes multiplied by grade in g/t and recovery
+as a fraction gives recovered gold in grams. Divide by
+$c=31.1034768$ g per troy ounce to express ounces; this is not a
+tonnes-to-ounces conversion applied directly to ore. The separate
+dimensionless realization factor $\kappa=0.91$ is the empirical
+factor used by the source to account for realized/theoretical output
+differences, including processing lags such as stockpiling, leaching
+pads and autoclave residence. Its physical interpretation does not itself validate its
+historical calibration. The source text's rounded $31.11$ and its frozen
+forecast vectors remain historical records, not recomputed outputs.
 \subsection{The Production Formula}
-The deterministic equation governing quarterly production is defined as follows:
-
+With units specified explicitly, the production identity is
 \begin{equation}\label{eq:production}
-    \text{Production (oz)} = \text{Ore Processed} \cdot \text{Average Grade} \cdot \text{Recovery Rate} \cdot 0.91 \cdot \frac{1}{31.11}  
+\mathrm{Prod}_{i,t}\,[\mathrm{oz}]
+=\frac{\kappa\,O_{i,t}\,[\mathrm t]\,
+G_{i,t}\,[\mathrm{g/t}]\,R_{i,t}}{c\,[\mathrm{g/oz}]},
+\qquad \kappa=0.91,\quad c=31.1034768.
 \end{equation}
+Here $R_{i,t}$ is a decimal recovery fraction. When $O$ is in kt,
+the corresponding numerical output is in koz. This dimensional
+identity does not imply that the historical forecast vectors have
+been rescaled.
 
 The expected future production will be computed forecasting the variables within this formula. To do so, a programmatic pipeline was developed in Python to process, analyze, and simulate data for each major asset. The methodology is broken down into four distinct computational phases.
 

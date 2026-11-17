@@ -203,9 +203,12 @@ dependence between the two series is the Pearson correlation coefficient
 \]
 which summarizes whether returns tend to move in the same direction ($\rho_{ij} > 0$),
 in opposite directions ($\rho_{ij} < 0$), or show no linear association ($\rho_{ij} \approx 0)$.
-Under the usual assumptions of weak stationarity, correlations can be estimated consistently
-from the sample and provide a compact description of average co–movement over the whole
-sample period (see, e.g., standard treatments in time–series econometrics).
+Weak stationarity alone does not ensure consistent correlation estimates.
+For example, joint strict stationarity and ergodicity, finite second
+moments and positive marginal variances give the required law of large
+numbers for sample moments. A central limit theorem or confidence band
+needs additional conditions. Here sample correlations describe average
+co-movement in the stated sample, without identifying causality.
 
 However, financial markets are characterized by changing regimes and time–varying
 dependence. To account for this, we complement static correlations with \emph{rolling}
@@ -442,8 +445,14 @@ Silver & Return    & 0.0063  & 0.0227 &    0.28 & 0.0000 \\
 \bottomrule
 \end{tabular}
 \begin{minipage}{0.90\textwidth}
-\footnotesize\emph{Notes:} Values reproduce the published Team~7 article
-snapshot. High fit in levels reflects near-unit-root persistence, not reliable
+\footnotesize\emph{Notes:} Cells preserve the Team~7 PDF snapshot.
+The frozen CSV robust-SE/$t$ pairs (rounded) are
+0.000518785/1926.2686 (gold) and 0.000973411/1025.0763 (silver)
+in \texttt{ar1\_log\_prices.csv}; for returns they are
+0.014595135/$-0.16559$ (gold) and 0.014596015/0.43386 (silver)
+in \texttt{ar1\_returns.csv}. Coefficients and $R^2$ agree at the
+shown precision; the cause of the SE/$t$ discrepancy is unresolved.
+High fit in levels reflects near-unit-root persistence, not reliable
 return predictability.
 \end{minipage}
 \end{table}
@@ -525,6 +534,10 @@ Silver & 0.00014 & 0.01990 & -0.85 & 7.79 & 10.79 \\
 \bottomrule
 \end{tabular}
 \end{table}
+The table preserves the source-PDF moments; saved CSV excess kurtosis is
+6.23770 (gold) and 7.78276 (silver). The cause of this smaller discrepancy
+is unverified; it is distinct from the AR(1) SE/$t$ divergence and does
+not establish an error in the ARMA/ARIMA tables.
 
 Figures~\ref{fig:t7-return-histograms} and
 \ref{fig:t7-return-qqplots}, regenerated on current LSE GLD/SLV returns, make
@@ -615,12 +628,28 @@ GARCH$(1,1)$,
  r_t=\mu+\varepsilon_t,\qquad
  \sigma_t^2=\omega+\alpha\varepsilon_{t-1}^2+\beta\sigma_{t-1}^2.
 \]
-The unified branch fits a Gaussian GARCH$(1,1)$ directly to the current LSE
-returns. The estimates are
-$(\hat\omega,\hat\alpha,\hat\beta)\approx(0.05385,0.10894,0.84798)$ for GLD and
-$(0.04080,0.05453,0.93900)$ for SLV when returns are expressed in percentage
-points. Both optimizers converge and $\hat\alpha+\hat\beta<1$; persistence is
-especially high for SLV.
+The LSE fit minimizes the Gaussian quasi-negative-log-likelihood
+\[
+\frac12\sum_t\left[\log h_t+\frac{(r_t-\mu)^2}{h_t}\right],
+\qquad h_t=\sigma_t^2,
+\]
+using percentage-point returns and $h_0=\max(s_r^2,10^{-8})$, with
+sample variance $s_r^2$ computed using denominator $N-1$.
+L-BFGS-B optimizes $\mu$ and transformed parameters
+\[
+\omega=e^{\vartheta_1},\quad
+\alpha=0.30\ell(\vartheta_2),\quad
+\beta=(0.999-\alpha)\ell(\vartheta_3),\qquad
+\ell(x)=(1+e^{-x})^{-1}.
+\]
+Bounds are $\mu\in[-2,2]$, $\vartheta_1\in[-20,4]$ and
+$\vartheta_2,\vartheta_3\in[-8,8]$, with a 3,000-iteration cap.
+Hence $\alpha<0.30$ and $\alpha+\beta<0.999$ are imposed restrictions.
+The table reports the obtained LSE fits, with higher persistence for
+SLV. Reported convergence flags certify neither global optimality nor
+an unrestricted fit; no robust/Hessian covariance or out-of-sample
+assessment is supplied here. The separate ten-day forecasts belong
+to the legacy fit.
 
 \begin{table}[htbp]
 \centering
@@ -638,9 +667,12 @@ SLV & 0.01495 & 0.04080 & 0.05453 & 0.93900 & 0.99353 & 6.3067 \\
 \bottomrule
 \end{tabular}}
 \begin{minipage}{0.94\textwidth}
-\footnotesize\emph{Notes:} Returns and conditional volatilities are expressed
-in percentage units. When $\hat\alpha+\hat\beta<1$,
-$\hat\sigma^2_{\infty}=\hat\omega/(1-\hat\alpha-\hat\beta)$.
+\footnotesize\emph{Notes:} Returns and conditional standard deviations
+are in percentage points; $\omega$ and variances are in squared
+percentage points. With unit-variance standardized innovations and a
+stationary finite second moment,
+$\sigma_\infty^2=\omega/(1-\alpha-\beta)$.
+Values refer to the constrained LSE fit.
 \end{minipage}
 \end{table}
 
@@ -718,11 +750,14 @@ Silver & 0.552 & 0.080 & 6.91 \\
 \end{tabular}
 \end{table}
 
-The regenerated visual evidence is consistent with persistent absolute returns. Their
-autocorrelations remain positive across many lags in
-Figure~\ref{fig:t7-absolute-return-acf}, while fractional filtering visibly
-reduces low-frequency persistence in
-Figure~\ref{fig:t7-fractional-differencing}.
+The absolute-return ACF in Figure~\ref{fig:t7-absolute-return-acf}
+and filtered series in Figure~\ref{fig:t7-fractional-differencing}
+are descriptive LSE diagnostics; a visual change after filtering alone
+does not establish reduced low-frequency persistence. The finite filter
+assigns weight $w_0$ to the current observation and subsequent weights
+to past observations. With $L$ retained weights, its first $L-1$ values
+are undefined (599 if $L=600$), so the filtered sample differs from
+the full sample used for the raw GPH slope.
 
 \begin{figure}[htbp]
 \centering
@@ -763,9 +798,8 @@ Static and rolling correlations and HC1 regressions are descriptive; they do
 not identify monetary, inflationary or geopolitical shocks. Normal-innovation
 GARCH does not represent leverage asymmetry, heavy-tailed innovations,
 structural breaks or jump arrivals. The GPH result is boundary-sensitive. In
-addition, the preserved article tables and repository outputs contain minor
-version drift in some AR(1) standard errors; this chapter reports the published
-article snapshot and does not disguise it as a fresh recomputation.
+addition, the AR(1) and moment-table notes identify PDF/CSV discrepancies;
+their causes remain unresolved, and no estimates are recomputed here.
 
 \paragraph{Developments already completed in the unified thesis.}
 The standalone article described continuous-time stochastic volatility,

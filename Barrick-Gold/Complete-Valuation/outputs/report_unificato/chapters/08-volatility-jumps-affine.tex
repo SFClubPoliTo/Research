@@ -57,7 +57,13 @@ To capture the empirical observation that volatility fluctuates and clusters ove
 $$dS_t = r S_t dt + \sqrt{v_t} S_t dW_t^S$$
 $$dv_t = \kappa(\theta - v_t)dt + \xi \sqrt{v_t} dW_t^v$$
 
-where the Brownian motions $dW_t^S$ and $dW_t^v$ are correlated ($d\langle W^S, W^v \rangle_t = \rho dt$). The correlation parameter $\rho < 0$ mathematically generates the "leverage effect," naturally producing a downward-sloping volatility skew. However, because SV diffusions are continuous, the variance requires time to accumulate. As time to maturity approaches zero ($\tau \to 0$), the diffusion variance $\int_t^T v_s ds$ converges to zero, causing the theoretical short-term volatility skew to flatten out, which contradicts the steep short-term smiles observed in equity markets.
+The Brownian drivers satisfy $d\langle W^S,W^v\rangle_t=\rho\,dt$.
+The driver correlation can generate leverage and a nonzero
+at-the-money implied-volatility skew, including at short maturities.
+Although integrated variance tends to zero as maturity tends to zero,
+that fact alone does not determine the limit of the implied-volatility
+slope. The adequacy of a stochastic-volatility diffusion for a given
+surface is an empirical and model-specific question.
 \subsubsection{The Case for Jump Processes (Short-Maturity Skew)}
 To address short-maturity pricing effects and the possibility of sudden market
 repricing, jump--diffusion models augment the continuous Brownian component with
@@ -72,13 +78,13 @@ modified as
 \]
 where $\lambda$ is the jump intensity and $J$ is the logarithmic jump size. The
 compensator $\lambda k$ ensures that the discounted price is a martingale under
-the pricing measure. Jumps can generate heavy tails and skewness even over short
-time horizons, because a discontinuous move may occur before the diffusion
-component has accumulated substantial variance. Over longer horizons, however,
-the standardized contribution of finite-variance independent jumps becomes less
-pronounced: the total variance grows linearly with maturity, while skewness and
-excess kurtosis scale down. As a result, pure jump--diffusion models typically
-struggle to reproduce persistent long-maturity volatility skews.
+the pricing measure. Jumps can affect tails and skew even over short horizons. For
+independent finite-variance compound-Poisson increments, both diffusion
+variance and jump variance grow linearly with time; the jump variance
+share does not automatically vanish at long maturities. With finite
+third and fourth moments, the magnitude of standardized log-return skewness and excess
+kurtosis scale down with horizon. This does not by itself establish a
+universal implied-volatility-skew rate or a fit ranking against Heston.
 
 
 \textbf{Synthesis}
@@ -321,18 +327,19 @@ $\sum_{i=1}^{N_t} Y_i$ at a jump time of $N$.
 
 
 
-Representation~\eqref{eq:jumpdiff_sol} makes transparent the two
-structural features that distinguish jump--diffusions from the
-Black--Scholes dynamics. First, the
-distribution of $\ln(S_t/S_0)$ is no longer Gaussian but a mixture of
-Gaussians indexed by $N_t$: conditional on $\{N_t = k\}$, the log
-return is normal with mean
-$\bigl(\mu - \tfrac{1}{2}\sigma^2\bigr) t + \sum_{i=1}^{k} Y_i$
-and variance $\sigma^2 t$, and the unconditional law aggregates these
-components weighted by the Poisson probabilities
-$e^{-\lambda t}(\lambda t)^k / k!$. This mixture structure generates
-the excess kurtosis and asymmetric skewness that the pure-diffusion
-model failed to reproduce. Secondly, with probability
+In representation~\eqref{eq:jumpdiff_sol}, conditional on both
+$N_t=n$ and the realized log-marks, the log-return is Gaussian with
+mean $(\mu-\sigma^2/2)t+\sum_{i=1}^nY_i$ and variance $\sigma^2t$.
+If the marks are i.i.d. $\mathcal N(m_J,s_J^2)$, independent of the
+count and Brownian motion, conditioning only on $N_t=n$ instead gives
+\[
+\log(S_t/S_0)\mid N_t=n\sim
+\mathcal N\bigl((\mu-\sigma^2/2)t+nm_J,\,\sigma^2t+ns_J^2\bigr).
+\]
+These components have Poisson weights $e^{-\lambda t}(\lambda t)^n/n!$;
+general mark laws give compound convolutions instead. The resulting
+tails and skew depend on the mark law as well as the intensity.
+For $\lambda t>0$ and almost-surely nonzero marks, with probability
 $1 - e^{-\lambda t} > 0$ the trajectory $s \mapsto S_s$ exhibits at
 least one discontinuity on the interval $[0,t]$, in sharp contrast
 with the almost-sure continuity of the Black--Scholes price process
@@ -938,10 +945,15 @@ then the probability distribution of \(X\) is absolutely continuous. Under this 
     f_X(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty} e^{-iux} \varphi_X(u) du
 \end{equation}
 
-While theoretically sound, relying on this standard inversion is computationally highly inefficient for derivative pricing. Pricing a European option natively requires the calculation of tail probabilities---specifically, the probability that the asset price exceeds the strike price at maturity, $\mathbb{P}(X > x)$. Utilizing the PDF would require a double numerical integration algorithm: an inner integral over the complex plane to invert the Fourier transform, followed by an outer integral over the real domain to compute the Cumulative Distribution Function (CDF). In calibration routines where prices must be evaluated thousands of times, this bottleneck becomes computationally prohibitive.
+Density-based pricing may invert the CF over real frequencies and
+then integrate the density. Direct CDF or payoff-transform methods
+avoid this nested quadrature; their relative efficiency depends on
+the implementation.
 \subsubsection{The Gil-Pelaez Inversion Theorem}
 
-To circumvent the computational burden of double integration, quantitative finance heavily relies on the Gil-Pelaez theorem~\cite{GilPelaez1951}. This powerful analytical result establishes a direct relationship between the characteristic function and the Cumulative Distribution Function, $F_X(x) = \mathbb{P}(X \le x)$, requiring only a single, well-behaved integration over the positive real line.
+Gil--Pelaez~\cite{GilPelaez1951} relates the CF to the CDF at continuity points
+through an improper real-frequency integral. Absolute integrability
+and numerical stability require separate analysis.
 
 For any continuous point $x$ of the distribution, the Gil-Pelaez inversion formula states:
 \begin{equation}
@@ -955,12 +967,26 @@ Consequently, the complementary tail probability---which forms the fundamental b
 \end{equation}
 \subsubsection{Application to Risk-Neutral Exercise Probabilities}
 
-In the context of the L\'evy-driven asset dynamics discussed in Section~\ref{sec:levy-processes}, let $X_t = \ln(S_t)$ be the logarithmic price process. Under the risk-neutral measure, the Gil-Pelaez theorem allows for the direct computation of the exact exercise probability of a Call option maturing at time $t$ with a logarithmic strike price $k = \ln(K)$.
-
-By substituting the exponential representation of the L\'evy process characteristic function from Equation~\eqref{eq:levy_exponent_chap6} into the inversion formula, the risk-neutral probability of the option expiring in-the-money is exactly:
+In this exponential L\'evy model, let $X_t=\log S_t$,
+$k=\log K$, and $L_t=\log(S_t/S_0)$, with $S_0,K>0$. Under the
+specified pricing measure, using the increment exponent introduced
+in \eqref{eq:levy_exponent_chap6},
+\[
+\varphi_{L_t}^{\mathbb Q}(u)=e^{t\psi_Q(u)},\qquad
+\varphi_{X_t}^{\mathbb Q}(u)=e^{iu\log S_0+t\psi_Q(u)}.
+\]
+At a continuity point of the terminal distribution, Gil--Pelaez gives
+(with the integral understood in the improper sense)
 \begin{equation}
-    \mathbb{P}(\ln S_t > k) = \frac{1}{2} + \frac{1}{\pi} \int_{0}^{\infty} \Re \left[ \frac{e^{-iuk} e^{t\psi(u)}}{iu} \right] du
+\mathbb Q(S_t>K)=\frac12+\frac1\pi\int_0^\infty
+\operatorname{Re}\!\left[
+\frac{e^{-iuk}e^{iu\log S_0+t\psi_Q(u)}}{iu}
+\right]du.
 \end{equation}
+Equivalently one may invert the log-return CF at threshold
+$\log(K/S_0)$. This is the exercise probability under $\mathbb Q$;
+the stock-weighted probability used in a call-price decomposition is
+a different object.
 
 This single-integral formulation is the cornerstone of modern semi-analytical pricing methods. By reducing the dimensionality of the integration, it ensures that models with arbitrary jump structures and stochastic volatility can be evaluated and calibrated to market data with computational speeds comparable to the closed-form Black-Scholes formulas.
 \subsection{Fourier Transforms in Pricing Theory}
@@ -998,13 +1024,17 @@ Let $\alpha > 0$ be a strictly positive damping coefficient. We define the dampe
 
 
 
-The introduction of the exponential term $e^{\alpha k}$ perfectly stabilizes the asymptotic behavior of the function on both ends of the real line:
-\begin{itemize}[label = --]
-    \item \textbf{As $k \to -\infty$ (Deep In-The-Money):} The Call price $C(k)$ is bounded by the initial asset price $S_0$. The damping factor $e^{\alpha k}$ rapidly decays to zero. Consequently, the modified price vanishes: $\lim_{k \to -\infty} c(k) = 0$.
-    \item \textbf{As $k \to \infty$ (Deep Out-Of-The-Money):} The damping factor $e^{\alpha k}$ grows exponentially. However, for a properly chosen $\alpha$, the probability density of the terminal log-price decays faster than $e^{\alpha k}$ grows, forcing the product to zero: $\lim_{k \to \infty} c(k) = 0$.
-\end{itemize}
-
-Because the dampened pricing function $c(k)$ approaches zero at both extremities, it becomes absolutely integrable, i.e., $c(k) \in \mathcal{L}^1(\mathbb{R})$. 
+For $\alpha>0$, $T>0$ and constant $r$, let
+$C(k)=e^{-rT}\mathbb E^{\mathbb Q}[(S_T-e^k)^+]$ with $S_T>0$.
+Tonelli's theorem gives
+\[
+\int_{\mathbb R}e^{\alpha k}C(k)\,dk
+=\frac{e^{-rT}\mathbb E^{\mathbb Q}[S_T^{\alpha+1}]}
+{\alpha(\alpha+1)}.
+\]
+Thus $\mathbb E^{\mathbb Q}[S_T^{\alpha+1}]<\infty$ ensures
+$c\in L^1(\mathbb R)$. Admissible moments depend on maturity and
+parameters; decay to zero at both ends alone does not prove integrability.
 
 
 
@@ -1017,7 +1047,10 @@ which can be compactly rewritten by combining the exponents:
     \psi_T(u) = \int_{-\infty}^{\infty} e^{i(u - i\alpha)k} C(k) dk
 \end{equation}
 
-This equation demonstrates that evaluating the standard Fourier transform of the dampened option price along the real axis $u$ is mathematically equivalent to evaluating the Fourier transform of the original undampened option price along a shifted contour in the complex plane, specifically at the complex frequency $(u - i\alpha)$.
+The equality defines the damped transform for real $u$, or equivalently
+the price transform on the complex line $u-i\alpha$ where it exists.
+Deforming a contour separately requires analyticity and suitable
+boundary-decay or domination conditions.
 \subsubsection{The Analytical Pricing Formula}
 
 The true power of the Carr-Madan dampening technique lies in the explicit connection it establishes between the Fourier transform of the option price and the characteristic function of the underlying asset's return. 
@@ -1027,16 +1060,24 @@ By substituting the risk-neutral pricing expectation into the definition of the 
     \psi_T(u) = \frac{e^{-rT} \varphi_T(u - i(\alpha + 1))}{\alpha^2 + \alpha - u^2 + i(2\alpha + 1)u}
 \end{equation}
 
-Here, $\varphi_T(z) = \mathbb{E}^{\mathbb{Q}}[e^{iz s_T}]$ is the characteristic function of the terminal logarithmic price $s_T = \ln(S_T)$ evaluated at the complex argument $z = u - i(\alpha + 1)$. For any underlying L\'evy process, this characteristic function is inherently known in closed form via the L\'evy-Khintchine exponent, ensuring that the numerator $\varphi_T(\cdot)$ is readily computable.
+Here $\varphi_T(z)=\mathbb E^{\mathbb Q}[e^{iz\log S_T}]$ is evaluated
+at $z=u-i(\alpha+1)$ for real $u$, where the stated moment makes it
+finite. Its complex domain is restricted by exponential moments;
+a real-axis L\'evy exponent alone guarantees neither all complex
+values nor their closed-form computability.
 
-Once the analytical form of $\psi_T(u)$ is established in the frequency domain, the final step is to recover the undampened, real-world Call option price $C(k)$. This is achieved by applying the Inverse Fourier Transform to $\psi_T(u)$ to obtain the dampened price $c(k)$, and subsequently multiplying by the inverse dampening factor $e^{-\alpha k}$. 
+Invert $\psi_T$ and multiply by $e^{-\alpha k}$ to recover the call
+price under the specified pricing measure. Integrability of $\psi_T$
+is a sufficient inversion condition; otherwise the inversion theorem
+and limiting sense must be specified.
 
 Since the Call option price must be a strictly real number, the inverse Fourier integral can be significantly simplified. The imaginary components must mathematically cancel out, allowing the integration to be performed exclusively over the positive real half-line by taking the real part of the integrand:
 \begin{equation}\label{eq:carr_madan_pricing}
     C(k) = \frac{e^{-\alpha k}}{\pi} \int_{0}^{\infty} \operatorname{Re}\!\left[ e^{-iuk}\psi_T(u) \right]du.
 \end{equation}
 
-This final equation represents a paradigm shift in quantitative finance. By substituting the known algebraic expression for $\psi_T(u)$ into the integral, the pricing of a European Call option under highly complex, discontinuous, or stochastic volatility dynamics is reduced to the numerical evaluation of a single, highly stable, one-dimensional integral.
+The formula reduces pricing to a one-dimensional integral; numerical
+accuracy still requires control of quadrature and tail truncation.
 
 % ---- next approved source slice ----
 
@@ -1374,21 +1415,12 @@ random oscillations of the variance around its drift. It acts on the
 smile through two distinct channels.
 
 \begin{itemize}[label = --]
-    \item \textit{Smile curvature.} For $\rho=0$, conditionally on
-          the trajectory of the variance the terminal log-price is
-          Gaussian, and its unconditional distribution is a mixture of
-          Gaussians indexed by the random integrated variance $I_T$
-          defined in \eqref{eq:integrated_variance}. For $\rho\neq0$
-          the log-price remains Gaussian conditionally on the whole
-          variance path, but its conditional mean contains the
-          correlated variance innovation and its conditional variance
-          is $(1-\rho^2)I_T$, so the mixture is no longer indexed by
-          $I_T$ alone and the unconditional law is skewed. Once jumps
-          are added, as in the Bates and Bates--Hawkes models below,
-          the law conditional on the variance path is itself a jump
-          mixture and is not Gaussian. In all cases this mechanism
-          generates heavier tails than the Black--Scholes lognormal
-          benchmark.
+    \item \textit{Smile curvature.} For the independent-driver case
+          $\rho=0$ proved above, the log-price is conditionally Gaussian
+          and its law is a mixture indexed by $I_T$ in
+          \eqref{eq:integrated_variance}. For $\rho\ne0$, the
+          correlated Brownian integral carries information beyond $I_T$;
+          the same conditional mean and variance cannot be reused.
 
           To see the mechanism in a transparent way, consider the
           simplified centred mixture
@@ -1396,8 +1428,8 @@ smile through two distinct channels.
           Y_T=\sqrt{I_T}\,Z,
           \qquad Z\sim\mathcal{N}(0,1),
           \]
-          with $Z$ independent of $I_T$. In this simplified setting one
-          obtains
+          with $Z$ independent of $I_T$, $0<\mathbb E[I_T]<\infty$
+          and $\mathbb E[I_T^2]<\infty$. In this simplified setting one obtains
           \begin{equation}\label{eq:SV_kurtosis}
           \operatorname{Kurt}(Y_T)
           =
@@ -1411,9 +1443,9 @@ smile through two distinct channels.
           the additional drift correction $-\frac12 I_T$. Nevertheless,
           it captures the essential point: randomness of integrated
           variance produces excess kurtosis relative to the
-          Black--Scholes benchmark. Increasing the vol-of-vol raises the
-          variability of $I_T$, fattens the tails of the return
-          distribution, and deepens the implied volatility smile.
+          Black--Scholes benchmark when $\operatorname{Var}(I_T)>0$.
+          This identity does not establish monotonicity of log-return
+          tail statistics or smile curvature in vol-of-vol.
 
     \item \textit{Skew amplification.} The vol-of-vol amplifies the
           asymmetry generated by a non-zero $\rho$. The correlation
@@ -1427,14 +1459,15 @@ smile through two distinct channels.
           the variance process itself moves very little.
 \end{itemize}
 
-When the vol-of-vol vanishes, the variance process collapses toward its
-deterministic mean-reverting limit, the Gaussian-mixture effect
-disappears, and the implied volatility surface moves back toward the flat
-Black--Scholes surface. The structural role of the variance process can
-therefore be summarised as follows: stochastic volatility generates
-excess kurtosis because the integrated variance $I_T$ is random rather
-than deterministic, and it generates skew through the interaction between
-variance shocks and price shocks.
+When vol-of-vol vanishes, the variance path is deterministic under
+the stated drift and initial condition. At each maturity the log-price
+then has a Gaussian law with integrated deterministic variance. The
+implied volatility is flat in strike for that maturity, but need not
+be constant across maturities unless the variance path is constant.
+Random integrated variance and correlation affect return tails and
+option smiles through different mechanisms; neither a universal
+smile symmetry nor a monotone change in every tail statistic is
+asserted for arbitrary parameter changes.
 
 Among the parametric specifications of
 \eqref{eq:SV_price}--\eqref{eq:SV_variance}, the most influential one is
@@ -1580,8 +1613,9 @@ e^{-rT}\,
 }
 \right]du,
 \end{equation}
-with $\alpha>0$ a damping coefficient chosen in such a way that
-$\varphi_T(u-i(\alpha+1))$ is well defined. Equivalently, the exercise
+with $\alpha>0$ satisfying the moment and inversion conditions above
+at this maturity, in particular $\mathbb E^{\mathbb Q}[S_T^{\alpha+1}]<\infty$.
+Equivalently, the exercise
 probabilities required for the writing of the price in the canonical
 Black--Scholes form
 \[
@@ -1640,11 +1674,12 @@ rT-\frac12 I_T
 \qquad
 I_T:=\int_0^T v_s\,ds.
 \end{equation}
-When $\rho=0$, conditionally on the variance path the stochastic integral
-in \eqref{eq:SV_log_short} is Gaussian with variance $I_T$; when
-$\rho\neq0$ it is conditionally Gaussian with variance $(1-\rho^2)I_T$ and a
-mean driven by the variance innovation.  In either case, if the
-variance process is regular at the origin, then
+For independent drivers ($\rho=0$), the integral in
+\eqref{eq:SV_log_short} is conditionally Gaussian with variance
+$I_T$. For correlated drivers, the decomposition
+$W^S=\rho W^v+\sqrt{1-\rho^2}W^\perp$ also introduces
+$\rho\int_0^T\sqrt{v_s}\,dW_s^v$, so that conditional statement
+cannot be reused. Separately, if the variance path is continuous at zero, then
 \[
 I_T=v_0T+o(T),
 \qquad T\downarrow 0,
@@ -1812,25 +1847,52 @@ Empirically, the Bates framework is designed to combine the strengths of the two
 The transition from Merton to Heston, and ultimately to Bates, represents a strategic trade-off between local and asymptotic non-normality. To conclude this synthesis, we evaluate the distinct ways in which these models generate the implied volatility skew and how they resolve the "term structure" problem.
 \subsubsection{Probability Tails and the Nature of Non-Normality}
 
-The fundamental difference lies in the mechanism of tail generation. In the Merton jump-diffusion model, non-normality is "injected" into the return distribution through the jump-size distribution $J$. This results in a distribution that is a weighted mixture of Gaussians, where the kurtosis is primarily driven by the jump intensity $\lambda$.
+In the Merton specification with Gaussian log-marks, conditional
+normal components are mixed over the Poisson count. Higher cumulants
+depend on both the arrival intensity and mark moments. For example,
+with independent increments and the required finite moments, the compound-jump
+cumulant of order $j\ge3$ is $\lambda T\mathbb E[J^j]$, while total
+variance is $T(\sigma^2+\lambda\mathbb E[J^2])$. These relations concern
+log-return moments, not implied-volatility derivatives.
 
-Conversely, in the Heston model with $\rho=0$, the log-return distribution is a mixture of Gaussians indexed by the random integrated variance $I_T = \int_0^T v_s ds$; with $\rho\neq0$ it is Gaussian only conditionally on the whole variance path, with variance $(1-\rho^2)I_T$ and a mean that depends on the variance innovation, so the mixture is not indexed by $I_T$ alone. Adding jumps, as in Bates, makes even the law conditional on the variance path non-Gaussian. Here, the excess kurtosis is generated by the "vol-of-vol" parameter $\xi$, which measures the uncertainty of the variance path. While Merton assumes that shocks are discrete and rare, Heston assumes that volatility itself is a continuous but unpredictable process.
+Heston instead generates continuous random variance. In the
+independent-driver case its log-return law admits the integrated-
+variance Gaussian-mixture description proved above. With nonzero
+price--variance correlation, a representation based only on $I_T$
+omits a correlated integral. Vol-of-vol controls one source of
+variance-path randomness, but it is not the sole determinant of all
+return cumulants or implied-volatility slopes.
 
 \subsubsection{The Term Structure of the Skew}
 
 The most critical theoretical distinction concerns how the implied volatility skew behaves as the time to maturity $\tau = T - t$ increases. We can formalize the "slope" of the skew near the money as $d \sigma_{imp} / d \ln K$.
 
 \begin{enumerate}
-    \item \textbf{Merton's Short-Maturity Dominance:} In the Merton model, the skew is extremely steep for short-dated options. However, as established by the Central Limit Theorem, the jump component's contribution to the total variance scales with $\lambda \tau$, while the diffusion variance scales with $\sigma^2 \tau$. As $\tau \to \infty$, the jump risk is diversified away, and the skew decays at a rate of $O(1/\sqrt{\tau})$.
-    \item \textbf{Heston's Long-Maturity Persistence:} In the Heston model, the correlation $\rho$ requires time to impact the terminal distribution. For very short maturities, the variance process is "quasi-deterministic," and the skew is negligible. However, for long maturities, the mean-reversion $\kappa$ and vol-of-vol $\xi$ ensure that the skew remains persistent and does not vanish as rapidly as in the pure jump case.
+\item \textbf{Jump effects.} Jump marks and arrival dynamics can affect
+short-maturity tails and option wings. Under the stated independent-
+increment moment assumptions, standardized log-return skewness may scale
+as $T^{-1/2}$ and excess kurtosis as $T^{-1}$. The CLT does not turn
+those statements into a universal implied-volatility-slope formula.
+\item \textbf{Stochastic-variance effects.} Price--variance correlation
+and vol-of-vol can generate a nonzero short-maturity ATM skew as well
+as maturity-dependent effects. Its longer-horizon behaviour depends
+on parameters and the asymptotic regime; no universal dominance over
+jump models is asserted here.
 \end{enumerate}
 \subsubsection{Why Bates Provides a Unified Benchmark}
 
-The Bates model overcomes these individual failures by assigning different mathematical "responsibilities" to different parameters. By inspecting the joint dynamics in \eqref{eq:bates_dynamics}, we can conclude that:
+Bates combines stochastic variance and jumps in
+\eqref{eq:bates_dynamics}, whose effects can overlap across maturities:
 \begin{itemize}[label = --]
-    \item The \textbf{Jump parameters} $(\lambda, \alpha_J, \delta_J)$ act as the primary drivers of the short-term skew, capturing the market's "crash-o-phobia" for immediate horizons.
-    \item The \textbf{Stochastic Volatility parameters} $(\kappa, \theta, \xi, \rho)$ act as the primary drivers of the long-term term structure, capturing the persistent leverage effect and volatility clustering.
+    \item The jump parameters $(\lambda,\alpha_J,\delta_J)$ influence
+    arrival rates, mark laws and tail events.
+    \item The stochastic-volatility parameters $(\kappa,\theta,\xi,\rho)$
+    influence variance mean reversion, volatility dynamics and smiles.
 \end{itemize}
+These mechanisms do not have exclusive short- or long-maturity roles.
+Their empirical contribution must be evaluated on the identified dataset
+and loss; additional parameters do not guarantee lower obtained error
+or better prediction.
 
 As a result, among the three benchmark models considered in this chapter, Bates
 is the most flexible framework for representing both short-maturity and

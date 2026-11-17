@@ -63,12 +63,13 @@ Hence, for large \( n \), the sample mean is approximately normal with variance 
 \end{theorem}
 
 \begin{remark}
-The CLT describes the distribution of the estimator for finite \( n \) and allows the construction of confidence intervals:
+For a large sample, the CLT gives an asymptotic approximation,
+not an exact finite-sample distribution. For $\varepsilon\ge0$,
 \[
-\mathbb{P}\left( |\bar{X}_n - \mu| \leq \varepsilon \right) 
-\approx \Phi\left( \frac{\sqrt{n}}{\sigma} \varepsilon \right),
+\mathbb P(|\bar X_n-\mu|\le\varepsilon)
+\approx 2\Phi\!\left(\frac{\sqrt n\,\varepsilon}{\sigma}\right)-1,
 \]
-where \( \Phi(\cdot) \) denotes the standard normal cumulative distribution function.
+where $\Phi$ is the standard normal CDF and $0<\sigma^2<\infty$.
 \end{remark}
 \subsection{Variance Estimation and Confidence Intervals }
 
@@ -89,14 +90,20 @@ where $\sigma_f^2 = \mathrm{Var}[f(X)]$. Since $\sigma_f^2$ is unknown, it is es
 \[
 \hat{\sigma}_f^2 = \frac{1}{N-1}\sum_{i=1}^N \left(f(X_i) - \hat{I}_N\right)^2.
 \]
-This quantity represents the dispersion of the elementary results $f(X_i)$ and decreases with $1/N$, showing that the accuracy of Monte Carlo improves at the rate $O(N^{-1/2})$, regardless of the problem’s dimension.
-
-The estimated variance allows for the construction of an asymptotic \emph{confidence interval} at level $1-\alpha$:
+The sample variance $\hat\sigma_f^2$ estimates the dispersion
+$\sigma_f^2$ of individual payoffs; it does not shrink as $1/N$.
+For independent samples,
+$\operatorname{Var}(\hat I_N)=\sigma_f^2/N$, estimated by
+$\hat\sigma_f^2/N$, with estimated standard error
+$\hat\sigma_f/\sqrt N$. For $0<\alpha<1$ and
+$0<\sigma_f^2<\infty$, the asymptotic confidence interval is
 \[
-\hat{I}_N \pm z_{\alpha/2}\,\frac{\hat{\sigma}_f}{\sqrt{N}},
+\hat I_N\pm z_{1-\alpha/2}\frac{\hat\sigma_f}{\sqrt N},
 \]
-where $z_{\alpha/2}$ is the quantile of the standard normal distribution.  
-This interval represents the region where the true value $I$ falls with approximate probability $1-\alpha$, providing an objective measure of the simulation’s precision.
+where $z_{1-\alpha/2}=\Phi^{-1}(1-\alpha/2)>0$ is the standard normal
+quantile.
+Approximate coverage refers to repeated sampling of the random
+interval, not a posterior probability for the fixed integral.
 
 A synthetic measure of the global error is the \emph{root mean square error} (RMSE), defined as
 \[
@@ -131,20 +138,25 @@ where the variance $\sigma_f^2 = \mathrm{Var}(e^{-X^2})$ is estimated empiricall
 \]
 From this, the confidence interval at level $1-\alpha$ is obtained as
 \[
-\hat{I}_N \pm z_{\alpha/2}\frac{\hat{\sigma}_f}{\sqrt{N}}.
+\hat I_N\pm z_{1-\alpha/2}\frac{\hat\sigma_f}{\sqrt N}.
 \]
 
 \paragraph{Numerical Analysis.}
-Assume we generate $N = 10^4$ samples (seed = 42). We obtain, for example,
+Using the illustrative printed summaries $N=10^4$ below (their
+seed-specific runtime has not been verified here),
 \[
 \hat{I}_{10^4} = 0.7510,\quad \hat{\sigma}_f = 0.1998,
 \]
-from which the 95\% confidence interval is
+the 95\% normal-approximation interval implied by those summaries is
 \[
-0.7510 \pm 1.96\frac{0.1998}{\sqrt{10^4}} = [0.7467,\ 0.7554],
+0.7510\pm1.96\frac{0.1998}{100}
+=[0.74708392,\,0.75491608].
 \]
-which effectively contains the analytical value $I_{\text{analytic}}$.  
-This demonstrates the statistical consistency of the Monte Carlo estimator and the validity of the asymptotic Gaussian approximation.
+The digits shown are arithmetic consequences of rounded inputs, not
+additional simulation precision. This interval does not contain the
+displayed analytical value $0.746824$. A single interval, whether or
+not it covers, does not demonstrate statistical consistency or verify
+the asymptotic approximation.
 
 \paragraph{RMSE Behavior.}
 In a repeated simulation with increasing numbers of samples $N$, the RMSE decreases according to the law
@@ -160,7 +172,10 @@ This behavior highlights the slow yet steady convergence typical of the Monte Ca
 
 
 \paragraph{Interpretation.}
-The example of $\int_0^1 e^{-x^2}\,dx$ is paradigmatic: the integrand is smooth and free of discontinuities, so the variance is finite and the convergence perfectly follows the Central Limit Theorem.  
+For this bounded integrand the i.i.d. estimator has finite variance,
+so the LLN and CLT apply under the stated sampling assumptions. They
+do not imply that every finite-sample interval covers the integral,
+and no additional seed-specific experiment is established here.
 In financial contexts, the integral represents the expected value of a payoff $f(X)$ under a given distribution $p(x)$: the described procedure is therefore directly applicable to estimating the expected price of a derivative or a Monte Carlo risk measure.
 \subsection{Application in Finance: European Option Pricing with Monte Carlo Simulation}
 
@@ -273,24 +288,27 @@ This means it produces all possible values \(x_i \in \{0, 1, \ldots, m-1\}\) bef
 Moreover, fixing the same initial seed \(x_0\) yields exactly the same sequence, a key feature for verification and replication of experimental results.
 \end{remark}
 
-\begin{remark}[Empirical uniformity]
-For an RNG to be usable in Monte Carlo, the sequence \(\{u_i\}\) should exhibit a uniform distribution on \([0,1]\). 
-Formally, for any interval \(A \subset [0,1]\),
+\begin{remark}[Finite-grid empirical uniformity]
+A deterministic finite-state generator with fixed seed eventually
+enters a cycle. Let $P$ be its period and $v_1,\ldots,v_P$ the
+outputs over one complete cycle, after any initial transient. For
+an interval $A\subset[0,1]$,
 \[
-\lim_{N \to \infty} \frac{1}{N}\sum_{i=1}^N \mathbf{1}_{\{u_i \in A\}} = \lambda(A),
+\lim_{N\to\infty}\frac1N\sum_{i=1}^N\mathbf1_{\{u_i\in A\}}
+=\frac{\#\{1\le j\le P:v_j\in A\}}{P}.
 \]
-where \(\lambda(A)\) denotes Lebesgue measure (length) of \(A\).
-In practice, this cannot be verified analytically and is assessed via statistical tests (e.g., the $\chi^2$ test) and graphical inspections of multidimensional uniformity.
+Even a full-period LCG visits a finite grid, not every point of a
+continuous uniform law. The i.i.d. uniform model used in Monte Carlo
+analysis is an idealization; empirical checks assess selected aspects
+of how a specified generator approximates it over the tested range.
 \end{remark}
 
 \begin{remark}[Apparent independence]
-Another fundamental requirement is the absence of visible correlation between successive values. 
-Since a deterministic generator cannot produce truly independent numbers, we require that any residual dependencies be \emph{statistically undetectable}. 
-Equivalently, for any test function \(f\) and samples \(u_i, u_j\) sufficiently far apart,
-\[
-\mathrm{Cov}(f(u_i), f(u_j)) \approx 0.
-\]
-Good apparent independence ensures that simulations do not introduce systematic bias from the arithmetic structure of the generator.
+Selected lag, projection and transformation tests can detect particular
+dependencies in a pseudo-random sequence. Their failure to reject is
+not independence and is not equivalent to zero covariance for every
+function and every pair of outputs. Generator parameters, seed, tested
+block lengths and the battery of checks must be specified separately.
 \end{remark}
 
 \begin{theorem}[Lattice structure of LCG sequences]
@@ -441,7 +459,10 @@ if for every \(a \in \mathbb{R}^d\) the linear combination \(a^\top X\) is univa
 \[
 a^\top X \sim \mathcal{N}(a^\top \mu,\, a^\top \Sigma a).
 \]
-Its density is
+The covariance $\Sigma$ is symmetric positive semidefinite; a zero
+variance in a linear direction is allowed in this definition. A
+density with respect to $d$-dimensional Lebesgue measure exists in
+the following form only when $\Sigma$ is positive definite:
 \[
 f_X(x) = \frac{1}{(2\pi)^{d/2}|\Sigma|^{1/2}}
 \exp\!\left(-\frac{1}{2}(x - \mu)^\top \Sigma^{-1} (x - \mu)\right).
@@ -453,7 +474,8 @@ Sampling \( X \sim \mathcal{N}(\mu, \Sigma) \) can be reduced to the standard ca
 
 \begin{theorem}[Sampling via Cholesky factorization]
 Let \(\Sigma\) be symmetric positive definite.
-Then there exists a unique lower–triangular matrix \(L\) such that
+Then there exists a unique lower-triangular matrix $L$ with strictly
+positive diagonal entries such that
 \[
 \Sigma = L L^\top.
 \]
@@ -559,7 +581,10 @@ and generation of financial scenarios consistent with multivariate risk models.
 \paragraph{Principal Component Analysis (PCA)}
 \begin{remark}[PCA as an alternative to Cholesky]
 An alternative to Cholesky for generating multivariate normals is \emph{Principal Component Analysis (PCA)}. 
-Again we start from the spectral decomposition of the covariance matrix:
+For symmetric positive semidefinite $\Sigma$, start from the
+spectral decomposition below. Zero eigenvalues are permitted, so this
+construction also handles a singular Gaussian law without asserting a
+full-dimensional density.
 \[
 \Sigma = V \Lambda V^\top,
 \]
@@ -576,8 +601,11 @@ the directions \(v_i\) are the \emph{principal components}, i.e., orthogonal dir
 
 \begin{remark}[Dimensionality reduction]
 In many high–dimensional simulations, 
-most of the total variance of \(\Sigma\) is concentrated in the first few eigenvalues.
-Then one may approximate \(X\) by retaining only the first \(k < d\) principal components:
+the leading eigenvalues may account for a large fraction of total
+variance. When $\operatorname{tr}(\Sigma)>0$, the retained fraction is
+$\sum_{i=1}^k\lambda_i/\operatorname{tr}(\Sigma)$. Using the same
+independent normal coordinates in the full and truncated vectors,
+one may retain the first $k<d$ components:
 \[
 X^{(k)} = \mu + \sum_{i=1}^{k} \sqrt{\lambda_i}\, v_i Z_i,
 \]
@@ -612,8 +640,11 @@ Then, generating only \(Z_1, Z_2 \sim \mathcal{N}(0,1)\) and setting
 \[
 X^{(2)} = \mu + \sqrt{\lambda_1}\, v_1 Z_1 + \sqrt{\lambda_2}\, v_2 Z_2,
 \]
-yields a two–dimensional simulation that captures most of the portfolio’s risk structure, 
-significantly reducing computational cost.
+retains 85\% of total factor variance in this hypothetical example.
+That percentage does not itself bound the error of every portfolio
+variance, tail-risk measure or nonlinear payoff; those depend on
+exposures and the retained directions. No Barrick dataset is implied.
+Only two normal coordinates are generated, reducing the sampling dimension.
 \end{example}
 
 \bigskip
@@ -624,9 +655,10 @@ PCA makes the geometry explicit and enables parsimonious representations of domi
 Both are fundamental for efficient simulation of correlated variates in multivariate Monte Carlo models.
 \subsection{Empirical Validation of Generators} 
 
-The statistical quality of a pseudo–random generator cannot be judged solely from its theoretical formulation: 
-its uniformity, independence, and correlation properties must be empirically verified. 
-The main methodologies include the \emph{uniformity $\chi^2$ test}, the \emph{QQ–plot} analysis, and the \emph{verification of empirical correlations}.
+Generator quality requires both mathematical specifications and
+empirical diagnostics. The following chi-square, QQ and correlation
+checks examine particular features under stated null models; they
+cannot verify absolute independence of a deterministic sequence.
 
 \begin{remark}[Purpose of empirical checks]
 An ideal generator should produce a sequence \(\{U_i\}\) that:
@@ -635,7 +667,9 @@ An ideal generator should produce a sequence \(\{U_i\}\) that:
     \item exhibits apparent independence between successive terms;
     \item shows no spurious correlations or geometric patterns in multidimensional samples.
 \end{enumerate}
-Since a deterministic generator cannot satisfy these conditions in the absolute sense, deviations from the theoretical assumptions are required to be statistically negligible within test tolerances.
+Each test has a specified null, size and sensitivity. Passing a
+finite collection of tests does not establish that every deviation is
+negligible for every payoff, dimension or simulation length.
 \end{remark}
 \paragraph{Uniformity $\chi^2$ test}
 
@@ -647,7 +681,11 @@ The test statistic is
 \[
 \chi^2 = \sum_{j=1}^{k} \frac{(O_j - E_j)^2}{E_j}.
 \]
-Under the null hypothesis of uniformity and for large \(N\), the statistic is approximately \(\chi^2_{k-1}\)–distributed with \(k-1\) degrees of freedom.
+Under the ideal null of independent uniforms, with bins fixed in
+advance, no parameters fitted and sufficiently large expected cell
+counts, the statistic has an asymptotic $\chi^2_{k-1}$ reference law.
+Dependent or low-discrepancy points do not automatically have this
+multinomial null distribution.
 \end{definition}
 
 \noindent
@@ -658,7 +696,9 @@ In practice, the test is applied for several values of \(k\) and on partial sequ
 If the p–value is too small (e.g., \(p < 0.01\)), 
 the uniformity hypothesis is rejected: 
 this may indicate that the generator favors certain parts of the interval or that the modulus arithmetic induces periodic patterns. 
-An excessively high p–value (\(p \approx 1\)) may also suggest over–regularity, a sign of imperfect pseudo–randomness.
+An isolated high p-value is not evidence of a flaw. Systematic
+over-regularity may be investigated through a specified repeated-test
+protocol; multiple tests and their dependence must be considered.
 \end{remark}
 
 \paragraph{QQ–plot analysis for normality and other distributions}
@@ -707,12 +747,23 @@ where dependence must be respected not only on average but also sample–wise.
 Correlation analysis can also reveal anomalies due to poor numerical conditioning in Cholesky or rounding issues.
 
 \begin{remark}[Sampling uncertainty]
-Because empirical correlations are noisy, 
-it is useful to compare the sample value with a confidence interval approximated by
+For $N>3$ independent and identically distributed pairs from a nondegenerate bivariate normal
+distribution, and $|\rho_{ij}^{\mathrm{emp}}|<1$, define
 \[
-\rho_{ij}^{\mathrm{emp}} \pm z_{\alpha/2}\sqrt{\frac{1 - (\rho_{ij}^{\mathrm{emp}})^2}{N-2}},
+\hat z=\operatorname{atanh}(\rho_{ij}^{\mathrm{emp}}),\qquad
+z_\pm=\hat z\pm\frac{z_{1-\alpha/2}}{\sqrt{N-3}}.
 \]
-where \(z_{\alpha/2}\) is the standard normal quantile for the desired confidence level.
+For $0<\alpha<1$, let $z_{1-\alpha/2}$ denote the standard normal
+quantile of order $1-\alpha/2$. A Fisher normal-approximation
+confidence interval of level $1-\alpha$ for the population correlation is
+\[
+[\tanh(z_-),\,\tanh(z_+)].
+\]
+This is asymptotic, not an exact finite-sample interval. The formula
+does not supply the same coverage for dependent pairs or arbitrary
+non-Gaussian generator diagnostics. Degenerate sample correlations
+$\pm1$ or zero sample variances require separate treatment; do not
+clip them silently into this formula.
 \end{remark}
 
 \paragraph{Application: comparing RNGs via European call pricing}
@@ -724,14 +775,19 @@ S_T = S_0 e^{(r - \frac{1}{2}\sigma^2)T + \sigma \sqrt{T}\,Z}.
 \]
 Comparing estimates from different RNGs (e.g., LCG, Mersenne Twister~\cite{MatsumotoNishimura1998}, Sobol, Halton) in terms of standard error and sample variance
 helps assess numerical stability and statistical efficiency.
-A high–quality RNG should produce consistent results within the estimated uncertainty, independent of the specific realization.
+Agreement within a valid uncertainty assessment is a useful check,
+not a requirement that every realization agree. Sobol and Halton
+outputs require their own QMC or randomized-QMC error assessment;
+their payoff sample variance is not an i.i.d. integration error.
 
 \bigskip
 \noindent
 \textbf{Summary.}  
-The $\chi^2$ test, QQ–plots, and empirical correlation checks are fundamental tools for validating pseudo–random generators. 
-They ensure that sequences used in Monte Carlo simulations are statistically reliable, 
-so that discrepancies from theory arise only from sampling noise rather than intrinsic flaws in the generator.
+Chi-square tests, QQ plots and correlation checks are diagnostics
+with finite scope. Passing them neither proves that a generator is
+flawless nor implies that all pricing discrepancies arise only from
+sampling noise; discretization, transformations and implementation
+errors remain separate possibilities.
 
 % ---- next approved source slice ----
 
@@ -920,7 +976,18 @@ If the asset pays a continuous dividend yield \(\delta\), the dynamics become
 \[
 \frac{dS(t)}{S(t)} = (r - \delta)\,dt + \sigma\,dW(t).
 \]
-Under this measure, the discounted price \(S(t)e^{-rt}\) is a martingale.
+Here $W$ denotes Brownian motion under $\mathbb Q$. For the
+dividend-paying asset above, with constant $r$, $\delta$, $\sigma$
+and fixed positive finite initial price, a nonzero
+dividend yield means that the discounted ex-dividend price $e^{-rt}S(t)$ alone is
+not a martingale: its drift is $-\delta e^{-rt}S(t)\,dt$. Instead, the
+discounted gains process
+\[
+G(t)=e^{-rt}S(t)+\int_0^t e^{-rs}\delta S(s)\,ds
+\]
+is a martingale on a finite horizon in this constant-coefficient GBM.
+Equivalently, $e^{-(r-\delta)t}S(t)$ is a martingale in this model. For
+$\delta=0$, these statements reduce to the no-dividend result.
 Typical parameterizations include:
 \begin{itemize}[leftmargin=10mm]
   \item \textbf{Equity indices:} \(\mu = r - \delta\), with \(\delta\) as the average dividend yield.
@@ -984,7 +1051,9 @@ For arithmetic Asian options we will use the \emph{geometric Asian} price (avail
 
 Many stochastic differential equations (SDEs) cannot be simulated in closed form.  
 In these cases, paths are generated through time discretization of the continuous process.  
-The most common approach is the \emph{Euler--Maruyama} method, which provides a simple first–order approximation of the stochastic integral.
+Euler--Maruyama is a local drift/diffusion approximation; its
+strong and weak orders must be distinguished under the corresponding
+regularity assumptions.
 
 \paragraph{Euler scheme.}
 Consider the general SDE
@@ -997,7 +1066,12 @@ On a uniform grid \(t_i = i\Delta t\), the discrete update is
 \widehat{X}_{i+1} = \widehat{X}_i + a(\widehat{X}_i)\,\Delta t
 + b(\widehat{X}_i)\sqrt{\Delta t}\,Z_i, \qquad Z_i\sim\mathcal N(0,1).
 \]
-The scheme replaces infinitesimal increments with local linear approximations and becomes exact when \(a\) and \(b\) are constant, as in the geometric Brownian motion.
+This additive update is exact on the grid when $a$ and $b$ are
+constant functions of the state. For GBM they are $a(x)=\mu x$ and
+$b(x)=\sigma x$, so the additive Euler update is not exact. The
+exponential GBM transition displayed earlier is exact on the grid for
+constant coefficients in the GBM specification. Here the $Z_i$ represent independent
+standardized Brownian increments on the grid.
 
 \paragraph{Convergence and error.}
 The accuracy of a discretization is assessed through two main notions:
@@ -1011,12 +1085,17 @@ The accuracy of a discretization is assessed through two main notions:
   |E[f(\widehat{X}_T)] - E[f(X_T)]| = O(\Delta t).
   \]
 \end{itemize}
-The Euler scheme therefore converges strongly with order \(1/2\) and weakly with order \(1\).  
-A second–order refinement, known as the \emph{Milstein scheme}, adds the correction term
+Under appropriate Lipschitz, growth and moment assumptions, Euler
+has strong order $1/2$. Weak order $1$ additionally requires sufficient
+regularity of the coefficients and the test payoff; discontinuous
+barrier events do not automatically satisfy these hypotheses.
+In the scalar case, Milstein adds
 \[
-\tfrac{1}{2}\,b(X_t)b'(X_t)\,(Z^2-1)\,\Delta t,
+\tfrac12 b(\widehat X_i)b'(\widehat X_i)(Z_i^2-1)\Delta t,
 \]
-achieving strong order~1 when \(b\) is smooth.
+and has strong order $1$ under its smoothness and moment conditions.
+This is not a generic second-order weak method, and these rates are
+not asserted for every square-root or jump model in the report.
 
 \paragraph{Bias and mean--square error.}
 The total mean--square error (MSE) combines discretization bias and Monte Carlo sampling noise:
@@ -1024,18 +1103,34 @@ The total mean--square error (MSE) combines discretization bias and Monte Carlo 
 \mathrm{MSE} \approx c_1^2\,\Delta t^{2\beta} + \frac{c_2}{n},
 \]
 where \(\beta\) denotes the weak order of the method and \(n\) the number of paths.  
-For the Euler scheme (\(\beta=1\)), halving the global error requires roughly four times more time steps, matching the classical \(O(N^{-1/2})\) convergence of Monte Carlo estimation.
+For a weak-order-one method in its applicable regime, the bias in
+the expectation is $O(\Delta t)$: halving that bias requires roughly
+halving $\Delta t$, or doubling the number of time steps on a fixed
+horizon. By contrast, halving an i.i.d. Monte Carlo standard error
+requires roughly four times as many paths. The balance of the two
+terms must be chosen for the payoff and error target at issue.
 
 \paragraph{Practical considerations.}
-When a closed--form transition is available (for instance in GBM), exact simulation is preferred since it eliminates bias entirely.  
-Otherwise, \(\Delta t\) must be chosen small enough that discretization error remains negligible compared to sampling variance.
+An exact GBM transition removes transition-discretization bias at the
+sampled dates, not every error in a path-dependent payoff. Between-date
+monitoring and quadrature errors can remain. With approximate
+transitions, compare sampling standard error and discretization bias
+on the same error scale, using the hypotheses of the selected scheme.
 
-For path--dependent payoffs, discretization may miss events such as barrier crossings between grid points.  
-A \emph{Brownian bridge} interpolation corrects this effect by computing the conditional crossing probability between successive steps:
+For a continuously monitored upper barrier, consider a Brownian
+log-price bridge with constant diffusion coefficient $\sigma>0$ over
+$\Delta t>0$. Given endpoints $x<h$ and $y<h$,
 \[
-p = 1 - \exp\!\left[-\frac{2(B - X_i)(B - X_{i+1})}{b_i^2\Delta t}\right],
+p_{\mathrm{hit}}=
+\exp\!\left[-\frac{2(h-x)(h-y)}{\sigma^2\Delta t}\right],
+\qquad p_{\mathrm{no\ hit}}=1-p_{\mathrm{hit}}.
 \]
-which can be used to reduce bias in continuously monitored options.
+For GBM use $x=\log S(t_i)$, $y=\log S(t_{i+1})$ and $h=\log H$
+for a price barrier $H>0$. If $x\ge h$ or $y\ge h$,
+the barrier has already been hit and $p_{\mathrm{hit}}=1$. These formulas concern continuous
+monitoring between the sampled endpoints; they do not prescribe a
+correction for a contract monitored only at discrete dates. They are
+not exact for a general state-dependent or jump diffusion.
 
 \begin{remark}[Summary]
 The Euler--Maruyama scheme provides a reliable and general baseline for the numerical simulation of diffusions.  
@@ -1156,8 +1251,13 @@ so that \(S_t\) is a Poisson mixture of lognormals.
 This generates leptokurtic distributions and captures the heavy tails typical of financial returns.
 
 \paragraph{Risk--neutral drift adjustment.}
-Under the risk--neutral measure, the drift is corrected to ensure that the discounted process \(S_t e^{-(r-\delta)t}\) is a martingale in presence of a continuous dividend yield \(\delta\).  
-If \(m = \mathbb E[Y - 1]\) is the mean relative jump size, the compensated drift becomes
+With constant rate $r$ and continuous dividend yield $\delta$,
+$\mathbb Q$-drift compensation makes $e^{-(r-\delta)t}S_t$
+a local martingale; a true martingale additionally requires integrability.
+Write $Z=\log Y$ and $m=\mathbb E^{\mathbb Q}[Y-1]
+=\mathbb E^{\mathbb Q}[e^Z-1]$, with finite absolute expectation.
+The arrival intensity and mark law must refer to this same measure.
+In the compound-Poisson case, the uncompensated drift is
 \[
 \mu = r - \delta - \lambda m.
 \]
@@ -1165,7 +1265,20 @@ Then,
 \[
 \frac{dS_t}{S_{t^-}} = (r-\delta)\,dt + \sigma\,dW_t + (dJ_t - \lambda m\,dt),
 \]
-so both the diffusion and compensated jump components are martingales.
+The compensated stochastic integrals are local martingales when well defined.
+For a marked counting measure $\mathcal N(dt,dz)$ with compensator
+$\lambda_{t^-}F^{\mathbb Q}(dz)\,dt$, the same convention gives
+\[
+\frac{dS_t}{S_{t^-}}=(r-\delta)\,dt+\sigma\,dW_t^{\mathbb Q}
++\int_{\mathbb R}(e^z-1)
+\bigl(\mathcal N(dt,dz)-\lambda_{t^-}F^{\mathbb Q}(dz)\,dt\bigr).
+\]
+Here $F^{\mathbb Q}$ is the fixed conditional law of the log-mark,
+with $\int|e^z-1|F^{\mathbb Q}(dz)<\infty$, and the intensity is
+locally integrable and predictable. Constant intensity gives the
+compound-Poisson case; Hawkes arrivals use their history-dependent
+intensity. A change to a physical or scenario law may change both
+intensity and mark expectation, so its compensator must use that law.
 
 \paragraph{Simulation on a fixed time grid.}
 On a uniform grid \(t_i=i\Delta t\), the logarithm of the price evolves as
@@ -1200,7 +1313,11 @@ Between jumps, the process evolves via the Euler or exact GBM scheme; when a jum
 \[
 S(\tau_j) = S(\tau_j^-)\,(1 + \kappa(Y_j)),
 \]
-where \(\kappa(Y_j)\) defines the jump amplitude.  
+Here $\kappa(Y_j)=Y_j-1=e^{Z_j}-1$, so the update multiplies
+$S(\tau_j^-)$ by $Y_j$. Chapter~8 instead uses $Y_j$ for the log-mark
+$Z_j$ defined above. The process $J_t$ accumulates relative jumps;
+it is not a single log-mark, and this local function $\kappa(\cdot)$
+is distinct from the CIR mean-reversion parameter.
 This structure preserves the weak order of convergence of the underlying diffusion scheme and is standard in Monte Carlo implementations.
 
 \begin{remark}[Barriers with jumps]
@@ -1345,7 +1462,12 @@ which simplifies to
 \[
 \mathrm{Cov}[Y_i,\widetilde{Y}_i] < 0.
 \]
-This condition requires that the simulation mapping \(f(\cdot)\) from inputs to outputs transforms positively correlated antithetic inputs into negatively correlated outputs. In particular, if \(Y = f(Z)\) is monotone increasing in each input \(Z_j\), and the antithetic counterpart is defined by \(\widetilde{Y} = f(-Z)\), then the covariance is nonpositive, ensuring a variance reduction.
+A distribution-preserving antithetic transformation keeps the
+marginal payoff law fixed, but does not automatically make payoff
+covariance negative. For independent standard normal input coordinates and a
+coordinatewise monotone integrand with finite second moment, $Z\mapsto-Z$ gives nonpositive
+covariance. This sufficient condition does not follow from negative
+input correlation alone for an arbitrary nonlinear payoff.
 \end{remark}
 
 \begin{remark}[Variance decomposition]
@@ -1362,34 +1484,46 @@ Antithetic sampling eliminates the contribution of the antisymmetric component \
 \end{remark}
 
 \begin{remark}[Systematic extensions]
-The antithetic transformation \(Z \mapsto -Z\) can be generalized to any orthogonal transformation \(T\) satisfying \(TZ \sim \mathcal{N}(0,I)\).  
-Applying multiple transformations \(T^1Z,\dots,T^kZ\) defines the systematic estimator
+Let $T_1,\ldots,T_k$ each preserve the input law, and set
+$Y_j=f(T_jZ)$ for the same $Z$. Then
 \[
-f_0(Z) = \frac{1}{k}\sum_{i=1}^{k} f(T^iZ),
+A_k=\frac1k\sum_{j=1}^kY_j,\qquad
+\operatorname{Var}(A_k)=\frac1{k^2}
+\left(\sum_{j=1}^k\operatorname{Var}(Y_j)
++2\sum_{i<j}\operatorname{Cov}(Y_i,Y_j)\right).
 \]
-which preserves the expected value and achieves variance reduction when
-\[
-\sum_{j=1}^{k-1}\mathrm{Cov}[f(Z),f(T^jZ)] < 0.
-\]
-The classical antithetic case corresponds to \(k=2\) and \(T=-I\).
+With finite equal marginal variances, $n$ independent groups use $kn$
+payoff evaluations. Relative to $kn$ independent evaluations, a
+strict variance reduction requires
+$\sum_{i<j}\operatorname{Cov}(Y_i,Y_j)<0$.
+For standard normal $Z$, orthogonal transformations preserve its law.
+The classical pair uses $T_1=I$ and $T_2=-I$. A simplified cyclic
+covariance sum needs additional symmetry assumptions and is not a
+formula for arbitrary collections of transformations.
 \end{remark}
 
 \begin{remark}[Practical advantages]
-The antithetic variates method is easy to implement and computationally inexpensive, as it reuses the same random inputs with opposite signs or complementary values. It preserves unbiasedness, introduces only minimal correlation structure, and is particularly effective for approximately monotone or symmetric payoffs. The method provides variance reduction without altering the sampling distribution or requiring auxiliary expectations.
+Antithetic sampling is inexpensive and preserves expectation when
+the transformation preserves the input law. Its efficiency depends
+on the payoff covariance at equal evaluation cost. It cancels the
+odd component under $Z\mapsto-Z$; for an even payoff the two outputs
+are identical, so symmetry alone is not a guarantee of improvement.
 \end{remark}
 
 % ---- next approved source slice ----
 
 \subsection{Quasi--Monte Carlo Methods}
 
-Quasi--Monte Carlo (QMC) methods represent one of the most significant developments in modern numerical simulation. They combine the conceptual structure of Monte Carlo integration with a deterministic construction of sampling points, achieving a substantially faster convergence rate than classical pseudo--random techniques. The core idea is to replace independent pseudo--random numbers with \emph{low--discrepancy sequences}, designed to cover the hypercube $[0,1]^d$ with exceptional uniformity.
+Quasi--Monte Carlo (QMC) replaces independent pseudo-random sampling
+with deterministic low-discrepancy points that cover $[0,1]^d$ uniformly.
+Its accuracy depends on the integration problem and point construction.
 
-The motivation behind this approach is that the error rate of standard Monte Carlo is limited by the statistical convergence $O(N^{-1/2})$, which follows from the Central Limit Theorem. In contrast, for low--discrepancy sequences, one can obtain nearly linear convergence rates, typically of the form
-\[
-O\!\left( \frac{(\log N)^d}{N} \right),
-\]
-which, for moderate values of $d$, results in a drastic improvement in precision for the same computational cost.  
-In path--dependent and multi--asset financial problems, this acceleration has considerable practical importance.
+For i.i.d. Monte Carlo with finite payoff variance, the root-mean-square
+error is $O(N^{-1/2})$. For fixed dimension and finite Hardy--Krause
+variation, Koksma--Hlawka and a suitable low-discrepancy construction
+give a deterministic bound $O((\log N)^d/N)$, not a universal gain at
+equal cost. Inverse-normal transformations and discontinuous payoffs
+can violate the finite-variation assumption.
 \paragraph{Discrepancy and point uniformity}
 
 The notion of \emph{discrepancy} is central to understanding the effectiveness of QMC.  
@@ -1432,7 +1566,9 @@ where $V_{\mathrm{HK}}(f)$ measures the structural complexity of $f$.
 This result is fundamental for two reasons:
 \begin{enumerate}
     \item it provides a \emph{deterministic} error bound, unlike classical Monte Carlo which offers only probabilistic guarantees;
-    \item it shows that the convergence rate is driven entirely by the discrepancy of the chosen sequence.
+    \item for a fixed integrand of finite Hardy--Krause variation,
+          the bound involves both variation and discrepancy; infinite
+          or unknown variation prevents its direct use as an error bar.
 \end{enumerate}
 Although the bound is often pessimistic and the variation $V_{\mathrm{HK}}(f)$ is rarely computable in practice, the inequality provides the theoretical justification for QMC.
 \paragraph{Low--discrepancy sequences}
@@ -1467,21 +1603,30 @@ Common randomization techniques include:
     \item \textbf{Cranley–Patterson rotation}: random toroidal shifts.
 \end{itemize}
 
-Randomization generates $K$ independent versions of the low--discrepancy sequence:
+A replication protocol uses $K_{\mathrm{rep}}\ge2$ independent randomizations, each with
+$N$ points. Denote their integral estimates and average by
 \[
-\widehat{I}_N^{(k)} = \frac{1}{N}\sum_{i=1}^N f\bigl(x_i^{(k)}\bigr),
-\qquad k=1,\dots,K,
+\widehat I_N^{(k)}=\frac1N\sum_{i=1}^N f(x_i^{(k)}),\qquad
+\overline I_N=\frac1{K_{\mathrm{rep}}}
+\sum_{k=1}^{K_{\mathrm{rep}}}\widehat I_N^{(k)}.
 \]
-and the overall estimator
+If each randomized point is uniform on the cube and $f$ is integrable,
+each replica is unbiased for the unchanged integration map. For
+identically distributed independent replicas with finite variance,
+the sample variance and estimated standard error of their average are
 \[
-\overline{I}_N = \frac{1}{K}\sum_{k=1}^K \widehat{I}_N^{(k)}
+s_{\mathrm{rep}}^2=\frac1{K_{\mathrm{rep}}-1}
+\sum_{k=1}^{K_{\mathrm{rep}}}(\widehat I_N^{(k)}-\overline I_N)^2,
+\qquad
+\widehat{\mathrm{SE}}(\overline I_N)
+=\frac{s_{\mathrm{rep}}}{\sqrt{K_{\mathrm{rep}}}}.
 \]
-is unbiased.  
-The empirical variance across the $K$ samples provides a statistical error estimate, typically with variance
-\[
-\operatorname{Var}(\overline{I}_N) = O\!\left(\frac{1}{N^2}\right),
-\]
-in contrast with the $O(1/N)$ of classical Monte Carlo.
+This uses independent integral estimates, not independent points
+within one scramble. Its rate depends on the integrand and the
+randomization; no universal $O(N^{-2})$ variance rate is asserted.
+Postprocessing such as sample moment matching requires its own bias
+and variance assessment. Replicate-based uncertainty does not remove
+any such bias or any path-discretization error.
 \paragraph{Convergence and effective dimension}
 
 In high dimensions, theoretical bounds may deteriorate due to the \emph{curse of dimensionality}.  
@@ -1491,7 +1636,9 @@ In particular, Brownian motion allows a substantial reduction of the \emph{effec
     \item \textbf{Brownian Bridge construction}: concentrates the largest variances in early coordinates of the QMC sequence;
     \item \textbf{PCA}: diagonalizes the covariance matrix of log-returns, reducing complexity to a few dominant factors.
 \end{itemize}
-Both techniques substantially enhance QMC performance, preserving its near-linear convergence rate.
+Brownian bridge and PCA can improve effective dimension for some
+payoffs; they do not by themselves guarantee a near-linear convergence
+rate or a fixed variance reduction.
 \paragraph{Financial applications and numerical implementation}
 
 Quasi--Monte Carlo methods have become a standard tool for the numerical valuation of complex derivatives and the simulation of high--dimensional stochastic models in quantitative finance. Their main advantage lies in the substantial variance reduction and the increased stability of numerical estimates, especially in problems where classical Monte Carlo suffers from slow convergence or high noise.
@@ -1534,7 +1681,12 @@ Consider an arithmetic Asian call with strike $K$ and maturity $T$, monitored at
 In a QMC framework, we proceed as follows:
 \begin{enumerate}
     \item generate $N$ points $u_i \in [0,1]^m$ using a Sobol' low--discrepancy sequence~\cite{Sobol1967};
-    \item transform each component via the inverse standard normal CDF to obtain $Z_i \in \mathbb{R}^m$ with i.i.d.\ $N(0,1)$ entries;
+    \item apply the inverse normal CDF to coordinates in $(0,1)$ to form
+          $Z_i\in\mathbb R^m$.
+          Deterministic QMC supplies normal-scale inputs, not random
+          i.i.d. draws. A randomized point uniform on the cube has
+          independent normal coordinates, but different paths within
+          the same randomization generally remain dependent;
     \item construct GBM paths using the exact discretisation
     \[
     S_{t_{j+1}} = S_{t_j} \exp\!\left( \bigl(r - \tfrac{1}{2}\sigma^2\bigr)\Delta t + \sigma \sqrt{\Delta t}\,Z_{i,j} \right), 
@@ -1546,13 +1698,19 @@ In a QMC framework, we proceed as follows:
     \]
 \end{enumerate}
 
-The procedure can be implemented with the Sobol' engine of \texttt{scipy.stats.qmc}. Although QMC is deterministic, a standard--error estimate obtained from the sample variance of the payoffs is useful in practice as a heuristic error indicator.
+Payoff dispersion divided by $\sqrt N$ from one deterministic or
+scrambled point set is not a justified standard error of the QMC
+integral. Independent randomizations as above are needed for a
+replication-based assessment, as in the Article~3 companion code, which uses independent scrambled Sobol' sets.
 
 
 
 
 In a production--grade implementation, this QMC engine can be embedded into a larger pricing framework, combined with Brownian Bridge or PCA to reduce the effective dimension and extended to multi--asset settings by introducing correlated normal variates through Cholesky factorisation of the covariance matrix.  
-Such architectures leverage the superior convergence of QMC to obtain more accurate and stable prices and Greeks, often with one or two orders of magnitude fewer paths than standard Monte Carlo.
+Such architectures may improve efficiency for suitable integrands.
+Any claimed gain must name the benchmark, evaluation cost, estimator
+and uncertainty protocol; no fixed orders-of-magnitude gain is
+guaranteed for the present application.
 \subsubsection{Comparative Numerical Benchmark for Variance Reduction Methods}
 
 

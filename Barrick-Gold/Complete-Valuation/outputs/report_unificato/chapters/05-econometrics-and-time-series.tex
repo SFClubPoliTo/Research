@@ -239,13 +239,21 @@ The degrees of freedom are $n - (k+1)$: we subtract $k+1$ because we have estima
 To test the null hypothesis $H_0: \beta_j = 0$, we compute the $t$-statistic:
 $$t_{\hat{\beta}_j} = \frac{\hat{\beta}_j}{se(\hat{\beta}_j)}$$
 
-This measures how many estimated standard deviations $\hat{\beta}_j$ is away from zero. We compare this value to a critical value $c$ from the $t_{n-k-1}$ distribution:
-
+The statistic measures how many estimated standard deviations $\hat\beta_j$
+is away from zero.
+Let $t_{\nu,p}$ denote the $p$-quantile of the Student distribution,
+with $\nu=n-k-1>0$. At significance level $0<\alpha<1$:
 \begin{itemize}
-\item \textbf{Two-Sided Alternative} ($H_1: \beta_j \neq 0$): Reject $H_0$ if $|t_{\hat{\beta}_j}| > c$, where $c$ is the 97.5th percentile for a 5\% test.
-\item \textbf{One-Sided Alternative} ($H_1: \beta_j > 0$): Reject $H_0$ if $t_{\hat{\beta}_j} > c$.
-\item \textbf{One-Sided Alternative} ($H_1: \beta_j < 0$): Reject $H_0$ if $t_{\hat{\beta}_j} < -c$.
+\item For $H_1:\beta_j\ne0$, reject when
+$|t_{\hat\beta_j}|>t_{\nu,1-\alpha/2}$.
+\item For $H_1:\beta_j>0$, reject when
+$t_{\hat\beta_j}>t_{\nu,1-\alpha}$.
+\item For $H_1:\beta_j<0$, reject when
+$t_{\hat\beta_j}<t_{\nu,\alpha}=-t_{\nu,1-\alpha}$.
 \end{itemize}
+For $\alpha=0.05$, the upper one-sided critical quantile level is $0.95$,
+whereas the upper two-sided critical quantile level is $0.975$. These exact
+Student critical values use the stated normal CLM assumptions.
 
 It is crucial to distinguish between \textbf{statistical significance} and \textbf{economic significance}. Statistical significance is determined by the size of the $t$-statistic, which depends on both the coefficient's magnitude and the standard error's smallness. Economic significance is determined by the \textbf{magnitude and sign of $\hat{\beta}_j$} relative to the scale of the variables. With large sample sizes, standard errors become very small, and even trivially small effects can achieve statistical significance. Therefore, after checking for statistical significance, one must always interpret the magnitude of the coefficient to assess its practical importance.
 \subsection{Confidence Intervals}
@@ -431,14 +439,36 @@ The main advantage is \textbf{time additivity}: the total log return over multip
 
 Consider $N$ assets held for $T$ periods. For each asset $i$, let $r_{it}$ be the log return at time $t$. The log returns $\{r_{it}\}$ are often treated as i.i.d. as a baseline model, although this assumption has important limitations.
 
-The most general model for the joint distribution of log returns is the conditional CDF:
-$$F_r(r_{11}, \ldots, r_{NT}; Y; \theta)$$
+The joint conditional distribution of all $N$ assets over $T$ periods
+can be represented by the CDF
+\[
+F_r(r_{11},\ldots,r_{NT}\mid Y;\theta),
+\]
+where $Y$ is the state information and $\theta$ denotes model parameters.
 
-where $Y$ is a vector of state variables and $\theta$ is a vector of parameters. Treating $Y$ as known, we partition the joint distribution as:
-$$F(r_{i1}, \ldots, r_{iT}; \theta) = F(r_{i1}) \prod_{t=2}^T F(r_{it} \mid r_{i,t-1}, \ldots, r_{i1})$$
-
-This highlights the time-based dependence of log returns. Under normality, the conditional distribution is:
-$$f(r_1, \ldots, r_T; \theta) = f(r_1; \theta) \prod_{t=2}^T \frac{1}{\sqrt{2\pi\sigma_t}} \exp\!\left(\frac{-(r_t - \mu_t)^2}{2\sigma_t^2}\right)$$
+For one asset, write the return history as
+$\mathbf r=(r_1,\ldots,r_T)$ and condition on the state information $Y$.
+When the conditional densities exist, their chain rule is
+\[
+f(\mathbf r\mid Y;\theta)=f(r_1\mid Y;\theta)
+\prod_{t=2}^T f(r_t\mid r_1,\ldots,r_{t-1},Y;\theta).
+\]
+This is a density factorization, not a product rule for CDFs. For
+example, a bivariate CDF satisfies
+\[
+F_{X,Z}(x,z)=\int_{(-\infty,x]}F_{Z\mid X=u}(z)\,dF_X(u).
+\]
+If $r_t$ is conditionally Gaussian with conditional mean $\mu_t$ and
+conditional standard deviation $\sigma_t>0$, its density is
+\[
+f(r_t\mid r_1,\ldots,r_{t-1},Y;\theta)
+=\frac{1}{\sqrt{2\pi}\,\sigma_t}
+\exp\!\left[-\frac{(r_t-\mu_t)^2}{2\sigma_t^2}\right].
+\]
+The parameters may depend on the conditioning information; this does
+not impose temporal independence. If the returns are independent
+conditional on $Y$, the corresponding conditional CDF factorizes
+into the product of its marginal conditional CDFs.
 
 Empirical evidence consistently shows that financial returns deviate from normality: they exhibit excess kurtosis (fat tails) and skewness. These \textbf{stylized facts} motivate the more sophisticated time series models discussed in subsequent chapters.
 
@@ -453,7 +483,11 @@ A weaker and more commonly used version is \textit{weak stationarity} (or covari
     \item[(b)] $\operatorname{Cov}(r_t, r_{t-\ell}) = \gamma_\ell$, depending only on the lag $\ell$, not on $t$
 \end{itemize}
 
-In practice, weak stationarity implies that a time plot shows values fluctuating with constant variation around a fixed level. The covariance $\gamma_\ell = \operatorname{Cov}(r_t, r_{t-\ell})$ is called the lag-$\ell$ \textbf{autocovariance}, satisfying $\gamma_0 = \operatorname{Var}(r_t)$ and $\gamma_{-\ell} = \gamma_\ell$.
+Weak stationarity fixes the unconditional mean, variance and lag
+covariances; a single time plot cannot establish these properties or
+ergodicity. Write $\gamma_\ell=\operatorname{Cov}(r_t,r_{t-\ell})$,
+with $0<\gamma_0<\infty$ for the correlation formulas below and
+$\gamma_{-\ell}=\gamma_\ell$.
 
 It is common to assume that asset return series are weakly stationary.
 \subsection{Correlation and Autocorrelation Functions}
@@ -463,7 +497,11 @@ The correlation coefficient between two random variables $X$ and $Y$ is:
 $$\rho_{x,y} = \frac{\operatorname{Cov}(X,Y)}{\sqrt{\operatorname{Var}(X)\operatorname{Var}(Y)}} = \frac{E[(X-\mu_x)(Y-\mu_y)]}{\sqrt{E(X-\mu_x)^2 \cdot E(Y-\mu_y)^2}}$$
 \end{definition}
 
-This coefficient measures the strength of linear dependence, with $-1 \leq \rho_{x,y} \leq 1$. The two variables are uncorrelated if $\rho_{x,y} = 0$. Furthermore, if both $X$ and $Y$ are normal random variables, then $\rho_{x,y} = 0$ if and only if $X$ and $Y$ are independent. The sample counterpart is:
+The coefficient measures linear dependence, with
+$-1\le\rho_{x,y}\le1$ when both variances are positive and finite.
+Zero correlation means uncorrelatedness. For a jointly Gaussian
+pair, and not merely Gaussian marginal distributions, zero covariance
+is equivalent to independence. The sample counterpart is:
 $$\hat{\rho}_{x,y} = \frac{\sum_{t=1}^T (x_t - \bar{x})(y_t - \bar{y})}{\sqrt{\sum_{t=1}^T (x_t - \bar{x})^2 \sum_{t=1}^T (y_t - \bar{y})^2}}$$
 
 \begin{definition}[Autocorrelation Function (ACF)]
@@ -476,20 +514,35 @@ From the definition, $\rho_0 = 1$, $\rho_\ell = \rho_{-\ell}$, and $-1 \leq \rho
 For a given sample $\{r_t\}_{t=1}^T$, the lag-$\ell$ sample autocorrelation is:
 $$\hat{\rho}_\ell = \frac{\sum_{t=\ell+1}^T (r_t - \bar{r})(r_{t-\ell} - \bar{r})}{\sum_{t=1}^T (r_t - \bar{r})^2}, \quad 0 \leq \ell < T - 1$$
 
-If $\{r_t\}$ is an i.i.d. sequence with $E(r_t^2) < \infty$, then $\hat{\rho}_\ell$ is asymptotically normal with mean zero and variance $1/T$.
+For an i.i.d. sequence with positive finite variance and finite fourth
+moment, $\sqrt T\,\hat\rho_\ell\xrightarrow{d}\mathcal N(0,1)$ at each
+fixed lag $\ell\ge1$. Thus $\pm1.96/\sqrt T$ is an approximate 95\%
+pointwise reference band under this null, not a simultaneous band or
+a universal band for dependent or conditionally heteroskedastic data.
+At lag zero, $\hat\rho_0=1$ whenever the sample variance is positive.
 \subsection{White Noise and Linear Time Series}
 
-A time series $r_t$ is called a \textbf{white noise} if $\{r_t\}$ is a sequence of independent and identically distributed random variables with finite mean and variance. If $r_t$ is normally distributed with mean zero and variance $\sigma^2$, the series is a \textbf{Gaussian white noise}. For a white noise series, all ACFs are zero.
+A weak white-noise process has zero mean, constant finite variance
+and zero autocovariance at every nonzero lag. Independence is an
+additional condition; an i.i.d. zero-mean sequence is strong white
+noise. Gaussian white noise means that the finite-dimensional vectors
+are jointly Gaussian as well as uncorrelated, hence independent.
+For positive variance, its ACF is zero at nonzero lags and one at lag zero.
 
 A time series $\{r_t\}$ is said to be \textbf{linear} if it can be written as:
 $$r_t = \mu + \sum_{i=0}^\infty \psi_i a_{t-i}$$
 
 where $\mu$ is the mean, $\psi_0 = 1$, and $\{a_t\}$ is a white noise series (the innovation or shock at time $t$).
 
-Under stationarity:
-$$E(r_t) = \mu, \quad \operatorname{Var}(r_t) = \sigma_a^2 \sum_{i=0}^\infty \psi_i^2, \quad \rho_\ell = \frac{\sum_{i=0}^\infty \psi_i \psi_{i+\ell}}{1 + \sum_{i=1}^\infty \psi_i^2}$$
-
-For a weakly stationary time series, $\psi_i \to 0$ as $i \to \infty$, meaning that the linear dependence of $r_t$ on the remote past diminishes for large $\ell$.
+For this causal linear representation, assume zero-mean uncorrelated
+innovations with $0<\sigma_a^2<\infty$ and
+$\sum_{i=0}^{\infty}\psi_i^2<\infty$. Since $\psi_0=1$,
+$$E(r_t)=\mu,\quad \operatorname{Var}(r_t)=\sigma_a^2\sum_{i=0}^{\infty}\psi_i^2,
+\quad \rho_\ell=\frac{\sum_{i=0}^{\infty}\psi_i\psi_{i+\ell}}
+{\sum_{i=0}^{\infty}\psi_i^2}\quad(\ell\ge0).$$
+Square summability implies $\psi_i\to0$, so the contribution of remote
+innovations diminishes. Weak stationarity alone does not imply this
+causal representation or consistency of sample correlations.
 
 % ===============================
 \subsection{Autoregressive Models}
@@ -573,9 +626,18 @@ Having introduced the building blocks of linear dependence, we can now study mod
 In practice, a model combining both AR and MA structures may be more appropriate. An ARMA($p$,$q$) model:
 $$r_t = \phi_0 + \phi_1 r_{t-1} + \cdots + \phi_p r_{t-p} + a_t - \theta_1 a_{t-1} - \cdots - \theta_q a_{t-q}$$
 
-is stationary if all AR roots lie outside the unit circle, and invertible if all MA roots lie outside the unit circle. The unconditional mean under stationarity is $E(r_t) = \phi_0/(1 - \phi_1 - \cdots - \phi_p)$.
+Here the innovations $a_t$ are centered white noise with
+$0<\sigma_a^2<\infty$. For the usual causal representation of the
+centered process, the AR roots of the reduced transfer function must
+lie outside the unit circle; invertibility requires its MA roots outside
+it. Common AR/MA factors are cancelled in that transfer function.
+For the displayed coefficients, provided $1-\phi_1-\cdots-\phi_p\ne0$,
+the stationary mean is $\mathbb E(r_t)=\phi_0/(1-\phi_1-\cdots-\phi_p)$.
 
-A key property: \textbf{both ACF and PACF tail off to zero}, without sharp cutoff. This signature characteristic distinguishes ARMA from pure AR (PACF cuts off) and pure MA (ACF cuts off) models.
+In a nondegenerate mixed ARMA model in minimal form, both ACF and
+PACF generally tail off rather than displaying the finite cutoff of a
+pure AR or pure MA model. Zero coefficients or cancellations can reduce
+the order and change this diagnostic pattern.
 
 \textbf{Model Identification via Information Criteria.} Since visual inspection is often ambiguous for ARMA models, a systematic approach uses:
 $$\text{AIC}(p,q) = -2\log(\hat{L}) + 2(p + q + 1), \qquad \text{BIC}(p,q) = -2\log(\hat{L}) + (p + q + 1)\log(T)$$
@@ -585,7 +647,12 @@ The preferred model minimizes the criterion. A practical strategy fits a range o
 % ===============================
 \subsubsection{The ARMA(1,1) Model}
 \textbf{Stationarity and Invertibility.}
-For an ARMA(1,1) model to be weakly stationary, the AR component must satisfy $|\phi_1| < 1$. For the model to be invertible, the MA component must satisfy $|\theta_1| < 1$. Under these conditions, the process admits both a stationary AR representation with infinite order and an invertible MA representation with infinite order.
+For the usual causal ARMA(1,1) with the minus-MA convention used
+above, assume $|\phi_1|<1$. This gives a stationary causal
+MA$(\infty)$ representation and the moments below. The additional
+condition $|\theta_1|<1$ gives an AR$(\infty)$ representation in terms
+of past observations. If $\phi_1=\theta_1$ in this parameter region,
+the centered process reduces to white noise after cancellation.
 
 The unconditional mean of an ARMA(1,1) model is
 \[
@@ -597,35 +664,50 @@ The unconditional variance is
 \]
 
 \textbf{Autocorrelation Function.}
-Unlike pure AR or MA models, the ACF of an ARMA(1,1) model does not exhibit a simple cutoff pattern. Instead, the ACF decays exponentially after the initial lags. Specifically, for lags $\ell \geq 2$,
+For this causal ARMA(1,1), the ACF satisfies the following recursion;
+except in reduced or cancellation cases, it tails off rather than
+having the finite cutoff of a pure MA model. For $\ell\ge2$,
 \[
 \rho_\ell = \phi_1 \rho_{\ell-1},
 \]
 which shows that the ACF follows an AR(1)-like recursive structure for $\ell \geq 2$. The lag-1 ACF is
 \[
-\rho_1 = \frac{\phi_1(1 - \phi_1\theta_1) + (\theta_1 - \phi_1)}{1 + \theta_1^2 - 2\phi_1\theta_1}.
+\rho_1=\frac{(\phi_1-\theta_1)(1-\phi_1\theta_1)}
+{1+\theta_1^2-2\phi_1\theta_1}.
 \]
-The PACF of an ARMA(1,1) model also exhibits an exponential decay pattern similar to that of an MA(1) model.
+The PACF generally tails off in a minimal mixed ARMA(1,1), with
+the appropriate exceptions when the process reduces to a lower-order
+model. In particular, $\phi_1=\theta_1$ gives white noise after cancellation.
 
 \subsection[General ARMA(p,q) Models]
 {General ARMA(\texorpdfstring{$p$}{p},\texorpdfstring{$q$}{q}) Models}
-The general ARMA$(p,q)$ model combines $p$ autoregressive terms and $q$ moving-average terms. The model is stationary if all roots of the characteristic AR polynomial $1 - \phi_1 z - \cdots - \phi_p z^p = 0$ lie outside the unit circle. The model is invertible if all roots of the MA characteristic polynomial $1 - \theta_1 z - \cdots - \theta_q z^q = 0$ lie outside the unit circle.
+The general ARMA$(p,q)$ model combines $p$ autoregressive and $q$
+moving-average terms. The displayed AR and MA polynomials are
+$A(z)=1-\phi_1z-\cdots-\phi_pz^p$ and
+$B(z)=1-\theta_1z-\cdots-\theta_qz^q$, respectively.
+For the centered process in minimal form, a causal stationary
+representation has all AR roots outside the unit circle, and an
+invertible representation has all MA roots outside it. If common factors
+exist, these root conditions apply after their cancellation. The mean
+below uses the displayed coefficients and a nonzero denominator.
 
 Under stationarity and invertibility conditions, the unconditional mean is
 \[
 \mathbb{E}(r_t) = \frac{\phi_0}{1 - \phi_1 - \cdots - \phi_p}.
 \]
 
-A key property of ARMA$(p,q)$ models is that:
-\begin{itemize}
-    \item The ACF decays exponentially with a pattern determined by the AR characteristic roots. It does not exhibit the sharp cutoff of pure AR or MA models.
-    \item The PACF also decays exponentially, without sharp cutoff.
-    \item Both ACF and PACF tail off to zero, indicating a mixed structure.
-\end{itemize}
-
-This property of both ACF and PACF tailing off is the signature characteristic of ARMA models and distinguishes them from pure AR and MA models.
+For a minimal causal and invertible mixed ARMA$(p,q)$ model,
+the ACF and PACF generally tail off. Their decay reflects the roots
+of the corresponding polynomials; zero coefficients or common factors
+may instead produce a reduced AR, MA or white-noise model. The absence
+of an obvious cutoff is a model-identification aid, not a proof of the
+chosen orders or an invariant property of every parameter vector.
 \subsubsection{Identifying ARMA Models}
-Identifying the orders $p$ and $q$ of an ARMA model is more challenging than identifying pure AR or MA models because both the ACF and PACF exhibit exponential decay without sharp cutoff. Several approaches are available for model identification.
+Identifying the orders of a minimal mixed ARMA model is often more
+challenging than identifying pure AR or MA models: ACF and PACF
+generally tail off. Reduced orders or common-factor cancellations are
+exceptions, so this pattern alone does not identify the model. Several
+approaches are available for model identification.
 
 \textbf{Visual Inspection of ACF and PACF.}
 The sample ACF and PACF provide visual clues for ARMA identification. If both the sample ACF and PACF decay exponentially without showing a clear cutoff, an ARMA model is suggested. A plot showing ACF tailing off gradually and PACF also tailing off gradually is indicative of an ARMA structure.

@@ -143,18 +143,26 @@ Chapter~\ref{ch:calibration}; Team~4's standalone demonstrator is excluded.
 Quarterly production of mine $i$ is built from three physical drivers,
 \begin{equation}
 \mathrm{Prod}_{i,t}=\frac{\kappa}{c}O_{i,t}G_{i,t}R_{i,t},
-\qquad\kappa=0.91,\quad c=31.1035~\text{g/oz},
+\qquad\kappa=0.91,\quad c=31.1034768~\text{g/troy oz},
 \label{eq:company-production-identity}
 \end{equation}
 where $O$ is ore processed in tonnes, $G$ processed grade in grams per tonne
 and $R\in(0,1)$ recovery. Their product is recovered gold in grams; $c$
-converts grams to troy ounces. The realisation factor $\kappa$ is the mean
-mine ratio of realised to theoretical production, absorbing lags such as
-stockpiling, heap leaching and autoclave residence \cite{team4}. The source
-uses rounded $31.11$, lowering output approximately $0.02\%$; conversion
-is from grams, not tonnes as stated in its text. Ore uses
+converts grams to troy ounces. The empirical realization factor
+$\kappa$ is separate from this conversion. Its value $0.91$ is a
+source assumption/calibration, not a physical constant \cite{team4}; the historical
+realized/theoretical ratios needed to re-estimate it are not supplied
+by this identity. Recovery is a fraction (for example, 82\% is $0.82$).
+If $O$ is recorded in kt rather than tonnes, the same numerical
+formula returns koz rather than oz. The historical source text used the
+rounded $31.11$; changing the displayed constant does not recalculate
+any frozen forecast. Ore, grade and recovery model specifications
+remain those described in Chapter~10: ore uses
 SARIMA$(1,0,1)(1,0,0)_4$, grade AR(1) without seasonal terms, and recovery
 uniform historical bounds widened by $\pm1\%$, truncated to $[0.50,1.00]$.
+The source interprets $\kappa$ through mean mine realized/theoretical
+ratios and processing lags, including stockpiling, heap leaching and
+autoclave residence.
 Production bands are 80\% Goodman product-variance intervals under
 independence (Chapter~\ref{ch:operations}).
 

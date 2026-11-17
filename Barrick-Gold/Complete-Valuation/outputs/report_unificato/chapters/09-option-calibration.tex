@@ -525,19 +525,24 @@ The model is memoryless: once a jump has occurred, the future jump intensity rem
 The Hawkes idea is to promote the intensity itself to a stochastic process \(\lambda_t\). The model then answers a different question: not only how large jumps are, but how the arrival rate of future jumps changes after past events. This is why Hawkes belongs naturally in this chapter. Chapter~\ref{ch:sv-jumps} developed the general theory of jump processes and stochastic volatility; here the focus is calibration and model design for the Bates jump layer.
 \subsection{Mathematical Definition}
 
-A one-dimensional Hawkes process~\cite{Hawkes1971} is a simple point process \(\{N_t\}_{t\geq0}\) with stochastic conditional intensity
+For a linear Hawkes process~\cite{Hawkes1971} started without prehistory at time
+zero, the predictable intensity is
 \begin{equation}
-    \lambda_t
-    =
-    \bar{\lambda}+\int_0^{t^-}\mu(t-s)\,\dd N_s,
+\lambda_t=\bar\lambda+\int_0^{t^-}\mu(t-s)\,\dd N_s,
 \end{equation}
-where \(\bar{\lambda}>0\) is the mean-reversion baseline and \(\mu(\tau)\geq0\) is the excitation kernel. The selected option model also allows the initial state \(\lambda_0\) to differ from this baseline. Equivalently, writing the strictly past jump times as \(\tau_i<t\),
+with baseline $\bar\lambda>0$ and nonnegative kernel $\mu$. In this
+empty-history convention the initial intensity equals the baseline.
+Equivalently,
 \begin{equation}
-    \lambda_t
-    =
-    \bar{\lambda}+\sum_{\tau_i<t}\mu(t-\tau_i)
+\lambda_t=\bar\lambda+\sum_{0\le\tau_i<t}\mu(t-\tau_i).
 \end{equation}
-in the stationary initialization.
+This finite-past sum is not stationary initialization. A stationary
+construction includes events before zero, or an initial state drawn
+from the appropriate invariant law. For the exponential kernel, the
+Markov-state form below also permits a specified initial intensity
+$\lambda_0\ge0$ different from the baseline; it explicitly retains
+that initial transient. The jump times in the sum below are those
+at or after time zero.
 
 The exponential kernel is the most useful specification for this study:
 \begin{equation}
@@ -564,7 +569,8 @@ For the exponential kernel,
 \begin{equation}
     \eta=\int_0^\infty \alpha e^{-\beta s}\,\dd s=\frac{\alpha}{\beta}.
 \end{equation}
-Stationarity requires
+For this nonnegative exponential-kernel model with positive baseline,
+a stationary regime with finite mean requires $n<1$, equivalently
 \begin{equation}
     \alpha<\beta.
 \end{equation}
@@ -666,14 +672,34 @@ where \(A\) and \(B\) solve, forward in \(\tau\),
     \qquad A(0)=B(0)=0,
     \label{eq:hawkes-riccati-A}
 \end{align}
-with the log-normal jump transform \(\psi_J(u)=\exp\!\big(iu\mu_J-\tfrac12\sigma_J^2u^2\big)\) and compensator \(k=e^{\mu_J+\sigma_J^2/2}-1\). The nonlinear term \(e^{\alpha B}\) is the signature of self-excitation: setting \(\alpha=0\) linearizes \eqref{eq:hawkes-riccati-B} and collapses it to the constant-intensity Bates jump transform in closed form. The system is integrated numerically with a vectorized fourth-order Runge--Kutta scheme; only \eqref{eq:hawkes-riccati-B} is genuinely nonlinear, and \(A\) follows by quadrature. The implementation calibrates \(\lambda_0\) separately from \(\bar{\lambda}\), allowing the initial option-implied intensity to differ from its long-run baseline.
+Here $\psi_J(u)=\exp(iu\mu_J-\sigma_J^2u^2/2)$ and
+$k=\exp(\mu_J+\sigma_J^2/2)-1$. For $\alpha>0$, the term
+$e^{\alpha B}$ in \eqref{eq:hawkes-riccati-B} represents
+self-excitation. Setting $\alpha=0$ linearizes
+\eqref{eq:hawkes-riccati-B}, while $A$ follows by quadrature.
+With $\alpha=0$ the intensity is
+$\lambda_t=\bar\lambda+(\lambda_0-\bar\lambda)e^{-\beta t}$,
+so the jump law is generally inhomogeneous Poisson, not constant
+intensity. Writing $c(u)=\psi_J(u)-1-iuk$, the same Riccati system gives
+\[
+\log\phi_{\mathrm{jump}}(u)=c(u)
+\left[\bar\lambda T+
+\frac{\lambda_0-\bar\lambda}{\beta}(1-e^{-\beta T})\right].
+\]
+The constant-intensity Bates limit further requires
+$\lambda_0=\bar\lambda$. The documented numerical implementation uses
+vectorized fourth-order Runge--Kutta for the system; the separately
+calibrated initial intensity is not replaced by a stationary draw.
 
 \paragraph{Consistency limits.}
 The construction is pinned down by limits that must hold exactly and that therefore double as implementation tests:
 \begin{itemize}[leftmargin=8mm, itemsep=2pt]
     \item at \(u=0\) one has \(B\equiv0\) and \(A\equiv0\), so \(\phi_{X_T}(0)=1\);
     \item evaluated at \(u=-i\) the jump transform equals one, which is precisely the martingale condition \(\E^\Q[S_T]=S_0e^{(r-q)T}\);
-    \item \(\alpha=0\) with constant \(\lambda_0\) reproduces the Bates price, while \(\lambda_0=0\) removes the jumps and returns Black--Scholes (or Heston).
+\item Setting $\alpha=0$ and $\lambda_0=\bar\lambda$ recovers the
+constant-intensity Bates jump component. A sufficient no-jump limit
+is $\lambda_0=\bar\lambda=\alpha=0$ with no prehistory; setting only
+$\lambda_0=0$ while retaining a positive baseline does not remove jumps.
 \end{itemize}
 A sign error in the drift, the compensator, or the jump transform would break one of these identities.
 
