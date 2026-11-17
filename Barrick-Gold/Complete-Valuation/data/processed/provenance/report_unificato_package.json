@@ -1,16 +1,16 @@
 {
   "edition": "unificato",
-  "archive_sha256": "e5c4d1267426f6287f1aee561bf2d9b1ff7b842bf69c903773e7cdd961a6f1f8",
-  "file_count": 73,
+  "archive_sha256": "de96606f9c597f1a6c71eb1342f8403063cc1adff4629efee26f4e1b853c322b",
+  "file_count": 74,
   "shared_images": 46,
   "files": [
     {
       "path": "Articolo.pdf",
-      "sha256": "5d1bd0ea7dbda303c4030882f110b4bdefaf3a6b53f261803de227e845e7f305"
+      "sha256": "b8171d6dd938fad32df572f8c686707370331205323a2b29bbdbb7cbd06f2042"
     },
     {
       "path": "Articolo.tex",
-      "sha256": "0f7ba44f59c74cc7609cffbf1f01a845e040ca10ecd7efc43db15330634ea2a0"
+      "sha256": "2aaca529542808283d73e5874ed6992d4e05078028f10bce4ff8cc463b47baf3"
     },
     {
       "path": "Copertina_research.pdf",
@@ -18,7 +18,11 @@
     },
     {
       "path": "chapters/00-discoveries-at-a-glance.tex",
-      "sha256": "2c166befc5dbfc307af023533c68801d5aaebebfc571f02a143d33beeb1ee22e"
+      "sha256": "a508be5871978de381c8b48363420e43a1030f7e358fc116bca13b5113a7a48c"
+    },
+    {
+      "path": "chapters/00-team.tex",
+      "sha256": "704a681515b30a50e92298101c529ccd77ce5f0478ecba9c4a36ba9c877ad0c1"
     },
     {
       "path": "chapters/01-introduction.tex",
