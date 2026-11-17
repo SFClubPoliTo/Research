@@ -1,131 +1,79 @@
 % Results shared with the Paper; written by src/build_report_fragments.py.
 \input{chapters/generated/results_20261024}
 
-\chapter*{Discoveries at a Glance}
-\addcontentsline{toc}{chapter}{Discoveries at a Glance}
-\markboth{Discoveries at a Glance}{Discoveries at a Glance}
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+\markboth{Abstract}{Abstract}
+
+\noindent
+This study builds and audits a stochastic valuation architecture for Barrick
+Mining Corporation. Eight teams of the Starting Finance Club PoliTo Research
+area contribute probability, econometrics, Monte Carlo, historical gold
+dynamics, stochastic volatility and jumps, option calibration, mine-level
+operating forecasts and discounted cash flow; unification assigns each variable
+to one source and links the layers through explicit date, unit, measure and
+accounting contracts. The central question is how much the choice of
+gold-price model matters for a discounted operating-margin proxy of Barrick
+when production, costs and discount-rate shocks are held fixed.
+Black--Scholes/GBM, Heston, Bates--Poisson and Bates--Hawkes are calibrated,
+with nested refinements, to 64 GLD calls of 2 September 2026 (605 eligible
+quotes, sponsor fee of 0.40\% as carry; IV RMSE \CalBSIVRMSE, \CalHIVRMSE,
+\CalBIVRMSE{} and \CalWIVRMSE~bp). They drive daily gold paths from the XAUUSD
+spot of USD~4,391.32/oz on a dated clock: only flows after 2 September 2026
+are valued. Three producing copper mines add about
+USD~\CuDeltaLow--\CuDeltaHigh~bn of explicit flows to 2030. Three findings
+follow.
 
 \begin{tcolorbox}[
   title={Discovery 1: the gold-price model matters less than numerical noise},
-  colback=sflightblue,
-  colframe=sfblue,
-  boxrule=0.7pt,
-  arc=1mm,
-  left=3mm,
-  right=3mm
+  colback=sflightblue, colframe=sfblue, boxrule=0.7pt, arc=1mm,
+  left=3mm, right=3mm, top=1mm, bottom=1mm
 ]
 \small
-Holding production, costs and discount-rate shocks fixed, the four gold-price
-laws give median operating proxies between \textbf{USD~\ValMedianLow{} and
-\ValMedianHigh~billion}. Changing only the number of paths or the seed moves a
-single model's median across \textbf{USD~\NumericalMedianLow--\NumericalMedianHigh~billion}.
-The spread between models is therefore no larger than the Monte Carlo
-uncertainty of one model, and the medians do not rank the models.
+Across 8,192 paths the four gold-price laws give median operating proxies
+between \textbf{USD~\ValMedianLow{} and \ValMedianHigh~billion}. Changing only
+the number of paths or the seed moves a single model's median across
+\textbf{USD~\NumericalMedianLow--\NumericalMedianHigh~billion}, so the medians
+do not rank the models (Figure~\ref{fig:discoveries-multimodel}).
 \end{tcolorbox}
 
 \begin{tcolorbox}[
   title={Discovery 2: the terminal value carries the result},
-  colback=sflightblue,
-  colframe=sfblue,
-  boxrule=0.7pt,
-  arc=1mm,
-  left=3mm,
-  right=3mm
+  colback=sflightblue, colframe=sfblue, boxrule=0.7pt, arc=1mm,
+  left=3mm, right=3mm, top=1mm, bottom=1mm
 ]
 \small
-Median flows to 31 December 2030 range from \textbf{USD~\ValExplicitLow{} to \ValExplicitHigh~billion} across the four engines;
-the perpetuity after 2030 carries about \textbf{\TerminalShare\%} of the mean proxy.
-The terminal assumptions, not the gold model, decide the level.
+Median flows to 31 December 2030 range from \textbf{USD~\ValExplicitLow{} to
+\ValExplicitHigh~billion}; the perpetuity after 2030 carries about
+\textbf{\TerminalShare\%} of the mean proxy. The terminal assumptions, not the
+gold model, decide the level.
 \end{tcolorbox}
 
 \begin{tcolorbox}[
   title={Discovery 3: no option model beats the persistence of the IV surface},
-  colback=sflightblue,
-  colframe=sfblue,
-  boxrule=0.7pt,
-  arc=1mm,
-  left=3mm,
-  right=3mm
+  colback=sflightblue, colframe=sfblue, boxrule=0.7pt, arc=1mm,
+  left=3mm, right=3mm, top=1mm, bottom=1mm
 ]
 \small
-In \OosDates{} rolling repricing tests, Bates--Hawkes has the lowest error among the
-four models (\OosWRMSE~bp), but carrying the last observed implied-volatility
-surface forward is still marginally more accurate on its support
-($R^2 = \OosWRPersistence\%$, DM $p = \OosWDMPersistenceP$); the other models
-have lower out-of-sample $R^2$ against persistence.
+In \OosDates{} rolling repricing tests Bates--Hawkes has the lowest error of
+the four models (\OosWRMSE~bp), but carrying the last observed
+implied-volatility surface forward remains marginally more accurate
+($R^2 = \OosWRPersistence\%$, DM $p = \OosWDMPersistenceP$).
 \end{tcolorbox}
-
-\noindent\textbf{What these numbers are.} They are operating-margin proxies,
-not enterprise or equity values (Section~\ref{sec:company-financial-perimeter}): research
-sensitivities, not fair values, target prices or investment advice.
-
-\noindent\textbf{What the four models do---and do not do.} Black--Scholes/GBM,
-Heston, Bates--Poisson and Bates--Hawkes govern only the \emph{gold-price
-layer}. They are calibrated to 64 GLD calls of 2 September 2026 with the
-trust's 0.40\% sponsor fee as carry. They do not generate mine production or
-costs: those come from Team~4's operating forecasts, identical in every run.
-The unified DCF and the stochastic WACC shocks are common as well. Only flows
-after the 2 September 2026 valuation time are valued; Barrick's Q1--Q2 2026
-actuals have already been realized and are excluded.
-Figure~\ref{fig:discoveries-multimodel} shows the four resulting distributions.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.88\textwidth]{\FigFigValMulti}
-  \caption{Operating-proxy distributions under the four gold-price laws on the
-  dated clock, 8,192 paths each, with common operations, WACC shocks and
-  signed terminal closure.}
+  \includegraphics[width=0.62\textwidth]{\FigFigValMulti}
+  \caption{Operating-proxy distributions under the four gold-price laws,
+  8,192 paths each, with common operations, WACC shocks and terminal closure.}
   \label{fig:discoveries-multimodel}
 \end{figure}
 
-\noindent\textbf{How the evidence was assembled.} The comparison is the
-endpoint of an integrated chain. Team~8 supplies option-implied gold-price
-dynamics; Team~4 supplies the production and unit-cost layer; Team~5 maps the
-resulting component margin through cash-flow and discounting identities;
-Team~3 supplies simulation diagnostics. The remaining teams provide
-probability, econometric, historical-volatility and stochastic-process
-foundations.
-
-The chain separates calibration from forecasting. Option parameters are
-estimated under the risk-neutral measure; the scenarios start from the gold
-spot of USD~4,391.32/oz at the valuation time and drift at the Treasury
-forward rate, which as a physical expectation assumes no gold risk premium.
-The option-implied volatility shape is carried over as a stated assumption,
-not a validated physical law. Section~\ref{sec:physical-measure-bridge} reports the separate physical
-forecasting evidence; Table~\ref{tab:discoveries-evidence} summarizes the
-evidence behind each layer.
-
-\begin{table}[H]
-\centering
-\caption{Evidence behind the valuation layer.}
-\label{tab:discoveries-evidence}
-\small
-\renewcommand{\arraystretch}{1.13}
-\begin{tabularx}{\textwidth}{@{}p{2.65cm}X X@{}}
-\toprule
-\textbf{Evidence block} & \textbf{Dated observation} &
-\textbf{Permitted interpretation} \\
-\midrule
-Market diagnostics & Barrick \texttt{B}: 86 daily bars, 27 April--27 August
-2026; GLD: 1,425 daily bars, 4 January 2021--27 August 2026
-(Section~\ref{sec:lse-current-diagnostics}). & Short-window diagnostics only;
-GLD is an ETF in USD/share, not physical gold in USD/oz. \\
-GLD surface & 605 eligible calls; a 64-contract Chebyshev--Chebyshev design
-(CC64) selects actual contracts across eight maturities and 20 strikes on 2 September 2026; same-date 14-tenor Treasury
-curve; carry $q=0.40\%$. & Option-implied calibration input; no physical
-drift is identified. \\
-Path engines & Daily full-truncation schemes with exact Hawkes intensity
-integration; Monte Carlo call prices within about two batch standard errors of
-COS prices for all four models. & Numerical correctness of the simulator, not
-evidence that the law is physically right. \\
-Integrated experiment & 8,192 paths; four gold engines; identical operating
-contract, DCF and WACC shocks. & A controlled attribution of distributional
-differences to the gold-price engine. \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-The chapters that follow reconstruct the company and data perimeter, the
-mathematical and empirical model layers, the common operating and DCF
-contracts, the four-model experiment and the limits that keep a conditional
-signal from becoming an investment conclusion.
+\vspace{-0.3cm}
+\noindent{\small\textbf{What these numbers are.} The price laws are
+risk-neutral: no GLD-to-gold basis or $\mathbb Q$-to-$\mathbb P$ mapping is
+validated, and mine-level operating uncertainty is not propagated. The results
+are operating-margin proxies without an equity bridge
+(Section~\ref{sec:company-financial-perimeter}), hence no per-share value or
+market comparison: controlled research sensitivities, not physical forecasts,
+fair values, target prices or investment advice.}
