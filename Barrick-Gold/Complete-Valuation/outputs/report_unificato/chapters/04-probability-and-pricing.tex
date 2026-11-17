@@ -766,7 +766,7 @@ so that expectations of payoffs are well defined.
 
 Under $\mathbb{P}$ the price follows \eqref{eq:GBM-SDE}, with $\mu$ the expected rate of return and $\sigma>0$ the volatility; by \eqref{eq:GBM-solution} started at $t_0$, $\mathbb{E}_{\mathbb{P}}[S(t)\mid\mathcal{F}_{t_0}]=S(t_0)e^{\mu(t-t_0)}$.
 
-Since typically $\mu \neq r$, the discounted price process
+Since typically $\mu \neq r$, the discounted price process (with $t_0=0$; the general case is treated below)
 \[
 \tilde S(t)=e^{-rt}S(t)
 \]
@@ -846,7 +846,7 @@ In models where the stock price dynamics include jumps, such as those driven by 
 As a consequence, the risk-neutral measure is no longer unique; instead, there exist infinitely many equivalent martingale measures.
 
 A common approach in Lévy models is therefore to select a convenient martingale measure and compute derivative prices as discounted expectations under this measure.
-An EMM $\mathbb Q$ is equivalent to $\mathbb P$ (the two measures share the same null sets) and makes the discounted price $e^{-rt}S(t)$ a martingale, so that $\mathbb E^{\mathbb Q}[S(t)\mid\mathcal F_0]=S_0e^{rt}$. For a geometric L\'evy price $S(t)=S_0e^{X_L(t)}$, provided the L\'evy measure $F_L$ of $X_L$ satisfies $\int_{\{x>1\}} e^{x}\,F_L(dx)<\infty$ (so that $\mathbb E^{\mathbb Q}[e^{X_L(t)}]$ is finite), this requires the characteristic exponent to satisfy $\psi_{\mathbb Q}(-i)=r$, which is a restriction on the drift of the L\'evy triplet (Remark~\ref{rem:levy-drift} in Chapter~\ref{ch:sv-jumps}). Many triplets satisfy this single restriction, so the EMM is generally not unique in L\'evy models.
+An EMM $\mathbb Q$ is equivalent to $\mathbb P$ (the two measures share the same null sets) and makes the discounted price $e^{-rt}S(t)$ a martingale, so that $\mathbb E^{\mathbb Q}[S(t)\mid\mathcal F_0]=S_0e^{rt}$. For a geometric L\'evy price $S(t)=S_0e^{X_L(t)}$, with $\mathbb E^{\mathbb Q}[e^{iuX_L(t)}]=e^{t\psi_{\mathbb Q}(u)}$ and L\'evy measure $\nu$, provided $\int_{\{x>1\}} e^{x}\,\nu(dx)<\infty$ (so that $\mathbb E^{\mathbb Q}[e^{X_L(t)}]$ is finite), this requires the characteristic exponent to satisfy $\psi_{\mathbb Q}(-i)=r$, which is a restriction on the drift of the L\'evy triplet (Remark~\ref{rem:levy-drift} in Chapter~\ref{ch:sv-jumps}). Many triplets satisfy this single restriction, so the EMM is generally not unique in L\'evy models.
 \subsection{Risk-Neutral Valuation in the Binomial Model}
 
 In the $N$-period binomial asset pricing model, derivative pricing relies on the risk-neutral probability measure $\mathbb Q$.

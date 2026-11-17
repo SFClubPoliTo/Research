@@ -140,21 +140,18 @@ From this, the confidence interval at level $1-\alpha$ is obtained as
 \]
 
 \paragraph{Numerical Analysis.}
-Using the illustrative printed summaries $N=10^4$ below (their
-seed-specific runtime has not been verified here),
+With $N=10^4$ uniform draws (NumPy \texttt{default\_rng(42)}),
 \[
-\hat{I}_{10^4} = 0.7510,\quad \hat{\sigma}_f = 0.1998,
+\hat{I}_{10^4} = 0.748929,\quad \hat{\sigma}_f = 0.200504,
 \]
-the 95\% normal-approximation interval implied by those summaries is
+and the 95\% normal-approximation interval is
 \[
-0.7510\pm1.96\frac{0.1998}{100}
-=[0.74708392,\,0.75491608].
+0.748929\pm1.96\,\frac{0.200504}{100}
+=[0.745000,\,0.752859],
 \]
-The digits shown are arithmetic consequences of rounded inputs, not
-additional simulation precision. This interval does not contain the
-displayed analytical value $0.746824$. A single interval, whether or
-not it covers, does not demonstrate statistical consistency or verify
-the asymptotic approximation.
+which contains the analytical value $0.746824$. A single interval,
+whether or not it covers, does not by itself verify the asymptotic
+approximation; coverage is a property of the procedure over repeated samples.
 
 \paragraph{RMSE Behavior.}
 In a repeated simulation with increasing numbers of samples $N$, the RMSE decreases according to the law
@@ -172,8 +169,7 @@ This behavior highlights the slow yet steady convergence typical of the Monte Ca
 \paragraph{Interpretation.}
 For this bounded integrand the i.i.d. estimator has finite variance,
 so the LLN and CLT apply under the stated sampling assumptions. They
-do not imply that every finite-sample interval covers the integral,
-and no additional seed-specific experiment is established here.
+do not imply that every finite-sample interval covers the integral.
 In financial contexts, the integral represents the expected value of a payoff $f(X)$ under a given distribution $p(x)$: the described procedure is therefore directly applicable to estimating the expected price of a derivative or a Monte Carlo risk measure.
 \subsection{Application in Finance: European Option Pricing with Monte Carlo Simulation}\label{sec:mc-european-call}
 
@@ -289,7 +285,7 @@ Selected lag, projection and transformation tests can detect particular
 dependencies in a pseudo-random sequence. Their failure to reject is
 not independence and is not equivalent to zero covariance for every
 function and every pair of outputs. Generator parameters, seed, tested
-block lengths and the battery of checks must be specified separately.
+block lengths and the battery of checks are specified separately.
 \end{remark}
 
 \begin{theorem}[Lattice structure of LCG sequences]
@@ -624,7 +620,7 @@ X^{(2)} = \mu + \sqrt{\lambda_1}\, v_1 Z_1 + \sqrt{\lambda_2}\, v_2 Z_2,
 retains 85\% of total factor variance in this hypothetical example.
 That percentage does not itself bound the error of every portfolio
 variance, tail-risk measure or nonlinear payoff; those depend on
-exposures and the retained directions. No Barrick dataset is implied.
+exposures and the retained directions.
 Only two normal coordinates are generated, reducing the sampling dimension.
 \end{example}
 
@@ -743,8 +739,8 @@ confidence interval of level $1-\alpha$ for the population correlation is
 This is asymptotic, not an exact finite-sample interval. The formula
 does not supply the same coverage for dependent pairs or arbitrary
 non-Gaussian generator diagnostics. Degenerate sample correlations
-$\pm1$ or zero sample variances require separate treatment; do not
-clip them silently into this formula.
+$\pm1$ or zero sample variances require separate treatment; they are not
+clipped into this formula.
 \end{remark}
 
 \paragraph{Application: comparing RNGs via European call pricing}

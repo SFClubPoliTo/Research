@@ -263,7 +263,7 @@ applying the It\^o--Doeblin formula for jump processes. Define
     X_t = S_0 \exp\!\left\{\sigma W_t
         + \left(\mu - \tfrac{1}{2}\sigma^2\right) t\right\},
     \qquad
-    J_t = \prod_{i=1}^{N_t} e^{Y_i},
+    P_t = \prod_{i=1}^{N_t} e^{Y_i},
 \]
 with the empty product equal to $1$. The process $\{X_t\}_{t\geq 0}$
 is continuous and satisfies, by the It\^o formula for continuous
@@ -271,17 +271,17 @@ semimartingales,
 \[
     dX_t = \mu\, X_t\, dt + \sigma\, X_t\, dW_t,
 \]
-while $\{J_t\}_{t\geq 0}$ is a pure-jump process whose jump at the
-arrival time $\tau_i$ of $N$ equals $J_{\tau_i^-}(e^{Y_i} - 1)$, so
+while $\{P_t\}_{t\geq 0}$ is a pure-jump process whose jump at the
+arrival time $\tau_i$ of $N$ equals $P_{\tau_i^-}(e^{Y_i} - 1)$, so
 that in differential form
 \[
-    dJ_t = J_{t^-}\!\left(e^{Y} - 1\right) dN_t.
+    dP_t = P_{t^-}\!\left(e^{Y} - 1\right) dN_t.
 \]
-Because $X$ is continuous and $J$ is a pure-jump process, their
+Because $X$ is continuous and $P$ is a pure-jump process, their
 quadratic covariation vanishes. Applying the product rule for jump
-processes to $S_t = X_t J_t$ yields
+processes to $S_t = X_t P_t$ yields
 \[
-    dS_t = X_{t^-}\, dJ_t + J_t\, dX_t
+    dS_t = X_{t^-}\, dP_t + P_t\, dX_t
          = \mu\, S_{t^-}\, dt + \sigma\, S_{t^-}\, dW_t
          + S_{t^-}\!\left(e^{Y} - 1\right) dN_t,
 \]
@@ -312,11 +312,11 @@ $\sum_{i=1}^{N_t} Y_i$ at a jump time of $N$.
 In representation~\eqref{eq:jumpdiff_sol}, conditional on both
 $N_t=n$ and the realized log-marks, the log-return is Gaussian with
 mean $(\mu-\sigma^2/2)t+\sum_{i=1}^nY_i$ and variance $\sigma^2t$.
-If the marks are i.i.d. $\mathcal N(m_J,s_J^2)$, independent of the
+If the marks are i.i.d. $\mathcal N(\alpha_J,\delta_J^2)$, independent of the
 count and Brownian motion, conditioning only on $N_t=n$ instead gives
 \[
 \log(S_t/S_0)\mid N_t=n\sim
-\mathcal N\bigl((\mu-\sigma^2/2)t+nm_J,\,\sigma^2t+ns_J^2\bigr).
+\mathcal N\bigl((\mu-\sigma^2/2)t+n\alpha_J,\,\sigma^2t+n\delta_J^2\bigr).
 \]
 These components have Poisson weights $e^{-\lambda t}(\lambda t)^n/n!$;
 general mark laws give compound convolutions instead. The resulting
@@ -1058,7 +1058,7 @@ in foreign exchange markets U-shaped, and in both cases incompatible with the
 constant diffusion coefficient of \eqref{eq:BS_SDE}. Volatility clustering is
 documented for gold in Chapter~\ref{ch:gold-econometrics}, and the leverage
 effect, a negative correlation between price and variance innovations, is
-discussed in the Remark on the leverage effect below.
+discussed in Remark~\ref{rem:leverage} below.
 
 
 The minimal modification of the Black--Scholes dynamics consistent with
@@ -1294,7 +1294,7 @@ stochastic volatility mainly produces excess kurtosis and smile
 curvature, while the leverage-induced negative skew observed in equity
 index options requires a non-zero, and typically negative, correlation.
 
-\begin{remark}
+\begin{remark}\label{rem:leverage}
 The terminology \emph{leverage effect} is historically due to the
 heuristic argument that a fall in the equity value of a firm increases
 the debt-to-equity ratio and therefore the financial risk borne by the
@@ -1670,6 +1670,7 @@ The structural power of the Merton model is most evident in the frequency domain
 Its horizon behaviour is compared with Heston and Bates in Section~\ref{sec:model-comparison}.
 \subsection{Bates as a Unified Jump-Volatility Model}\label{sec:bates-model}
 
+\paragraph{Heston benchmark.}
 Heston~\cite{Heston1993} is the stochastic-volatility benchmark \eqref{eq:heston_S}--\eqref{eq:heston_corr}, with affine characteristic function \eqref{eq:heston_CF_affine}; its continuous-path behaviour at short maturities is discussed in Section~\ref{sec:sv-limits}.
 
 The Bates model~\cite{Bates1996} embeds Merton's lognormal jump process into Heston's stochastic volatility environment, giving an affine jump-diffusion~\cite{DuffiePanSingleton2000}. Under the risk-neutral measure $\mathbb{Q}$, the joint dynamics of the asset price $S_t$ and its instantaneous variance $v_t$ are governed by the following system of stochastic differential equations:
@@ -1694,7 +1695,7 @@ The exponentially affine form keeps the Bates model compatible with the Carr--Ma
 
 \subsection{Theoretical Comparison of the Main Mechanisms}\label{sec:model-comparison}
 
-The transition from Merton to Heston, and ultimately to Bates, represents a strategic trade-off between local and asymptotic non-normality. To conclude this synthesis, we evaluate the distinct ways in which these models generate the implied volatility skew and how they resolve the "term structure" problem.
+We compare how jumps and stochastic variance affect return tails and the implied-volatility skew across maturities.
 \subsubsection{Probability Tails and the Nature of Non-Normality}
 
 In the Merton specification with Gaussian log-marks, conditional
