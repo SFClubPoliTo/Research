@@ -32,8 +32,10 @@ def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = F
   r0 = float(cfg["revenues"]["r0"])
   g_path = np.asarray(cfg["revenues"]["g_path"], dtype=float)
   selected_scenario = scenario_info["scenario"]
-  fcff_cfg = dict(cfg["fcff_parameters"])
-  fcff_cfg["s_inf"] = float(cfg["fcff_parameters"]["s_inf"][selected_scenario])
+  fcff_cfg = dict(cfg["fcff_parameters"])          #check for scenario variable 
+  fcff_cfg["s_inf"] = float(cfg["fcff_parameters"]["s_inf"][scenario])
+  fcff_cfg["m_growth"] = list(cfg["fcff_parameters"]["m_growth"][scenario])
+  fcff_cfg["m_inf"] = float(cfg["fcff_parameters"]["m_inf"][scenario])
   rates_cfg = dict(cfg["rates_and_terminal"])
   if not np.isclose(fcff_cfg["w_inf"], rates_cfg["wacc_maturity"], rtol=0, atol=1e-12):
     raise ValueError("G2 e G3 devono usare lo stesso WACC di maturità")
