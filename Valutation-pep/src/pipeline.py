@@ -37,6 +37,7 @@ def run_pipeline(config_path: str = "config/config.yaml", is_final_run: bool = F
   fcff_cfg["m_growth"] = list(cfg["fcff_parameters"]["m_growth"][scenario])
   fcff_cfg["m_inf"] = float(cfg["fcff_parameters"]["m_inf"][scenario])
   rates_cfg = dict(cfg["rates_and_terminal"])
+  rates_cfg["margin_terminal"] = fcff_cfg["m_inf"]
   if not np.isclose(fcff_cfg["w_inf"], rates_cfg["wacc_maturity"], rtol=0, atol=1e-12):
     raise ValueError("G2 e G3 devono usare lo stesso WACC di maturità")
   # Stessa ipotesi di rendimento nel reinvestimento G2 e nel terminal value.
