@@ -1,12 +1,12 @@
 {
   "edition": "paper",
-  "archive_sha256": "b5646cdfd5852a73283836a1e7202064db717daeee1f34c649b57ff974e73954",
+  "archive_sha256": "fedec81fbe6063b2b3a7fc6b96f55db56c8d11a2c1956a486c1231a77a694f68",
   "file_count": 43,
   "shared_images": 27,
   "files": [
     {
       "path": "Articolo.pdf",
-      "sha256": "052095e49daeade1827ef3200312954714e18b296e3cd4657902c02a48e31ec3"
+      "sha256": "5b36aa19730ce823caf1161a72bdb57ea50b735a683aec75717e62276171ac0c"
     },
     {
       "path": "Articolo.tex",
@@ -130,7 +130,7 @@
     },
     {
       "path": "sections/02_data_assumptions.tex",
-      "sha256": "5bf65c2cfd1e2b5e6d3d5355194b1db0bb77651bcce723c3a6295acc3bc9f637"
+      "sha256": "906c26ae990817f012245665369691daf3668ce9d113f66d7058065ec17e6e23"
     },
     {
       "path": "sections/03_methodology.tex",
@@ -158,7 +158,7 @@
     },
     {
       "path": "sections/04b_copper_extension.tex",
-      "sha256": "53135bf46ea934f07b764e6b50185f3fe7e2482819018b937f4eadb44bdd8929"
+      "sha256": "f7662639018355f9a0d2790794377fa51b1f23da85bf6d2f311a4f10cfd4c762"
     },
     {
       "path": "sections/05_robustness.tex",

@@ -1,16 +1,16 @@
 {
   "edition": "unificato",
-  "archive_sha256": "977cab33815667ed5db3242a21975e0d223ab2fc16101a15b057d9489dce19ba",
+  "archive_sha256": "0f822e65c1dc617f083b727f99f1fafab92bce6e154da80e596f30cb96156458",
   "file_count": 76,
   "shared_images": 47,
   "files": [
     {
       "path": "Articolo.pdf",
-      "sha256": "e37853add4efff689265153bce32ea5800f7bedc0c52b5e4c8ccabec4830ef64"
+      "sha256": "ad88bf76458a4512171fe982809e40760687f06ed2fae96d66a329103802bc41"
     },
     {
       "path": "Articolo.tex",
-      "sha256": "8967a1530016606710ecd0e2e1c2e082005799d634cd3603d3ad6f450e76e143"
+      "sha256": "3b0f74cf6c84b3966a3744078280f03b6a2e605a33f2043da9c81d2860378aad"
     },
     {
       "path": "Copertina_research.pdf",
@@ -74,11 +74,11 @@
     },
     {
       "path": "chapters/09-option-calibration.tex",
-      "sha256": "f2a66d281435f72c7042a1e5b863ed04c294666f0bb77a68b91743cebbcb97e8"
+      "sha256": "0056b2bcc2e8c5a49b719e6f6d21f055f76abded36edfde9dcf7977cef6be3fa"
     },
     {
       "path": "chapters/09-physical-measure.tex",
-      "sha256": "c997e4481ba05ed35140c48e87d80f2ebe0a23102f3551c1fd2f3bb952510fa4"
+      "sha256": "7a75bb4ad8664ac6cab1aaadd5fc20a5db49ff89ec01013bc83e924c89ad5615"
     },
     {
       "path": "chapters/09-team8-calibration-evidence.tex",
@@ -90,7 +90,7 @@
     },
     {
       "path": "chapters/10-copper-evidence.tex",
-      "sha256": "e9b9399e113d8a79d26da8d771b33f669d3806980765b7f10a55fceb53bf55e9"
+      "sha256": "652832f37ffb67335dd4a2213b8cb94463b53f3c51e71706219af59445e81a86"
     },
     {
       "path": "chapters/10-operations-ebitda.tex",
@@ -110,7 +110,7 @@
     },
     {
       "path": "chapters/15-data-dates.tex",
-      "sha256": "c0c2b31a74e69b7a9c5d76012ebb49735e5a5b698257ac84494bd23fbe29053e"
+      "sha256": "d0c7d8dc56b13fcc7b08fe6eb1b7a7377856b7db77e9f801c2c9a90a5a3ad8b7"
     },
     {
       "path": "chapters/generated/copper-results.tex",
