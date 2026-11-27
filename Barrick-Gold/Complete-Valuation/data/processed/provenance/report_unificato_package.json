@@ -1,16 +1,16 @@
 {
   "edition": "unificato",
-  "archive_sha256": "036ee1b4bb557d9d5725c65d683730a45e32207caeb1b40911ad6b75fac00b0d",
-  "file_count": 74,
+  "archive_sha256": "08745b6451c2cdb488f84d37c8785525e4013f833375be8f8923f434b21a95a4",
+  "file_count": 75,
   "shared_images": 46,
   "files": [
     {
       "path": "Articolo.pdf",
-      "sha256": "78980a9882a37e348d8bf16a1d72caab3d3f72ddf9679a78c86d7498d267487c"
+      "sha256": "f1f7e69a62198f7240c8ec2bff4a7f178316449c2820951f255954e3727bfbe8"
     },
     {
       "path": "Articolo.tex",
-      "sha256": "2aaca529542808283d73e5874ed6992d4e05078028f10bce4ff8cc463b47baf3"
+      "sha256": "8967a1530016606710ecd0e2e1c2e082005799d634cd3603d3ad6f450e76e143"
     },
     {
       "path": "Copertina_research.pdf",
@@ -107,6 +107,10 @@
     {
       "path": "chapters/14-discussion-conclusion.tex",
       "sha256": "3525e64ae8929b96924d8b9722acf12a16d02c14682be08ffe17284764674655"
+    },
+    {
+      "path": "chapters/15-data-dates.tex",
+      "sha256": "c0c2b31a74e69b7a9c5d76012ebb49735e5a5b698257ac84494bd23fbe29053e"
     },
     {
       "path": "chapters/generated/copper-results.tex",

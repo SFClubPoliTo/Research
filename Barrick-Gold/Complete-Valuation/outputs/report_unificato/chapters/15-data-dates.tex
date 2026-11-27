@@ -1,0 +1,46 @@
+\chapter*{Data Sources and Dates}
+\addcontentsline{toc}{chapter}{Data Sources and Dates}
+\markboth{Data Sources and Dates}{Data Sources and Dates}
+
+\noindent
+All valuation results are dated 2 September 2026: market data, calibration and
+valuation time share that date, and nothing observed afterwards enters the
+results. The table lists when each input was observed; the report text was
+completed on 17 November 2026.
+
+\medskip
+{\small
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{4.1cm} >{\raggedright\arraybackslash}p{3.0cm} >{\raggedright\arraybackslash}X@{}}
+\toprule
+\textbf{Input} & \textbf{Source} & \textbf{Observation date or period} \\
+\midrule
+\multicolumn{3}{@{}l}{\textit{Valuation inputs (current results)}}\\
+Valuation time and gold spot (XAUUSD, USD~4,391.32/oz) & Interactive Brokers & 2 September 2026, 20:00 UTC \\
+GLD option surface (605 eligible calls, 64 calibrated) & Interactive Brokers & 2 September 2026 \\
+U.S. Treasury curve (14 par yields, 1 month--30 years) & U.S. Department of the Treasury, entered manually & 2 September 2026 \\
+Rolling option repricing (31 surfaces, 30 forecasts) & Interactive Brokers & 9 July--2 September 2026 \\
+Copper futures options (HG) & Interactive Brokers & 2 September 2026; rolling pilot 9 July--2 September 2026 \\
+Barrick mine-level operations and costs & Barrick filings & Annual Report 2025; Q1 and Q2 2026 mine statistics (Q2 release of 10 August 2026) \\
+Valued cash flows & Model & 2 September 2026--31 December 2030, then terminal value \\
+\midrule
+\multicolumn{3}{@{}l}{\textit{Market context and physical-measure evidence}}\\
+Barrick (B) and GLD daily prices & LSE (London Strategic Edge) & Extracted 28 August 2026; B 27 April--27 August 2026, GLD 4 January 2021--27 August 2026 \\
+GLD daily history & Interactive Brokers & 7 September 2021--2 September 2026 \\
+Physical forecasting experiment & Interactive Brokers & 29 targets, 13 July--2 September 2026 (fits of 11 October 2026, before the carry correction) \\
+\midrule
+\multicolumn{3}{@{}l}{\textit{Source-study evidence (historical, superseded for the valuation)}}\\
+Gold and silver econometrics (Team~7) & Yahoo Finance & 1 May 2006--31 December 2024 \\
+Recomputed long-memory figures & LSE & 5 January 2021--1 July 2026 \\
+Team~8 calibration ($q=0$) and online test & LSE & 12 August 2026; targets 11 February--10 August 2026 \\
+\bottomrule
+\end{tabularx}
+}
+
+\medskip
+\noindent
+\textbf{Not included.} Market prices after 2 September 2026 and Barrick's
+third-quarter 2026 results (published 9 November 2026) are not used. Updating
+the study to a later date requires a new option surface and Treasury curve,
+recalibration, a new rolling test and a revaluation, not a change of single
+numbers.
