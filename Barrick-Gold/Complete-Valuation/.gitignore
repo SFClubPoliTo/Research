@@ -30,3 +30,6 @@ data/processed/team8/calibration_q040_20261024/**/calibration_surface.csv
 data/processed/team8/oos_q040_20261024/calibration_sets/
 data/processed/team8/oos_q040_20261024/calibrations/**/calibration_surface.csv
 data/processed/team8/oos_q040_20261024/rolling/option_forecasts.csv
+
+# Scanned signature of the President: used in the local PDF build, never published
+outputs/img/publication/president_signature.png
