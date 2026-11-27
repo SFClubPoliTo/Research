@@ -1,12 +1,12 @@
 {
   "edition": "paper",
-  "archive_sha256": "8f0970d30f4c46919142f901e4d39ec7bc5ef604415e733f1ee25e1798fbe296",
+  "archive_sha256": "a2b7a0785847a2a4a6febf3f5a49ad0a43db843e59fcac68e99a7c65fd0ad516",
   "file_count": 43,
   "shared_images": 27,
   "files": [
     {
       "path": "Articolo.pdf",
-      "sha256": "5f29b26ffc27a9ff392c50b1e2e6e5bd4c78c106ca7ad05b2db3386fc03387e8"
+      "sha256": "6e0fea01113173a6e3ca5b96f6c224226af2b0831b70679f7eadd03ab0299f2b"
     },
     {
       "path": "Articolo.tex",
