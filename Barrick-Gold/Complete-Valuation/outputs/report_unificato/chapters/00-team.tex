@@ -82,9 +82,12 @@ into this report and the companion Paper:
 \begin{flushright}
 \begin{minipage}{6.2cm}
 \centering
-\vspace*{0.8cm}
+% The scanned signature is kept local (not in Git); without it a blank space is left.
+\IfFileExists{../img/publication/president_signature.png}%
+  {\includegraphics[width=4.2cm]{../img/publication/president_signature.png}\\[-4pt]}%
+  {\vspace*{1.6cm}}
 \rule{6cm}{0.4pt}\\[2pt]
-The President\\
+Alessia Aiello, President\\
 Starting Finance Club PoliTo
 \end{minipage}
 \end{flushright}
